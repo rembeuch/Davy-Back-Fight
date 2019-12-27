@@ -1,2 +1,16 @@
-<h1>Questions#show</h1>
-<p>Find me in app/views/questions/show.html.erb</p>
+<div class="container">
+  <div class="card-product">
+    <%= cl_image_tag @question.photo, :class => "question-photo" %>
+    <div class="card-product-infos">
+        <h2> <%= @question.title %></h2>
+    </div>
+  </div>
+  <% @question.answers.sort_by(&:position).each do |answer| %>
+    <div class="card-product">
+      <div class="card-product-infos">
+      <h1> <%= answer.text %> </h1>
+      Cote <%= answer.multiplier %>
+      </div>
+    </div>
+  <% end %>
+</div>
