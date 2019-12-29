@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_25_093954) do
+ActiveRecord::Schema.define(version: 2019_12_29_182740) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_12_25_093954) do
     t.string "text"
     t.integer "position"
     t.integer "multiplier"
-    t.string "status"
+    t.string "status", default: "En cours"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"

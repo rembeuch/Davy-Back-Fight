@@ -11,7 +11,10 @@
 <div class="card-product">
       <div class="card-product-infos">
         <%= simple_form_for [@question, @answer, @user_answer] do |f| %>
-          <%= f.input :amount %>
+          <%= f.error_notification %>
+          <%= f.input :amount,label: 'Votre Mise? (Nombre entier)',
+                as: :integer,
+                required: true %>
           <%= f.button :submit, "Valider", class: "btn btn-primary" %>
         <% end %>
       </div>
