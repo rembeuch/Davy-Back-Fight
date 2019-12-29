@@ -1,0 +1,16 @@
+
+<div class="container">
+  <h1>Vos Paris</h1>
+<% @user_answers.each do |user_answer| %>
+    <div class="card-product">
+      <%= cl_image_tag user_answer.answer.question.photo, :class => "question-photo" %>
+      <div class="card-product-infos">
+        <h2><%= user_answer.answer.question.title %></h2>
+          Votre réponse:
+            <%= user_answer.answer.text %>
+          Montant misé:
+            <%= user_answer.amount %>B
+      </div>
+    </div>
+  <% end %>
+</div>
