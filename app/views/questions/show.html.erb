@@ -1,4 +1,7 @@
 <div class="container">
+   <% if current_user.admin == true %>
+    <%= link_to 'créer une nouvelle réponse', new_question_answer_path(@question), class: "btn btn-warning" %>
+    <% end %>
   <div class="card-product">
     <%= cl_image_tag @question.photo, :class => "question-photo" %>
     <div class="card-product-infos">
@@ -7,6 +10,7 @@
   </div>
   <% @question.answers.sort_by(&:position).each do |answer| %>
     <div class="card-product">
+        <%= link_to 'Parier!', question_answer_path(@question, answer), class: "btn btn-danger" %>
       <div class="card-product-infos">
       <h1> <%= answer.text %> </h1>
       Cote <%= answer.multiplier %>

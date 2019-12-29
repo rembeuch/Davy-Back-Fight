@@ -18,14 +18,14 @@ traitre_wano = Question.create!(
     tag: 'wano',
     photo: "https://res.cloudinary.com/dsiamykrd/image/upload/v1577443578/wano_gtoynb.jpg"
   )
-  traitre_wano.photo = "https://res.cloudinary.com/dsiamykrd/image/upload/v1577443272/wano_kmhwli.jpg"
+  traitre_wano.photo = "https://res.cloudinary.com/dsiamykrd/image/upload/v1577443578/wano_gtoynb.jpg"
 
 puts "creating answers"
 
 answer_1_traitre_wano = Answer.create!(
   question: traitre_wano,
   text: 'Kanjuro?',
-  multiplier: 1.5,
+  multiplier: 2,
   status: 'unknow',
   position: 1,
   )
@@ -33,7 +33,7 @@ answer_1_traitre_wano = Answer.create!(
 answer_2_traitre_wano = Answer.create!(
   question: traitre_wano,
   text: 'Shinobu?',
-  multiplier: 1.5,
+  multiplier: 2,
   status: 'unknow',
   position: 2,
   )
@@ -41,7 +41,7 @@ answer_2_traitre_wano = Answer.create!(
 answer_3_traitre_wano = Answer.create!(
   question: traitre_wano,
   text: 'Carrot?',
-  multiplier: 2,
+  multiplier: 3,
   status: 'unknow',
   position: 3,
   )
@@ -49,7 +49,7 @@ answer_3_traitre_wano = Answer.create!(
 answer_4_traitre_wano = Answer.create!(
   question: traitre_wano,
   text: 'Autre?',
-  multiplier: 1.3,
+  multiplier: 2,
   status: 'unknow',
   position: 4,
   )
