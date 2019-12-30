@@ -13,6 +13,9 @@
           Gain Potentiel en cas de bonne réponse:
           <%= user_answer.amount * user_answer.answer.multiplier %>
           <%= user_answer.answer.status %>
+          <% if user_answer.answer.status == 'Validé!'  %>
+          <%= link_to "Récupérez vos gains!", user_answer_win_path(user_answer), method: :patch, class: "btn btn-success" %>
+          <% end %>
       </div>
     </div>
   <% end %>

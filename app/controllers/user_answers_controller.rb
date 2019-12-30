@@ -24,6 +24,14 @@ class UserAnswersController < ApplicationController
     end
   end
 
+  def win
+    @user_answer = UserAnswer.find(params[:user_answer_id])
+    @user_answer.user = current_user
+    current_user.update(berrys: (current_user.berrys + (@user_answer.amount * @user_answer.answer.multiplier)))
+    @user_answer.answer.update(status: 'Terminé')
+    redirect_to user_answers_path
+  end
+
   def user_answer_params
     params.require(:user_answer).permit(:amount)
   end

@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :user_answers, only: [:index]
+  resources :user_answers, only: [:index] do
+    patch :win
+  end
 end
