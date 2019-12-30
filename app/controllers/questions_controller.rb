@@ -13,10 +13,10 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def update
-  end
-
-  def edit
+  def close
+    @question = Question.find(params[:question_id])
+    @question.update(closed: true)
+    redirect_to question_path(@question)
   end
 
   def destroy

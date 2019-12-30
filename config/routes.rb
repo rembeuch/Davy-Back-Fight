@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :questions, only: [:index, :show, :new, :create] do
+    patch :close
     resources :answers , only: [:show, :new, :create] do
       resources :user_answers, only: [:new, :create]
     end
