@@ -21,6 +21,20 @@ class AnswersController < ApplicationController
     end
   end
 
+  def true
+    @question = Question.find(params[:question_id])
+    @answer = Answer.find(params[:answer_id])
+    @answer.update(status: 'Validé!')
+    redirect_to question_path(@question)
+  end
+
+  def false
+    @question = Question.find(params[:question_id])
+    @answer = Answer.find(params[:answer_id])
+    @answer.update(status: 'Invalide')
+    redirect_to question_path(@question)
+  end
+
   def answer_params
     params.require(:answer).permit(:text, :position, :multiplier)
   end

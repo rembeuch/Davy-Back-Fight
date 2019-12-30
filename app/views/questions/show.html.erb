@@ -18,9 +18,13 @@
           <%= link_to 'Parier!', question_answer_path(@question, answer), class: "btn btn-danger" %>
         <% end %>
       <div class="card-product-infos">
-      <h1> <%= answer.text %> </h1>
-      Cote <%= answer.multiplier %>
+        <h1> <%= answer.text %> </h1>
+        Cote <%= answer.multiplier %>
       </div>
+      <% if current_user.admin == true %>
+        <%= link_to 'true', question_answer_true_path(@question, answer), method: :patch, class: "btn btn-success" %>
+        <%= link_to 'false', question_answer_false_path(@question, answer), method: :patch, class: "btn btn-danger" %>
+      <% end %>
     </div>
   <% end %>
 </div>

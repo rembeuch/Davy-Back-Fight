@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :questions, only: [:index, :show, :new, :create] do
     patch :close
     resources :answers , only: [:show, :new, :create] do
+      patch :true
+      patch :false
       resources :user_answers, only: [:new, :create]
     end
   end
