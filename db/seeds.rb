@@ -29,7 +29,7 @@ answer_1_traitre_wano = Answer.create!(
   question: traitre_wano,
   text: 'Kanjuro?',
   multiplier: 2,
-  status: 'unknow',
+  status: 'En cours',
   position: 1,
   )
 
@@ -37,7 +37,7 @@ answer_2_traitre_wano = Answer.create!(
   question: traitre_wano,
   text: 'Shinobu?',
   multiplier: 2,
-  status: 'unknow',
+  status: 'En cours',
   position: 2,
   )
 
@@ -45,7 +45,7 @@ answer_3_traitre_wano = Answer.create!(
   question: traitre_wano,
   text: 'Carrot?',
   multiplier: 3,
-  status: 'unknow',
+  status: 'En cours',
   position: 3,
   )
 
@@ -53,6 +53,6 @@ answer_4_traitre_wano = Answer.create!(
   question: traitre_wano,
   text: 'Autre?',
   multiplier: 2,
-  status: 'unknow',
+  status: 'En cours',
   position: 4,
   )
