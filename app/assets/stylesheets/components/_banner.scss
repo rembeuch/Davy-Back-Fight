@@ -2,8 +2,10 @@
   justify-content: space-between;
   background-image: url("https://res.cloudinary.com/dsiamykrd/image/upload/v1577109704/banner_sjhzy5.png");
   background-position: center;
-  background-size: cover;
+  background-size: 99%;
   height: 400px;
+  background-origin: content-box;
+  background-repeat: no-repeat;
 }
 
 
