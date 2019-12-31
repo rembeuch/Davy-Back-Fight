@@ -33,4 +33,13 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:title, :photo, :tag)
   end
+
+  def sort
+    @questions_sort = Question.where(closed: false)
+  end
+
+  def sort_tag
+    @questions = Question.all
+    @questions_sort_tag = @questions.sort_by(&:tag)
+  end
 end

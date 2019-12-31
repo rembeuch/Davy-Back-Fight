@@ -1,14 +1,22 @@
 <div class="container">
-  <h1>Paris</h1>
+  <div class="card ">
+    <h1>Paris les plus récents</h1>
+      Trier <%= link_to 'Les paris en cours', question_sort_path(1) %> <%= link_to 'par Tag', question_sort_tag_path(1) %>
+  </div>
     <% if current_user.admin == true %>
     <%= link_to 'créer un nouveau paris', new_question_path, class: "btn btn-warning" %>
     <% end %>
-  <% @questions.each do |question| %>
+  <% @questions.sort_by(&:created_at).reverse.each do |question| %>
     <div class="card-product">
       <%= cl_image_tag question.photo, :class => "question-photo" %>
       <div class="card-product-infos">
         <h2> <%= question.title %></h2>
         <%= link_to 'Détails', question_path(question), class: "btn btn-success" %>
+        <% if question.closed %>
+          <%= "Pari cloturé" %>
+        <% else %>
+          <%= "en cours" %>
+        <% end %>
       </div>
     </div>
   <% end %>

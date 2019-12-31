@@ -20,6 +20,9 @@
       <div class="card-product-infos">
         <h1> <%= answer.text %> </h1>
         Cote <%= answer.multiplier %>
+        <% if @question.closed %>
+          <%= answer.status %>
+        <% end %>
       </div>
       <% if current_user.admin == true %>
         <%= link_to 'true', question_answer_true_path(@question, answer), method: :patch, class: "btn btn-success" %>
