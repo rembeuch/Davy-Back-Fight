@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="card">
+    <ul>
+      <% @users.sort_by(&:berrys).reverse.each do |user| %>
+        <li><%= user.pseudo %> <%= user.berrys %> Berrys</li>
+      <% end %>
+    </ul>
+  </div>
+</div>

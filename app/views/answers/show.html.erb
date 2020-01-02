@@ -1,0 +1,39 @@
+<div class="container">
+<div class="card-product">
+    <%= cl_image_tag @question.photo, :class => "question-photo" %>
+    <div class="card-product-infos">
+        <h2> <%= @question.title %></h2>
+      <h1> <%= @answer.text %> </h1>
+      Cote <div id="multiplier"> <%= @answer.multiplier %></div>
+    </div>
+  </div>
+
+<div class="card-product">
+      <div class="card-product-infos">
+        <%= simple_form_for [@question, @answer, @user_answer] do |f| %>
+          <%= f.error_notification %>
+          <%= f.input :amount,label: 'Votre Mise? (Nombre entier)',
+                as: :integer,
+                required: true,
+                input_html: { id: 'amount'} %>
+          <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    <h2>Gains potentiels:
+<span id = "result"></span>B
+</h2>
+    </div>
+
+<script>
+
+  let num2 = document.getElementById('amount')
+  num2.addEventListener("change", function()
+  {
+    num1 = document.getElementById("multiplier").innerText;
+    num2 = document.getElementById("amount").value;
+    document.getElementById("result").innerHTML = num1 * num2;
+  });
+
+
+</script>
+</div>

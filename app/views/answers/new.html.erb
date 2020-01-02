@@ -1,0 +1,17 @@
+<h1>add answer</h1>
+<% if current_user.admin == true %>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <div class="form-inputs">
+  <%= simple_form_for [@question, @answer] do |f| %>
+  <%= f.input :text, label: 'Text' %>
+  <%= f.input :position %>
+  <%= f.input :multiplier %>
+
+
+  <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+   </div>
+  </div>
+</div>
+  <% end %>
+<% end %>

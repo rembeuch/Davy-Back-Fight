@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="card">
+    <h1 >Paris triés par Tag</h1>
+  </div>
+  <% @questions_sort_tag.each do |question| %>
+    <div class="card-product">
+      <%= cl_image_tag question.photo, :class => "question-photo" %>
+      <div class="card-product-infos">
+        Tag: <%= question.tag %>
+        <h2> <%= question.title %></h2>
+        <%= link_to 'Détails', question_path(question), class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+</div>
