@@ -14,9 +14,6 @@
   </div>
   <% @question.answers.sort_by(&:position).each do |answer| %>
     <div class="card-product">
-        <% unless @question.closed %>
-          <%= link_to 'Parier!', question_answer_path(@question, answer), class: "btn btn-danger" %>
-        <% end %>
       <div class="card-product-infos">
         <h1> <%= answer.text %> </h1>
         Cote <%= answer.multiplier %>
@@ -24,6 +21,9 @@
           <%= answer.status %>
         <% end %>
       </div>
+        <% unless @question.closed %>
+          <%= link_to 'Parier!', question_answer_path(@question, answer), class: "btn btn-danger m-5" %>
+        <% end %>
       <% if current_user.admin == true %>
         <%= link_to 'true', question_answer_true_path(@question, answer), method: :patch, class: "btn btn-success" %>
         <%= link_to 'false', question_answer_false_path(@question, answer), method: :patch, class: "btn btn-danger" %>

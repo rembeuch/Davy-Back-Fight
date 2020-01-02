@@ -4,7 +4,7 @@
     <div class="card-product-infos">
         <h2> <%= @question.title %></h2>
       <h1> <%= @answer.text %> </h1>
-      Cote <%= @answer.multiplier %>
+      Cote <%= @answer.multiplier, id="multiplier" %>
     </div>
   </div>
 
@@ -14,9 +14,23 @@
           <%= f.error_notification %>
           <%= f.input :amount,label: 'Votre Mise? (Nombre entier)',
                 as: :integer,
-                required: true %>
+                required: true,
+                input_html: { id: 'amount'} %>
           <%= f.button :submit, "Valider", class: "btn btn-primary" %>
         <% end %>
       </div>
+    <p>Gains potentiels:
+<span id = "result"></span>
+</p>
     </div>
+
+<script>
+document.getElementById('amount').onchange = function() {
+        num1 = document.getElementById("multiplier").value;
+        num2 = document.getElementById("amount").value;
+        document.getElementById("result").innerHTML = num1 * num2;
+};
+
+
+</script>
 </div>
