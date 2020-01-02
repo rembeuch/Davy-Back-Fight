@@ -4,7 +4,7 @@
     <div class="card-product-infos">
         <h2> <%= @question.title %></h2>
       <h1> <%= @answer.text %> </h1>
-      Cote <%= @answer.multiplier, id="multiplier" %>
+      Cote <div id="multiplier"> <%= @answer.multiplier %></div>
     </div>
   </div>
 
@@ -19,17 +19,20 @@
           <%= f.button :submit, "Valider", class: "btn btn-primary" %>
         <% end %>
       </div>
-    <p>Gains potentiels:
-<span id = "result"></span>
-</p>
+    <h2>Gains potentiels:
+<span id = "result"></span>B
+</h2>
     </div>
 
 <script>
-document.getElementById('amount').onchange = function() {
-        num1 = document.getElementById("multiplier").value;
-        num2 = document.getElementById("amount").value;
-        document.getElementById("result").innerHTML = num1 * num2;
-};
+
+  let num2 = document.getElementById('amount')
+  num2.addEventListener("change", function()
+  {
+    num1 = document.getElementById("multiplier").innerText;
+    num2 = document.getElementById("amount").value;
+    document.getElementById("result").innerHTML = num1 * num2;
+  });
 
 
 </script>
