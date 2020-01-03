@@ -20,7 +20,6 @@ traitre_wano = Question.create!(
     closed: false,
     title: 'Qui à trahi les fourreaux rouges en renseignant Orochi de leurs actions?',
     tag: 'wano',
-    photo: "https://res.cloudinary.com/dsiamykrd/image/upload/v1577443578/wano_gtoynb.jpg"
   )
   traitre_wano.photo = "https://res.cloudinary.com/dsiamykrd/image/upload/v1577443578/wano_gtoynb.jpg"
 
