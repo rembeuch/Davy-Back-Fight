@@ -8,13 +8,13 @@
       <%= link_to 'créer un article', new_article_path, class: 'btn btn-warning' %>
     <% end %>
 
-    <h1 class="card p-5">Attention les paris de ce site sont basés sur les dernières sorties des chapitres de One Piece, si vous n'êtes pas à jour vous vous exposez aux <strong> SPOILS!! </strong></h1>
+    <h1 class="card p-5 mb-4">Attention les paris de ce site sont basés sur les dernières sorties des chapitres de One Piece, si vous n'êtes pas à jour vous vous exposez aux <strong> SPOILS!! </strong></h1>
 
     <% @articles.each do |article| %>
-      <div class="card">
-        <h1><%= article.title %></h1>
-        <%=  cl_image_tag article.photo  %>
-        <h3><%=  article.text%></h3>
+      <div class="card mb-4">
+        <h1 class="text-center m-2"><%= article.title %></h1>
+        <%=  cl_image_tag article.photo, :class => "article-photo"  %>
+        <h3 class="m-3"><%=  article.text%></h3>
       </div>
     <% end %>
 </div>
