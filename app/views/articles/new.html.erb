@@ -1,0 +1,17 @@
+<% if current_user.admin %>
+<h1>new article</h1>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <div class="form-inputs">
+        <%= simple_form_for [@article] do |f| %>
+        <%= f.input :title, label: 'Titre' %>
+        <%= f.input :text %>
+        <%= f.input :photo %>
+        <%= f.input :photo_cache, as: :hidden %>
+
+        <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+      </div>
+    </div>
+</div>
+  <% end %>
+<% end %>

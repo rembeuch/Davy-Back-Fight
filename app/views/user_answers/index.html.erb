@@ -1,7 +1,10 @@
 
 <div class="container">
+
+  <h2 class="card p-5 mb-4 text-center">Recevez 10.000B en vous connectant chaque jour!</h2>
+
   <h1>Vos Paris</h1>
-<% @user_answers.sort_by(&:created_at).reverse.each do |user_answer| %>
+    <% @user_answers.sort_by(&:created_at).reverse.each do |user_answer| %>
     <div class="card-product">
       <%= cl_image_tag user_answer.answer.question.photo, :class => "question-photo" %>
       <div class="card-product-infos">
@@ -9,14 +12,20 @@
           Votre réponse:
             <%= user_answer.answer.text %>
           Montant misé:
-            <%= user_answer.amount %>B
+           <%=number_with_delimiter(user_answer.amount, :delimiter => '.')%> B
           Gain Potentiel en cas de bonne réponse:
-          <%= user_answer.amount * user_answer.answer.multiplier %>B
+          <%= number_with_delimiter(user_answer.amount * user_answer.answer.multiplier, :delimiter => '.') %>B
           <%= user_answer.answer.status %>
           <% if user_answer.answer.status == 'Validé!'  %>
-          <%= link_to "Récupérez vos gains!", user_answer_win_path(user_answer), method: :patch, class: "btn btn-success" %>
+          <%= link_to "Récupérez vos gains!", user_answer_win_path(user_answer), method: :patch, class: "btn btn-success", id: "gain" %>
           <% end %>
       </div>
     </div>
   <% end %>
 </div>
+
+<script>
+  Document.getElementById("gain").disabled = true;
+
+
+</script>

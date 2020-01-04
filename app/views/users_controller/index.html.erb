@@ -1,9 +1,9 @@
 <div class="container">
   <div class="card">
-    <ul>
+    <ol>
       <% @users.sort_by(&:berrys).reverse.each do |user| %>
-        <li><%= user.pseudo %> <%= user.berrys %> Berrys</li>
+        <li><%= user.pseudo %> <%=number_with_delimiter(user.berrys, :delimiter => '.')%> Berrys</li>
       <% end %>
-    </ul>
+    </ol>
   </div>
 </div>

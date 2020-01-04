@@ -26,7 +26,8 @@
         <% end %>
       <% if current_user.admin == true %>
         <%= link_to 'true', question_answer_true_path(@question, answer), method: :patch, class: "btn btn-success" %>
-        <%= link_to 'false', question_answer_false_path(@question, answer), method: :patch, class: "btn btn-danger" %>
+        <%= link_to 'false', question_answer_false_path(@question, answer), method: :patch, class: "btn btn-danger m-3" %>
+        <%= answer.status %>
       <% end %>
     </div>
   <% end %>

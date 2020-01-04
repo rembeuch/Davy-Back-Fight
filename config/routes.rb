@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   end
 
   resources :users_controller, only: [:index]
+
+  resources :articles, only: [:index, :new, :create]
 end

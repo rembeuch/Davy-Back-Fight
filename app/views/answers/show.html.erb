@@ -4,7 +4,6 @@
     <div class="card-product-infos">
         <h2> <%= @question.title %></h2>
       <h1> <%= @answer.text %> </h1>
-      Cote <div id="multiplier"> <%= @answer.multiplier %></div>
     </div>
   </div>
 
@@ -15,13 +14,15 @@
           <%= f.input :amount,label: 'Votre Mise? (Nombre entier)',
                 as: :integer,
                 required: true,
-                input_html: { id: 'amount'} %>
-          <%= f.button :submit, "Valider", class: "btn btn-primary" %>
-        <% end %>
+                input_html: { id: 'amount'}
+        %>
       </div>
-    <h2>Gains potentiels:
+      Cote <div id="multiplier"> <%= @answer.multiplier %></div>
+    <h2 class="m-5">Gains potentiels:
 <span id = "result"></span>B
 </h2>
+          <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+        <% end %>
     </div>
 
 <script>
@@ -31,7 +32,8 @@
   {
     num1 = document.getElementById("multiplier").innerText;
     num2 = document.getElementById("amount").value;
-    document.getElementById("result").innerHTML = num1 * num2;
+    num3 = num1 * num2;
+    document.getElementById("result").innerHTML = num3.toLocaleString('en')
   });
 
 
