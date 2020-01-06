@@ -27,5 +27,5 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
 
-  mount StripeEvent::Engine, at: 'https://25d87d75.ngrok.io'
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
