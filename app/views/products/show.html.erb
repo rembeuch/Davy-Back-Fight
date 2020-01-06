@@ -7,6 +7,10 @@
       <h1><%= @product.name %></h1>
       <p>Prix: <%= @product.price %>€</p>
       <p>Some awesome description of our amazing product.</p>
+      <%= form_tag orders_path do %>
+        <%= hidden_field_tag 'product_id', @product.id %>
+        <%= submit_tag 'Purchase', class: 'btn btn-primary' %>
+      <% end %>
     </div>
   </div>
 </div>

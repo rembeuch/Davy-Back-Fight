@@ -22,4 +22,10 @@ Rails.application.routes.draw do
   resources :articles, only: [:index, :new, :create]
 
   resources :products, only: [:index, :show]
+
+  resources :orders, only: [:show, :create]  do
+    resources :payments, only: :new
+  end
+
+  # mount StripeEvent::Engine, at: 'ajouter le nom de domaine /stripe-webhooks'
 end
