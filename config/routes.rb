@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   resources :users_controller, only: [:index]
 
   resources :articles, only: [:index, :new, :create]
+
+  resources :products, only: [:index, :show]
 end
