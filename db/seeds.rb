@@ -28,7 +28,7 @@ puts "creating answers"
 
 answer_1_traitre_wano = Answer.create!(
   question: traitre_wano,
-  text: 'Kanjuro?',
+  text: 'Kanjuro',
   multiplier: 2,
   status: 'En cours',
   position: 1,
@@ -36,7 +36,7 @@ answer_1_traitre_wano = Answer.create!(
 
 answer_2_traitre_wano = Answer.create!(
   question: traitre_wano,
-  text: 'Shinobu?',
+  text: 'Shinobu',
   multiplier: 2,
   status: 'En cours',
   position: 2,
@@ -44,7 +44,7 @@ answer_2_traitre_wano = Answer.create!(
 
 answer_3_traitre_wano = Answer.create!(
   question: traitre_wano,
-  text: 'Carrot?',
+  text: 'Carrot',
   multiplier: 3,
   status: 'En cours',
   position: 3,
@@ -52,7 +52,7 @@ answer_3_traitre_wano = Answer.create!(
 
 answer_4_traitre_wano = Answer.create!(
   question: traitre_wano,
-  text: 'Autre?',
+  text: 'Autre',
   multiplier: 2,
   status: 'En cours',
   position: 4,
