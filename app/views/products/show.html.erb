@@ -1,12 +1,12 @@
-<div class="container py-3">
+<div class="container py-3 bg-white">
   <div class="row">
     <div class="col-sm-12 col-md-6">
-      <%= image_tag(@product.photo_url, width: '100%') %>
+      <%= image_tag @product.photo_url, class: "product-photo mx-auto" %>
     </div>
     <div class="col-sm-12 col-md-6">
       <h1><%= @product.name %></h1>
       <p>Prix: <%= @product.price %>€</p>
-      <p>Some awesome description of our amazing product.</p>
+      <%= link_to 'Commander', new_product_order_path(@product), class: 'btn btn-primary' %>
     </div>
   </div>
 </div>
