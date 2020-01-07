@@ -4,6 +4,8 @@
     <div class="col">
       <h1>Résumé de votre commande</h1>
       <p>Achat de <strong><%= @order.product.name %></strong> pour <strong><%= humanized_money_with_symbol @order.amount %></strong></p>
+       <p> <strong>ADRESSE DE LIVRAISON</strong> <%= @order.address %> <%= @order.zipcode %> <%= @order.city %>
+      </p>
       <button id="pay" class="btn btn-primary">Payer</button>
       <script src="https://js.stripe.com/v3/"></script>
       <script>
