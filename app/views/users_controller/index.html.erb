@@ -9,7 +9,7 @@
   </div>
     <div class="row">
       <div class="col-6 ml-2">
-        <% @users.first(10).each do |user| %>
+        <% @users.sort_by(&:berrys).reverse.first(10).each do |user| %>
          <%=cl_image_tag user.avatar, :class => "classement-avatar mt-2" %>
          <% end %>
       </div>
