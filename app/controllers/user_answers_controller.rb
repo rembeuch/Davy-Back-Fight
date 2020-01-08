@@ -28,7 +28,8 @@ class UserAnswersController < ApplicationController
     @user_answer = UserAnswer.find(params[:user_answer_id])
     @user_answer.user = current_user
     current_user.update(berrys: (current_user.berrys + (@user_answer.amount * @user_answer.answer.multiplier)))
-    @user_answer.answer.update(status: 'Terminé')
+    @user_answer.closed = true
+    @user_answer.save
     redirect_to user_answers_path
   end
 

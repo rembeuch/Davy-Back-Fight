@@ -12,6 +12,7 @@ puts "Destroy all instances"
 UserAnswer.destroy_all
 Answer.destroy_all
 Question.destroy_all
+Order.destroy_all
 Product.destroy_all
 
 

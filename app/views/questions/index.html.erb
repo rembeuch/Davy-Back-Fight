@@ -11,7 +11,7 @@
       <%= cl_image_tag question.photo, :class => "question-photo" %>
       <div class="card-product-infos m-2">
         <h2> <%= question.title %></h2>
-        <%= link_to 'Détails', question_path(question), class: "btn btn-success m-2" %>
+        <%= link_to 'Détails', question_path(question), class: "btn btn-success m-2 rounded-pill border border-success" %>
         <% if question.closed %>
           <%= "Pari cloturé" %>
         <% else %>

@@ -5,10 +5,13 @@
         <div class="form-inputs">
           <%= simple_form_for [@product, @order] do |f| %>
             <%= f.error_notification %>
-            <%= f.input :address, label: 'Adresse' %>
-            <%= f.input :city %>
-            <%= f.input :zipcode %>
-          <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+            <%= f.input :address, label: 'Adresse',
+                        required: true %>
+            <%= f.input :city, required: true %>
+            <%= f.input :zipcode, required: true %>
+             <%= f.input :nation, label: 'Pays',
+                        required: true %>
+          <%= f.button :submit, "Valider", class: "btn btn-primary m-5" %>
         </div>
       </div>
   </div>
