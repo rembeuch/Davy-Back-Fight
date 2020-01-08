@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
       line_items: [{
-        name: "#{order.address}, #{order.zipcode}, #{order.city}",
+        name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation}",
         images: [product.photo_url],
         amount: product.price_cents,
         currency: 'eur',
@@ -44,6 +44,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:address, :city, :zipcode)
+    params.require(:order).permit(:address, :city, :zipcode, :nation)
   end
 end
