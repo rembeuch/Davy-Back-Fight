@@ -1,10 +1,13 @@
 <div class="container">
   <h1>Shop</h1>
+  <% if current_user.admin == true %>
+    <%= link_to 'Ajouter un produit', new_product_path, class: "btn btn-warning" %>
+    <% end %>
   <div class="row">
     <% @products.each do |product| %>
       <div class="col-6 col-md-4">
         <div class="card m-3">
-          <%= image_tag product.photo_url , class: "product-photo mx-auto" %>
+          <%= cl_image_tag product.photo , :class => "product-photo mx-auto mt-3" %>
           <div class="card-body">
             <h5 class="card-title"><%= product.name %> <%= product.price %>€</h5>
             <%= link_to "Details", product_path(product), class: "btn btn-primary" %>
