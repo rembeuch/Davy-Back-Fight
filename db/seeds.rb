@@ -61,6 +61,6 @@ answer_4_traitre_wano = Answer.create!(
 
 
 puts 'Creating products...'
-Product.create!(name: 'Poster Luffy', price_cents: 900, photo_url: 'https://cdn.shopify.com/s/files/1/0093/9143/9935/products/Poster_One_piece_luffy_-_Luffy_store_-min_1200x1200.jpg?v=1564828804')
+Product.create!(name: 'Poster Luffy', price_cents: 900, photo: 'https://cdn.shopify.com/s/files/1/0093/9143/9935/products/Poster_One_piece_luffy_-_Luffy_store_-min_1200x1200.jpg?v=1564828804')
 
-Product.create!(name: 'Poster Zoro', price_cents: 900, photo_url: 'https://cdn11.bigcommerce.com/s-c90z0hdhmk/images/stencil/1280x1280/products/52/54/zoro_wanted__67101.1556392879.jpg?c=2&imbypass=on')
+Product.create!(name: 'Poster Zoro', price_cents: 900, photo: 'https://cdn11.bigcommerce.com/s-c90z0hdhmk/images/stencil/1280x1280/products/52/54/zoro_wanted__67101.1556392879.jpg?c=2&imbypass=on')
