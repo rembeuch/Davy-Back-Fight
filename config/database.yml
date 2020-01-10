@@ -80,6 +80,7 @@ test:
 #
 production:
   <<: *default
+   url: <%= ENV['POSTGRESQL_ADDON_URI']
   database: _Davy-Back-Fight_production
   username: _Davy-Back-Fight
   password: <%= ENV['_DAVY-BACK-FIGHT_DATABASE_PASSWORD'] %>
