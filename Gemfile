@@ -6,7 +6,6 @@ gem 'carrierwave', '~> 1.2'
 gem 'money-rails'
 gem 'stripe'
 gem 'stripe_event'
-gem 'letter_opener', group: :development
 
 gem 'bootsnap', require: false
 gem 'devise'
