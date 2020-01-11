@@ -3,7 +3,7 @@
     <%= cl_image_tag @question.photo, :class => "question-photo" %>
     <div class="card-product-infos">
         <h2> <%= @question.title %></h2>
-      <h1> <%= @answer.text %> </h1>
+      <h1 class="font-custom-title"> <%= @answer.text %> </h1>
     </div>
   </div>
 
@@ -18,10 +18,10 @@
         %>
       </div>
       Cote <div id="multiplier"> <%= @answer.multiplier %></div>
-    <h2 class="m-5">Gains potentiels:
+    <h2 class="m-5 ">Gains potentiels:
 <span id = "result"></span>B
+          <%= f.button :submit, "Valider", class: "btn btn-primary m-3" %>
 </h2>
-          <%= f.button :submit, "Valider", class: "btn btn-primary" %>
         <% end %>
     </div>
 

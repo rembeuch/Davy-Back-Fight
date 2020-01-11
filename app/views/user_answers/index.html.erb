@@ -1,9 +1,9 @@
 
 <div class="container">
 
-  <h2 class="card p-5 mb-4 text-center">Recevez 10.000B en vous connectant chaque jour!</h2>
+  <h2 class="card p-5 mb-4 text-center font-custom-title">Recevez 10.000B en vous connectant chaque jour!</h2>
 
-  <h1 class="card p-5 mb-4 text-center">Vos Paris <%= link_to 'Vos Commandes', orders_path %></h1>
+  <h1 class="card p-5 mb-4 text-center font-custom-title">Vos Paris <%= link_to 'Vos Commandes', orders_path %></h1>
     <% @user_answers.sort_by(&:created_at).reverse.each do |user_answer| %>
     <div class="card-product">
       <%= cl_image_tag user_answer.answer.question.photo, :class => "question-photo" %>
