@@ -1,8 +1,8 @@
-<div class="container d-flex justify-content-center text-center ">
+<div class="container d-flex justify-content-center text-center mt-5">
   <div class="card p-3 center">
     <ol>
       <% @users.sort_by(&:berrys).reverse.each do |user| %>
-        <li> <h1> <%= user.pseudo %> <br> <%=number_with_delimiter(user.berrys, :delimiter => '.')%> Berrys </h1></li>
+        <li class="font-custom-navbar"> <h1 class="font-custom-title"> <%= user.pseudo %> <br> <%=number_with_delimiter(user.berrys, :delimiter => '.')%> Berrys </h1></li>
         <hr>
       <% end %>
     </ol>
