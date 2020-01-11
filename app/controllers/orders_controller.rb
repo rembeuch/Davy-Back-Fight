@@ -15,7 +15,6 @@ class OrdersController < ApplicationController
     if order.save
 
     session = Stripe::Checkout::Session.create(
-      payment_method: ['card'],
       payment_method_types: ['card'],
       line_items: [{
         name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation}/// #{product.name}",
