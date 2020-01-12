@@ -10,13 +10,19 @@
       <div class="card-product-infos">
         <h2><%= user_answer.answer.question.title %></h2>
           Votre réponse:
-            <%= user_answer.answer.text %>
+           <strong> <%= user_answer.answer.text %></strong>
             <br>
           Montant misé:
-           <%=number_with_delimiter(user_answer.amount, :delimiter => '.')%> B
+          <strong> <%=number_with_delimiter(user_answer.amount, :delimiter => '.')%> B </strong>
           Gain Potentiel en cas de bonne réponse:
-          <%= number_with_delimiter(user_answer.amount * user_answer.answer.multiplier, :delimiter => '.') %>B
-          <%= user_answer.answer.status %>
+          <strong> <%= number_with_delimiter(user_answer.amount * user_answer.answer.multiplier, :delimiter => '.') %>B </strong>
+          <% if user_answer.answer.status == 'En cours'  %>
+           <span class="text-primary"> <%= user_answer.answer.status%></span>
+          <% elsif user_answer.answer.status == 'Validé!' %>
+            <span class="text-success"> <%= user_answer.answer.status%></span>
+          <% else %>
+            <span class="text-danger"> <%= user_answer.answer.status%></span>
+          <% end %>
           <% if user_answer.closed == false && user_answer.answer.status == 'Validé!'  %>
             <%= link_to "Récupérez vos gains!", user_answer_win_path(user_answer), method: :patch, class: "btn btn-success", id: "gain" %>
           <% end %>
