@@ -5,7 +5,7 @@
     <div class="wanted-pseudo pt-1 pl-1 mt-5 ml-5"> <%=current_user.pseudo%></div>
     <div class="wanted-berrys pl-5 ml-5"> <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%></div>
     <% else %>
-        <center><%= link_to 'Login', new_user_session_path, class: "btn login-btn" %></center>
+        <center><%= link_to 'Login', new_user_session_path, class: "btn login-btn font-custom" %></center>
     <% end %>
 </div>
   <div class="container banner ml-1 mt-5">
