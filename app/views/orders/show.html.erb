@@ -6,7 +6,8 @@
       <ul class="list-unstyled">
         <li><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></li>
         <li><strong>PRODUCT</strong> <%= @order.product.name %> [<%= @order.product_name %>]</li>
-        <li><strong>TOTAL</strong> <%= humanized_money_with_symbol @order.amount %></li>
+        <li><strong>QUANTITE</strong> <%= @order.quantity %> </li>
+        <li><strong>TOTAL</strong> <%= humanized_money_with_symbol (@order.product.price * @order.quantity) %></li>
          <li><strong>ADRESSE DE LIVRAISON</strong> <%= @order.address %> <%= @order.zipcode %> <%= @order.city %> <%= @order.nation %></li>
         </li>
       </ul>
