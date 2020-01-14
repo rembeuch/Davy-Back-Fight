@@ -14,7 +14,9 @@
     <% @articles.each do |article| %>
       <div class="card mb-4">
         <h1 class="text-center m-2 font-custom-title"><%= article.title %></h1>
-        <%=  cl_image_tag article.photo, :class => "article-photo"  %>
+        <% if article.image != nil %>
+          <%=  image_tag article.image, :class => "article-photo"  %>
+        <% end %>
         <h3 class="m-3 font-custom"><%=  article.text%></h3>
       </div>
     <% end %>
