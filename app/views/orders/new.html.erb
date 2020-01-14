@@ -1,9 +1,23 @@
 <div class="container bg-white">
+   <div class="row mt-4 py-5">
+    <div class="col-sm-12 col-md-4">
+      <%= cl_image_tag @product.photo, class: "product-photo mx-auto" %>
+    </div>
+    <div class="col-sm-12 col-md-8">
+      <h1><%= @product.name %></h1>
+      <p><%= @product.description %></p>
+      <p>Prix: <span id="price"> <%= @product.price %></span>€</p>
+      Total: <span id = "total"><%= @product.price %></span> €
+
+          <%= simple_form_for [@product, @order] do |f| %>
+            <%= f.input :quantity,label: 'Quantité?',
+                as: :integer,
+                required: true,
+                input_html: { id: 'quantity'} %>
   <h1>Indiquez votre adresse de livraison</h1>
     <div class="row">
       <div class="col-sm-4 col-sm-offset-4">
         <div class="form-inputs">
-          <%= simple_form_for [@product, @order] do |f| %>
             <%= f.error_notification %>
             <%= f.input :address, label: 'Adresse',
                         required: true %>
@@ -15,5 +29,21 @@
         </div>
       </div>
   </div>
+    </div>
+  </div>
     <% end %>
 </div>
+
+<script>
+
+  let num1 = document.getElementById('quantity')
+  num1.addEventListener("change", function()
+  {
+    num1 = document.getElementById("quantity").value;
+    num2 = document.getElementById("price").innerText;
+    num3 = parseFloat(num2) * num1;
+    document.getElementById("total").innerHTML = num3.toLocaleString('en')
+  });
+
+
+</script>
