@@ -5,17 +5,17 @@
         <div class="card m-3">
           <%= cl_image_tag @question.photo , :class => "answer-photo mx-auto mt-3" %>
           <div class="card-body">
-            <h5 class="card-title"><%= @question.title %></h5>
+            <h5 class="card-title font-custom"><%= @question.title %></h5>
                   <h1 class="font-custom-title"> <%= @answer.text %> </h1>
           <%= simple_form_for [@question, @answer, @user_answer] do |f| %>
           <%= f.error_notification %>
-          <%= f.input :amount,label: 'Votre Mise? (Nombre entier)',
+          <%= f.input :amount,label: 'Votre mise? (Nombre entier)',
                 as: :integer,
                 required: true,
                 input_html: { id: 'amount'}
         %>
          <h3> Cote: <div id="multiplier"> <%= @answer.multiplier %></div></h3>
-      <h2 class="m-5 ">Gains potentiels:
+      <h2 class="m-5 font-custom">Gains potentiels:
         <span id = "result"></span>B
           <%= f.button :submit, "Valider", class: "btn btn-primary m-3",data: { disable_with: false } %>
       </h2>

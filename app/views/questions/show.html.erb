@@ -6,7 +6,7 @@
   <div class="card-product">
     <%= cl_image_tag @question.photo, :class => "question-photo"  %>
     <div class="card-product-infos">
-        <h2> <%= @question.title %></h2>
+        <h2 class="font-custom"> <%= @question.title %></h2>
         <% if @question.closed %>
           <%= "Terminé!" %>
         <% end %>
