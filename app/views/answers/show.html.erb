@@ -1,29 +1,29 @@
 <div class="container">
-<div class="card-product">
-    <%= cl_image_tag @question.photo, :class => "question-photo" %>
-    <div class="card-product-infos">
-        <h2> <%= @question.title %></h2>
-      <h1 class="font-custom-title"> <%= @answer.text %> </h1>
-    </div>
-  </div>
 
-<div class="card-product">
-      <div class="card-product-infos">
-        <%= simple_form_for [@question, @answer, @user_answer] do |f| %>
+ <div class="row">
+      <div class="col-12 col-md-12">
+        <div class="card m-3">
+          <%= cl_image_tag @question.photo , :class => "answer-photo mx-auto mt-3" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= @question.title %></h5>
+                  <h1 class="font-custom-title"> <%= @answer.text %> </h1>
+          <%= simple_form_for [@question, @answer, @user_answer] do |f| %>
           <%= f.error_notification %>
           <%= f.input :amount,label: 'Votre Mise? (Nombre entier)',
                 as: :integer,
                 required: true,
                 input_html: { id: 'amount'}
         %>
-      </div>
-      Cote <div id="multiplier"> <%= @answer.multiplier %></div>
-    <h2 class="m-5 ">Gains potentiels:
-<span id = "result"></span>B
-          <%= f.button :submit, "Valider", class: "btn btn-primary m-3" %>
-</h2>
+         <h3> Cote: <div id="multiplier"> <%= @answer.multiplier %></div></h3>
+      <h2 class="m-5 ">Gains potentiels:
+        <span id = "result"></span>B
+          <%= f.button :submit, "Valider", class: "btn btn-primary m-3",data: { disable_with: false } %>
+      </h2>
         <% end %>
-    </div>
+      </div>
+        </div>
+      </div>
+  </div>
 
 <script>
 

@@ -2,13 +2,18 @@
   <div class="card">
     <h1 class="mx-auto font-custom-title">Paris en cours</h1>
   </div>
+
+
+<div class="row">
   <% @questions_sort.sort_by(&:created_at).reverse.each do |question| %>
-    <div class="card-product">
-      <%= cl_image_tag question.photo, :class => "question-photo" %>
-      <div class="card-product-infos">
-        <h2> <%= question.title %></h2>
-        <%= link_to 'Détails', question_path(question), class: "btn btn-success" %>
+      <div class="col-8 col-md-6">
+        <div class="card m-3">
+          <%= cl_image_tag question.photo , :class => "product-photo mx-auto mt-3" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= question.title %></h5>
+            <%= link_to "Details", question_path(question), class: "btn btn-success m-2 rounded-pill border border-success" %>
+          </div>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>

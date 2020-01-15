@@ -4,14 +4,15 @@
   <h2 class="card p-5 mb-4 text-center font-custom-title">Recevez 10.000B en vous connectant chaque jour!</h2>
 
   <h1 class="card p-5 mb-4 text-center font-custom-title">Vos Paris <%= link_to 'Vos Commandes', orders_path %></h1>
+
+  <div class="row">
     <% @user_answers.sort_by(&:created_at).reverse.each do |user_answer| %>
-    <div class="card-product">
-      <%= cl_image_tag user_answer.answer.question.photo, :class => "question-photo" %>
-      <div class="card-product-infos">
-        <h2><%= user_answer.answer.question.title %></h2>
-          Votre réponse:
-           <strong> <%= user_answer.answer.text %></strong>
-            <br>
+      <div class="col-12 col-md-12">
+        <div class="card m-3">
+          <%= cl_image_tag user_answer.answer.question.photo , :class => "answer-photo mx-auto mt-3" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= user_answer.answer.question.title %> Votre réponse:
+           <strong> <%= user_answer.answer.text %></strong></h5> <br>
           Montant misé:
           <strong> <%=number_with_delimiter(user_answer.amount, :delimiter => '.')%> B </strong>
           Gain Potentiel en cas de bonne réponse:
@@ -24,13 +25,11 @@
             <span class="text-danger"> <%= user_answer.answer.status%></span>
           <% end %>
           <% if user_answer.closed == false && user_answer.answer.status == 'Validé!'  %>
-            <%= link_to "Récupérez vos gains!", user_answer_win_path(user_answer), method: :patch, class: "btn btn-success", id: "gain" %>
+            <%= link_to "Récupérez vos gains!", user_answer_win_path(user_answer), method: :patch, class: "btn btn-success", id: "gain",data: { disable_with: false } %>
           <% end %>
+          </div>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 
-<script>
-  Document.getElementById("gain").disabled = true;
-</script>
