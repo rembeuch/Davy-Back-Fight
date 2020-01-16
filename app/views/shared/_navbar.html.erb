@@ -1,9 +1,9 @@
 <div class="d-flex">
-<div class="bg-profil">
+<div class="bg-profil p-5 ml-4">
     <% if user_signed_in? %>
      <center> <%=cl_image_tag current_user.avatar, :class => "wanted-avatar" %></center>
-    <div class="wanted-pseudo pt-1 pl-1 mt-5 ml-5"> <%=current_user.pseudo%></div>
-    <div class="wanted-berrys pl-5 ml-5"> <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%></div>
+    <div class="wanted-pseudo pl-1 ml-2"> <%=current_user.pseudo%></div>
+    <div class="wanted-berrys pl-4 ml-5 pb-3 "> <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%></div>
     <% else %>
         <center><%= link_to 'Login', new_user_session_path, class: "btn login-btn font-custom" %></center>
     <% end %>
