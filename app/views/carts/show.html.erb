@@ -1,0 +1,12 @@
+<div class="container bg-white">
+  <h1>Panier</h1>
+
+  <ul>
+      <% @cart.items.each do |item| %>
+        <li><%= item.product.name %>(X <%= item.quantity %>)</li>
+      <% end %>
+  </ul>
+
+
+<p><%= link_to "Retourner à la boutique", products_path %> </p>
+</div>

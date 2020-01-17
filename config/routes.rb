@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
 
+  resources :carts, only: :show
+
+  resources :items, only: :create
+
   resources :pages, only: :index
 
 
