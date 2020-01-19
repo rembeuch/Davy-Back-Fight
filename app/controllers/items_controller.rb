@@ -20,4 +20,11 @@ class ItemsController < ApplicationController
       redirect_to product_path(product)
     end
   end
+
+  def destroy
+    @cart = current_user.cart
+    @item = Item.find_by(id: params[:check])
+    @item.destroy
+    redirect_to cart_path(@cart)
+  end
 end

@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   resources :carts, only: [:show, :destroy]
 
-  resources :items, only: :create
+  resources :items, only: [:create, :destroy]
 
   resources :pages, only: :index
 

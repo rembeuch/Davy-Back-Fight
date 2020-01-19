@@ -4,6 +4,7 @@
   <ul>
       <% @cart.items.each do |item| %>
         <li><%= item.product.name %>(X <%= item.quantity %>) <span class="badge badge-pill badge-primary"> <%= number_to_currency(item.total, unit: "€", separator: ",", format: "%n %u") %></span></li>
+        <%= link_to "Supprimer cet article", item_path(id: item.id, check: item.id), method: :delete, data: { confirm: "Êtes-vous sur?"}, class: "btn btn-danger" %>
       <% end %>
   </ul>
 
