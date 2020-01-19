@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
 
-  resources :carts, only: :show
+  resources :carts, only: [:show, :destroy]
 
   resources :items, only: :create
 

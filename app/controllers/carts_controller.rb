@@ -4,4 +4,10 @@ class CartsController < ApplicationController
 
   def show
   end
+
+  def destroy
+    @cart = current_user.cart
+    @cart.items.destroy_all
+    redirect_to cart_path(@cart)
+  end
 end

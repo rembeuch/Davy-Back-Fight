@@ -3,10 +3,12 @@
 
   <ul>
       <% @cart.items.each do |item| %>
-        <li><%= item.product.name %>(X <%= item.quantity %>)</li>
+        <li><%= item.product.name %>(X <%= item.quantity %>) <span class="badge badge-pill badge-primary"> <%= number_to_currency(item.total, unit: "€", separator: ",", format: "%n %u") %></span></li>
       <% end %>
   </ul>
 
+<p class="font-weight-bold">Total : <span class="badge badge-pill badge-primary"> <%= number_to_currency(@cart.total, unit: "€", separator: ",", format: "%n %u") %></span></p>
 
+<%= button_to "Vider le panier", @cart, method: :delete, data: { confirm: "Êtes-vous sur?"}, class: "btn btn-danger" %>
 <p><%= link_to "Retourner à la boutique", products_path %> </p>
 </div>
