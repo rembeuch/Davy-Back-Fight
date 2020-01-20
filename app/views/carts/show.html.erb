@@ -1,15 +1,23 @@
-<div class="container bg-white">
-  <h1>Panier</h1>
+<div class="container bg-white p-5">
 
-  <ul>
-      <% @cart.items.each do |item| %>
-        <li><%= item.product.name %>(X <%= item.quantity %>) <span class="badge badge-pill badge-primary"> <%= number_to_currency(item.total, unit: "€", separator: ",", format: "%n %u") %></span></li>
-        <%= link_to "Supprimer cet article", item_path(id: item.id, check: item.id), method: :delete, data: { confirm: "Êtes-vous sur?"}, class: "btn btn-danger" %>
+  <h2 class="font-weight-bold d-flex justify-content-end">Total : <span class="badge badge-pill badge-primary"> <%= number_to_currency(@cart.total, unit: "€", separator: ",", format: "%n %u") %></span></h2>
+  <p class="d-flex justify-content-end">Vos articles: (X<%= @cart.items.count %>)</p>
+
+
+    <ul>
+        <% @cart.items.each do |item| %>
+
+   <div class="col-12 col-md-6">
+          <div class="card m-3">
+            <%= cl_image_tag item.product.photo , :class => "product-photo mx-auto mt-3" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= item.product.name %>(X <%= item.quantity %>) <span class="badge badge-pill badge-primary"> <%= number_to_currency(item.total, unit: "€", separator: ",", format: "%n %u") %></span></h5>
+          <%= link_to "Supprimer cet article", item_path(id: item.id, check: item.id), method: :delete, data: { confirm: "Êtes-vous sur?"}, class: "badge badge-pill badge-danger" %>
+            </div>
+          </div>
+        </div>
       <% end %>
-  </ul>
+  <p><%= link_to "Retourner à la boutique", products_path, class: "badge badge-pill badge-success" %> </p>
 
-<p class="font-weight-bold">Total : <span class="badge badge-pill badge-primary"> <%= number_to_currency(@cart.total, unit: "€", separator: ",", format: "%n %u") %></span></p>
-
-<%= button_to "Vider le panier", @cart, method: :delete, data: { confirm: "Êtes-vous sur?"}, class: "btn btn-danger" %>
-<p><%= link_to "Retourner à la boutique", products_path %> </p>
+  <%= button_to "Vider le panier", @cart, method: :delete, data: { confirm: "Êtes-vous sur?"} %>
 </div>
