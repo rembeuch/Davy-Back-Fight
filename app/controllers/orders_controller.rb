@@ -43,6 +43,15 @@ class OrdersController < ApplicationController
     @orders = current_user.orders
   end
 
+  def items_order
+    @cart = current_user.cart
+    @order = Order.new
+  end
+
+  def items_order_create
+    redirect_to root_path
+  end
+
   def order_params
     params.require(:order).permit(:address, :city, :zipcode, :nation, :quantity)
   end

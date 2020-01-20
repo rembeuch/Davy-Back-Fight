@@ -1,6 +1,7 @@
 <div class="container bg-white p-5">
 
-  <h2 class="font-weight-bold d-flex justify-content-end">Total : <span class="badge badge-pill badge-primary"> <%= number_to_currency(@cart.total, unit: "€", separator: ",", format: "%n %u") %></span></h2>
+  <h2 class="font-weight-bold d-flex justify-content-end">Total : <span class="badge badge-pill badge-primary"> <%= number_to_currency(@cart.total, unit: "€", separator: ",", format: "%n %u") %></span>
+    <%= link_to 'Commander', items_order_new_order_path , class: 'btn btn-primary'  %></h2>
   <p class="d-flex justify-content-end">Vos articles: (X<%= @cart.items.count %>)</p>
 
 

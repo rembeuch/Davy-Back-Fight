@@ -29,7 +29,12 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
 
-  resources :carts, only: [:show, :destroy]
+  resources :orders do
+    get 'items_order', on: :new
+    post 'items_order_create'
+  end
+
+  resources :carts, only: [:show]
 
   resources :items, only: [:create, :destroy]
 
