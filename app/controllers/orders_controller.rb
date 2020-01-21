@@ -54,10 +54,11 @@ class OrdersController < ApplicationController
     order.user = current_user
     @product_list = []
     @cart.items.each do |item|
+      @product_list.push(item.quantity)
       @product_list.push(item.product.name)
     end
     order.product = @cart.items.first.product
-    order.update(product_name: @product_list.join(','))
+    order.update(product_name: @product_list.join(' '))
     order.update(amount: @cart.total)
     order.state = 'Non finalisée'
 
@@ -66,7 +67,7 @@ class OrdersController < ApplicationController
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
-          name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} ///  #{@product_list.join(',')} ",
+          name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} ///  #{@product_list.join(' ')} ",
           amount: @cart.total.to_i * 100,
           currency: 'eur',
           quantity: order.quantity
