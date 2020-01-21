@@ -8,7 +8,7 @@
       <p><%= @product.description %></p>
       <p>Prix: <%= @product.price %>€</p>
      <div> <%= link_to 'Commander', new_product_order_path(@product), class: 'btn btn-primary' %></div> <br>
-      <%= button_to 'Ajouter au Panier', items_path(product_id: @product) ,class: 'btn btn-primary'   %>
+      <%= button_to 'Ajouter au Panier', items_path(product_id: @product) %>
     </div>
   </div>
 </div>

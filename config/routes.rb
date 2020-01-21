@@ -29,10 +29,8 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
 
-  resources :orders do
-    get 'items_order', on: :new
-    post 'items_order_create'
-  end
+    get 'items_order' => 'orders#items_order'
+    post 'items_order_create' => 'orders#items_order_create'
 
   resources :carts, only: [:show]
 

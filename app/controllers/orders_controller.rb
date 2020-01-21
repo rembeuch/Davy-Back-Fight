@@ -49,7 +49,38 @@ class OrdersController < ApplicationController
   end
 
   def items_order_create
-    redirect_to root_path
+    @cart = current_user.cart
+    order = Order.new(order_params)
+    order.user = current_user
+    @product_list = []
+    @cart.items.each do |item|
+      @product_list.push(item.product.name)
+    end
+    order.product = @cart.items.first.product
+    order.update(product_name: @product_list.join(','))
+    order.update(amount: @cart.total)
+    order.state = 'Non finalisée'
+
+    if order.save && order.quantity == 1
+
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [{
+          name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} ///  #{@product_list.join(',')} ",
+          amount: @cart.total.to_i * 100,
+          currency: 'eur',
+          quantity: order.quantity
+        }],
+        success_url: order_url(order),
+        cancel_url: order_url(order)
+      )
+
+      order.update(checkout_session_id: session.id)
+      redirect_to new_order_payment_path(order)
+    else
+      redirect_to cart_path(@cart)
+      flash[:alert] = "Something went wrong..."
+    end
   end
 
   def order_params
