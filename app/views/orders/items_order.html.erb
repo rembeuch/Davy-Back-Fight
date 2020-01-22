@@ -9,8 +9,10 @@
                           required: true %>
               <%= f.input :city,label: 'Ville', required: true %>
               <%= f.input :zipcode,label: 'Code Postal', required: true %>
-               <%= f.input :nation, label: 'Pays',
+              <%= f.input :nation, label: 'Pays',
                           required: true %>
+              <h3>Utiliser un CODE PROMO</h3>
+              <%= f.input :coupon, label: 'Code Promo' %>
             <%= f.button :submit, "Valider", class: "btn btn-primary m-5" %>
           </div>
         </div>

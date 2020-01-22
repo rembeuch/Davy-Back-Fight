@@ -12,7 +12,9 @@ class OrdersController < ApplicationController
     order.amount = (product.price * order.quantity)
     order.state = 'Non finalisée'
     order.user = current_user
+
     if order.save && order.quantity >= 1
+
 
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
@@ -21,7 +23,7 @@ class OrdersController < ApplicationController
         images: [product.photo],
         amount: product.price_cents,
         currency: 'eur',
-        quantity: order.quantity
+        quantity: order.quantity,
       }],
       success_url: order_url(order),
       cancel_url: order_url(order)
@@ -70,7 +72,7 @@ class OrdersController < ApplicationController
           name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} ///  #{@product_list.join(' ')} ",
           amount: @cart.total.to_i * 100,
           currency: 'eur',
-          quantity: order.quantity
+          quantity: order.quantity,
         }],
         success_url: order_url(order),
         cancel_url: order_url(order)
@@ -85,6 +87,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:address, :city, :zipcode, :nation, :quantity)
+    params.require(:order).permit(:address, :city, :zipcode, :nation, :quantity, :coupon)
   end
 end
