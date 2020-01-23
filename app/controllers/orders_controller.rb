@@ -15,22 +15,32 @@ class OrdersController < ApplicationController
 
     if order.save && order.quantity >= 1
 
+      if order.coupon == ""
+        order.amount
+      elsif order.coupon == "DVBF10"
+        Stripe::Coupon.retrieve("#{order.coupon}")
+        @coupon = Stripe::Coupon.retrieve("#{order.coupon}")
+        order.amount -= (order.amount * (@coupon.percent_off / 100))
+      else
+        order.amount
+        flash[:alert] = "Wrong Code Promo"
+      end
 
-    session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      line_items: [{
-        name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} /// #{product.name}",
-        images: [product.photo],
-        amount: product.price_cents,
-        currency: 'eur',
-        quantity: order.quantity,
-      }],
-      success_url: order_url(order),
-      cancel_url: order_url(order)
-    )
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [{
+          name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} /// #{product.name}",
+          images: [product.photo],
+          amount: order.amount_cents.to_i,
+          currency: 'eur',
+          quantity: order.quantity,
+        }],
+        success_url: order_url(order),
+        cancel_url: order_url(order)
+      )
 
-    order.update(checkout_session_id: session.id)
-    redirect_to new_order_payment_path(order)
+      order.update(checkout_session_id: session.id)
+      redirect_to new_order_payment_path(order)
     else
       redirect_to new_product_order_path(product)
       flash[:alert] = "Something went wrong..."
@@ -65,12 +75,23 @@ class OrdersController < ApplicationController
     order.state = 'Non finalisée'
 
     if order.save && order.quantity == 1
+      if order.coupon == ""
+        order.amount
+      elsif order.coupon == "DVBF10"
+        Stripe::Coupon.retrieve("#{order.coupon}")
+        @coupon = Stripe::Coupon.retrieve("#{order.coupon}")
+        order.amount = @cart.total
+        order.amount -= (order.amount * (@coupon.percent_off / 100))
+      else
+        order.amount
+        flash[:alert] = "Wrong Code Promo"
+      end
 
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
           name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} ///  #{@product_list.join(' ')} ",
-          amount: @cart.total.to_i * 100,
+          amount: order.amount_cents.to_i,
           currency: 'eur',
           quantity: order.quantity,
         }],
