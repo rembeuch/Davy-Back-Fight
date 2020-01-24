@@ -22,8 +22,13 @@
    <%= link_to 'Profil', user_answers_path %>
   </li>
   <li class="m-2 font-custom-navbar">
-   <%= link_to 'Shop', products_path %>
+   <%= link_to 'Boutique', products_path %>
   </li>
+  <% if user_signed_in? && current_user.cart != nil %>
+  <li class="m-2 font-custom-navbar">
+   <%= link_to 'Mon Panier', cart_path(current_user.cart) %>
+  </li>
+  <% end %>
   <li class="m-2 font-custom-navbar">
    <%= link_to 'Classement', users_controller_index_path %>
   </li>

@@ -1,0 +1,20 @@
+<div class="container bg-white">
+  <h1>Indiquez votre adresse de livraison</h1>
+    <%= simple_form_for @order, :url => items_order_create_path(@order) , :method => :items_order_create,   :order_id => @order   do |f| %>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <div class="form-inputs">
+              <%= f.error_notification %>
+              <%= f.input :address, label: 'Adresse',
+                          required: true %>
+              <%= f.input :city,label: 'Ville', required: true %>
+              <%= f.input :zipcode,label: 'Code Postal', required: true %>
+              <%= f.input :nation, label: 'Pays',
+                          required: true %>
+              <h3>Utiliser un CODE PROMO</h3>
+              <%= f.input :coupon, label: 'Code Promo' %>
+            <%= f.button :submit, "Valider", class: "btn btn-primary m-5" %>
+          </div>
+        </div>
+        <% end %>
+    </div>
