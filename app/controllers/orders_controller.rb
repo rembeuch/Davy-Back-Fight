@@ -23,15 +23,16 @@ class OrdersController < ApplicationController
         order.amount -= (order.amount * (@coupon.percent_off / 100))
       else
         order.amount
+        order.coupon = ""
         flash[:alert] = "Wrong Code Promo"
       end
 
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
-          name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} /// #{product.name}",
+          name: "Code PROMO: #{order.coupon} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{product.name}",
           images: [product.photo],
-          amount: order.amount_cents.to_i,
+          amount: order.amount_cents.to_i / order.quantity,
           currency: 'eur',
           quantity: order.quantity,
         }],
@@ -84,13 +85,14 @@ class OrdersController < ApplicationController
         order.amount -= (order.amount * (@coupon.percent_off / 100))
       else
         order.amount
+        order.coupon = ""
         flash[:alert] = "Wrong Code Promo"
       end
 
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
-          name: "#{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} ///  #{@product_list.join(' ')} ",
+          name: "Code PROMO: #{order.coupon} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{@product_list.join(' ')} ",
           amount: order.amount_cents.to_i,
           currency: 'eur',
           quantity: order.quantity,
