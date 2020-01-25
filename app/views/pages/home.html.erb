@@ -8,7 +8,7 @@
       <%= link_to 'créer un article', new_article_path, class: 'btn btn-warning' %>
     <% end %>
 
-    <h1 class="card p-5 mb-4 font-custom">Attention les paris de ce site sont basés sur les dernières sorties des chapitres de One Piece, si vous n'êtes pas à jour vous vous exposez aux <strong> SPOILS!! </strong>
+    <h1 class="card p-5 mb-4 font-custom">Attention les paris de ce site sont basés sur les dernières sorties des chapitres de One Piece, si vous n'êtes pas à jour vous vous exposez aux SPOILS!!
     </h1>
 
     <% @articles.sort_by(&:created_at).reverse.first(10).each do |article| %>
@@ -20,6 +20,7 @@
         <h3 class="m-3 font-custom"><%=  article.text%>
         <% if article.link != nil %>
           <%= link_to article.link, article.link, target: :_blank %>
+         <p><%= article.created_at %></p>
         <% end %>
         </h3>
       </div>
