@@ -2,16 +2,11 @@
   <div class="card p-3 center">
     <ol>
       <% @users.sort_by(&:berrys).reverse.each do |user| %>
-        <li class="font-custom-navbar"> <h1 class="font-custom-title"> <%= user.pseudo %> <br> <%=number_with_delimiter(user.berrys, :delimiter => '.')%> Berrys </h1></li>
+        <li class="font-custom-navbar"> <h2 class="font-custom-title"> <%= user.pseudo %></h2></li>
+         <%= cl_image_tag user.avatar, :class => 'classement-avatar' %>
+        <h3> <%=number_with_delimiter(user.berrys, :delimiter => '.')%> Berrys</h3>
         <hr>
       <% end %>
     </ol>
   </div>
-    <div class="row">
-      <div class="col-6 ml-2">
-        <% @users.sort_by(&:berrys).reverse.first(10).each do |user| %>
-         <%=cl_image_tag user.avatar, :class => "classement-avatar mt-2" %>
-         <% end %>
-      </div>
-    </div>
 </div>
