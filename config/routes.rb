@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get 'items_order' => 'orders#items_order'
     post 'items_order_create' => 'orders#items_order_create'
 
-  resources :carts, only: [:show]
+  resources :carts, only: [:show, :destroy]
 
   resources :items, only: [:create, :destroy]
 
