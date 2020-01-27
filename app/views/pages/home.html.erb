@@ -20,9 +20,9 @@
         <h3 class="m-3 font-custom"><%=  article.text%>
         <% if article.link != nil %>
           <%= link_to article.link, article.link, target: :_blank %>
-         <p><%= article.created_at %></p>
-        <% end %>
         </h3>
+         <p>Posté le:<%= article.created_at.strftime("%d %b. %Y") %></p>
+        <% end %>
       </div>
     <% end %>
 </div>
