@@ -4,7 +4,7 @@
     <% end %>
   <div class="row">
     <% @products.sort_by(&:created_at).each do |product| %>
-      <div class="col-6 col-md-4">
+      <div class="col-12 col-md-4">
         <div class="card m-3">
           <%= cl_image_tag product.photo , :class => "product-photo mx-auto mt-3" %>
           <div class="card-body">
