@@ -9,5 +9,6 @@ class CartsController < ApplicationController
     @cart = current_user.cart
     @cart.items.destroy_all
     redirect_to cart_path(@cart)
+    flash[:alert] = "Votre panier est vide!"
   end
 end
