@@ -1,8 +1,11 @@
 <div class="container bg-white">
-  <h1>Indiquez votre adresse de livraison</h1>
-    <%= simple_form_for @order, :url => items_order_create_path(@order) , :method => :items_order_create,   :order_id => @order   do |f| %>
       <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
+    <%= simple_form_for @order, :url => items_order_create_path(@order) , :method => :items_order_create,   :order_id => @order   do |f| %>
+  <h1>Indiquez votre nom:</h1>
+            <%= f.input :name, label: 'Votre Nom',
+                        required: true %>
+  <h1>Indiquez votre adresse de livraison</h1>
           <div class="form-inputs">
               <%= f.error_notification %>
               <%= f.input :address, label: 'Adresse',

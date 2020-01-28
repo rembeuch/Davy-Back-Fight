@@ -14,7 +14,11 @@
           <div class="card m-3">
             <%= cl_image_tag item.product.photo , :class => "cart-photo mx-auto mt-3" %>
             <div class="card-body">
-              <h5 class="card-title"><%= item.product.name %>(X <%= item.quantity %>) <span class="badge badge-pill badge-primary"> <%= number_to_currency(item.total, unit: "€", separator: ",", format: "%n %u") %></span>
+              <h5 class="card-title"><%= item.product.name %>
+<br>
+                 <%= button_to "+", add_item_path(id: item.id, check: item.id), method: :post%>(X <%= item.quantity %>)<%= button_to "-", sub_item_path(id: item.id, check: item.id), method: :post%>
+<br>
+                <span class="badge badge-pill badge-primary"> <%= number_to_currency(item.total, unit: "€", separator: ",", format: "%n %u") %></span>
               </h5>
                 <%= link_to "Supprimer cet article", item_path(id: item.id, check: item.id), method: :delete, data: { confirm: "Êtes-vous sur?"}, class: "badge badge-pill badge-danger" %>
             </div>

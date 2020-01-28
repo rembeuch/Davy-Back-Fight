@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
-          name: "Code PROMO: #{order.coupon} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{product.name}",
+          name: "Code PROMO: #{order.coupon} /Nom: #{order.name} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{product.name}",
           images: [product.photo],
           amount: order.amount_cents.to_i / order.quantity,
           currency: 'eur',
@@ -92,7 +92,7 @@ class OrdersController < ApplicationController
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
-          name: "Code PROMO: #{order.coupon} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{@product_list.join(' ')} ",
+          name: "Code PROMO: #{order.coupon} /Nom: #{order.name} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{@product_list.join(' ')} ",
           amount: order.amount_cents.to_i,
           currency: 'eur',
           quantity: order.quantity,
@@ -110,6 +110,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:address, :city, :zipcode, :nation, :quantity, :coupon)
+    params.require(:order).permit(:name, :address, :city, :zipcode, :nation, :quantity, :coupon)
   end
 end

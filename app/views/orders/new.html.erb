@@ -3,7 +3,7 @@
     <div class="col-sm-12 col-md-4">
       <%= cl_image_tag @product.photo, class: "product-photo mx-auto" %>
     </div>
-    <div class="col-sm-12 col-md-8">
+    <div class="col-sm-6 col-md-6">
       <h1><%= @product.name %></h1>
       <p><%= @product.description %></p>
       <p>Prix: <span id="price"> <%= @product.price %></span>€</p>
@@ -14,9 +14,12 @@
                 as: :integer,
                 required: true,
                 input_html: { id: 'quantity'} %>
-  <h1>Indiquez votre adresse de livraison</h1>
+          <h1>Indiquez votre nom:</h1>
+            <%= f.input :name, label: 'Votre Nom',
+                        required: true %>
+  <h1>Indiquez votre adresse de livraison:</h1>
     <div class="row">
-      <div class="col-sm-4 col-sm-offset-4">
+      <div class="col-sm-6 col-sm-offset-6">
         <div class="form-inputs">
             <%= f.error_notification %>
             <%= f.input :address, label: 'Adresse',

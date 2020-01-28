@@ -4,6 +4,7 @@
     <div class="col">
       <h1>Résumé de votre commande</h1>
       <p>Achat de <strong>  <%= @order.product_name %></strong> pour <strong><%= humanized_money_with_symbol (@order.amount_cents/100) %></strong></p>
+      <p><strong>Nom:</strong><%= @order.name %> </p>
        <p> <strong>ADRESSE DE LIVRAISON</strong> <%= @order.address %> <%= @order.zipcode %> <%= @order.city %>
       </p>
       <button id="pay" class="btn btn-primary">Payer</button>

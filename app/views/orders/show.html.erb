@@ -4,12 +4,13 @@
     <div class="col">
       <h1>Order #<%= @order.id %> <small><span class="badge badge-primary"><%= @order.state %></span></small></h1>
       <ul class="list-unstyled">
-        <li><strong>ISSUED ON</strong> <%= @order.created_at.to_date %></li>
-        <li><strong>PRODUCT</strong> <%= @order.product_name %> </li>
-        <li><strong>QUANTITE</strong> <%= @order.quantity %> </li>
+        <li><strong>Fait le</strong> <%= @order.created_at.to_date %></li>
+        <li><strong>Article(s)</strong> <%= @order.product_name %> </li>
+        <li><strong>Quantité</strong> <%= @order.quantity %> </li>
         <li><strong>CODE PROMO</strong> <%= @order.coupon %> </li>
         <li><strong>TOTAL</strong> <%= humanized_money_with_symbol (@order.amount) %></li>
-         <li><strong>ADRESSE DE LIVRAISON</strong> <%= @order.address %> <%= @order.zipcode %> <%= @order.city %> <%= @order.nation %></li>
+        <li><strong>Nom</strong> <%= @order.name %> </li>
+        <li><strong>ADRESSE DE LIVRAISON</strong> <%= @order.address %> <%= @order.zipcode %> <%= @order.city %> <%= @order.nation %></li>
         </li>
       </ul>
       <p>Estimated delivery in <strong>4 business weeks</strong></p>
