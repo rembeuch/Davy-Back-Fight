@@ -4,6 +4,7 @@ class Order < ApplicationRecord
 
   monetize :amount_cents
 
+  validates :name, presence: true
   validates :address, presence: true
   validates :zipcode, presence: true
   validates :city, presence: true
