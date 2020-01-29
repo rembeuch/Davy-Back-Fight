@@ -13,8 +13,13 @@
           <%= cl_image_tag question.photo , :class => "product-photo mx-auto mt-3" %>
           <div class="card-body">
             <h5 class="card-title"><%= question.title %></h5>
-            <%= link_to "Details", question_path(question), class: "btn btn-success m-2 rounded-pill border border-success" %>
-          </div>
+            <% if question.lock == false %>
+              <%= link_to "Details", question_path(question), class: "btn btn-success m-2 rounded-pill border border-success" %>
+            <% else %>
+              <h2 class="font-custom"> Les Paris sont momentanément suspendus entre la parution des scans RAW et la traduction vf. Les résultats seront mis à jour.
+              </h2>
+            <% end %>
+           </div>
         </div>
       </div>
     <% end %>
