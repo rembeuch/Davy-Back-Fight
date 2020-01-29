@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post 'lock' => 'questions#lock'
+
   resources :user_answers, only: [:index] do
     patch :win
   end

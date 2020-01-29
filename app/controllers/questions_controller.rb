@@ -42,4 +42,16 @@ class QuestionsController < ApplicationController
     @questions = Question.all
     @questions_sort_tag = @questions.sort_by(&:tag)
   end
+
+  def lock
+    @questions = Question.all
+    @questions.each do |question|
+      if question.lock == false
+        question.update(lock: true)
+      else
+        question.update(lock: false)
+      end
+    end
+    redirect_to questions_path
+  end
 end
