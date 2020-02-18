@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
 
       if order.coupon == ""
         order.amount
-      elsif order.coupon == "DVBF10"
+      elsif order.coupon == "JUBA10"
         Stripe::Coupon.retrieve("#{order.coupon}")
         @coupon = Stripe::Coupon.retrieve("#{order.coupon}")
         order.amount -= (order.amount * (@coupon.percent_off / 100))
