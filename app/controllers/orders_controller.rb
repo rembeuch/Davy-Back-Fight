@@ -78,7 +78,7 @@ class OrdersController < ApplicationController
     if order.save && order.quantity == 1
       if order.coupon == ""
         order.amount
-      elsif order.coupon == "DVBF10"
+      elsif order.coupon == "JUBA10"
         Stripe::Coupon.retrieve("#{order.coupon}")
         @coupon = Stripe::Coupon.retrieve("#{order.coupon}")
         order.amount = @cart.total
