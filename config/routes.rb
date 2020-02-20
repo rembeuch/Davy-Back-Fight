@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     patch :win
   end
 
+  patch'update' => 'user_answers#update'
+
   resources :users_controller, only: [:index]
 
   resources :articles, only: [:index, :new, :create]
