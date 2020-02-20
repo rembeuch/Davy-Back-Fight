@@ -1,9 +1,17 @@
 
 <div class="container">
+  <h5 class="font-custom">Changer votre avatar
+  <%= form_for current_user, :url => {:action => 'update'} do |form| %>
+  <%= form.file_field :avatar %>
+  <%= form.submit "upload" %>
+  <% end %>
+  </h5>
 
-  <h2 class="card p-5 mb-4 text-center font-custom-title">Recevez 10.000B en vous connectant chaque jour!</h2>
+  <h1 class="card p-5 mb-4 text-center font-custom-title">Vos Paris <%= link_to 'Vos Commandes', orders_path %>
+  </h1>
 
-  <h1 class="card p-5 mb-4 text-center font-custom-title">Vos Paris <%= link_to 'Vos Commandes', orders_path %></h1>
+  <h2 class="card p-5 mb-4 text-center font-custom-title">Recevez 10.000B en vous connectant chaque jour!
+  </h2>
 
 
   <h1 class="font-custom">  <% if @user_answers == [] %>
