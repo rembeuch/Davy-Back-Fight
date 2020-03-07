@@ -43,6 +43,10 @@ class QuestionsController < ApplicationController
     @questions_sort_tag = @questions.sort_by(&:tag)
   end
 
+  def sort_finish
+    @questions_sort_finish = Question.where(closed: true)
+  end
+
   def lock
     @questions = Question.all
     @questions.each do |question|

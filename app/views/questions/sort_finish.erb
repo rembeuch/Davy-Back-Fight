@@ -1,12 +1,12 @@
 <div class="container">
   <div class="card">
-    <h1 class="mx-auto font-custom-title">Paris triés par Tag</h1>
-    <p class="ml-3"> Trier: <%= link_to 'Tout Les paris', questions_path %> / <%= link_to 'Paris en cours', question_sort_path(1) %> / <%= link_to 'Paris terminés', question_sort_finish_path(1) %> </p>
+    <h1 class="mx-auto font-custom-title">Paris terminés</h1>
+    <p class="ml-3"> Trier: <%= link_to 'Tout Les paris', questions_path %> / <%= link_to 'Paris en cours', question_sort_path(1) %> /  <%= link_to 'par Tag', question_sort_tag_path(1) %> </p>
   </div>
 
 
 <div class="row">
-  <% @questions_sort_tag.each do |question| %>
+  <% @questions_sort_finish.each do |question| %>
       <div class="col-8 col-md-6">
         <div class="card m-3">
           <%= cl_image_tag question.photo , :class => "product-photo mx-auto mt-3" %>
