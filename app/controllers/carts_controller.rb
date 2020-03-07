@@ -3,6 +3,7 @@ class CartsController < ApplicationController
   before_action :set_cart, only: [:show]
 
   def show
+    @sum_items = 0
   end
 
   def destroy
