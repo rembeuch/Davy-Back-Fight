@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :questions, only: [:index, :show, :new, :create] do
     get :sort
     get :sort_tag
+    get :sort_finish
     patch :close
     resources :answers , only: [:show, :new, :create] do
       patch :true
