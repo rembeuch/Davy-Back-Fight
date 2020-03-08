@@ -1,7 +1,11 @@
 <div class="container bg-white p-5">
 
   <h2 class="font-weight-bold d-flex justify-content-end">Total: <span class="badge badge-pill badge-primary"> <%= number_to_currency(@cart.total, unit: "€", separator: ",", format: "%n %u") %></span>
+    <% @cart.items.each do |item| %>
+      <% @sum_items += item.quantity %>
+    <% end %>
   </h2>
+    <p class="font-weight-bold d-flex justify-content-end">Nombre d'articles: <%= @sum_items %></p>
     <% if @cart.items == [] %>
      <h4> Votre panier est vide.</h4>
     <% else %>
