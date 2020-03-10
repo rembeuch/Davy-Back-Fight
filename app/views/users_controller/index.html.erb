@@ -2,7 +2,7 @@
   <div class="card p-3 center">
     <ol>
       <% @users.sort_by(&:berrys).reverse.each do |user| %>
-        <li class="font-custom-navbar"> <h2 class="font-custom-title"> <%= user.pseudo %></h2></li>
+        <li class="font-custom-title"> <h2 class="font-custom-title"> <%= user.pseudo %></h2></li>
          <%= cl_image_tag user.avatar, :class => 'classement-avatar' %>
         <h3 class="font-custom"> <%=number_with_delimiter(user.berrys, :delimiter => '.')%> Berrys</h3>
         <hr>
