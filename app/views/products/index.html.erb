@@ -2,8 +2,17 @@
   <% if current_user.admin == true %>
     <%= link_to 'Ajouter un produit', new_product_path, class: "btn btn-warning" %>
     <% end %>
+      <div class="col-12 col-md-12">
+        <div class="card m-3">
+          <%= cl_image_tag @products.first.photo , :class => "product-photo mx-auto mt-3" %>
+          <div class="card-body">
+            <h5 class="card-title font-custom"><%= @products.first.name %> <%= @products.first.price %>€</h5>
+            <%= link_to "Détails", product_path(@products.first), class: "btn btn-primary" %>
+          </div>
+        </div>
+      </div>
   <div class="row">
-    <% @products.sort_by(&:created_at).each do |product| %>
+      <% @products[1..-1].sort_by(&:created_at).each do |product| %>
       <div class="col-12 col-md-4">
         <div class="card m-3">
           <%= cl_image_tag product.photo , :class => "product-photo mx-auto mt-3" %>
