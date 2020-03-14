@@ -1,7 +1,15 @@
 <div class="container bg-white">
       <div class="row">
-        <div class="col-sm-4 col-sm-offset-4">
+        <div class="col-sm-12 col-md-4">
+          <% @cart.items.each do |item| %>
+            <h5 class="card-title"><%= item.product.name %>
+            <%= cl_image_tag item.product.photo, class: "product-photo mx-auto py-3" %>
+              Quantité: <%= item.quantity %></h5>
+              <hr>
+          <% end %>
+        </div>
     <%= simple_form_for @order, :url => items_order_create_path(@order) , :method => :items_order_create,   :order_id => @order   do |f| %>
+         <h2>Total:  <%= number_to_currency(@cart.total, unit: "€", separator: ",", format: "%n %u") %></h2>
   <h1>Indiquez votre nom:</h1>
             <%= f.input :name, label: 'Votre Nom',
                         required: true %>
