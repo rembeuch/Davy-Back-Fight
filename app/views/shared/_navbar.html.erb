@@ -5,11 +5,18 @@
     <div class="wanted-pseudo pl-1 ml-2"> <%=current_user.pseudo%></div>
     <div class="wanted-berrys pl-4 ml-5 pb-3 "> <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%></div>
     <% else %>
-        <center><%= link_to 'Login', new_user_session_path, class: "btn login-btn font-custom" %></center>
+        <%= link_to 'Login', new_user_session_path, class: "btn login-btn font-custom" %>
     <% end %>
 </div>
-  <div class="container banner ml-1 mt-5">
+  <div class="container banner mr-5 mt-5">
   </div>
+  <%= link_to products_path do %>
+    <div class="mt-5 pl-4 bg-white pb-3">
+          <%= cl_image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1584089203/oxgccphboxppt2bpkawb.jpg" , :class => "product-photo-banner" %>
+            <h5 >Soutenez le site en achetant des Berrys ou en utilisant la boutique!</h5>
+
+        </div>
+    <% end %>
 </div>
   <ul class="container nav justify-content-center p-3 mb-2 bg-white ">
     <li class="m-2 font-custom-navbar">
