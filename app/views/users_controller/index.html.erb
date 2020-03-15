@@ -1,12 +1,10 @@
 <div class="container d-flex justify-content-center text-center mt-5">
   <div class="card p-3 center">
-    <ol>
-      <li class="font-custom-title"> <h2 class="font-custom-title"> <%= @users.sort_by(&:berrys).reverse.first.pseudo %> est le Seigneur des Pirates!</h2></li>
-         <%= cl_image_tag @users.sort_by(&:berrys).reverse.first.avatar, :class => 'classement-avatar' %>
+     <h2 class="font-custom-title"> <%= @users.sort_by(&:berrys).reverse.first.pseudo %> est le Seigneur des Pirates!</h2></li>
+         <%= cl_image_tag @users.sort_by(&:berrys).reverse.first.avatar, :class => 'classement-avatar mx-auto' %>
         <h3 class="font-custom"> <%=number_with_delimiter(@users.sort_by(&:berrys).reverse.first.berrys, :delimiter => '.')%> Berrys</h3>
         <hr>
-    </ol>
-    <div class="card p-3 center">
+      <div class="card p-3 center">
       <ol>
         <% @users.sort_by(&:berrys).reverse[1..4].each do |user| %>
           <li class="font-custom-title"> <h2 class="font-custom-title">Empereur : <%= user.pseudo %></h2></li>
