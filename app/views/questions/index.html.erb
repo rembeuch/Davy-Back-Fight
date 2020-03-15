@@ -11,7 +11,7 @@
 
 <div class="row">
     <% @questions.sort_by(&:created_at).reverse.each do |question| %>
-      <div class="col-8 col-md-6">
+      <div class="col-12 col-md-6">
         <div class="card m-3">
           <%= cl_image_tag question.photo , :class => "product-photo mx-auto mt-3" %>
           <div class="card-body">
