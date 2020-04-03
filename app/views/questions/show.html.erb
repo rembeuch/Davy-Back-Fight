@@ -23,7 +23,7 @@
           <%= answer.status %>
         <% end %>
       </div>
-        <% unless @question.closed %>
+        <% unless @question.closed || answer.status != "En cours"%>
           <%= link_to 'Parier!', question_answer_path(@question, answer), class: "btn btn-danger m-5" %>
         <% end %>
       <% if current_user.admin == true %>
