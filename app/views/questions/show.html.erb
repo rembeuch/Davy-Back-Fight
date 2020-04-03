@@ -19,11 +19,11 @@
 
         <h1 class="ml-5 font-custom-title"> <%= answer.text %> </h1>
        <p class="ml-5"> Cote <%= answer.multiplier %> </p>
-        <% if @question.closed %>
+        <% if @question.closed || answer.status != "En cours"  %>
           <%= answer.status %>
         <% end %>
       </div>
-        <% unless @question.closed || answer.status != "En cours"%>
+        <% if answer.status == "En cours" && @question.closed == false%>
           <%= link_to 'Parier!', question_answer_path(@question, answer), class: "btn btn-danger m-5" %>
         <% end %>
       <% if current_user.admin == true %>
