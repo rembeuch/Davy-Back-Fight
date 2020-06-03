@@ -16,8 +16,11 @@
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 Catégories  </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <%= link_to "Tout les articles", products_path %>
+    <br>
     <% @products.uniq{|product| product.tags}.each do |product| %>
         <% if product.tags != "" %>
+        <% @product_tags = product.tags %>
       <br>
          <%= link_to "#{product.tags}", product_tags_product_path(product) %>
       <br>
@@ -28,7 +31,7 @@ Catégories  </button>
   </div>
   <div class="row">
       <% @products.sort_by(&:created_at).each do |product| %>
-      <% if product.name != "#{@products.first.name}" %>
+      <% if product.tags.include?(@product.tags) %>
         <div class="col-12 col-md-4">
           <div class="card m-3">
             <%= cl_image_tag product.photo , :class => "product-photo mx-auto mt-3" %>

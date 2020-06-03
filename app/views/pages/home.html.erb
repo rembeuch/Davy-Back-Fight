@@ -8,8 +8,11 @@
       <%= link_to 'créer un article', new_article_path, class: 'btn btn-warning' %>
     <% end %>
 
-    <h1 class="card p-5 mb-4 font-custom">Attention les paris de ce site sont basés sur les dernières sorties des chapitres de One Piece, si vous n'êtes pas à jour vous vous exposez aux SPOILS!!
-    </h1>
+    <div>
+    <h2 class="card p-5 mb-4 font-custom">Tu penses être un vrai fan de One Piece? Paris tes Berrys et fais augmenter ta prime!
+      <%= link_to 'Parier!', questions_path, class: "text-center" %>
+    </h2>
+    </div>
 
     <% @articles.sort_by(&:created_at).reverse.first(10).each do |article| %>
       <div class="card mb-4">

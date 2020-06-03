@@ -26,9 +26,11 @@ Rails.application.routes.draw do
 
   resources :articles, only: [:index, :new, :create]
 
-  resources :products, only: [:index, :show, :new, :create] do
+  resources :products, only: [:index, :edit, :update, :show, :new, :create] do
+  get 'tags_product' => 'products#tags_product'
     resources :orders, only: [:new, :create]
   end
+
 
   resources :orders, only: [:show, :index]  do
     resources :payments, only: :new
