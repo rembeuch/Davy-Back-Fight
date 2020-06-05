@@ -9,14 +9,14 @@
     <% end %>
 
     <div>
-    <h2 class="card p-5 mb-4 font-custom">Tu penses être un vrai fan de One Piece? Prouves le en pariant des Berrys et fais augmenter ta prime!
+    <h1 class="card p-5 mb-4 font-custom">Tu penses être un vrai fan de One Piece ? Prouves le en pariant des Berrys et fais augmenter ta prime!
       <%= link_to 'Parier!', questions_path, class: "text-center" %>
-    </h2>
+    </h1>
     </div>
 
     <% @articles.sort_by(&:created_at).reverse.first(10).each do |article| %>
       <div class="card mb-4">
-        <h1 class="text-center m-2 font-custom-title"><%= article.title %></h1>
+        <h2 class="text-center m-2 font-custom-title"><%= article.title %></h2>
         <% if article.image != nil %>
           <%=  image_tag article.image, :class => "article-photo"  %>
         <% end %>
