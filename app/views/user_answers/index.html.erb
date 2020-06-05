@@ -29,7 +29,7 @@
            <strong> <%= user_answer.answer.text %></strong></h5> <br>
           Montant misé:
           <strong> <%=number_with_delimiter(user_answer.amount, :delimiter => '.')%> B </strong>
-          Gain Potentiel en cas de bonne réponse:
+          Gains Potentiels en cas de bonne réponse:
           <strong> <%= number_with_delimiter(user_answer.amount * user_answer.answer.multiplier, :delimiter => '.') %>B </strong>
           <% if user_answer.answer.status == 'En cours'  %>
            <span class="text-primary"> <%= user_answer.answer.status%></span>

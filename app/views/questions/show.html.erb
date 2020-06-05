@@ -6,10 +6,11 @@
   <div class="card-product">
     <%= cl_image_tag @question.photo, :class => "question-photo"  %>
     <div class="card-product-infos">
-        <h2 class="font-custom"> <%= @question.title %></h2>
+        <h1 class="font-custom"> <%= @question.title %>
         <% if @question.closed %>
-          <%= "Terminé!" %>
+         <em> <%= "Terminé!" %> </em>
         <% end %>
+        </h1>
     </div>
   </div>
   <% @question.answers.sort_by(&:position).each do |answer| %>
@@ -17,14 +18,14 @@
       <div class="col-12 col-md-6">
         <div class="card m-3"></div>
 
-        <h1 class="ml-5 font-custom-title"> <%= answer.text %> </h1>
+        <h2 class="ml-5 font-custom-title"> <%= answer.text %> </h2>
        <p class="ml-5"> Cote <%= answer.multiplier %> </p>
         <% if @question.closed || answer.status != "En cours"  %>
           <%= answer.status %>
         <% end %>
       </div>
         <% if answer.status == "En cours" && @question.closed == false%>
-          <%= link_to 'Parier!', question_answer_path(@question, answer), class: "btn btn-danger m-5" %>
+          <%= link_to 'Parier!', question_answer_path(@question, answer), class: "btn btn-danger m-5 my-auto" %>
         <% end %>
       <% if current_user.admin == true %>
         <div class="card">

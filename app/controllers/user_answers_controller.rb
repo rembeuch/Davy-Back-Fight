@@ -42,4 +42,8 @@ class UserAnswersController < ApplicationController
     @user.update_attribute(:avatar, params[:user][:avatar])
     redirect_to user_answers_path
   end
+
+  def best
+    @user_answers = UserAnswer.where(closed: true)
+  end
 end

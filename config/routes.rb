@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     patch :win
   end
 
+  get'best' => 'user_answers#best'
   patch'update' => 'user_answers#update'
 
   resources :users_controller, only: [:index]
