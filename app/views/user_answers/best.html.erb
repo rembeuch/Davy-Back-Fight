@@ -6,13 +6,13 @@
           <div class="card m-3">
             <%= cl_image_tag user_answer.answer.question.photo , :class => "answer-photo mx-auto mt-3" %>
             <div class="card-body">
-              <h5 class="card-title"><%= user_answer.answer.question.title %> Votre réponse:
-                <strong> <%= user_answer.answer.text %></strong>
+              <h5 class="card-title"><%= user_answer.answer.question.title %>  Réponse:
+                <strong> <%= user_answer.answer.text %> </strong>
               </h5>
               <br>
                 Montant misé:
               <strong> <%=number_with_delimiter(user_answer.amount, :delimiter => '.')%> B </strong>
-                Gains :
+                Gains remporter par <b> <%= user_answer.user.pseudo %> </b>:
               <strong> <%= number_with_delimiter(user_answer.amount * user_answer.answer.multiplier, :delimiter => '.') %>B </strong>
               <span class="text-success"> <%= user_answer.answer.status%></span>
             </div>
