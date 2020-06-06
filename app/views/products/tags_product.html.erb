@@ -1,5 +1,5 @@
 <div class="container">
-  <% if current_user.admin == true %>
+  <% if user_signed_in? && current_user.admin == true %>
     <%= link_to 'Ajouter un produit', new_product_path, class: "btn btn-warning" %>
   <% end %>
       <div class="col-12 col-md-8 text-center mx-auto">
@@ -38,7 +38,7 @@ Catégories  </button>
             <div class="card-body">
               <h5 class="card-title font-custom"><%= product.name %> <%= product.price %>€</h5>
               <%= link_to "Détails", product_path(product), class: "btn btn-primary" %>
-              <% if current_user.admin == true %>
+              <% if user_signed_in? && current_user.admin == true %>
                 <%= link_to 'Edit', edit_product_path(product), class: "btn btn-warning" %>
               <% end %>
             </div>

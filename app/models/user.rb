@@ -12,5 +12,4 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
   validates :pseudo, uniqueness: true
-  validates :avatar, presence: true
 end
