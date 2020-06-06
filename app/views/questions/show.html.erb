@@ -6,11 +6,11 @@
   <div class="card-product">
     <%= cl_image_tag @question.photo, :class => "question-photo"  %>
     <div class="card-product-infos">
-        <h1 class="font-custom"> <%= @question.title %>
+        <h2 class="font-custom"> <%= @question.title %>
         <% if @question.closed %>
          <em> <%= "Terminé!" %> </em>
         <% end %>
-        </h1>
+        </h2>
     </div>
   </div>
   <% @question.answers.sort_by(&:position).each do |answer| %>
@@ -36,4 +36,5 @@
       <% end %>
     </div>
   <% end %>
+  <br>
 </div>
