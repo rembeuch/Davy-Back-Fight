@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_03_095109) do
+ActiveRecord::Schema.define(version: 2020_06_09_095440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2020_06_03_095109) do
     t.integer "quantity", default: 1
     t.string "coupon"
     t.string "name"
+    t.boolean "mailing", default: true
     t.index ["product_id"], name: "index_orders_on_product_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

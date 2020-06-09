@@ -66,6 +66,10 @@ class OrdersController < ApplicationController
 
   def show
     @order = current_user.orders.find(params[:id])
+    if @order.state == "paid" && @order.mailing == true
+      UserMailer.with(user: current_user).command.deliver_now
+      @order.update(mailing: false)
+    end
   end
 
   def index
