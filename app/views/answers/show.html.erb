@@ -4,7 +4,7 @@
    <div class="row">
         <div class="col-12 col-md-12">
           <div class="card m-3">
-            <%= cl_image_tag @question.photo , :class => "answer-photo mx-auto mt-3" %>
+            <%= image_tag @question.image , :class => "answer-photo mx-auto mt-3" %>
             <div class="card-body">
               <h5 class="card-title font-custom"><%= @question.title %></h5>
                     <h1 class="font-custom-title"> <%= @answer.text %> </h1>

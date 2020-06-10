@@ -10,9 +10,11 @@
   <h1 class="card p-5 mb-4 text-center font-custom-title">Vos Paris <%= link_to 'Vos Commandes', orders_path %>
   </h1>
 
-  <h2 class="card p-5 mb-4 text-center font-custom-title">Recevez 10.000B en vous connectant chaque jour!
-  </h2>
-
+  <div class="card">
+    <h2 class=" text-center font-custom-title">Recevez 10.000B en vous connectant chaque jour!
+    </h2>
+    <p class="ml-3"> Trier : <%= link_to ' Vos Paris en cours', sort_user_answer_path %> / <%= link_to ' Vos Paris Terminés', finish_user_answer_path %></p>
+  </div>
 
   <h1 class="font-custom">  <% if @user_answers == [] %>
     Vous n'avez aucun Paris
@@ -23,7 +25,7 @@
     <% @user_answers.sort_by(&:created_at).reverse.each do |user_answer| %>
       <div class="col-12 col-md-12">
         <div class="card m-3">
-          <%= cl_image_tag user_answer.answer.question.photo , :class => "answer-photo mx-auto mt-3" %>
+          <%= image_tag user_answer.answer.question.image , :class => "answer-photo mx-auto mt-3" %>
           <div class="card-body">
             <h5 class="card-title"><%= user_answer.answer.question.title %> Votre réponse:
            <strong> <%= user_answer.answer.text %></strong></h5> <br>

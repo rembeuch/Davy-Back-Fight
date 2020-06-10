@@ -30,8 +30,21 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    @question = Question.find(params[:id])
+    if @question.update(question_params)
+      redirect_to question_path(@question), notice: 'modifié!'
+    else
+      render :edit
+    end
+  end
+
   def question_params
-    params.require(:question).permit(:title, :photo, :tag)
+    params.require(:question).permit(:title, :photo, :tag, :image)
   end
 
   def sort

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :questions, only: [:index, :show, :new, :create] do
+  resources :questions, only: [:index, :edit, :update, :show, :new, :create] do
     get :sort
     get :sort_tag
     get :sort_finish
@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     patch :win
   end
 
+  get'finish_user_answer' => 'user_answers#finish_user_answer'
+  get'sort_user_answer' => 'user_answers#sort_user_answer'
   get'best' => 'user_answers#best'
   patch'update' => 'user_answers#update'
 

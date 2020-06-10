@@ -4,7 +4,7 @@
     <%= link_to 'close', question_close_path(@question.id), method: :patch, class: "btn btn-danger" %>
     <% end %>
   <div class="card-product">
-    <%= cl_image_tag @question.photo, :class => "question-photo"  %>
+    <%= image_tag @question.image, :class => "question-photo"  %>
     <div class="card-product-infos">
         <h2 class="font-custom"> <%= @question.title %>
         <% if @question.closed %>

@@ -15,7 +15,7 @@
     <% @questions.sort_by(&:created_at).reverse.each do |question| %>
       <div class="col-12 col-md-6">
         <div class="card m-3">
-          <%= cl_image_tag question.photo , :class => "product-photo mx-auto mt-3" %>
+          <%=  image_tag question.image, :class => "product-photo mx-auto mt-3"  %>
           <div class="card-body">
             <h5 class="card-title font-custom"><%= question.title %></h5>
             <% if question.lock == false %>
@@ -29,6 +29,9 @@
         <% else %>
           <%= "en cours" %>
         <% end %>
+        <% if user_signed_in? && current_user.admin == true %>
+                <%= link_to 'Edit', edit_question_path(question), class: "btn btn-warning" %>
+              <% end %>
           </div>
         </div>
       </div>

@@ -46,4 +46,12 @@ class UserAnswersController < ApplicationController
   def best
     @user_answers = UserAnswer.where(closed: true)
   end
+
+  def sort_user_answer
+    @sort_user_answers = UserAnswer.all
+  end
+
+  def finish_user_answer
+    @finish_user_answers = UserAnswer.all
+  end
 end
