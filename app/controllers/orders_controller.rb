@@ -41,6 +41,10 @@ class OrdersController < ApplicationController
         Stripe::Coupon.retrieve("#{order.coupon}")
         @coupon = Stripe::Coupon.retrieve("#{order.coupon}")
         order.amount -= (order.amount * (@coupon.percent_off / 100))
+      elsif order.coupon == "EMD178"
+        Stripe::Coupon.retrieve("#{order.coupon}")
+        @coupon = Stripe::Coupon.retrieve("#{order.coupon}")
+        order.amount -= (order.amount * (@coupon.percent_off / 100))
       else
         order.amount
         order.coupon = ""
@@ -127,6 +131,11 @@ class OrdersController < ApplicationController
         order.amount = @cart.total
         order.amount -= (order.amount * (@coupon.percent_off / 100))
       elsif order.coupon == "INSTA100"
+        Stripe::Coupon.retrieve("#{order.coupon}")
+        @coupon = Stripe::Coupon.retrieve("#{order.coupon}")
+        order.amount = @cart.total
+        order.amount -= (order.amount * (@coupon.percent_off / 100))
+      elsif order.coupon == "EMD178"
         Stripe::Coupon.retrieve("#{order.coupon}")
         @coupon = Stripe::Coupon.retrieve("#{order.coupon}")
         order.amount = @cart.total
