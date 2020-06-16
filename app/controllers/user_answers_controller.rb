@@ -13,7 +13,7 @@ class UserAnswersController < ApplicationController
     if @user_answer.amount.nil?
       redirect_to question_answer_path(@question, @answer)
       flash[:notice] = "problème!"
-    elsif current_user.berrys >= @user_answer.amount && @user_answer.amount.positive? && @user_answer.amount != nil
+    elsif current_user.berrys > @user_answer.amount && @user_answer.amount.positive? && @user_answer.amount != nil
       @user_answer.save
       current_user.update(berrys: (current_user.berrys - @user_answer.amount))
       redirect_to user_answers_path
