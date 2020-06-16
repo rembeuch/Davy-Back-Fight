@@ -10,7 +10,7 @@
                     <h1 class="font-custom-title"> <%= @answer.text %> </h1>
             <%= simple_form_for [@question, @answer, @user_answer] do |f| %>
             <%= f.error_notification %>
-            <%= f.input :amount,label: 'Votre mise? (Nombre entier)',
+            <%= f.input :amount,label: 'Votre mise? (Nombre entier) Vous devez garder 1 Berry minimum',
                   as: :integer,
                   required: true,
                   input_html: { id: 'amount'}
