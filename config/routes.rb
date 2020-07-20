@@ -52,6 +52,7 @@ Rails.application.routes.draw do
 
 
   resources :pages, only: :index
+  get 'quiz' => 'pages#quiz'
 
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
