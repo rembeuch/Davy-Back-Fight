@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_10_072004) do
+ActiveRecord::Schema.define(version: 2020_07_24_092959) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,23 @@ ActiveRecord::Schema.define(version: 2020_06_10_072004) do
     t.string "image", default: ""
   end
 
+  create_table "quiz_answers", force: :cascade do |t|
+    t.bigint "quiz_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+    t.boolean "status", default: false
+    t.index ["quiz_id"], name: "index_quiz_answers_on_quiz_id"
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.string "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "question"
+    t.integer "numero"
+  end
+
   create_table "user_answers", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "answer_id"
@@ -145,6 +162,7 @@ ActiveRecord::Schema.define(version: 2020_06_10_072004) do
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
+    t.integer "numero_quiz", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -156,6 +174,7 @@ ActiveRecord::Schema.define(version: 2020_06_10_072004) do
   add_foreign_key "items", "products"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
+  add_foreign_key "quiz_answers", "quizzes"
   add_foreign_key "user_answers", "answers"
   add_foreign_key "user_answers", "users"
 end
