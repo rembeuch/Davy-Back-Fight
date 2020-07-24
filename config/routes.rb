@@ -51,10 +51,14 @@ Rails.application.routes.draw do
   post'sub_item' => 'items#sub_item'
 
 
-  resources :pages, only: :index
   get 'quiz' => 'pages#quiz'
+  resources :pages, only: :index
 
-  resources :quizzes, only: [:edit, :update, :new, :create]
+
+  resources :quizzes, only: [:edit, :update, :new, :create] do
+    resources :quiz_answers, only: [:edit, :update, :new, :create]
+  end
+    patch 'plus' => 'quizzes#plus'
 
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'

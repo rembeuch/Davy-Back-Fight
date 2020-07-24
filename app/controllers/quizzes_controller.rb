@@ -26,9 +26,14 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def plus
+    current_user.update(numero_quiz: (current_user.numero_quiz + 1))
+    redirect_to quiz_path
+  end
+
   private
 
   def quiz_params
-    params.require(:quiz).permit(:choices, :answer)
+    params.require(:quiz).permit(:answer, :question, :numero)
   end
 end

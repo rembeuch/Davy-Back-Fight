@@ -7,5 +7,9 @@ class PagesController < ApplicationController
 
   def index
   end
-end
 
+  def quiz
+    @quizs = Quiz.all
+    @current_quiz = Quiz.find_by(numero: current_user.numero_quiz)
+  end
+end
