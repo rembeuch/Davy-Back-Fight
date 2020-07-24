@@ -1,0 +1,5 @@
+<div class="container">
+  <% if user_signed_in? && current_user.admin == true %>
+    <%= link_to 'créer un quiz', new_quiz_path, class: 'btn btn-warning' %>
+  <% end %>
+</div>
