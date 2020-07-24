@@ -56,9 +56,12 @@ Rails.application.routes.draw do
 
 
   resources :quizzes, only: [:edit, :update, :new, :create] do
-    resources :quiz_answers, only: [:edit, :update, :new, :create]
+    resources :quiz_answers, only: [:edit, :update, :new, :create] do
+      patch 'validation' => 'quiz_answers#validation'
+    end
   end
     patch 'plus' => 'quizzes#plus'
+
 
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'

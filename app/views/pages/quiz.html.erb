@@ -1,4 +1,41 @@
 <div class="container">
+  <p>Actuellement <%= @quizs.count %> quiz disponibles.
+    <% if current_user.numero_quiz > 0 %>
+      <%= (current_user.numero_quiz - 1 ) %>/<%= @quizs.count %> terminés.</p>
+    <% end %>
+
+
+  <% if current_user.numero_quiz == 0 %>
+    <div class="card m-3">
+      <%= link_to 'Démarrer les quizs?',
+      plus_path , method: :patch, class: "btn btn-success", data: { disable_with: false } %>
+    </div>
+  <% elsif current_user.numero_quiz > 0 && current_user.numero_quiz <= @quizs.count  %>
+    <div class="col-12 col-md-12">
+        <div class="card m-3">
+          <div class="card-body">
+            <h1 class="card-title font-custom"><%= @current_quiz.question %>
+
+            </h1>
+            <div class="row" id="validation">
+              <% @current_quiz.quiz_answers.each do |answer| %>
+                <div class="col-6 col-md-6 my-2" >
+                  <div class="quiz_btn"> <%= link_to "#{answer.description}", quiz_quiz_answer_validation_path(@current_quiz, answer), method: :patch, class: "btn btn-success" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+              <span id = "rep">
+              </span>
+              <span id = "result">
+              </span>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      il n'y a pas d'autres quiz pour le moment.
+  <% end %>
+
   <% if user_signed_in? && current_user.admin == true %>
     <%= link_to 'créer un quiz', new_quiz_path, class: 'btn btn-warning' %>
    <div class="row">
@@ -22,30 +59,16 @@
       </div>
     <% end %>
   <% end %>
-  <p>Actuellement <%= @quizs.count %> quiz disponibles. <%= current_user.numero_quiz %>/<%= @quizs.count %> terminés.</p>
-
-
-  <% if current_user.numero_quiz == 0 %>
-    <div class="card m-3">
-      <%= link_to 'Démarrer les quizs?',
-      plus_path , method: :patch, class: "btn btn-success", data: { disable_with: false } %>
-    </div>
-  <% elsif current_user.numero_quiz > 0 %>
-    <div class="col-12 col-md-12">
-        <div class="card m-3">
-          <div class="card-body">
-            <h1 class="card-title font-custom"><%= @current_quiz.question %>
-
-            </h1>
-            <div class="row">
-              <% @current_quiz.quiz_answers.each do |answer| %>
-                <div class="col-6 col-md-6">
-                <p class="btn btn-primary btn-lg"> <%= answer.description %> <%= answer.status %> </p>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-  <% end %>
 </div>
+
+
+<script>
+
+  document.querySelectorAll('.quiz_btn').forEach(item => {
+    item.addEventListener('click', event => {
+      //handle click
+          document.getElementById("validation").remove()
+          document.getElementById("result").innerHTML = ' passer au quiz suivant <%= link_to quiz_path %> '
+    })
+  })
+</script>
