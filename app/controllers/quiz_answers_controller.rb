@@ -19,9 +19,6 @@ class QuizAnswersController < ApplicationController
     @quiz_answer = QuizAnswer.find(params[:quiz_answer_id])
     if @quiz_answer.status == true
       current_user.update(berrys: (current_user.berrys + 20_000))
-      current_user.update(numero_quiz: (current_user.numero_quiz + 1))
-    else
-      current_user.update(numero_quiz: (current_user.numero_quiz + 1))
     end
   end
 

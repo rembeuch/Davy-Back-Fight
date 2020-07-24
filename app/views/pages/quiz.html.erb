@@ -29,6 +29,7 @@
               </span>
               <span id = "result">
               </span>
+              <div id="countdown"></div>
           </div>
         </div>
       </div>
@@ -62,13 +63,34 @@
 </div>
 
 
-<script>
 
+
+<% if @current_quiz != nil %>
+<script>
   document.querySelectorAll('.quiz_btn').forEach(item => {
     item.addEventListener('click', event => {
       //handle click
+          document.getElementById("countdown").remove()
           document.getElementById("validation").remove()
-          document.getElementById("result").innerHTML = ' passer au quiz suivant <%= link_to quiz_path %> '
+          document.getElementById("result").innerHTML = '  <%= link_to "Passer au quiz suivant", quiz_path , class: "btn btn-success m-2" %> '
+          document.getElementById("rep").innerHTML = 'la réponse était:<strong> <%= @current_quiz.answer %></strong>'
     })
   })
+
+  var timeleft = 15;
+var downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+    document.getElementById("validation").remove()
+          document.getElementById("result").innerHTML = '  <%= link_to "Passer au quiz suivant", quiz_path , class: "btn btn-success m-2" %> '
+          document.getElementById("rep").innerHTML = 'la réponse était:<strong> <%= @current_quiz.answer %></strong>'
+    document.getElementById("countdown").innerHTML = "Terminé!";
+    '<%       current_user.update(numero_quiz: (current_user.numero_quiz + 1)) %>'
+  } else {
+    document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+  }
+  timeleft -= 1;
+}, 1000);
 </script>
+
+<% end %>
