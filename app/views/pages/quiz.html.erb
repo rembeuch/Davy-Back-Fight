@@ -40,7 +40,7 @@
   <% if user_signed_in? && current_user.admin == true %>
     <%= link_to 'créer un quiz', new_quiz_path, class: 'btn btn-warning' %>
    <div class="row">
-    <% @quizs.each do |quiz| %>
+    <% @quizs.reverse.each do |quiz| %>
       <div class="col-12 col-md-12">
         <div class="card m-3">
           <div class="card-body">
