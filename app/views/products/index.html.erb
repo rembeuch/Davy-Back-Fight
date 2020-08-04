@@ -6,6 +6,7 @@
         <div class="card m-3">
           <%= cl_image_tag @products.first.photo , :class => "product-photo mx-auto mt-3" %>
           <div class="card-body">
+            A la une en ce moment:
             <h5 class="card-title font-custom"><%= @products.first.name %> pour <%= @products.first.price %>€</h5>
             <%= link_to "Détails", product_path(@products.first), class: "btn btn-primary" %>
           </div>

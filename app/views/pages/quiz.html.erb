@@ -1,8 +1,11 @@
 <div class="container">
   <p>Actuellement <%= @quizs.count %> quiz disponibles.
     <% if current_user.numero_quiz > 0 %>
-      <%= (current_user.numero_quiz - 1 ) %>/<%= @quizs.count %> terminés.</p>
+      <%= (current_user.numero_quiz - 1 ) %>/<%= @quizs.count %> terminés.
+      <br>
+        Soutenez le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
     <% end %>
+  </p>
 
 
   <% if current_user.numero_quiz == 0 %>
