@@ -1,7 +1,9 @@
 <div class="container">
+  <h2 class="font-custom">Chaque bonne réponse rapporte 20K Berrys. 25 secondes pour répondre.</h2>
   <p>Actuellement <%= @quizs.count %> quiz disponibles.
     <% if current_user.numero_quiz > 0 %>
       <%= (current_user.numero_quiz - 1 ) %>/<%= @quizs.count %> terminés.
+      <br>
       <br>
         Soutenez le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
     <% end %>
@@ -10,7 +12,7 @@
 
   <% if current_user.numero_quiz == 0 %>
     <div class="card m-3">
-      <%= link_to 'Démarrer les quizs?',
+      <%= link_to 'Démarrer les quiz?',
       plus_path , method: :patch, class: "btn btn-success", data: { disable_with: false } %>
     </div>
   <% elsif current_user.numero_quiz > 0 && current_user.numero_quiz <= @quizs.count  %>
@@ -76,17 +78,17 @@
           document.getElementById("countdown").remove()
           document.getElementById("validation").remove()
           document.getElementById("result").innerHTML = '  <%= link_to "Passer au quiz suivant", quiz_path , class: "btn btn-success m-2" %> '
-          document.getElementById("rep").innerHTML = 'la réponse était:<strong> <%= @current_quiz.answer %></strong>'
+          document.getElementById("rep").innerHTML = 'La réponse était :<strong> <%= @current_quiz.answer %></strong>'
     })
   })
 
-  var timeleft = 15;
+  var timeleft = 25;
 var downloadTimer = setInterval(function(){
   if(timeleft <= 0){
     clearInterval(downloadTimer);
     document.getElementById("validation").remove()
           document.getElementById("result").innerHTML = '  <%= link_to "Passer au quiz suivant", quiz_path , class: "btn btn-success m-2" %> '
-          document.getElementById("rep").innerHTML = 'la réponse était:<strong> <%= @current_quiz.answer %></strong>'
+          document.getElementById("rep").innerHTML = 'La réponse était : <strong> <%= @current_quiz.answer %></strong>'
     document.getElementById("countdown").innerHTML = "Terminé!";
     '<%       current_user.update(numero_quiz: (current_user.numero_quiz + 1)) %>'
   } else {
