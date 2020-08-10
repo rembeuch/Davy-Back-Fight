@@ -9,6 +9,9 @@
             A la une en ce moment:
             <h5 class="card-title font-custom"><%= @products.first.name %> pour <%= @products.first.price %>€</h5>
             <%= link_to "Détails", product_path(@products.first), class: "btn btn-primary" %>
+            <% if user_signed_in? && current_user.admin == true %>
+                <%= link_to 'Edit', edit_product_path(@products.first), class: "btn btn-warning" %>
+              <% end %>
           </div>
         </div>
       </div>

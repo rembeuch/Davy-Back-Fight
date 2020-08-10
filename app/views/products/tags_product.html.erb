@@ -2,16 +2,7 @@
   <% if user_signed_in? && current_user.admin == true %>
     <%= link_to 'Ajouter un produit', new_product_path, class: "btn btn-warning" %>
   <% end %>
-      <div class="col-12 col-md-8 text-center mx-auto">
-        <div class="card m-3">
-          <%= cl_image_tag @products.first.photo , :class => "product-photo mx-auto mt-3" %>
-          <div class="card-body">
-            <h5 class="card-title font-custom"><%= @products.first.name %> pour <%= @products.first.price %>€</h5>
-            <%= link_to "Détails", product_path(@products.first), class: "btn btn-primary" %>
-          </div>
-        </div>
-      </div>
-  <div>
+<div>
     <h2 class=" p-2 text-center font-custom-title"> <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 Catégories  </button>
