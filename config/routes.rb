@@ -62,6 +62,8 @@ Rails.application.routes.draw do
   end
     patch 'plus' => 'quizzes#plus'
 
+  resources :tournaments, only: [:index, :show, :new, :create]
+
 
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
