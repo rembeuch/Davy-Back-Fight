@@ -1,0 +1,15 @@
+<div class="container py-3 bg-white">
+  <h1><%= @tournament.title %></h1>
+  <% if Time.now.getlocal("+00:00") < @tournament.start %>
+    <% if @current_participation == [] %>
+      <%= simple_form_for [@tournament, @participation] do |f| %>
+            <%= f.error_notification %>
+            <%= f.button :submit, "Participer", class: "btn btn-primary m-3",data: { disable_with: false } %>
+
+      <% end %>
+    <% else %>
+     Vous êtes inscris!
+    <% end %>
+  <% end %>
+</div>
+

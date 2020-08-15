@@ -17,6 +17,12 @@ class TournamentsController < ApplicationController
     end
   end
 
+  def show
+    @tournament = Tournament.find(params[:id])
+    @participation = Participation.new
+    @current_participation = current_user.participations.where(tournament: @tournament)
+  end
+
   def tournament_params
     params.require(:tournament).permit(:title, :start)
   end

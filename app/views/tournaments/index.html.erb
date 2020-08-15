@@ -8,15 +8,16 @@
         <div class="col-12 col-md-12">
           <div class="card m-3">
             <div class="card-body">
-              <h5 class="card-title">
-                <strong><%= tournament.title %> </strong>
+              <h2 class="card-title">
+                <strong> <%= tournament.title %> </strong>
                 <br>
                 <%= tournament.participations.count %> participants
                 <br>
+                <span class="d-flex"> <%= link_to "Détails", tournament_path(tournament), class: "btn-lg btn-success m-2 rounded-pill border border-success" %> </span>
                 <% if tournament.status == 'à venir' %>
                   début: <%= tournament.start.strftime("%d %b. %Y à %kh:%M") %>
                 <% end %>
-              </h5>
+              </h2>
             </div>
           </div>
         </div>

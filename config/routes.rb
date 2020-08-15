@@ -64,7 +64,9 @@ Rails.application.routes.draw do
 
   resources :tournaments, only: [:index, :show, :new, :create]
 
-
+  resources :tournaments, only: [:show] do
+    resources :participations, only: [:create]
+  end
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
