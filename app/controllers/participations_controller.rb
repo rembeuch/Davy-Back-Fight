@@ -11,4 +11,23 @@ class ParticipationsController < ApplicationController
       render :new
     end
   end
+
+  def fdd_answer
+    @tournament = Tournament.find(params[:tournament_id])
+    @current_participation = current_user.participations.where(tournament: @tournament).first
+    @current_participation.update(answer: "Fruit du Démon")
+    redirect_to tournament_path(@tournament)
+  end
+
+  def granit_answer
+    @tournament = Tournament.find(params[:tournament_id])
+    @current_participation = current_user.participations.where(tournament: @tournament).first
+    @current_participation.update(answer: "Menottes en Granit marin")
+  end
+
+  def katana_answer
+    @tournament = Tournament.find(params[:tournament_id])
+    @current_participation = current_user.participations.where(tournament: @tournament).first
+    @current_participation.update(answer: "Katana")
+  end
 end

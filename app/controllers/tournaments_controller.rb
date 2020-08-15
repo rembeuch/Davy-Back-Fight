@@ -29,11 +29,11 @@ class TournamentsController < ApplicationController
   def odd_elements(array)
     @participations_odd = []
     @participations_even = []
-    array.each_with_index do |item,index|
-      if index % 2 == 0
-        @participations_odd.push(item)
+    array.each do |participation|
+      if participation.id.odd?
+        @participations_odd.push(participation)
       else
-        @participations_even.push(item)
+        @participations_even.push(participation)
       end
     end
   end

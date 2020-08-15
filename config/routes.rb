@@ -65,8 +65,11 @@ Rails.application.routes.draw do
   resources :tournaments, only: [:index, :show, :new, :create]
 
   resources :tournaments, only: [:show] do
+    patch 'fdd_answer' => 'participations#fdd_answer'
     resources :participations, only: [:create]
   end
+
+
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

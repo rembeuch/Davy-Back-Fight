@@ -11,15 +11,50 @@
     <% end %>
 
   <% elsif Time.now.getlocal("+00:00") > @tournament.start && @current_participation.status == "Validée" %>
-    <%= @participations_validées.count %> / <%= @tournament.participations.count %> participants.
-    c'est parti!
+    <% @tournament.update(status: "en cours") %>
+    <h4> <%= @participations_validées.count %> / <%= @tournament.participations.count %> participants. </h4>
     <br>
     <% if @participations_odd.include?(@current_participation) && @participations_validées.exists?(@current_participation.id + 1) %>
-      <%= @current_participation.user.pseudo %> / V.S / <%= @participations_validées.find(@current_participation.id + 1).user.pseudo %>
+      <div class="row">
+        <div class=" col-sm">
+          <div class="card p-3 center">
+          <h2 class="font-custom-title"> <%= @current_participation.user.pseudo %> </h2>
+             <%= cl_image_tag @current_participation.user.avatar, :class => 'classement-avatar mx-auto' %>
+          <h3 class="font-custom"> <%=number_with_delimiter(@current_participation.user.berrys, :delimiter => '.')%> Berrys</h3>
+          <div class="row">
+            <%= link_to tournament_fdd_answer_path(@tournament), method: :patch do %>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;">
+            <% end %>
+            </div>
+          </div>
+        </div>
+        <h2 class="col-sm text-center my-auto">
+          <img src="https://cuiseur-sous-vide.fr/wp-content/uploads/2019/01/vs-logo-123x105.png" alt="" >
+        </h2>
+        <div class=" col-sm">
+          <div class="card p-3 center">
+            <h2 class="font-custom-title"> <%= @participations_validées.find(@current_participation.id + 1).user.pseudo  %> </h2>
+            <%= cl_image_tag @participations_validées.find(@current_participation.id + 1).user.avatar, :class => 'classement-avatar mx-auto' %>
+            <h3 class="font-custom"> <%=number_with_delimiter(@participations_validées.find(@current_participation.id + 1).user.berrys, :delimiter => '.')%> Berrys</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row" id="reponse">
+        <div class=" col-sm">
+          <h3> <%= @current_participation.answer %> </h3>
+        </div>
+        <div class="col-sm"></div>
+        <div class=" col-sm">
+          <h3> <%= @participations_validées.find(@current_participation.id + 1).answer %> </h3>
+        </div>
+      </div>
+
+
     <% elsif @participations_odd.include?(@current_participation) %>
-      <%= @current_participation.user.pseudo %> / V.S / Teaurau du colisé
+      <%= @current_participation.user.pseudo %> / V.S / Taureau du colisée
     <% elsif @participations_even.include?(@current_participation) %>
       <%= @current_participation.user.pseudo %> / V.S / <%= @participations_validées.find(@current_participation.id - 1).user.pseudo %>
     <% end %>
-    <% end %>
+  <% end %>
 </div>
+

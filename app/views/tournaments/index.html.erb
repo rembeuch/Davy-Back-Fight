@@ -14,8 +14,10 @@
                 <%= tournament.participations.count %> participants
                 <br>
                 <span class="d-flex"> <%= link_to "Détails", tournament_path(tournament), class: "btn-lg btn-success m-2 rounded-pill border border-success" %> </span>
-                <% if tournament.status == 'à venir' %>
+                <% if Time.now.getlocal("+00:00") < tournament.start %>
                   début: <%= tournament.start.strftime("%d %b. %Y à %kh:%M") %>
+                <% elsif Time.now.getlocal("+00:00") > tournament.start %>
+                  <%= tournament.status %>
                 <% end %>
               </h2>
             </div>
