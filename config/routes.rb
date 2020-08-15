@@ -66,6 +66,8 @@ Rails.application.routes.draw do
 
   resources :tournaments, only: [:show] do
     patch 'fdd_answer' => 'participations#fdd_answer'
+    patch 'granit_answer' => 'participations#granit_answer'
+    patch 'katana_answer' => 'participations#katana_answer'
     resources :participations, only: [:create]
   end
 

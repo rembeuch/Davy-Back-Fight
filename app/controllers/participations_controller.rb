@@ -22,12 +22,14 @@ class ParticipationsController < ApplicationController
   def granit_answer
     @tournament = Tournament.find(params[:tournament_id])
     @current_participation = current_user.participations.where(tournament: @tournament).first
-    @current_participation.update(answer: "Menottes en Granit marin")
+    @current_participation.update(answer: "Granit marin")
+    redirect_to tournament_path(@tournament)
   end
 
   def katana_answer
     @tournament = Tournament.find(params[:tournament_id])
     @current_participation = current_user.participations.where(tournament: @tournament).first
     @current_participation.update(answer: "Katana")
+    redirect_to tournament_path(@tournament)
   end
 end
