@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_12_092743) do
+ActiveRecord::Schema.define(version: 2020_08_15_084506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2020_08_12_092743) do
     t.bigint "tournament_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "Validée"
     t.index ["tournament_id"], name: "index_participations_on_tournament_id"
     t.index ["user_id"], name: "index_participations_on_user_id"
   end

@@ -5,11 +5,21 @@
       <%= simple_form_for [@tournament, @participation] do |f| %>
             <%= f.error_notification %>
             <%= f.button :submit, "Participer", class: "btn btn-primary m-3",data: { disable_with: false } %>
-
       <% end %>
     <% else %>
      Vous êtes inscris!
     <% end %>
-  <% end %>
-</div>
 
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @current_participation.status == "Validée" %>
+    <%= @participations_validées.count %> / <%= @tournament.participations.count %> participants.
+    c'est parti!
+    <br>
+    <% if @participations_odd.include?(@current_participation) && @participations_validées.exists?(@current_participation.id + 1) %>
+      <%= @current_participation.user.pseudo %> / V.S / <%= @participations_validées.find(@current_participation.id + 1).user.pseudo %>
+    <% elsif @participations_odd.include?(@current_participation) %>
+      <%= @current_participation.user.pseudo %> / V.S / Teaurau du colisé
+    <% elsif @participations_even.include?(@current_participation) %>
+      <%= @current_participation.user.pseudo %> / V.S / <%= @participations_validées.find(@current_participation.id - 1).user.pseudo %>
+    <% end %>
+    <% end %>
+</div>
