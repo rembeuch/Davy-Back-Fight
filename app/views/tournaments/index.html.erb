@@ -15,9 +15,14 @@
                 <br>
                 <span class="d-flex"> <%= link_to "Détails", tournament_path(tournament), class: "btn-lg btn-success m-2 rounded-pill border border-success" %> </span>
                 <% if Time.now.getlocal("+00:00") < tournament.start %>
-                  début: <%= tournament.start.getlocal("+02:00").strftime("%d %b. %Y à %kh:%M") %>
+                  Début: <%= tournament.start.getlocal("+02:00").strftime("%d %b. %Y à %kh:%M") %>
                 <% elsif Time.now.getlocal("+00:00") > tournament.start %>
                   <%= tournament.status %>
+                  <% if tournament.status == 'Terminé' && tournament.participations.where(status: "Validée") != [] %>
+                   <h2> Vainqueur: <%= tournament.participations.where(status: "Validée").first.user.pseudo %> </h2>
+                  <% elsif tournament.status == 'Terminé' && tournament.participations.where(status: "Validée") == [] %>
+                    <h2>Match Nul!</h2>
+                  <% end %>
                 <% end %>
               </h2>
             </div>

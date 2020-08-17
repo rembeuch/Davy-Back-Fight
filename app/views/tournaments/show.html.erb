@@ -13,12 +13,12 @@
     <% @tournament.update(status: "Terminé") %>
     <div>Félicitations! Vous avez gagné le tournoi!</div>
 
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @participations_validées.count <= 0 %>
+    <% @tournament.update(status: "Terminé") %>
+    <div>Match nul! tout les combattants se sont neutralisés!</div>
+
   <% elsif Time.now.getlocal("+00:00") > @tournament.start && @current_participation == nil %>
     <div>Le tournoi est en cours, si vous n'êtes pas inscris vous ne pouvez pas participer.</div>
-
-  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @current_participation.lap > @tournament.lap %>
-  <h3> Tour n°<%= @tournament.lap %> </h3>
-  Vous avez remporté ce tour! le prochain à: <%= @tournament.start.getlocal("+02:00") + 300 %>
 
   <% elsif Time.now.getlocal("+00:00") > @tournament.start && @current_participation.status == "terminée" %>
     <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
@@ -32,7 +32,7 @@
     <br>
 
 
-    <% if @participations_validées.index(@current_participation) % 2 == 0 && @participations_validées.exists?(@participations_validées[(@participations_validées.index(@current_participation))+1].id) %>
+    <% if @participations_validées.index(@current_participation) % 2 == 0 && !@participations_validées[@participations_validées.index(@current_participation)+1].nil? %>
       <div class="row">
         <div class=" col-sm">
           <div class="card p-3 center">
@@ -91,40 +91,40 @@
               <h2 class="text-center"> <strong> égalité!</strong></h2>
               <% if current_user.berrys > @participations_validées[(@participations_validées.index(@current_participation))+1].user.berrys %>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
-                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(status: "terminée") %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
                 <div>Votre prime est plus élevée. Vous remportez ce tour!</div>
               <% elsif current_user.berrys == @participations_validées[(@participations_validées.index(@current_participation))+1].user.berrys%>
                 <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
-                <% @current_participation.status == "terminée" %>
-                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(status: "terminée") %>
+                <% @current_participation.update(engage: true) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
               <% else %>
                 <div>Votre Prime est plus basse.Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
-                <% @current_participation.status == "terminée" %>
+                <% @current_participation.update(engage: true) %>
               <% end %>
             <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Granit marin' %>
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
-              <% @current_participation.status == "terminée" %>
+              <% @current_participation.update(engage: true) %>
             <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Katana' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
-                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(status: "terminée") %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
             <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Katana' %>
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
-              <% @current_participation.status == "terminée" %>
-            <% elsif @current_participation.answer == 'Ganit marin' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Fruit du Démon' %>
+              <% @current_participation.update(engage: true) %>
+            <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Fruit du Démon' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
-                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(status: "terminée") %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
              <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Fruit du Démon' %>
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
-              <% @current_participation.status == "terminée" %>
+              <% @current_participation.update(engage: true) %>
             <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Granit marin' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
-                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(status: "terminée") %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
             <% end %>
 
           </div>
@@ -137,7 +137,7 @@
 
 
 
-    <% elsif @participations_validées.index(@current_participation) % 2 != 0 && @participations_validées.exists?(@participations_validées[(@participations_validées.index(@current_participation))-1].id) %>
+    <% elsif @participations_validées.index(@current_participation) % 2 != 0 && !@participations_validées[@participations_validées.index(@current_participation)-1].nil? %>
       <div class="row">
         <div class=" col-sm">
           <div class="card p-3 center">
@@ -195,32 +195,32 @@
               <h2 class="text-center"> <strong> égalité!</strong></h2>
               <% if current_user.berrys > @participations_validées[(@participations_validées.index(@current_participation))-1].user.berrys %>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
-                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(status: "terminée") %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
                 <div>Votre prime est plus élevée. Vous remportez ce tour!</div>
               <% elsif current_user.berrys == @participations_validées[(@participations_validées.index(@current_participation))-1].user.berrys%>
                 <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
-                <% @current_participation.status == "terminée" %>
-                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(status: "terminée") %>
+                <% @current_participation.update(engage: true) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
               <% else %>
                 <div>Votre Prime est plus basse.Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
-                <% @current_participation.status == "terminée" %>
+                <% @current_participation.update(engage: true) %>
               <% end %>
             <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Granit marin' %>
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
-              <% @current_participation.status == "terminée" %>
+              <% @current_participation.update(engage: true) %>
             <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Katana' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
-                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(status: "terminée") %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
             <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Katana' %>
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
-              <% @current_participation.status == "terminée" %>
+              <% @current_participation.update(engage: true) %>
             <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
-                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(status: "terminée") %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
              <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <% @current_participation.status == "terminée" %>
@@ -228,7 +228,7 @@
             <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Granit marin' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
-                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(status: "terminée") %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
             <% end %>
 
           </div>
