@@ -1,0 +1,245 @@
+<div class="container py-3 bg-white">
+  <h1><%= @tournament.title %></h1>
+  <% if Time.now.getlocal("+00:00") < @tournament.start %>
+    <% if current_user.participations.where(tournament: @tournament) == [] %>
+      <%= simple_form_for [@tournament, @participation] do |f| %>
+            <%= f.error_notification %>
+            <%= f.button :submit, "Participer", class: "btn btn-primary m-3",data: { disable_with: false } %>
+      <% end %>
+    <% else %>
+     Vous êtes inscris! Début du tournoi le <%= @tournament.start.getlocal("+02:00").strftime("%d %b. %Y à %kh:%M") %>
+    <% end %>
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @participations_validées.count == 1 && @current_participation.status == "Validée" %>
+    <% @tournament.update(status: "Terminé") %>
+    <div>Félicitations! Vous avez gagné le tournoi!</div>
+
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @current_participation == nil %>
+    <div>Le tournoi est en cours, si vous n'êtes pas inscris vous ne pouvez pas participer.</div>
+
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @current_participation.lap > @tournament.lap %>
+  <h3> Tour n°<%= @tournament.lap %> </h3>
+  Vous avez remporté ce tour! le prochain à: <%= @tournament.start.getlocal("+02:00") + 300 %>
+
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @current_participation.status == "terminée" %>
+    <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+
+
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start %>
+    <% @tournament.update(status: "en cours") %>
+    <h4> <%= @participations_validées.count %> / <%= @tournament.participations.count %> participants. Tour n°<%= @tournament.lap %> </h4>
+
+
+    <br>
+
+
+    <% if @participations_validées.index(@current_participation) % 2 == 0 && @participations_validées.exists?(@participations_validées[(@participations_validées.index(@current_participation))+1].id) %>
+      <div class="row">
+        <div class=" col-sm">
+          <div class="card p-3 center">
+          <h2 class="font-custom-title"> <%= @current_participation.user.pseudo %> </h2>
+             <%= cl_image_tag @current_participation.user.avatar, :class => 'classement-avatar mx-auto' %>
+          <h3 class="font-custom"> <%=number_with_delimiter(@current_participation.user.berrys, :delimiter => '.')%> Berrys</h3>
+          <div class="row">
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Fruit du Démon" %>
+              <%= link_to tournament_fdd_answer_path(@tournament), method: :patch do %>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+              <% end %>
+            <% end %>
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Granit marin" %>
+              <%= link_to tournament_granit_answer_path(@tournament), method: :patch do %>
+                <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+              <% end %>
+            <% end %>
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Katana" %>
+              <%= link_to tournament_katana_answer_path(@tournament), method: :patch do %>
+                <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+              <% end %>
+            <% end %>
+            </div>
+          </div>
+        </div>
+        <h2 class="col-sm text-center my-auto">
+          <img src="https://cuiseur-sous-vide.fr/wp-content/uploads/2019/01/vs-logo-123x105.png" alt="" >
+        </h2>
+        <div class=" col-sm">
+          <div class="card p-3 center">
+            <h2 class="font-custom-title"> <%= @participations_validées[(@participations_validées.index(@current_participation))+1].user.pseudo  %> </h2>
+            <%= cl_image_tag @participations_validées[(@participations_validées.index(@current_participation))+1].user.avatar, :class => 'classement-avatar mx-auto' %>
+            <h3 class="font-custom"> <%=number_with_delimiter(@participations_validées[(@participations_validées.index(@current_participation))+1].user.berrys, :delimiter => '.')%> Berrys</h3>
+          </div>
+        </div>
+      </div>
+      <% if @current_participation.answer != "En attente" && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == "En attente" %>
+        <div class="row" id="reponse">
+          <div class=" col-sm">
+            <h3> <%= @current_participation.answer %> </h3>
+          </div>
+          <div class="col-sm"></div>
+          <div class=" col-sm">
+            <h3> <%= @participations_validées[(@participations_validées.index(@current_participation))+1].answer %> </h3>
+          </div>
+        </div>
+
+      <% elsif @current_participation.answer != "En attente" && @participations_validées[(@participations_validées.index(@current_participation))+1].answer != "En attente" %>
+
+        <div class="row" id="reponse">
+          <div class=" col-sm">
+            <h3>votre choix: <%= @current_participation.answer %> </h3>
+          </div>
+          <div class="col-sm">
+            <% if @current_participation.answer == @participations_validées[(@participations_validées.index(@current_participation))+1].answer %>
+              <h2 class="text-center"> <strong> égalité!</strong></h2>
+              <% if current_user.berrys > @participations_validées[(@participations_validées.index(@current_participation))+1].user.berrys %>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(status: "terminée") %>
+                <div>Votre prime est plus élevée. Vous remportez ce tour!</div>
+              <% elsif current_user.berrys == @participations_validées[(@participations_validées.index(@current_participation))+1].user.berrys%>
+                <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+                <% @current_participation.status == "terminée" %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(status: "terminée") %>
+              <% else %>
+                <div>Votre Prime est plus basse.Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+                <% @current_participation.status == "terminée" %>
+              <% end %>
+            <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Granit marin' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <% @current_participation.status == "terminée" %>
+            <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Katana' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(status: "terminée") %>
+            <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Katana' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <% @current_participation.status == "terminée" %>
+            <% elsif @current_participation.answer == 'Ganit marin' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Fruit du Démon' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(status: "terminée") %>
+             <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Fruit du Démon' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <% @current_participation.status == "terminée" %>
+            <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Granit marin' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(status: "terminée") %>
+            <% end %>
+
+          </div>
+          <div class=" col-sm">
+            <h3>choix de l'adversaire: <%= @participations_validées[(@participations_validées.index(@current_participation))+1].answer %> </h3>
+          </div>
+        </div>
+      <% end %>
+
+
+
+
+    <% elsif @participations_validées.index(@current_participation) % 2 != 0 && @participations_validées.exists?(@participations_validées[(@participations_validées.index(@current_participation))-1].id) %>
+      <div class="row">
+        <div class=" col-sm">
+          <div class="card p-3 center">
+          <h2 class="font-custom-title"> <%= @current_participation.user.pseudo %> </h2>
+             <%= cl_image_tag @current_participation.user.avatar, :class => 'classement-avatar mx-auto' %>
+          <h3 class="font-custom"> <%=number_with_delimiter(@current_participation.user.berrys, :delimiter => '.')%> Berrys</h3>
+          <div class="row">
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Fruit du Démon" %>
+              <%= link_to tournament_fdd_answer_path(@tournament), method: :patch do %>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+              <% end %>
+            <% end %>
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Granit marin" %>
+              <%= link_to tournament_granit_answer_path(@tournament), method: :patch do %>
+                <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+              <% end %>
+            <% end %>
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Katana" %>
+              <%= link_to tournament_katana_answer_path(@tournament), method: :patch do %>
+                <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+              <% end %>
+            <% end %>
+            </div>
+          </div>
+        </div>
+        <h2 class="col-sm text-center my-auto">
+          <img src="https://cuiseur-sous-vide.fr/wp-content/uploads/2019/01/vs-logo-123x105.png" alt="" >
+        </h2>
+        <div class=" col-sm">
+          <div class="card p-3 center">
+            <h2 class="font-custom-title"> <%= @participations_validées[(@participations_validées.index(@current_participation))-1].user.pseudo  %> </h2>
+            <%= cl_image_tag @participations_validées[(@participations_validées.index(@current_participation))-1].user.avatar, :class => 'classement-avatar mx-auto' %>
+            <h3 class="font-custom"> <%=number_with_delimiter(@participations_validées[(@participations_validées.index(@current_participation))-1].user.berrys, :delimiter => '.')%> Berrys</h3>
+          </div>
+        </div>
+      </div>
+      <% if @current_participation.answer != "En attente" && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == "En attente" %>
+        <div class="row" id="reponse">
+          <div class=" col-sm">
+            <h3> <%= @current_participation.answer %> </h3>
+          </div>
+          <div class="col-sm"></div>
+          <div class=" col-sm">
+            <h3> <%= @participations_validées[(@participations_validées.index(@current_participation))-1].answer %> </h3>
+          </div>
+        </div>
+      <% elsif @current_participation.answer != "En attente" && @participations_validées[(@participations_validées.index(@current_participation))-1].answer != "En attente" %>
+
+        <div class="row" id="reponse">
+          <div class=" col-sm">
+            <h3>votre choix: <%= @current_participation.answer %> </h3>
+          </div>
+          <div class="col-sm">
+            <% if @current_participation.answer == @participations_validées[(@participations_validées.index(@current_participation))-1].answer %>
+              <h2 class="text-center"> <strong> égalité!</strong></h2>
+              <% if current_user.berrys > @participations_validées[(@participations_validées.index(@current_participation))-1].user.berrys %>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(status: "terminée") %>
+                <div>Votre prime est plus élevée. Vous remportez ce tour!</div>
+              <% elsif current_user.berrys == @participations_validées[(@participations_validées.index(@current_participation))-1].user.berrys%>
+                <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+                <% @current_participation.status == "terminée" %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(status: "terminée") %>
+              <% else %>
+                <div>Votre Prime est plus basse.Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+                <% @current_participation.status == "terminée" %>
+              <% end %>
+            <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Granit marin' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <% @current_participation.status == "terminée" %>
+            <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Katana' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(status: "terminée") %>
+            <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Katana' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <% @current_participation.status == "terminée" %>
+            <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(status: "terminée") %>
+             <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <% @current_participation.status == "terminée" %>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+            <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Granit marin' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(status: "terminée") %>
+            <% end %>
+
+          </div>
+          <div class=" col-sm">
+            <h3>choix de l'adversaire: <%= @participations_validées[(@participations_validées.index(@current_participation))-1].answer %> </h3>
+          </div>
+        </div>
+      <% end %>
+    <% else  %>
+      <%= @current_participation.user.pseudo %> / V.S / Taureau du colisée
+    <% end %>
+  <% end %>
+</div>
+

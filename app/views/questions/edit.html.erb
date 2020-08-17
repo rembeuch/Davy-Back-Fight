@@ -1,0 +1,21 @@
+<% if current_user.admin == true %>
+<div class="container">
+  <div class="row ">
+    <div class="col-sm-12 col-sm-offset-12">
+      <div class="form-inputs card m-3 p-4">
+       <%= simple_form_for [ @question] do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :title, label: 'Titre' %>
+        <%= f.input :tag %>
+        <%= f.input :image %>
+  <div class="actions">
+            <%= f.button :submit, "Valider", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+  <br>
+  <%= link_to "retour", question_path(@question),  class: 'btn btn-warning' %>
+</div>
+<% end %>

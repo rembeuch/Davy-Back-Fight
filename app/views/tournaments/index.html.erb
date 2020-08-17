@@ -1,0 +1,29 @@
+<div class="container">
+  <% if user_signed_in? && current_user.admin == true %>
+    <%= link_to 'créer un Tournoi', new_tournament_path, class: 'btn btn-warning' %>
+  <% end %>
+  <div class="row">
+    <% if @tournaments != nil %>
+      <% @tournaments.sort_by(&:created_at).reverse.each do |tournament| %>
+        <div class="col-12 col-md-12">
+          <div class="card m-3">
+            <div class="card-body">
+              <h2 class="card-title">
+                <strong> <%= tournament.title %> </strong>
+                <br>
+                <%= tournament.participations.count %> participants
+                <br>
+                <span class="d-flex"> <%= link_to "Détails", tournament_path(tournament), class: "btn-lg btn-success m-2 rounded-pill border border-success" %> </span>
+                <% if Time.now.getlocal("+00:00") < tournament.start %>
+                  début: <%= tournament.start.getlocal("+02:00").strftime("%d %b. %Y à %kh:%M") %>
+                <% elsif Time.now.getlocal("+00:00") > tournament.start %>
+                  <%= tournament.status %>
+                <% end %>
+              </h2>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

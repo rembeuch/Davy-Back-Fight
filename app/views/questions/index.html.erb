@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="card ">
+    <h3 class="card p-5 mb-4 font-custom">Attention les paris de ce site sont basés sur les dernières sorties des chapitres de One Piece, si vous n'êtes pas à jour vous vous exposez aux SPOILS!!
+    </h3>
+    <h1 class="mx-auto font-custom-title">Paris les plus récents</h1>
+   <h5 class="font-custom mx-auto"> Recevez 10.000B en vous connectant chaque jour!</h5>
+     <p class="ml-3"> Trier: <%= link_to 'Les paris en cours', question_sort_path(1) %> / <%= link_to 'par Tag', question_sort_tag_path(1) %> / <%= link_to 'Paris terminés', question_sort_finish_path(1) %> / <%= link_to 'Les meilleurs Paris gagnants', best_path %></p>
+  </div>
+ <% if user_signed_in? && current_user.admin == true %>
+      <%= link_to 'créer un paris', new_question_path, class: 'btn btn-warning' %>
+      <%= button_to 'LOCK', lock_path, method: :post %>
+    <% end %>
+
+<div class="row">
+    <% @questions.sort_by(&:created_at).reverse.each do |question| %>
+      <div class="col-12 col-md-6">
+        <div class="card m-3">
+          <%=  image_tag question.image, :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body">
+            <h5 class="card-title font-custom"><%= question.title %></h5>
+            <% if question.lock == false %>
+              <%= link_to "Détails", question_path(question), class: "btn btn-success m-2 rounded-pill border border-success" %>
+            <% elsif question.lock == true %>
+              <h2 class="font-custom"> Les Paris sont momentanément suspendus entre la parution des scans RAW et la traduction vf. Les résultats seront mis à jour.
+              </h2>
+            <% end %>
+            <% if question.closed %>
+          <%= "Pari cloturé" %>
+        <% else %>
+          <%= "en cours" %>
+        <% end %>
+        <% if user_signed_in? && current_user.admin == true %>
+                <%= link_to 'Edit', edit_question_path(question), class: "btn btn-warning" %>
+              <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+

@@ -1,0 +1,40 @@
+<div class="container bg-white">
+   <% if current_user.admin == true %>
+    <%= link_to 'créer une nouvelle réponse', new_question_answer_path(@question), class: "btn btn-warning" %>
+    <%= link_to 'close', question_close_path(@question.id), method: :patch, class: "btn btn-danger" %>
+    <% end %>
+  <div class="card-product">
+    <%= image_tag @question.image, :class => "question-photo"  %>
+    <div class="card-product-infos">
+        <h2 class="font-custom"> <%= @question.title %>
+        <% if @question.closed %>
+         <em> <%= "Terminé!" %> </em>
+        <% end %>
+        </h2>
+    </div>
+  </div>
+  <% @question.answers.sort_by(&:position).each do |answer| %>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="card m-3"></div>
+
+        <h2 class="ml-5 font-custom-title"> <%= answer.text %> </h2>
+       <p class="ml-5"> Cote <%= answer.multiplier %> </p>
+        <% if @question.closed || answer.status != "En cours"  %>
+          <%= answer.status %>
+        <% end %>
+      </div>
+        <% if answer.status == "En cours" && @question.closed == false%>
+          <%= link_to 'Parier!', question_answer_path(@question, answer), class: "btn btn-danger m-5 my-auto" %>
+        <% end %>
+      <% if current_user.admin == true %>
+        <div class="card">
+        <%= link_to 'true', question_answer_true_path(@question, answer), method: :patch, class: "btn btn-success m-3" %>
+        <%= link_to 'false', question_answer_false_path(@question, answer), method: :patch, class: "btn btn-danger m-3" %>
+        <%= answer.status %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <br>
+</div>

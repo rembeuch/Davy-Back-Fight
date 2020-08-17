@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="card">
+    <h2 class=" text-center font-custom-title">Recevez 10.000B en vous connectant chaque jour!
+    </h2>
+    <p class="ml-3"> Trier : <%= link_to 'Tout Vos Paris', user_answers_path %> / <%= link_to ' Vos Paris en Terminés', finish_user_answer_path %> </p>
+  </div>
+  <div class="row">
+    <% @sort_user_answers.each do |user_answer| %>
+      <% if user_answer.answer.status == "En cours" && user_answer.user == current_user %>
+        <div class="col-12 col-md-12">
+          <div class="card m-3">
+            <%= image_tag user_answer.answer.question.image , :class => "answer-photo mx-auto mt-3" %>
+            <div class="card-body">
+              <h5 class="card-title"><%= user_answer.answer.question.title %>  Réponse:
+                <strong> <%= user_answer.answer.text %> </strong>
+              </h5>
+              <br>
+                Montant misé:
+              <strong> <%=number_with_delimiter(user_answer.amount, :delimiter => '.')%> B </strong>
+                Gains potentiels:
+              <strong> <%= number_with_delimiter(user_answer.amount * user_answer.answer.multiplier, :delimiter => '.') %>B </strong>
+              <span class="text-primary"> <%= user_answer.answer.status%></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

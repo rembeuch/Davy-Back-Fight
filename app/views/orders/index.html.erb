@@ -1,0 +1,31 @@
+<div class="container">
+<h1 class="card p-5 mb-4 text-center font-custom-title">Vos Commandes <%= link_to 'Vos Paris', user_answers_path %></h1>
+
+<h1 class="font-custom">  <% if @orders == [] %>
+    Vous n'avez aucune Commande
+  <% end %></h1>
+</div>
+
+
+<% @orders.sort_by(&:created_at).reverse.each do |order| %>
+<div class="container ">
+  <div class="row py-4 bg-white">
+    <div class="col-md-4"><%= cl_image_tag order.product.photo, class: "product-photo mr-3" %></div>
+    <div class="col">
+      <h1>Commande #<%= order.id %> <small><span class="badge badge-primary"><%= order.state %></span></small></h1>
+      <ul class="list-unstyled">
+        <li><strong>Fait le</strong> <%= order.created_at.to_date %></li>
+        <li><strong>Article(s)</strong> <%= order.product_name %> </li>
+        <li><strong>Quantité</strong> <%= order.quantity %> </li>
+        <li><strong>CODE PROMO</strong> <%= order.coupon %> </li>
+        <li><strong>TOTAL</strong> <%= order.amount %>€</li>
+        <li><strong>Nom</strong> <%= order.name %> </li>
+        <li><strong>ADRESSE DE LIVRAISON:</strong> <%= order.address %> <%= order.zipcode %> <%= order.city %> <%= order.nation %></li>
+        </li>
+      </ul>
+      <p>Délai de livraison estimé à <strong>4 semaines</strong></p>
+      <%= link_to "Details", order_path(order), class: "btn btn-primary" %>
+    </div>
+  </div>
+      <hr>
+</div><% end %>

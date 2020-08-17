@@ -1,0 +1,61 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+#
+# Examples:
+#
+#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+#   Character.create(name: 'Luke', movie: movies.first)
+
+
+
+puts "Destroy all instances"
+Item.destroy_all
+UserAnswer.destroy_all
+Answer.destroy_all
+Question.destroy_all
+Order.destroy_all
+Product.destroy_all
+
+
+puts "creating questions"
+
+traitre_wano = Question.create!(
+    closed: false,
+    title: 'Qui à trahi les fourreaux rouges en renseignant Orochi de leurs actions?',
+    tag: 'wano',
+  )
+  traitre_wano.photo = "https://res.cloudinary.com/dsiamykrd/image/upload/v1577443578/wano_gtoynb.jpg"
+
+puts "creating answers"
+
+answer_1_traitre_wano = Answer.create!(
+  question: traitre_wano,
+  text: 'Kanjuro',
+  multiplier: 2,
+  status: 'En cours',
+  position: 1,
+  )
+
+answer_2_traitre_wano = Answer.create!(
+  question: traitre_wano,
+  text: 'Shinobu',
+  multiplier: 2,
+  status: 'En cours',
+  position: 2,
+  )
+
+answer_3_traitre_wano = Answer.create!(
+  question: traitre_wano,
+  text: 'Carrot',
+  multiplier: 3,
+  status: 'En cours',
+  position: 3,
+  )
+
+answer_4_traitre_wano = Answer.create!(
+  question: traitre_wano,
+  text: 'Autre',
+  multiplier: 2,
+  status: 'En cours',
+  position: 4,
+  )

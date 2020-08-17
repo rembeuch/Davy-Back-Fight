@@ -1,0 +1,15 @@
+<h1>new quiz</h1>
+<% if current_user.admin == true %>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <div class="form-inputs">
+  <%= simple_form_for [@quiz] do |f| %>
+    <%= f.input :question, label: 'question' %>
+    <%= f.input :answer, label: 'réponse' %>
+    <%= f.input :numero, label: 'numéro' %>
+  <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+   </div>
+  </div>
+</div>
+  <% end %>
+<% end %>

@@ -1,0 +1,51 @@
+
+<div class="container">
+  <h5 class="font-custom">Changer votre avatar
+  <%= form_for current_user, :url => {:action => 'update'} do |form| %>
+  <%= form.file_field :avatar %>
+  <%= form.submit "upload" %>
+  <% end %>
+  </h5>
+
+  <h1 class="card p-5 mb-4 text-center font-custom-title">Vos Paris <%= link_to 'Vos Commandes', orders_path %>
+  </h1>
+
+  <div class="card">
+    <h2 class=" text-center font-custom-title">Recevez 10.000B en vous connectant chaque jour!
+    </h2>
+    <p class="ml-3"> Trier : <%= link_to ' Vos Paris en cours', sort_user_answer_path %> / <%= link_to ' Vos Paris Terminés', finish_user_answer_path %></p>
+  </div>
+
+  <h1 class="font-custom">  <% if @user_answers == [] %>
+    Vous n'avez aucun Paris
+  <% end %></h1>
+
+
+  <div class="row">
+    <% @user_answers.sort_by(&:created_at).reverse.each do |user_answer| %>
+      <div class="col-12 col-md-12">
+        <div class="card m-3">
+          <%= image_tag user_answer.answer.question.image , :class => "answer-photo mx-auto mt-3" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= user_answer.answer.question.title %> Votre réponse:
+           <strong> <%= user_answer.answer.text %></strong></h5> <br>
+          Montant misé:
+          <strong> <%=number_with_delimiter(user_answer.amount, :delimiter => '.')%> B </strong>
+          Gains Potentiels en cas de bonne réponse:
+          <strong> <%= number_with_delimiter(user_answer.amount * user_answer.answer.multiplier, :delimiter => '.') %>B </strong>
+          <% if user_answer.answer.status == 'En cours'  %>
+           <span class="text-primary"> <%= user_answer.answer.status%></span>
+          <% elsif user_answer.answer.status == 'Validé!' %>
+            <span class="text-success"> <%= user_answer.answer.status%></span>
+          <% else %>
+            <span class="text-danger"> <%= user_answer.answer.status%></span>
+          <% end %>
+          <% if user_answer.closed == false && user_answer.answer.status == 'Validé!'  %>
+            <%= link_to "Récupérez vos gains!", user_answer_win_path(user_answer), method: :patch, class: "btn btn-success", id: "gain",data: { disable_with: false } %>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+

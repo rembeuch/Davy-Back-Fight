@@ -1,0 +1,68 @@
+<div class="d-flex">
+<div class="bg-profil p-5 ml-4">
+    <% if user_signed_in? %>
+    <% if current_user.current_sign_in_at.to_date - current_user.last_sign_in_at.to_date >= 1 %>
+      <% current_user.update(berrys: (current_user.berrys + 10_000)) %>
+       <%  current_user.update(last_sign_in_at: (current_user.current_sign_in_at)) %>
+    <% end %>
+     <center> <%=cl_image_tag current_user.avatar, :class => "wanted-avatar" %></center>
+    <div class="wanted-pseudo pl-1 ml-2"> <%=current_user.pseudo%></div>
+    <div class="wanted-berrys pl-4 ml-5 pb-3 "> <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%></div>
+    <% else %>
+        <%= link_to 'Login', new_user_session_path, class: "btn login-btn font-custom" %>
+    <% end %>
+</div>
+  <div class="container banner mr-5 mt-5">
+  </div>
+  <%= link_to products_path do %>
+    <div class="mt-5 pl-4 bg-white pb-3">
+          <%= cl_image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1584089203/oxgccphboxppt2bpkawb.jpg" , :class => "product-photo-banner" %>
+            <h5 class="font-custom">Soutenez le site sur Tipee ou en utilisant la boutique!</h5>
+
+        </div>
+    <% end %>
+</div>
+  <ul class="container nav justify-content-center p-3 mb-2 bg-white ">
+    <li class="m-2 font-custom-navbar">
+      <%= link_to 'Accueil', root_path, class: current_class?(root_path) %>
+    </li>
+    <li class="m-2 font-custom-navbar">
+     <%= link_to 'Paris', questions_path, class: current_class?(questions_path) %>
+    </li>
+    <li class="m-2 font-custom-navbar">
+     <%= link_to 'Quiz', quiz_path, class: current_class?(quiz_path) %>
+    </li>
+    <li class="m-2 font-custom-navbar">
+     <%= link_to 'Tournois', tournaments_path, class: current_class?(tournaments_path)%>
+    </li>
+    <li class="m-2 font-custom-navbar">
+     <%= link_to 'Profil', user_answers_path, class: current_class?(user_answers_path)%>
+    </li>
+    <li class="m-2 font-custom-navbar">
+     <%= link_to 'Boutique', products_path, class: current_class?(products_path) %>
+    </li>
+    <% if user_signed_in? && current_user.cart != nil %>
+    <li class="m-2 font-custom-navbar">
+     <%= link_to 'Mon Panier', cart_path(current_user.cart), class: current_class?(cart_path(current_user.cart)) %>
+    </li>
+    <% end %>
+    <li class="m-2 font-custom-navbar">
+     <%= link_to 'Classement', users_controller_index_path, class: current_class?(users_controller_index_path) %>
+    </li>
+    <%= link_to "https://www.instagram.com/davybackfight.rocks/?hl=fr",  class: 'btn' do %>
+      <i class="fab fa-instagram fa-3x"></i>
+    <% end %>
+    <%= link_to "https://fr.tipeee.com/davybackfight",  class: 'btn' do %>
+      <i class="fas fa-campground fa-2x"></i>
+    <% end %>
+     <li class="m-2 font-custom-navbar">
+     <%= link_to 'Contact CGV Mentions légales', pages_path, class: current_class?(pages_path) %>
+    </li>
+    <% if user_signed_in? %>
+      <li class="m-2 font-custom-navbar">
+      <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete %>
+      </li>
+    <% end %>
+  </ul>
+
+

@@ -1,0 +1,14 @@
+<h1>new quiz_answer</h1>
+<% if current_user.admin == true %>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <div class="form-inputs">
+  <%= simple_form_for [@quiz, @quiz_answer] do |f| %>
+    <%= f.input :description, label: 'text réponse' %>
+    <%= f.input :status, label: 'bonne réponse' %>
+  <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+   </div>
+  </div>
+</div>
+  <% end %>
+<% end %>
