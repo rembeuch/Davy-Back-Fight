@@ -11,7 +11,11 @@
     <% end %>
   <% elsif Time.now.getlocal("+00:00") > @tournament.start && @participations_validées.count == 1 && @current_participation.status == "Validée" %>
     <% @tournament.update(status: "Terminé") %>
-    <div>Félicitations! Vous avez gagné le tournoi!</div>
+    <div>Félicitations! Vous avez gagné le tournoi!
+      <% if @current_participation.engage == false  %>
+      <%= link_to "Récupérer #{number_with_delimiter(@gains, :delimiter => '.')} Berrys", tournament_win_path(@tournament), method: :patch, class: "btn btn-success",data: { disable_with: false } %>
+      <% end %>
+    </div>
 
   <% elsif Time.now.getlocal("+00:00") > @tournament.start && @participations_validées.count <= 0 %>
     <% @tournament.update(status: "Terminé") %>
@@ -70,6 +74,15 @@
             <% if @current_participation.answer != "En attente" %>
               <h3>Choix de l'adversaire: <strong> <%= @participations_validées[(@participations_validées.index(@current_participation))+1].answer %> </strong>
               </h3>
+              <div>
+                <% if @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Fruit du Démon' %>
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))+1].answer == "Granit marin"%>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))+1].answer == "Katana" %>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+                <% end %>
+              </div>
             <% end %>
           </div>
         </div>
@@ -201,6 +214,15 @@
             <% if @current_participation.answer != "En attente" %>
               <h3>Choix de l'adversaire: <strong> <%= @participations_validées[(@participations_validées.index(@current_participation))-1].answer %> </strong>
               </h3>
+              <div>
+                <% if @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))-1].answer == "Granit marin"%>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))-1].answer == "Katana" %>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+                <% end %>
+              </div>
             <% end %>
           </div>
         </div>
@@ -330,7 +352,17 @@
             <h2 class="font-custom-title"> Taureau du colisée </h2>
             <img src="https://ekladata.com/cmB6nF4MtpEql45pwm65lHzQgTA@474x346.png" alt="" style="height: 280px; width: 280px;" class="mx-1 border border-success">
             <% if @current_participation.answer != "En attente" %>
-              <h3>choix du Taureau: <%= @participations_validées[(@participations_validées.index(@current_participation))-1].answer %> </h3>
+              <h3>choix du Taureau: <%= @participations_validées[(@participations_validées.index(@current_participation))-1].answer %>
+              </h3>
+              <div>
+                <% if @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))-1].answer == "Granit marin"%>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))-1].answer == "Katana" %>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+                <% end %>
+              </div>
             <% end %>
           </div>
         </div>
@@ -411,3 +443,12 @@
   <% end %>
 </div>
 
+
+<script>
+  setTimeout(function(){
+   window.location.reload(1);
+}, 120000);
+  setTimeout(function(){
+   window.location.reload(1);
+}, 120001);
+</script>

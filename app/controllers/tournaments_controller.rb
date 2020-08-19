@@ -25,10 +25,11 @@ class TournamentsController < ApplicationController
     if @tournament.status == 'en cours'
       lap_turn
     end
+    @gains = (@tournament.participations.count * 10_000)
   end
 
   def lap_turn
-    if Time.now.getlocal("+00:00") > @tournament.start + 60 && @participations_validées.count > 1
+    if Time.now.getlocal("+00:00") > @tournament.start + 300 && @participations_validées.count > 1
       @participations_validées.each do |participation|
         if participation.answer == 'En attente' || participation.engage == true
           participation.update(status: "terminée")
@@ -38,8 +39,16 @@ class TournamentsController < ApplicationController
         participation.update(answer: "En attente")
       end
       @tournament.update(lap: (@tournament.lap += 1))
-      @tournament.update(start: (@tournament.start + 60))
+      @tournament.update(start: (@tournament.start + 300))
     end
+  end
+
+  def win
+    @tournament = Tournament.find(params[:tournament_id])
+    @current_participation = current_user.participations.where(tournament: @tournament).first
+    current_user.update(berrys: (current_user.berrys + (@tournament.participations.count * 10_000)))
+    @current_participation.update(engage: true)
+    redirect_to tournament_path(@tournament)
   end
 
   private
