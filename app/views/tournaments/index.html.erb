@@ -2,13 +2,40 @@
   <% if user_signed_in? && current_user.admin == true %>
     <%= link_to 'créer un Tournoi', new_tournament_path, class: 'btn btn-warning' %>
   <% end %>
+
+  <div class="card p-3 m-3 text-center align-items-center ">
+    <h1 class="font-custom-title"> Bienvenue au Colisée! </h1>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Voir les règles des Tournois:
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Règles:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Il faut gagner!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <% if @tournaments != nil %>
       <% @tournaments.sort_by(&:created_at).reverse.each do |tournament| %>
         <div class="col-12 col-md-12">
-          <div class="card m-3">
+          <div class="card mx-5">
             <div class="card-body">
-              <h2 class="card-title">
+              <h2 class="card-title font-custom">
                 <strong> <%= tournament.title %> </strong>
                 <br>
                 <%= tournament.participations.count %> participants
