@@ -40,6 +40,7 @@ class TournamentsController < ApplicationController
       end
       @tournament.update(lap: (@tournament.lap += 1))
       @tournament.update(start: (@tournament.start + 300))
+      redirect_to tournament_path(@tournament)
     end
   end
 

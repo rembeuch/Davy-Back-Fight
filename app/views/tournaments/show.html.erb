@@ -1,5 +1,56 @@
 <div class="container py-3 bg-white">
   <h1><%= @tournament.title %></h1>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Voir les règles des Tournois:
+  </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Règles:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-auto">
+            <h1> Bienvenue au Colisée! </h1>
+            <p>-Si vous êtes inscrit, le tournoi débutera à l'heure indiquée.
+                <br>
+                -Le nombre de participants déterminera les gains du vainqueur : 10K Berrys pour chaque participants (ex: 30 participants = 300K Berrys pour le vainqueur)
+                <br>
+                -Le but du jeu est d'éliminer ses adversaires à chaque tour pour être le dernier participant restant.
+                <br>
+                -Une fois le tournoi commencé chaque tour dure 5 minutes.
+            <h1>Déroulement des combats</h1>
+            <p>-Les combats sont basés sur le principe du jeu "Pierre-Feuille-Ciseaux", vous affrontez un adversaire à chaque tour.
+              <br>
+              -Vous devez choisir avant la fin du tour entre <strong>Le Fruit du démon, Le Granit marin, Les Katanas</strong>.
+              <h4>- <strong>Le Fruit du démon bat Les Katanas, Le Granit marin bat le Fruit du démon et les Katanas battent le Granit Marin.</strong></h4>
+              <br>
+              -Les combats sont rapides et violents! Ils se déroulent en une seule manche. Pas de 2ème chance!
+              <br>
+              -En cas d'égalité, le pirate avec la plus haute prime remporte la manche. Si les joueurs ont la même prime, ils se neutralisent et sont tous les 2 éliminés!
+              <br>
+              -Si vous ne donnez aucune réponse avant la fin du tour vous êtes éliminé, pareil pour votre adversaire.
+              <br>
+              -Si les 2 finalistes se neutralisent, il y a match nul et personne ne remporte le tournoi.
+              <br>
+              -Vous tomberez peut-être parfois par hasard sur le taureau du colisée!
+            </p>
+            <h1>Détails techniques</h1>
+            <p>-Durant les combats, la page se relance toute les 2 minutes pour mettre à jour le choix des joueurs.</p>
+            <h4>Vous pouvez rafraîchir la page manuellement vous-même pour voir s'il y a eu du changement.</h4>
+
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
   <% if Time.now.getlocal("+00:00") < @tournament.start %>
     <% if current_user.participations.where(tournament: @tournament) == [] %>
       <%= simple_form_for [@tournament, @participation] do |f| %>
