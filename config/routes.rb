@@ -55,7 +55,8 @@ Rails.application.routes.draw do
   resources :pages, only: :index
 
 
-  resources :quizzes, only: [:edit, :update, :new, :create] do
+  resources :quizzes, only: [:edit, :new, :create] do
+    patch 'update' => 'quizzes#update'
     resources :quiz_answers, only: [:edit, :update, :new, :create] do
       patch 'validation' => 'quiz_answers#validation'
     end

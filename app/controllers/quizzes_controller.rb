@@ -18,7 +18,7 @@ class QuizzesController < ApplicationController
   end
 
   def update
-    @quiz = Quiz.find(params[:id])
+    @quiz = Quiz.find(params[:quiz_id])
     if @quiz.update(quiz_params)
       redirect_to quiz_path, notice: 'modifié!'
     else
