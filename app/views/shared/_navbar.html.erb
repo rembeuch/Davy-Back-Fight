@@ -55,9 +55,6 @@
     <%= link_to "https://fr.tipeee.com/davybackfight",  class: 'btn' do %>
       <i class="fas fa-campground fa-2x"></i>
     <% end %>
-     <li class="m-2 font-custom-navbar">
-     <%= link_to 'Contact CGV Mentions légales', pages_path, class: current_class?(pages_path) %>
-    </li>
     <% if user_signed_in? %>
       <li class="m-2 font-custom-navbar">
       <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete %>

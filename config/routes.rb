@@ -74,7 +74,7 @@ Rails.application.routes.draw do
     resources :participations, only: [:create]
   end
 
-
+  get 'politique' => 'pages#politique'
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

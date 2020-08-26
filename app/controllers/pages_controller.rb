@@ -12,4 +12,7 @@ class PagesController < ApplicationController
     @quizs = Quiz.all
     @current_quiz = Quiz.find_by(numero: current_user.numero_quiz)
   end
+
+  def politique
+  end
 end
