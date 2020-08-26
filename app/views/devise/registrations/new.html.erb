@@ -25,7 +25,8 @@
                       required: true,
                       :as => :boolean,
                       input_html: {checked: false, id: 'checkbox'},
-                      label: 'Accepter la politique de confidentialité'%>
+                      label: 'Accepter la politique de confidentialité',
+                      class: "m-3"%>
           </div>
           <label class="btn btn-primary mt-4 mr-3 mb-5">
               Ajouter une photo
@@ -75,4 +76,26 @@
 
   });
 
+  const check = document.getElementById("checkbox")
+  check.addEventListener("change", function() {
+    myFunction();
+  });
+  function myFunction() {
+  var x = document.getElementById("submit");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
 </script>
+<style>
+#submit {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: lightblue;
+  margin-top: 20px;
+  display: none
+}
+</style>
