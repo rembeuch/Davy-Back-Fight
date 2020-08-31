@@ -55,14 +55,34 @@ Rails.application.routes.draw do
   resources :pages, only: :index
 
 
+<<<<<<< HEAD
   resources :quizzes, only: [:edit, :update, :new, :create] do
+=======
+  resources :quizzes, only: [:edit, :new, :create] do
+    patch 'update' => 'quizzes#update'
+>>>>>>> tournament
     resources :quiz_answers, only: [:edit, :update, :new, :create] do
       patch 'validation' => 'quiz_answers#validation'
     end
   end
     patch 'plus' => 'quizzes#plus'
 
+<<<<<<< HEAD
 
+=======
+  resources :tournaments, only: [:index, :show, :new, :create]
+
+  resources :tournaments, only: [:show] do
+    patch 'win' => 'tournaments#win'
+    patch 'fdd_answer' => 'participations#fdd_answer'
+    patch 'granit_answer' => 'participations#granit_answer'
+    patch 'katana_answer' => 'participations#katana_answer'
+    patch 'draw' => 'participations#draw'
+    resources :participations, only: [:create]
+  end
+
+  get 'politique' => 'pages#politique'
+>>>>>>> tournament
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

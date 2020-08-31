@@ -1,0 +1,506 @@
+<div class="container py-3 bg-white">
+  <h1><%= @tournament.title %></h1>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Voir les règles des Tournois:
+  </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Règles:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-auto">
+            <h1> Bienvenue au Colisée! </h1>
+            <p>-Si vous êtes inscrit, le tournoi débutera à l'heure indiquée.
+                <br>
+                -Le nombre de participants déterminera les gains du vainqueur : 10K Berrys pour chaque participants (ex: 30 participants = 300K Berrys pour le vainqueur)
+                <br>
+                -Le but du jeu est d'éliminer ses adversaires à chaque tour pour être le dernier participant restant.
+                <br>
+                -Une fois le tournoi commencé chaque tour dure 5 minutes.
+            <h1>Déroulement des combats</h1>
+            <p>-Les combats sont basés sur le principe du jeu "Pierre-Feuille-Ciseaux", vous affrontez un adversaire à chaque tour.
+              <br>
+              -Vous devez choisir avant la fin du tour entre <strong>Le Fruit du démon, Le Granit marin, Les Katanas</strong>.
+              <h4>- <strong>Le Fruit du démon bat Les Katanas, Le Granit marin bat le Fruit du démon et les Katanas battent le Granit Marin.</strong></h4>
+              <br>
+              -Les combats sont rapides et violents! Ils se déroulent en une seule manche. Pas de 2ème chance!
+              <br>
+              -En cas d'égalité, le pirate avec la plus haute prime remporte la manche. Si les joueurs ont la même prime, ils se neutralisent et sont tous les 2 éliminés!
+              <%= link_to "Obtenir plus de Berrys", product_path(57) %>
+              <br>
+              -Si vous ne donnez aucune réponse avant la fin du tour vous êtes éliminé, pareil pour votre adversaire.
+              <br>
+              -Si les 2 finalistes se neutralisent, il y a match nul et personne ne remporte le tournoi.
+              <br>
+              -Vous tomberez peut-être parfois par hasard sur le taureau du colisée!
+            </p>
+            <h1>Détails techniques</h1>
+            <p>-Durant les combats, la page se relance toute les 2 minutes pour mettre à jour le choix des joueurs.</p>
+            <h4>Vous pouvez rafraîchir la page manuellement vous-même pour voir s'il y a eu du changement.</h4>
+
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% if Time.now.getlocal("+00:00") < @tournament.start %>
+    <% if current_user.participations.where(tournament: @tournament) == [] %>
+      <%= simple_form_for [@tournament, @participation] do |f| %>
+            <%= f.error_notification %>
+            <%= f.button :submit, "Participer", class: "btn btn-primary m-3",data: { disable_with: false } %>
+      <% end %>
+    <% else %>
+     Vous êtes inscris! Début du tournoi le <%= @tournament.start.getlocal("+02:00").strftime("%d %b. %Y à %kh:%M") %>
+    <% end %>
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @participations_validées.count == 1 && @current_participation.status == "Validée" %>
+    <% @tournament.update(status: "Terminé") %>
+    <div>Félicitations! Vous avez gagné le tournoi!
+      <% if @current_participation.engage == false  %>
+      <%= link_to "Récupérer #{number_with_delimiter(@gains, :delimiter => '.')} Berrys", tournament_win_path(@tournament), method: :patch, class: "btn btn-success",data: { disable_with: false } %>
+      <% end %>
+    </div>
+
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @participations_validées.count <= 0 %>
+    <% @tournament.update(status: "Terminé") %>
+    <div>Match nul! tout les combattants se sont neutralisés!</div>
+
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @current_participation == nil %>
+    <div>Le tournoi est en cours, si vous n'êtes pas inscris vous ne pouvez pas participer.</div>
+
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start && @current_participation.status == "terminée" %>
+    <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+
+
+  <% elsif Time.now.getlocal("+00:00") > @tournament.start %>
+    <% @tournament.update(status: "en cours") %>
+    <h4> <%= @participations_validées.count %> / <%= @tournament.participations.count %> participants. Tour n°<%= @tournament.lap %> </h4>
+
+
+    <br>
+
+
+    <% if @participations_validées.index(@current_participation) % 2 == 0 && !@participations_validées[@participations_validées.index(@current_participation)+1].nil? %>
+      <div class="row">
+        <div class=" col-sm">
+          <div class="card p-3 center">
+          <h2 class="font-custom-title"> <%= @current_participation.user.pseudo %> </h2>
+             <%= cl_image_tag @current_participation.user.avatar, :class => 'classement-avatar mx-auto' %>
+          <h3 class="font-custom"> <%=number_with_delimiter(@current_participation.user.berrys, :delimiter => '.')%> Berrys</h3>
+          <h3>Votre choix: <strong> <%= @current_participation.answer %> </strong> </h3>
+          <div class="row">
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Fruit du Démon" %>
+              <%= link_to tournament_fdd_answer_path(@tournament), method: :patch do %>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+              <% end %>
+            <% end %>
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Granit marin" %>
+              <%= link_to tournament_granit_answer_path(@tournament), method: :patch do %>
+                <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+              <% end %>
+            <% end %>
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Katana" %>
+              <%= link_to tournament_katana_answer_path(@tournament), method: :patch do %>
+                <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+              <% end %>
+            <% end %>
+            </div>
+          </div>
+        </div>
+        <h2 class="col-sm text-center my-auto">
+          <img src="https://cuiseur-sous-vide.fr/wp-content/uploads/2019/01/vs-logo-123x105.png" alt="" >
+        </h2>
+        <div class=" col-sm">
+          <div class="card p-3 center">
+            <h2 class="font-custom-title"> <%= @participations_validées[(@participations_validées.index(@current_participation))+1].user.pseudo  %> </h2>
+            <%= cl_image_tag @participations_validées[(@participations_validées.index(@current_participation))+1].user.avatar, :class => 'classement-avatar mx-auto' %>
+            <h3 class="font-custom"> <%=number_with_delimiter(@participations_validées[(@participations_validées.index(@current_participation))+1].user.berrys, :delimiter => '.')%> Berrys</h3>
+            <% if @current_participation.answer != "En attente" %>
+              <h3>Choix de l'adversaire: <strong> <%= @participations_validées[(@participations_validées.index(@current_participation))+1].answer %> </strong>
+              </h3>
+              <div>
+                <% if @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Fruit du Démon' %>
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))+1].answer == "Granit marin"%>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))+1].answer == "Katana" %>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <% if @current_participation.answer != "En attente" && @participations_validées[(@participations_validées.index(@current_participation))+1].answer != "En attente" %>
+
+          <div class="col-sm">
+            <% if @current_participation.answer == @participations_validées[(@participations_validées.index(@current_participation))+1].answer %>
+              <h2 class="text-center"> <strong> égalité!</strong></h2>
+              <% if current_user.berrys > @participations_validées[(@participations_validées.index(@current_participation))+1].user.berrys %>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
+                <div>Votre prime est plus élevée. Vous remportez ce tour!</div>
+                <div>
+                  <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+                </div>
+              <% elsif current_user.berrys == @participations_validées[(@participations_validées.index(@current_participation))+1].user.berrys%>
+                <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+                <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+                </div>
+                <% @current_participation.update(engage: true) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
+              <% else %>
+                <div>Votre Prime est plus basse.Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+                <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+                </div>
+                <% @current_participation.update(engage: true) %>
+              <% end %>
+            <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Granit marin' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+                </div>
+              <% @current_participation.update(engage: true) %>
+            <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Katana' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+              <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
+            <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Katana' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+              </div>
+              <% @current_participation.update(engage: true) %>
+            <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Fruit du Démon' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+              <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
+             <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Fruit du Démon' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+              </div>
+              <% @current_participation.update(engage: true) %>
+            <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Granit marin' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+              <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
+            <% end %>
+          </div>
+      <% end %>
+
+
+
+
+    <% elsif @participations_validées.index(@current_participation) % 2 != 0 && !@participations_validées[@participations_validées.index(@current_participation)-1].nil? %>
+      <div class="row">
+        <div class=" col-sm">
+          <div class="card p-3 center">
+          <h2 class="font-custom-title"> <%= @current_participation.user.pseudo %> </h2>
+             <%= cl_image_tag @current_participation.user.avatar, :class => 'classement-avatar mx-auto' %>
+          <h3 class="font-custom"> <%=number_with_delimiter(@current_participation.user.berrys, :delimiter => '.')%> Berrys</h3>
+          <h3>Votre choix: <strong> <%= @current_participation.answer %> </strong> </h3>
+          <div class="row">
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Fruit du Démon" %>
+              <%= link_to tournament_fdd_answer_path(@tournament), method: :patch do %>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+              <% end %>
+            <% end %>
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Granit marin" %>
+              <%= link_to tournament_granit_answer_path(@tournament), method: :patch do %>
+                <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+              <% end %>
+            <% end %>
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Katana" %>
+              <%= link_to tournament_katana_answer_path(@tournament), method: :patch do %>
+                <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+              <% end %>
+            <% end %>
+            </div>
+          </div>
+        </div>
+        <h2 class="col-sm text-center my-auto">
+          <img src="https://cuiseur-sous-vide.fr/wp-content/uploads/2019/01/vs-logo-123x105.png" alt="" >
+        </h2>
+        <div class=" col-sm">
+          <div class="card p-3 center">
+            <h2 class="font-custom-title"> <%= @participations_validées[(@participations_validées.index(@current_participation))-1].user.pseudo  %> </h2>
+            <%= cl_image_tag @participations_validées[(@participations_validées.index(@current_participation))-1].user.avatar, :class => 'classement-avatar mx-auto' %>
+            <h3 class="font-custom"> <%=number_with_delimiter(@participations_validées[(@participations_validées.index(@current_participation))-1].user.berrys, :delimiter => '.')%> Berrys</h3>
+            <% if @current_participation.answer != "En attente" %>
+              <h3>Choix de l'adversaire: <strong> <%= @participations_validées[(@participations_validées.index(@current_participation))-1].answer %> </strong>
+              </h3>
+              <div>
+                <% if @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))-1].answer == "Granit marin"%>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))-1].answer == "Katana" %>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <% if @current_participation.answer != "En attente" && @participations_validées[(@participations_validées.index(@current_participation))-1].answer != "En attente" %>
+
+
+          <div class="col-sm">
+            <% if @current_participation.answer == @participations_validées[(@participations_validées.index(@current_participation))-1].answer %>
+              <h2 class="text-center"> <strong> égalité!</strong></h2>
+              <% if current_user.berrys > @participations_validées[(@participations_validées.index(@current_participation))-1].user.berrys %>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
+                <div>Votre prime est plus élevée. Vous remportez ce tour!</div>
+                <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+              <% elsif current_user.berrys == @participations_validées[(@participations_validées.index(@current_participation))-1].user.berrys%>
+                <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+                <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+                </div>
+                <% @current_participation.update(engage: true) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
+              <% else %>
+                <div>Votre Prime est plus basse.Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+                <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+                </div>
+                <% @current_participation.update(engage: true) %>
+              <% end %>
+            <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Granit marin' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+                </div>
+              <% @current_participation.update(engage: true) %>
+            <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Katana' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+              <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
+            <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Katana' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+              </div>
+              <% @current_participation.update(engage: true) %>
+            <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+              <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
+             <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <% @current_participation.status == "terminée" %>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+              </div>
+              <% @current_participation.update(engage: true) %>
+            <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Granit marin' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+              <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
+            <% end %>
+
+          </div>
+      <% end %>
+
+
+    <% else  %>
+      <div class="row">
+        <div class=" col-sm">
+          <div class="card p-3 center">
+          <h2 class="font-custom-title"> <%= @current_participation.user.pseudo %> </h2>
+             <%= cl_image_tag @current_participation.user.avatar, :class => 'classement-avatar mx-auto' %>
+          <h3 class="font-custom"> <%=number_with_delimiter(@current_participation.user.berrys, :delimiter => '.')%> Berrys</h3>
+          <h3>Votre choix: <strong> <%= @current_participation.answer %> </strong> </h3>
+          <div class="row">
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Fruit du Démon" %>
+              <%= link_to tournament_fdd_answer_path(@tournament), method: :patch do %>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+              <% end %>
+            <% end %>
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Granit marin" %>
+              <%= link_to tournament_granit_answer_path(@tournament), method: :patch do %>
+                <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+              <% end %>
+            <% end %>
+            <% if @current_participation.answer == "En attente" || @current_participation.answer == "Katana" %>
+              <%= link_to tournament_katana_answer_path(@tournament), method: :patch do %>
+                <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+              <% end %>
+            <% end %>
+            </div>
+          </div>
+        </div>
+        <h2 class="col-sm text-center my-auto">
+          <img src="https://cuiseur-sous-vide.fr/wp-content/uploads/2019/01/vs-logo-123x105.png" alt="" >
+        </h2>
+        <div class=" col-sm">
+          <div class="card p-3 center">
+            <h2 class="font-custom-title"> Taureau du colisée </h2>
+            <img src="https://ekladata.com/cmB6nF4MtpEql45pwm65lHzQgTA@474x346.png" alt="" style="height: 280px; width: 280px;" class="mx-1 border border-success">
+            <% if @current_participation.answer != "En attente" %>
+              <h3>choix du Taureau: <%= @participations_validées[(@participations_validées.index(@current_participation))-1].answer %>
+              </h3>
+              <div>
+                <% if @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcShjP4LE8gC8QTBqZPcr3-cVOycMbEC-4yg9A&usqp=CAU" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-danger">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))-1].answer == "Granit marin"%>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece-cat/images/e/ef/Kairoseki_Infobox.png/revision/latest?cb=20180829191322&path-prefix=ca" alt="" style="height: 100px; width: 100px;" class="mx-2 border border-primary">
+                <% elsif @participations_validées[(@participations_validées.index(@current_participation))-1].answer == "Katana" %>
+                  <img src="https://vignette.wikia.nocookie.net/onepiece/images/8/84/Sabres_Infobox.png/revision/latest?cb=20141230204205&path-prefix=fr" alt="" style="height: 100px; width: 100px;" class="mx-1 border border-success">
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% if @current_participation.answer != "En attente" && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == "En attente" %>
+
+          <div class="col-sm"></div>
+          <div class=" col-sm">
+            <h3> <%= @participations_validées[(@participations_validées.index(@current_participation))-1].answer %> </h3>
+          </div>
+      <% elsif @current_participation.answer != "En attente" && @participations_validées[(@participations_validées.index(@current_participation))-1].answer != "En attente" %>
+
+
+          <div class="col-sm">
+            <% if @current_participation.answer == @participations_validées[(@participations_validées.index(@current_participation))-1].answer %>
+              <h2 class="text-center"> <strong> égalité!</strong></h2>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+                <div>Le taureau est impressioné, Vous remportez ce tour!</div>
+                <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+            <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Granit marin' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+              </div>
+              <% @current_participation.update(engage: true) %>
+            <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Katana' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+              <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+            <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Katana' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+              </div>
+              <% @current_participation.update(engage: true) %>
+            <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+              <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+             <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
+              <h2 class="text-center"> <strong> Défaite!</strong></h2>
+              <% @current_participation.status == "terminée" %>
+              <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
+              <div>
+                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  </h3>
+              </div>
+              <% @current_participation.update(engage: true) %>
+            <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Granit marin' %>
+              <h2 class="text-center"> <strong> Victoire!</strong></h2>
+              <div>
+                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
+                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                </h3>
+              </div>
+                <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
+            <% end %>
+
+          </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+
+<script>
+  setTimeout(function(){
+   window.location.reload(1);
+}, 120000);
+  setTimeout(function(){
+   window.location.reload(1);
+}, 120001);
+</script>
