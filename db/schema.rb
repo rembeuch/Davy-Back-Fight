@@ -10,11 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_07_24_092959) do
-=======
+
 ActiveRecord::Schema.define(version: 2020_08_17_062439) do
->>>>>>> tournament
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,8 +97,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_062439) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-<<<<<<< HEAD
-=======
+
   create_table "participations", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "tournament_id"
@@ -115,7 +111,6 @@ ActiveRecord::Schema.define(version: 2020_08_17_062439) do
     t.index ["user_id"], name: "index_participations_on_user_id"
   end
 
->>>>>>> tournament
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "photo"
@@ -154,8 +149,7 @@ ActiveRecord::Schema.define(version: 2020_08_17_062439) do
     t.integer "numero"
   end
 
-<<<<<<< HEAD
-=======
+
   create_table "tournaments", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -165,7 +159,6 @@ ActiveRecord::Schema.define(version: 2020_08_17_062439) do
     t.integer "lap", default: 1
   end
 
->>>>>>> tournament
   create_table "user_answers", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "answer_id"
@@ -206,11 +199,9 @@ ActiveRecord::Schema.define(version: 2020_08_17_062439) do
   add_foreign_key "items", "products"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
-<<<<<<< HEAD
-=======
+
   add_foreign_key "participations", "tournaments"
   add_foreign_key "participations", "users"
->>>>>>> tournament
   add_foreign_key "quiz_answers", "quizzes"
   add_foreign_key "user_answers", "answers"
   add_foreign_key "user_answers", "users"

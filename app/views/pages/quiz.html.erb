@@ -39,11 +39,8 @@
         </div>
       </div>
     <% else %>
-<<<<<<< HEAD
       il n'y a pas d'autres quiz pour le moment.
-=======
      <div class="mb-5"> il n'y a pas d'autres quiz pour le moment. </div>
->>>>>>> tournament
   <% end %>
 
   <% if user_signed_in? && current_user.admin == true %>
@@ -96,11 +93,8 @@ var downloadTimer = setInterval(function(){
     document.getElementById("countdown").innerHTML = "Terminé!";
     '<%       current_user.update(numero_quiz: (current_user.numero_quiz + 1)) %>'
   } else {
-<<<<<<< HEAD
     document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
-=======
     document.getElementById("countdown").innerHTML = timeleft + " seconds restantes";
->>>>>>> tournament
   }
   timeleft -= 1;
 }, 1000);

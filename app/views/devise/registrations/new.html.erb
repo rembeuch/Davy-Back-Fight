@@ -19,8 +19,7 @@
           <%= f.input :password_confirmation,
                       required: true,
                       input_html: { autocomplete: "new-password" } %>
-<<<<<<< HEAD
-=======
+
           <div class="card">
           <%= link_to 'Voir la Politique de confidentialité', politique_path, class: 'm-3' %>
           <%= f.input :accepter,
@@ -30,7 +29,6 @@
                       label: 'Accepter la politique de confidentialité',
                       class: "m-3"%>
           </div>
->>>>>>> tournament
           <label class="btn btn-primary mt-4 mr-3 mb-5">
               Ajouter une photo
               <span style="display:none;">
@@ -46,11 +44,8 @@
             <img src="" alt="" class="image-preview__image wanted-avatar mt-1">
           </div>
 
-<<<<<<< HEAD
-        <div class="form-actions">
-=======
+
         <div class="form-actions" id="submit">
->>>>>>> tournament
           <%= f.button :submit, "Créer votre compte", class: 'btn btn-primary' %>
         </div>
       <% end %>
@@ -64,11 +59,8 @@
   const Ifile = document.getElementById("avatar-preview")
   const previewContainer = document.getElementById("imagePreview")
   const previewImage = previewContainer.querySelector(".image-preview__image")
-<<<<<<< HEAD
 
-=======
   const checkbox = document.getElementById("checkbox")
->>>>>>> tournament
   Ifile.addEventListener("change", function() {
     const file = this.files[0];
 
@@ -86,22 +78,19 @@
     }
 
   });
-<<<<<<< HEAD
-</script>
-=======
 
   const check = document.getElementById("checkbox")
   check.addEventListener("change", function() {
-    myFunction();
-  });
-  function myFunction() {
-  var x = document.getElementById("submit");
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
+      myFunction();
+    });
+    function myFunction() {
+    var x = document.getElementById("submit");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
   }
-}
 </script>
 <style>
 #submit {
@@ -113,4 +102,3 @@
   display: none
 }
 </style>
->>>>>>> tournament
