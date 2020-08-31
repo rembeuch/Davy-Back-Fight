@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1>edit quiz</h1>
 <% if current_user.admin == true %>
 <div class="row">
@@ -12,4 +13,26 @@
   </div>
 </div>
   <% end %>
+=======
+<% if current_user.admin == true %>
+<div class="container">
+  <div class="row ">
+    <div class="col-sm-12 col-sm-offset-12">
+      <div class="form-inputs card m-3 p-4">
+       <%= simple_form_for  @quiz, :url => quiz_update_path(@quiz), :method => :patch do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :question, label: 'question' %>
+        <%= f.input :answer, label: 'Réponse' %>
+        <%= f.input :numero, label: 'numéro' %>
+  <div class="actions">
+            <%= f.button :submit, "Valider", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+  <br>
+  <%= link_to "retour", quiz_path,  class: 'btn btn-warning' %>
+</div>
+>>>>>>> tournament
 <% end %>

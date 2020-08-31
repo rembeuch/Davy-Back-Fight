@@ -1,0 +1,90 @@
+<div class="container">
+  <% if user_signed_in? && current_user.admin == true %>
+    <%= link_to 'créer un Tournoi', new_tournament_path, class: 'btn btn-warning' %>
+  <% end %>
+
+  <div class="card p-3 m-3 text-center align-items-center ">
+    <h1 class="font-custom-title"> Bienvenue au Colisée! </h1>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Voir les règles des Tournois:
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Règles:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-auto">
+            <h1> Bienvenue au Colisée! </h1>
+            <p>-Si vous êtes inscrit, le tournoi débutera à l'heure indiquée.
+                <br>
+                -Le nombre de participants déterminera les gains du vainqueur : 10K Berrys pour chaque participants (ex: 30 participants = 300K Berrys pour le vainqueur)
+                <br>
+                -Le but du jeu est d'éliminer ses adversaires à chaque tour pour être le dernier participant restant.
+                <br>
+                -Une fois le tournoi commencé chaque tour dure 5 minutes.
+            <h1>Déroulement des combats</h1>
+            <p>-Les combats sont basés sur le principe du jeu "Pierre-Feuille-Ciseaux", vous affrontez un adversaire à chaque tour.
+              <br>
+              -Vous devez choisir avant la fin du tour entre <strong>Le Fruit du démon, Le Granit marin, Les Katanas</strong>.
+              <h4>- <strong>Le Fruit du démon bat Les Katanas, Le Granit marin bat le Fruit du démon et les Katanas battent le Granit Marin.</strong></h4>
+              <br>
+              -Les combats sont rapides et violents! Ils se déroulent en une seule manche. Pas de 2ème chance!
+              <br>
+              -En cas d'égalité, le pirate avec la plus haute prime remporte la manche. Si les joueurs ont la même prime, ils se neutralisent et sont tous les 2 éliminés!
+                <%= link_to "Obtenir plus de Berrys", product_path(57) %>
+              <br>
+              -Si vous ne donnez aucune réponse avant la fin du tour vous êtes éliminé, pareil pour votre adversaire.
+              <br>
+              -Si les 2 finalistes se neutralisent, il y a match nul et personne ne remporte le tournoi.
+              <br>
+              -Vous tomberez peut-être parfois par hasard sur le taureau du colisée!
+            </p>
+            <h1>Détails techniques</h1>
+            <p>-Durant les combats, la page se relance toute les 2 minutes pour mettre à jour le choix des joueurs.</p>
+            <h4>Vous pouvez rafraîchir la page manuellement vous-même pour voir s'il y a eu du changement.</h4>
+
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <% if @tournaments != nil %>
+      <% @tournaments.sort_by(&:created_at).reverse.each do |tournament| %>
+        <div class="col-12 col-md-12">
+          <div class="card mx-5 my-3">
+            <div class="card-body">
+              <h2 class="card-title font-custom">
+                <strong> <%= tournament.title %> </strong>
+                <br>
+                <%= tournament.participations.count %> participants
+                <br>
+                <span class="d-flex"> <%= link_to "Détails", tournament_path(tournament), class: "btn-lg btn-success m-2 rounded-pill border border-success" %> </span>
+                <% if Time.now.getlocal("+00:00") < tournament.start %>
+                  Début: <%= tournament.start.getlocal("+02:00").strftime("%d %b. %Y à %kh:%M") %>
+                <% elsif Time.now.getlocal("+00:00") > tournament.start %>
+                  <%= tournament.status %>
+                  <% if tournament.status == 'Terminé' && tournament.participations.where(status: "Validée") != [] %>
+                   <h2> Vainqueur: <%= tournament.participations.where(status: "Validée").first.user.pseudo %> </h2>
+                  <% elsif tournament.status == 'Terminé' && tournament.participations.where(status: "Validée") == [] %>
+                    <h2>Match Nul!</h2>
+                  <% end %>
+                <% end %>
+              </h2>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

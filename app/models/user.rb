@@ -7,6 +7,10 @@ class User < ApplicationRecord
   has_many :user_answers
   has_many :orders
   has_one :cart
+<<<<<<< HEAD
+=======
+  has_many :participations
+>>>>>>> tournament
 
   mount_uploader :avatar, PhotoUploader
 
