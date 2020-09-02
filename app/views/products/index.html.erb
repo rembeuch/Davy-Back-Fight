@@ -4,7 +4,9 @@
   <% end %>
       <div class="col-12 col-md-8 text-center mx-auto">
         <div class="card m-3">
-          <%= cl_image_tag @products.first.photo , :class => "product-photo mx-auto mt-3" %>
+          <%= link_to product_path(@products.first), class: 'text-center' do %>
+            <%= cl_image_tag @products.first.photo , :class => "product-photo mx-auto mt-3" %>
+          <% end %>
           <div class="card-body">
             A la une en ce moment:
             <h5 class="card-title font-custom"><%= @products.first.name %> pour <%= @products.first.price %>€</h5>
@@ -35,7 +37,9 @@ Catégories  </button>
       <% if product.name != "#{@products.first.name}" %>
         <div class="col-12 col-md-4">
           <div class="card m-3">
-            <%= cl_image_tag product.photo , :class => "product-photo mx-auto mt-3" %>
+          <%= link_to product_path(product), class: "text-center" do %>
+            <%= cl_image_tag product.photo , :class => "product-photo center mt-3" %>
+          <% end %>
             <div class="card-body">
               <h5 class="card-title font-custom"><%= product.name %> <%= product.price %>€</h5>
               <%= link_to "Détails", product_path(product), class: "btn btn-primary" %>
