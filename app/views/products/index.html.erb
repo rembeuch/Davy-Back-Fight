@@ -3,19 +3,20 @@
     <%= link_to 'Ajouter un produit', new_product_path, class: "btn btn-warning" %>
   <% end %>
       <div class="col-12 col-md-8 text-center mx-auto">
-        <div class="card m-3">
-          <%= link_to product_path(@products.first), class: 'text-center' do %>
-            <%= cl_image_tag @products.first.photo , :class => "product-photo mx-auto mt-3" %>
-          <% end %>
-          <div class="card-body">
-            A la une en ce moment:
-            <h5 class="card-title font-custom"><%= @products.first.name %> pour <%= @products.first.price %>€</h5>
-            <%= link_to "Détails", product_path(@products.first), class: "btn btn-primary" %>
-            <% if user_signed_in? && current_user.admin == true %>
-                <%= link_to 'Edit', edit_product_path(@products.first), class: "btn btn-warning" %>
+        <div class="card mb-4">
+        <h2 class="text-center m-2 font-custom-title"><%= @article.title %></h2>
+        <% if @article.image != nil %>
+          <%=  image_tag @article.image, :class => "article-photo"  %>
+        <% end %>
+        <h3 class="m-3 font-custom"><%=  @article.text%>
+        <% if @article.link != nil %>
+          <%= link_to @article.link, @article.link, target: :_blank %>
+        </h3>
+        <% end %>
+        <% if user_signed_in? && current_user.admin == true %>
+                <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-warning" %>
               <% end %>
-          </div>
-        </div>
+      </div>
       </div>
   <div>
     <h2 class=" p-2 text-center font-custom-title"> <div class="dropdown">
@@ -38,7 +39,9 @@ Catégories  </button>
         <div class="col-12 col-md-4">
           <div class="card m-3">
           <%= link_to product_path(product), class: "text-center" do %>
-            <%= cl_image_tag product.photo , :class => "product-photo center mt-3" %>
+            <% if product.image != nil %>
+              <%= image_tag product.image , :class => "product-photo center mt-3" %>
+            <% end %>
           <% end %>
             <div class="card-body">
               <h5 class="card-title font-custom"><%= product.name %> <%= product.price %>€</h5>

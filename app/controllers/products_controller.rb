@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show, :tags_product ]
   def index
     @products = Product.all
+    @article = Article.first
   end
 
   def show
@@ -41,6 +42,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :photo, :price_cents, :description, :tags)
+    params.require(:product).permit(:name, :photo, :image, :price_cents, :description, :tags)
   end
 end

@@ -3,7 +3,7 @@
         <div class="col-sm-12 col-md-4">
           <% @cart.items.each do |item| %>
             <h5 class="card-title"><%= item.product.name %>
-            <%= cl_image_tag item.product.photo, class: "product-photo mx-auto py-3" %>
+            <%= image_tag item.product.image, class: "product-photo mx-auto py-3" %>
               Quantité: <%= item.quantity %></h5>
               <hr>
           <% end %>

@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :users_controller, only: [:index]
 
-  resources :articles, only: [:index, :new, :create]
+  resources :articles, only: [:index, :new, :create, :edit, :update]
 
   resources :products, only: [:index, :edit, :update, :show, :new, :create] do
   get 'tags_product' => 'products#tags_product'
