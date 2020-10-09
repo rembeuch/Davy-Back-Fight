@@ -3,14 +3,12 @@
   <div class="row ">
     <div class="col-sm-12 col-sm-offset-12">
       <div class="form-inputs card m-3 p-4">
-       <%= simple_form_for [ @product] do |f| %>
+       <%= simple_form_for [ @article] do |f| %>
         <%= f.error_notification %>
-        <%= f.input :name, label: 'Titre' %>
-        <%= f.input :price_cents, label: "prix" %>
-        <%= f.input :description, label: "description" %>
-        <%= f.input :tags, label: "tags" %>
+        <%= f.input :title, label: 'Titre' %>
+        <%= f.input :text, label: "texte" %>
         <%= f.input :image, label: "image" %>
-
+        <%= f.input :link, label: "link" %>
   <div class="actions">
             <%= f.button :submit, "Valider", class: 'btn btn-primary' %>
         </div>
@@ -19,6 +17,6 @@
     </div>
   </div>
   <br>
-  <%= link_to "retour", product_path(@product),  class: 'btn btn-warning' %>
+  <%= link_to "retour", products_path,  class: 'btn btn-warning' %>
 </div>
 <% end %>

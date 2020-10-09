@@ -25,7 +25,7 @@ Catégories  </button>
       <% if product.tags.include?(@product.tags) %>
         <div class="col-12 col-md-4">
           <div class="card m-3">
-            <%= cl_image_tag product.photo , :class => "product-photo mx-auto mt-3" %>
+            <%= image_tag product.image , :class => "product-photo mx-auto mt-3" %>
             <div class="card-body">
               <h5 class="card-title font-custom"><%= product.name %> <%= product.price %>€</h5>
               <%= link_to "Détails", product_path(product), class: "btn btn-primary" %>

@@ -16,7 +16,7 @@
         <% @cart.items.each do |item| %>
         <div class="col-12 col-md-6">
           <div class="card m-3">
-            <%= cl_image_tag item.product.photo , :class => "cart-photo mx-auto mt-3" %>
+            <%= image_tag item.product.image , :class => "cart-photo mx-auto mt-3" %>
             <div class="card-body">
               <h5 class="card-title"><%= item.product.name %>
 <br>
