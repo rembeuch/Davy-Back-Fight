@@ -33,26 +33,38 @@ Catégories  </button>
   </div>
 </div> </h2>
   </div>
+
   <div class="row">
-      <% @products.sort_by(&:created_at).each do |product| %>
-      <% if product.name != "#{@products.first.name}" %>
-        <div class="col-12 col-md-4">
-          <div class="card m-3">
-          <%= link_to product_path(product), class: "text-center" do %>
-            <% if product.image != nil %>
-              <%= image_tag product.image , :class => "product-photo center mt-3" %>
-            <% end %>
-          <% end %>
-            <div class="card-body">
-              <h5 class="card-title font-custom"><%= product.name %> <%= product.price %>€</h5>
-              <%= link_to "Détails", product_path(product), class: "btn btn-primary" %>
-              <% if user_signed_in? && current_user.admin == true %>
-                <%= link_to 'Edit', edit_product_path(product), class: "btn btn-warning" %>
+    <% @products.uniq{|product| product.tags}.each do |product| %>
+        <% if product.tags != "" %>
+          <div class="col-12 col-md-12">
+            <div class="card m-3">
+      <br>
+            <h1 class="text-center"><%= link_to "#{product.tags}", product_tags_product_path(product), class: "badge badge-pill badge-dark m-2 mt-3" %>
+            </h1>
+      <br>
+            <div class="row">
+              <% @products.where(tags: product.tags).first(6).each do |product| %>
+                 <div class="col-12 col-md-4">
+                  <div class="card m-3">
+                    <%= link_to product_path(product), class: "text-center" do %>
+                     <% if product.image != nil %>
+                      <%= image_tag product.image , :class => "product-photo center mt-3" %>
+                    <% end %>
+                  <% end %>
+                    <div class="card-body">
+                      <h5 class="card-title font-custom"><%= product.name %> <%= product.price %>€</h5>
+                      <%= link_to "Détails", product_path(product), class: "btn btn-primary" %>
+                      <% if user_signed_in? && current_user.admin == true %>
+                        <%= link_to 'Edit', edit_product_path(product), class: "btn btn-warning" %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
               <% end %>
             </div>
           </div>
-        </div>
-      <% end %>
+          </div>
+        <% end %>
     <% end %>
   </div>
-</div>
