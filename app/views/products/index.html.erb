@@ -4,18 +4,17 @@
   <% end %>
       <div class="col-12 col-md-8 text-center mx-auto">
         <div class="card mb-4">
-        <h2 class="text-center m-2 font-custom-title"><%= @article.title %></h2>
-        <% if @article.image != nil %>
-          <%=  image_tag @article.image, :class => "article-photo"  %>
-        <% end %>
-        <h3 class="m-3 font-custom"><%=  @article.text%>
-        <% if @article.link != nil %>
-          <%= link_to @article.link, @article.link, target: :_blank %>
-        </h3>
-        <% end %>
-        <% if user_signed_in? && current_user.admin == true %>
-                <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-warning" %>
-              <% end %>
+          <%= link_to @article.link do %>
+            <h2 class="text-center m-2 font-custom-title"><%= @article.title %></h2>
+            <% if @article.image != nil %>
+              <%=  image_tag @article.image, :class => "article-photo"  %>
+            <% end %>
+            <h3 class="m-3 font-custom"><%=  @article.text%>
+            </h3>
+            <% if user_signed_in? && current_user.admin == true %>
+              <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-warning" %>
+            <% end %>
+          <% end %>
       </div>
       </div>
   <div>

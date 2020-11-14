@@ -25,14 +25,16 @@ Catégories  </button>
       <% if product.tags.include?(@product.tags) %>
         <div class="col-12 col-md-4">
           <div class="card m-3">
-            <%= image_tag product.image , :class => "product-photo mx-auto mt-3" %>
-            <div class="card-body">
-              <h5 class="card-title font-custom"><%= product.name %> <%= product.price %>€</h5>
-              <%= link_to "Détails", product_path(product), class: "btn btn-primary" %>
-              <% if user_signed_in? && current_user.admin == true %>
-                <%= link_to 'Edit', edit_product_path(product), class: "btn btn-warning" %>
+            <%= link_to product_path(product), class: "text-center" do %>
+              <%= image_tag product.image , :class => "product-photo mx-auto mt-3" %>
+              <div class="card-body">
+                <h5 class="card-title font-custom"><%= product.name %> <%= product.price %>€</h5>
+                <%= link_to "Détails", product_path(product), class: "btn btn-primary" %>
+                <% if user_signed_in? && current_user.admin == true %>
+                  <%= link_to 'Edit', edit_product_path(product), class: "btn btn-warning" %>
+                <% end %>
+              </div>
               <% end %>
-            </div>
           </div>
         </div>
       <% end %>
