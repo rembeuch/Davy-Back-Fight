@@ -11,4 +11,23 @@
       <%= button_to 'Ajouter au Panier', items_path(product_id: @product) %>
     </div>
   </div>
+  <% if @product.carousel != [] %>
+    <div id="carousel-Product" class="carousel slide m-5" data-ride="carousel" data-interval="2000">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= image_tag @product.carousel[0], class: "product-photo product-photo-show mx-auto" %>
+        </div>
+        <% if @product.carousel[1] != nil && @product.carousel[1] != ""%>
+        <div class="carousel-item">
+          <%= image_tag @product.carousel[1], class: "product-photo product-photo-show mx-auto" %>
+        </div>
+        <% end %>
+        <% if @product.carousel[2] != nil && @product.carousel[2] != "" %>
+        <div class="carousel-item">
+          <%= image_tag @product.carousel[2], class: "product-photo product-photo-show mx-auto" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
