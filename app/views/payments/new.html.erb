@@ -1,6 +1,6 @@
 <div class="container bg-white">
   <div class="row py-4">
-    <div class="col-md-3"><%= image_tag @order.product.photo_url, width: '100%' %></div>
+    <div class="col-md-3"><%= image_tag @order.product.image, width: '100%' %></div>
     <div class="col">
       <h1>Résumé de votre commande</h1>
       <p>Achat de <strong>  <%= @order.product_name %></strong> pour <strong><%= (@order.amount_cents/100) %>€</strong></p>

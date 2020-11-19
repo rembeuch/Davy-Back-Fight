@@ -63,7 +63,7 @@ class OrdersController < ApplicationController
         payment_method_types: ['card'],
         line_items: [{
           name: "Code PROMO: #{order.coupon} /Nom: #{order.name} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{product.name}",
-          images: [product.photo],
+          images: [product.image],
           amount: order.amount_cents.to_i / order.quantity,
           currency: 'eur',
           quantity: order.quantity,
