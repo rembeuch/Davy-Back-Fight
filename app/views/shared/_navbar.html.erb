@@ -26,18 +26,37 @@
     <li class="m-2 font-custom-navbar">
       <%= link_to 'Accueil', root_path, class: current_class?(root_path) %>
     </li>
-    <li class="m-2 font-custom-navbar">
-     <%= link_to 'Paris', questions_path, class: current_class?(questions_path) %>
-    </li>
-    <li class="m-2 font-custom-navbar">
-     <%= link_to 'Quiz', quiz_path, class: current_class?(quiz_path) %>
-    </li>
-    <li class="m-2 font-custom-navbar">
-     <%= link_to 'Colisée', tournaments_path, class: current_class?(tournaments_path)%>
-    </li>
-    <li class="m-2 font-custom-navbar">
-     <%= link_to 'Profil', user_answers_path, class: current_class?(user_answers_path)%>
-    </li>
+
+
+  <div class="dropdown m-2">
+    <span class="font-custom-navbar">Jeux <i class="fas fa-chevron-down"></i></span>
+      <div class="dropdown-content">
+        <li class="m-2 font-custom-navbar">
+          <%= link_to 'Paris', questions_path, class: current_class?(questions_path) %>
+        </li>
+        <li class="m-2 font-custom-navbar">
+         <%= link_to 'Quiz', quiz_path, class: current_class?(quiz_path) %>
+        </li>
+        <li class="m-2 font-custom-navbar">
+         <%= link_to 'Colisée', tournaments_path, class: current_class?(tournaments_path)%>
+        </li>
+      </div>
+  </div>
+
+  <div class="dropdown m-2">
+    <span class="font-custom-navbar">Profil <i class="fas fa-chevron-down"></i></span>
+      <div class="dropdown-content">
+        <li class="m-2 font-custom-navbar">
+         <%= link_to 'Mes Paris', user_answers_path, class: current_class?(user_answers_path)%>
+        </li>
+        <li class="m-2 font-custom-navbar">
+         <%= link_to 'Mes Commandes', orders_path, class: current_class?(orders_path)%>
+        </li>
+      </div>
+  </div>
+
+
+
     <li class="m-2 font-custom-navbar">
      <%= link_to 'Boutique', products_path, class: current_class?(products_path) %>
     </li>
@@ -51,9 +70,6 @@
     </li>
     <%= link_to "https://www.instagram.com/davybackfight.rocks/?hl=fr",  class: 'btn' do %>
       <i class="fab fa-instagram fa-3x"></i>
-    <% end %>
-    <%= link_to "https://fr.tipeee.com/davybackfight",  class: 'btn' do %>
-      <i class="fas fa-campground fa-2x"></i>
     <% end %>
     <% if user_signed_in? %>
       <li class="m-2 font-custom-navbar">
