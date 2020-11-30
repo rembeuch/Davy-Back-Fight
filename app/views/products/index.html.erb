@@ -25,9 +25,10 @@ Catégories  </button>
     <% @products.uniq{|product| product.tags}.each do |product| %>
         <% if product.tags != "" %>
       <br>
-         <%= link_to "#{product.tags}", product_tags_product_path(product) %>
+         <%= link_to "#{product.tags}", product_tags_product_path(product), class: "mx-2" %>
       <br>
         <% end %>
+      <br>
     <% end %>
   </div>
 </div> </h2>
