@@ -10,8 +10,8 @@
         </div>
     <%= simple_form_for @order, :url => items_order_create_path(@order) , :method => :items_order_create,   :order_id => @order   do |f| %>
          <h2>Total:  <%= number_to_currency(@cart.total, unit: "€", separator: ",", format: "%n %u") %></h2>
-  <h1>Indiquez votre nom:</h1>
-            <%= f.input :name, label: 'Votre Nom',
+  <h1>Indiquez votre Nom et votre Prénom:</h1>
+            <%= f.input :name, label: 'Nom et prénom',
                         required: true %>
   <h1>Indiquez votre adresse de livraison</h1>
           <div class="form-inputs">
@@ -22,6 +22,9 @@
               <%= f.input :zipcode,label: 'Code Postal', required: true %>
               <%= f.input :nation, label: 'Pays',
                           required: true %>
+              <%= image_tag Product.first.image, class: "product-photo mx-auto" %>
+              +<%= Product.first.price %>€
+              <%= f.input :upsell, label: "Profitez d'une réduction sur cet article si vous l'ajoutez maintenant à votre commande" %>
               <h3>Utiliser un CODE PROMO</h3>
               <%= f.input :coupon, label: 'Code Promo' %>
             <%= f.button :submit, "Valider", class: "btn btn-primary m-5" %>
