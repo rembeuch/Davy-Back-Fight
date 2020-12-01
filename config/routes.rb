@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
 
   resources :orders, only: [:show, :index]  do
+    post 'upsell' => 'orders#upsell'
     resources :payments, only: :new
   end
 

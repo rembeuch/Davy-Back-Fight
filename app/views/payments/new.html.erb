@@ -8,6 +8,7 @@
        <p> <strong>ADRESSE DE LIVRAISON:</strong> <%= @order.address %> <%= @order.zipcode %> <%= @order.city %>
       </p>
       <button id="pay" class="btn btn-primary">Payer</button>
+      <br>
       <script src="https://js.stripe.com/v3/"></script>
       <script>
         const paymentButton = document.getElementById('pay');

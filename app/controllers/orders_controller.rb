@@ -8,8 +8,13 @@ class OrdersController < ApplicationController
     product = Product.find(params[:product_id])
     order = Order.new(order_params)
     order.product = product
-    order.product_name = product.name
-    order.amount = (product.price * order.quantity)
+    if order.upsell == true
+      order.product_name = "#{product.name} +  #{Product.first.name}"
+      order.amount = ((product.price * order.quantity) + Product.first.price)
+    else
+      order.product_name = product.name
+      order.amount = (product.price * order.quantity)
+    end
     order.state = 'Non finalisée'
     order.user = current_user
 
@@ -62,7 +67,7 @@ class OrdersController < ApplicationController
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
-          name: "Code PROMO: #{order.coupon} /Nom: #{order.name} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{product.name}",
+          name: "Code PROMO: #{order.coupon} /Nom: #{order.name} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{order.product_name}",
           images: [product.image],
           amount: order.amount_cents.to_i / order.quantity,
           currency: 'eur',
@@ -106,8 +111,13 @@ class OrdersController < ApplicationController
       @product_list.push(item.product.name)
     end
     order.product = @cart.items.first.product
-    order.update(product_name: @product_list.join(' '))
-    order.update(amount: @cart.total)
+    if order.upsell == true
+      order.update(product_name: "#{@product_list.join(' ')} + #{Product.first.name}")
+      order.update(amount: (@cart.total + Product.first.price))
+    else
+      order.update(product_name: @product_list.join(' '))
+      order.update(amount: @cart.total)
+    end
     order.state = 'Non finalisée'
 
     if order.save && order.quantity == 1
@@ -167,7 +177,7 @@ class OrdersController < ApplicationController
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
         line_items: [{
-          name: "Code PROMO: #{order.coupon} /Nom: #{order.name} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{@product_list.join(' ')} ",
+          name: "Code PROMO: #{order.coupon} /Nom: #{order.name} / Adresse de livraison: #{order.address}, #{order.zipcode}, #{order.city}, #{order.nation} / #{order.product_name} ",
           amount: order.amount_cents.to_i,
           currency: 'eur',
           quantity: order.quantity,
@@ -184,7 +194,11 @@ class OrdersController < ApplicationController
     end
   end
 
+  def upsell
+    @order.upsell = true
+  end
+
   def order_params
-    params.require(:order).permit(:name, :address, :city, :zipcode, :nation, :quantity, :coupon)
+    params.require(:order).permit(:name, :address, :city, :zipcode, :nation, :quantity, :coupon, :upsell)
   end
 end
