@@ -5,7 +5,7 @@
       <% @sum_items += item.quantity %>
     <% end %>
   </h2>
-    <p class="font-weight-bold d-flex justify-content-end">Nombre d'articles: <%= @sum_items %></p>
+    <p class="font-weight-bold d-flex justify-content-end">Nombre d'articles:<%= @sum_items %> </p>
     <% if @cart.items == [] %>
      <h4> Votre panier est vide.</h4>
     <% else %>
@@ -35,3 +35,4 @@
 
   <%= button_to "Vider le panier", @cart, method: :delete, data: { confirm: "Êtes-vous sur?"} %>
 </div>
+
