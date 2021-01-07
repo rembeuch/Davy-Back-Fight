@@ -22,7 +22,7 @@
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 Catégories  </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <% @products.uniq{|product| product.tags}.each do |product| %>
+    <% @products.uniq{|product| product.tags}.sort_by(&:tags).each do |product| %>
         <% if product.tags != "" %>
       <br>
          <%= link_to "#{product.tags}", product_tags_product_path(product), class: "mx-2" %>
@@ -35,7 +35,7 @@ Catégories  </button>
   </div>
 
   <div class="row">
-    <% @products.uniq{|product| product.tags}.each do |product| %>
+    <% @products.uniq{|product| product.tags}.sort_by(&:tags).each do |product| %>
         <% if product.tags != "" %>
           <div class="col-12 col-md-12">
             <div class="card m-3">
@@ -57,6 +57,7 @@ Catégories  </button>
                       <%= link_to "Détails", product_path(product), class: "btn btn-primary" %>
                       <% if user_signed_in? && current_user.admin == true %>
                         <%= link_to 'Edit', edit_product_path(product), class: "btn btn-warning" %>
+                        <%= button_to "Destroy", product, method: :delete, data: { confirm: "Êtes-vous sur?"} %>
                       <% end %>
                     </div>
                   </div>
