@@ -9,7 +9,7 @@ Catégories  </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <%= link_to "Tout les articles", products_path %>
     <br>
-    <% @products.uniq{|product| product.tags}.each do |product| %>
+    <% @products.uniq{|product| product.tags}.sort_by(&:tags).each do |product| %>
         <% if product.tags != "" %>
         <% @product_tags = product.tags %>
       <br>
