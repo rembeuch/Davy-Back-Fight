@@ -27,8 +27,8 @@
                         required: true %>
             <%= f.input :city,label: 'Ville', required: true %>
             <%= f.input :zipcode,label: 'Code Postal', required: true %>
-            <%= f.input :nation, label: 'Pays',
-                        required: true %>
+            <%= f.input :nation, label: 'Pays', required: true %>
+            <%= f.input :tel, label: 'Numéro de téléphone', required: true %>
             <%= image_tag Product.first.image, class: "product-photo mx-auto" %>
             +<%= (Product.first.price) %>€
             <%= f.input :upsell, label: "Profitez d'une réduction sur cet article si vous l'ajoutez maintenant à votre commande" %>
