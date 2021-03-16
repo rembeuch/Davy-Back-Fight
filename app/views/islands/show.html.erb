@@ -1,0 +1,31 @@
+<div class="container">
+  <% if current_user.admin == true %>
+  <%= link_to 'créer un nouveau lieu', new_island_place_path(@island), class: "btn btn-warning" %>
+  <% end %>
+  <h1> <%= link_to "☠️aller à Votre position☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill" %></h1>
+
+  <h1 class="font-custom text-center  "> <%= @island.name %>
+  <br>
+  <%= link_to 'retourner à la carte des îles', islands_path, class: "btn btn-primary" %> </h1>
+
+  <div class="row">
+    <% @island.places.each do |place| %>
+    <div class="col-12 col-md-4">
+      <div class="card m-3">
+        <%= link_to island_place_path(@island, place), class: "text-center" do %>
+        <% if place.image != nil %>
+        <%= image_tag place.image , :class => "product-photo center mt-3" %>
+        <% end %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title font-custom"><%= place.name %> </h5>
+          <% if place.name == @player.position %>
+            <h3> ☠️Vous êtes ici☠️</h3>
+          <% end %>
+          <%= link_to "Détails", island_place_path(@island, place), class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

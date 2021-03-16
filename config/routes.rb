@@ -77,6 +77,12 @@ Rails.application.routes.draw do
     resources :participations, only: [:create]
   end
 
+  resources :islands, only: [:index, :show, :new, :create] do
+    resources :places, only: [:new, :create, :show]
+  end
+
+  resources :players, only: [:new, :create, :show, :index]
+
   get 'politique' => 'pages#politique'
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
