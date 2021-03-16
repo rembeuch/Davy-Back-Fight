@@ -1,2 +1,8 @@
-<h1>Places#show</h1>
-<p>Find me in app/views/places/show.html.erb</p>
+<div class="container">
+  <h1 class="font-custom text-center  "> <%= @place.name %>
+  <%= link_to 'retourner à la carte de  l\'île', island_path(@island), class: "btn btn-primary" %> </h1>
+  <%= render 'shared/dashboard' %>
+
+  <%= image_tag @place.image , :class => "product-photo center mt-3" %>
+  </h1>
+</div>
