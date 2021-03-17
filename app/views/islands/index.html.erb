@@ -1,38 +1,52 @@
-
-<div class="container">
-  <% if user_signed_in? && current_user.admin == true  %>
+<div class="row">
+  <div class="container">
+    <% if user_signed_in? && current_user.admin == true  %>
     <%= link_to 'Ajouter une île', new_island_path, class: "btn btn-warning" %>
-  <% end %>
-<%= render 'shared/dashboard' %>
-  <div class="row">
-    <% @islands.uniq{|island| island.category}.sort_by(&:category).each do |island| %>
-    <div class="col-12 col-md-12">
-      <div class="m-3">
-    <h1 class="text-center"><%= link_to "îles de #{island.category}", islands_path, class: "badge badge-pill badge-dark m-2 mt-3" %>
-    </h1>
-        <div class="row">
-          <% @islands.where(category: island.category).each do |island| %>
-          <div class="col-12 col-md-4">
-            <div class="card m-3">
-              <%= link_to island_path(island), class: "text-center" do %>
+    <% end %>
+    <%= render 'shared/dashboard' %>
+    <div class="row">
+      <% @islands.uniq{|island| island.category}.sort_by(&:category).each do |island| %>
+      <div class="col-12 col-md-12">
+        <div class="m-3">
+          <h1 class="text-center"><%= link_to "îles de #{island.category}", islands_path, class: "badge badge-pill badge-dark m-2 mt-3" %>
+          </h1>
+          <div class="row">
+            <% @islands.where(category: island.category).each do |island| %>
+            <div class="col-12 col-md-4">
+              <div class="card m-3">
+                <%= link_to island_path(island), class: "text-center" do %>
                 <% if island.image != nil %>
-                  <%= image_tag island.image , :class => "product-photo center mt-3" %>
+                <%= image_tag island.image , :class => "product-photo center mt-3" %>
                 <% end %>
-              <% end %>
-              <div class="card-body">
-                <h5 class="card-title font-custom"><%= island.name %> </h5>
-                <% if island.places.find_by(name: @player.position) %>
-                 <h3> ☠️Vous êtes ici☠️</h3>
                 <% end %>
-                <%= link_to "Détails", island_path(island), class: "btn btn-primary" %>
+                <div class="card-body">
+                  <h5 class="card-title font-custom"><%= island.name %> </h5>
+                  <% if island.places.find_by(name: @player.position) %>
+                  <h3>☠️Vous êtes ici☠️</h3>
+                  <% end %>
+                  <%= link_to "Détails", island_path(island), class: "btn btn-primary" %>
+                </div>
               </div>
             </div>
+            <% end %>
           </div>
-          <% end %>
         </div>
       </div>
+      <% end %>
     </div>
-    <% end %>
-  </div>
 
+  </div>
+  <div class="col-2 col-md-2 text-center mt-4">
+    <div class="card mb-4">
+      <% if @article.image != nil %>
+      <%=  image_tag @article.image  %>
+      <% end %>
+      <h2 class="text-center m-2 font-custom-title"><%= @article.title %></h2>
+      <h3 class="m-3 font-custom"><%=  @article.text%>
+      </h3>
+      <% if user_signed_in? && current_user.admin == true %>
+      <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-warning" %>
+      <% end %>
+    </div>
+  </div>
 </div>

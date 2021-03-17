@@ -23,6 +23,7 @@ class IslandsController < ApplicationController
 
   def index
     @player = current_user.player
+    @article = Article.first(2)[1]
     @islands = Island.all
   end
 
