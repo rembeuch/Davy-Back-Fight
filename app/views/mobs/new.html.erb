@@ -1,0 +1,22 @@
+<h1>add mob</h1>
+<% if current_user.admin == true %>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <div class="form-inputs">
+      <%= simple_form_for [@place, @mob] do |f| %>
+      <%= f.input :name, label: 'name' %>
+      <%= f.input :health, label: 'health' %>
+      <%= f.input :image, label: 'image' %>
+      <%= f.input :level, label: 'level' %>
+      <%= f.input :bonus, label: 'bonus' %>
+      <%= f.input :exp, label: 'exp' %>
+
+
+
+
+      <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+<% end %>
+<% end %>

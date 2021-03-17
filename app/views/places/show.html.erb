@@ -1,8 +1,28 @@
 <div class="container">
-  <h1 class="font-custom text-center  "> <%= @place.name %>
-  <%= link_to 'retourner à la carte de  l\'île', island_path(@island), class: "btn btn-primary" %> </h1>
   <%= render 'shared/dashboard' %>
+  <h1 class="font-custom text-center  "> <%= @place.name %>
+    <%= link_to 'retourner à la carte de  l\'île', island_path(@island), class: "btn btn-primary" %> </h1>
 
-  <%= image_tag @place.image , :class => "product-photo center mt-3" %>
+    <%= image_tag @place.image , :class => "product-photo center mt-3" %>
   </h1>
+  <div class="m-3 d-flex">
+    <div class="card col-6 col-md-6 mx-2">
+      <ul> Joueurs Présents à cet endroit:
+        <% @players.each do |player| %>
+          <li> <%= player.user[:pseudo] %> LVL:<%= player.level %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="card col-6 col-md-6  mx-2">
+      <% if current_user.admin == true %>
+        <%= link_to 'créer un nouveau mob', new_place_mob_path(@place), class: "btn btn-warning" %>
+      <% end %>
+      <ul> Personnages Présents à cet endroit:
+        <% @place.mobs.each do |mob| %>
+          <%= image_tag mob.image , :class => "product-photo center mt-3" %>
+          <li><%= mob.name %> LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️</li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>

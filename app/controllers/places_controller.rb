@@ -27,6 +27,7 @@ class PlacesController < ApplicationController
     @player = current_user.player
     @place = Place.find(params[:id])
     @island = Island.find(params[:island_id])
+    @players = Player.where(position: @place.name)
   end
 
   def place_params
