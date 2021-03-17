@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_17_143305) do
+ActiveRecord::Schema.define(version: 2021_03_17_193816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_143305) do
     t.string "image"
     t.string "bonus"
     t.integer "exp"
+    t.integer "power"
     t.index ["place_id"], name: "index_mobs_on_place_id"
   end
 
@@ -128,6 +129,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_143305) do
     t.integer "exp", default: 0
     t.integer "action", default: 3
     t.boolean "in_fight", default: false
+    t.integer "mob_power"
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 

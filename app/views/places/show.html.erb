@@ -9,7 +9,7 @@
     <div class="card col-6 col-md-6 mx-2">
       <ul> Joueurs Présents à cet endroit:
         <% @players.each do |player| %>
-          <li> <%= player.user[:pseudo] %> LVL:<%= player.level %></li>
+          <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙</li>
         <% end %>
       </ul>
     </div>
@@ -20,7 +20,9 @@
       <ul> Personnages Présents à cet endroit:
         <% @place.mobs.each do |mob| %>
           <%= image_tag mob.image , :class => "product-photo center mt-3" %>
-          <li><%= mob.name %> LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️</li>
+          <li><%= mob.name %> LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️
+            <%= link_to 'Combattre', mob_path(mob) %>
+          </li>
         <% end %>
       </ul>
     </div>

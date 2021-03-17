@@ -85,6 +85,8 @@ Rails.application.routes.draw do
     resources :mobs, only: [:new, :create]
   end
 
+  resources :mobs, only: [:show]
+
   resources :players, only: [:new, :create, :show, :index]
 
   get 'politique' => 'pages#politique'
