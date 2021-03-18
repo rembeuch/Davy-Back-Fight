@@ -85,9 +85,15 @@ Rails.application.routes.draw do
     resources :mobs, only: [:new, :create]
   end
 
-  resources :mobs, only: [:show]
+  resources :mobs, only: [:show] do
+  post 'power' => 'mobs#power'
+  post 'run' => 'mobs#run'
+  post 'retry_player' => 'mobs#retry_player'
+
+  end
 
   resources :players, only: [:new, :create, :show, :index]
+
 
   get 'politique' => 'pages#politique'
 

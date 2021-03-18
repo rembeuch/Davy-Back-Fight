@@ -1,7 +1,7 @@
 <div class="container">
   <%= render 'shared/dashboard' %>
   <h1 class="font-custom text-center  "> <%= @place.name %>
-    <%= link_to 'retourner à la carte de  l\'île', island_path(@island), class: "btn btn-primary" %> </h1>
+    <%= link_to 'retourner à la carte de  l\'île', island_path(@place.island_id), class: "btn btn-primary" %> </h1>
 
     <%= image_tag @place.image , :class => "product-photo center mt-3" %>
   </h1>

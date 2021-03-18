@@ -1,4 +1,5 @@
 class MobsController < ApplicationController
+    layout "application", except: [:show]
   def new
     @place = Place.find(params[:place_id])
     @mob = Mob.new
@@ -16,11 +17,13 @@ class MobsController < ApplicationController
   end
 
   def show
+    @disable_nav = true
     @mob = Mob.find(params[:id])
     @place = @mob.place
     @player = current_user.player
     if @player.in_fight == false
       @player.update(mob_power: pick_mob_score)
+      @player.update(player_power: (@player.player_power += rand(1..11)))
     end
     @player.update(in_fight: true)
 
@@ -30,8 +33,38 @@ class MobsController < ApplicationController
   rand(10..21)
   end
 
-  def pick_player_power
-  rand(1..11)
+  def power
+    @mob = Mob.find(params[:mob_id])
+    @player = current_user.player
+    @player.update(player_power: (@player.player_power += rand(1..11)))
+    check_score
+    redirect_to mob_path(@mob)
+  end
+
+  def run
+    @mob = Mob.find(params[:mob_id])
+    @player = current_user.player
+    @player.update(health: (@player.health - 1))
+    @player.update(player_power: 0)
+    @player.update(fight: 'default')
+    @player.update(in_fight: false)
+    redirect_to place_path(@mob.place_id)
+  end
+
+  def retry_player
+    @mob = Mob.find(params[:mob_id])
+    @player = current_user.player
+    @player.update(health: (@player.health - 1))
+    @player.update(player_power: 0)
+    @player.update(fight: 'default')
+    @player.update(in_fight: false)
+    redirect_to mob_path(@mob)
+  end
+
+  def check_score
+    if @player.player_power > 21
+      @player.update(fight: 'lose')
+    end
   end
 
   private

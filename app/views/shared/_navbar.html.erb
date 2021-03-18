@@ -5,6 +5,9 @@
       <% current_user.update(berrys: (current_user.berrys + 10_000)) %>
       <% if current_user.player != nil %>
         <% current_user.player.update(action: 3) %>
+        <% if current_user.player.in_fight == false %>
+          <% current_user.player.update(health: current_user.player.max_health) %>
+        <% end %>
       <% end %>
       <%  current_user.update(last_sign_in_at: (current_user.current_sign_in_at)) %>
     <% end %>
@@ -89,5 +92,3 @@
       </li>
     <% end %>
   </ul>
-
-

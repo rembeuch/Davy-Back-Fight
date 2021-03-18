@@ -26,7 +26,6 @@ class PlacesController < ApplicationController
   def show
     @player = current_user.player
     @place = Place.find(params[:id])
-    @island = Island.find(params[:island_id])
     @players = Player.where(position: @place.name)
   end
 
