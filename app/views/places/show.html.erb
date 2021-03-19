@@ -21,7 +21,11 @@
         <% @place.mobs.each do |mob| %>
           <%= image_tag mob.image , :class => "product-photo center mt-3" %>
           <li><%= mob.name %> LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️
-            <%= link_to 'Combattre', mob_path(mob) %>
+            <% if @player.health <= 0 %>
+              Vous devez attendre de récupérer de la santé pour combattre (santé maximum récupérée chaque jour)
+            <% else %>
+              <h3> <%= link_to 'Combattre ⚔️', mob_path(mob)%> </h3>
+            <% end %>
           </li>
         <% end %>
       </ul>

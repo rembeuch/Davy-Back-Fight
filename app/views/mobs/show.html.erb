@@ -1,31 +1,36 @@
 <div class="container">
   <%= render 'shared/dashboard' %>
-  <%= link_to 'retour', place_path(@mob.place_id) %>
   <h1 class="font-custom text-center  "> <%= @place.name %>
   </h1>
-  <% if @player.health > 0 %>
+  <% if @player.health <= 0 %>
+  Perdu!  Vous devez attendre de récupérer de la santé (santé maximum récupérée chaque jour)
+      <%= link_to 'retour', place_path(@mob.place_id), class: "btn btn-success" %>
+  <% else %>
     <div class="m-3 d-flex">
       <div class="card col-6 col-md-6 mx-2">
-        Votre Puissance D'Attaque🗡️: <%= @player.player_power %>
+      <h1>Votre Puissance D'Attaque🗡️: <%= @player.player_power %></h1>
+        écart de niveau: + <%= @player.level - @mob.level %> à la résolution du combat
+        <br>
         <% if @player.player_power == 0 %>
-         <%= button_to 'Continuer? (+1 à +11)',mob_power_path(@mob), method: :post %>
+         <%= button_to 'Attaquer (+1 à +11)',mob_power_path(@mob), method: :post %>
         <% elsif @player.fight == 'lose' %>
           Perdu!
-          <%= button_to 'Continuer?',mob_retry_player_path(@mob), method: :post %> ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post %>
+          <%= button_to 'Continuer?', mob_retry_player_path(@mob), method: :post %> ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post %>
   1 blessure
         <% elsif @player.player_power == 21%>
           Puissance Maximale!
-          <%= button_to 'résoudre le combat' %>
+          <%= button_to 'Résoudre', mob_resolve_path(@mob) , method: :post %> ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post %>
         <% elsif @player.player_power < 21 %>
-          <%= button_to 'Continuer? (+1 à +11)',mob_power_path(@mob), method: :post %>
-          <%= button_to 'résoudre le combat' %>
+          <%= button_to 'Attaquer (+1 à +11)',mob_power_path(@mob), method: :post %>
+          ou
+          <%= button_to 'Résoudre', mob_resolve_path(@mob) , method: :post %>
+          ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post %>
         <% end %>
      </div>
       <div class="card col-6 col-md-6  mx-2">
-
+            <h1><%= @mob.name %>: Puissance D'Attaque🗡️ <%= @player.mob_power %>  </h1>
             <%= image_tag @mob.image , :class => "product-photo center mt-3" %>
-            <%= @mob.name %> LVL:<%= @mob.level %>💪 Santé:<%= @mob.health %>❤️ Bonus: <%= @mob.bonus %> 🍈
-            <h1>Puissance D'Attaque🗡️ <%= @player.mob_power %>  </h1>
+             LVL:<%= @mob.level %>💪 Santé:<%= @player.mob_health %>/<%= @mob.health %>❤️ Bonus: <%= @mob.bonus %> 🍈
       </div>
     </div>
   <% end %>

@@ -6,5 +6,5 @@ class Player < ApplicationRecord
   end
   validates :position, inclusion: { in: POSITIONS }
 
-  LEVELS = [0, 1000, 3000, 6000, 10000, 15000, 21000, 28000, 36000, 45000]
+  LEVELS = [0, 999, 2999, 5999, 9999, 14999, 20999, 27999, 35999, 44999]
 end

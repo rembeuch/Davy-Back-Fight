@@ -89,7 +89,8 @@ Rails.application.routes.draw do
   post 'power' => 'mobs#power'
   post 'run' => 'mobs#run'
   post 'retry_player' => 'mobs#retry_player'
-
+  post 'resolve' => 'mobs#resolve'
+  get 'reward' => 'mobs#reward'
   end
 
   resources :players, only: [:new, :create, :show, :index]
