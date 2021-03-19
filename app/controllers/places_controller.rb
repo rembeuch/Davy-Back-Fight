@@ -29,6 +29,13 @@ class PlacesController < ApplicationController
     @players = Player.where(position: @place.name)
   end
 
+  def move_player
+    @player = current_user.player
+    @place = Place.find(params[:place_id])
+    @player.update(position: @place.name)
+    redirect_to place_path(@place)
+  end
+
   def place_params
     params.require(:place).permit(:name, :image)
   end

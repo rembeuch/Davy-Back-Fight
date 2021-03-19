@@ -20,7 +20,6 @@ class PlayersController < ApplicationController
   def show
   end
 
-
   private
 
   def player_params

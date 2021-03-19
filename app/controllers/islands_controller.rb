@@ -32,6 +32,13 @@ class IslandsController < ApplicationController
     @island = Island.find(params[:id])
   end
 
+  def move_player
+    @player = current_user.player
+    @island = Island.find(params[:island_id])
+    @player.update(position: @island.places[0].name)
+    redirect_to island_path(@island)
+  end
+
   private
 
   def island_params

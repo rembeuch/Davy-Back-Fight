@@ -60,6 +60,9 @@ class MobsController < ApplicationController
     @player.update(fight: 'default')
     @player.update(mob_power: pick_mob_score)
     @player.update(health: (@player.health - 1))
+    if @player.health <= 0
+      @player.update(in_fight: false)
+    end
     redirect_to mob_path(@mob)
   end
 

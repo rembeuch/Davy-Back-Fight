@@ -78,10 +78,12 @@ Rails.application.routes.draw do
   end
 
   resources :islands, only: [:index, :show, :new, :create] do
+    post 'move_player' => "islands#move_player"
     resources :places, only: [:new, :create, :show]
   end
 
   resources :places, only: [:show] do
+    post 'move_player' => "places#move_player"
     resources :mobs, only: [:new, :create]
   end
 

@@ -25,6 +25,9 @@
                   <h3>☠️Vous êtes ici☠️</h3>
                   <% end %>
                   <%= link_to "Détails", island_path(island), class: "btn btn-primary" %>
+                  <% if !island.places.find_by(name: @player.position) %>
+                    <%= button_to 'Se déplacer sur cette île ⛵',island_move_player_path(island), method: :post %>
+                  <% end %>
                 </div>
               </div>
             </div>

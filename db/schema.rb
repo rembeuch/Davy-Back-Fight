@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_19_122853) do
+ActiveRecord::Schema.define(version: 2021_03_19_232324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 2021_03_19_122853) do
     t.integer "action", default: 3
     t.boolean "in_fight", default: false
     t.integer "mob_power"
-    t.integer "player_power"
+    t.integer "player_power", default: 0
     t.string "fight", default: "default"
     t.integer "max_health", default: 3
     t.integer "mob_health"

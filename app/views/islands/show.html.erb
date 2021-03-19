@@ -20,9 +20,12 @@
         <div class="card-body">
           <h5 class="card-title font-custom"><%= place.name %> </h5>
           <% if place.name == @player.position %>
-            <h3> ☠️Vous êtes ici☠️</h3>
+            <h3 class=""> ☠️Vous êtes ici☠️</h3>
           <% end %>
           <%= link_to "Détails", island_place_path(@island, place), class: "btn btn-primary" %>
+          <% if place.name != @player.position %>
+          <%= button_to 'Se rendre ici👣',place_move_player_path(place), method: :post %>
+          <% end %>
         </div>
       </div>
     </div>
