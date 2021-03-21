@@ -7,15 +7,19 @@
   </h1>
   <div class="m-3 d-flex">
     <div class="card col-6 col-md-6 mx-2">
-      <ul> Joueurs Présents à cet endroit:
-        <% @players.each do |player| %>
-          <% if player.user == current_user %>
-            <h4>Vous êtes ici☠️</h4>
-          <% else %>
-            <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙</li>
+      <% if @player.position == @place.name %>
+        <ul> Joueurs Présents à cet endroit:
+          <% @players.each do |player| %>
+            <% if player.user == current_user %>
+              <h4>Vous êtes ici☠️</h4>
+            <% else %>
+              <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙</li>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
+        </ul>
+      <% else %>
+        Vous devez vous déplacer à cet endroit pour voir les joueurs qui s'y trouvent.
+      <% end %>
     </div>
     <div class="card col-6 col-md-6  mx-2">
       <% if current_user.admin == true %>

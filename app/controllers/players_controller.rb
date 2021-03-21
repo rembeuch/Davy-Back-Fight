@@ -5,12 +5,16 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(player_params)
-    @player.user = current_user
-    if @player.save
+    if current_user.player != nil
       redirect_to islands_path
     else
-      render :new
+      @player = Player.new(player_params)
+      @player.user = current_user
+      if @player.save
+        redirect_to islands_path
+      else
+        render :new
+      end
     end
   end
 

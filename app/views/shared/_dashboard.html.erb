@@ -2,7 +2,7 @@
   Nom: <%= current_user.pseudo %>🏴‍☠️ Prime: <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%>B🪙 Santé: <%= current_user.player.health %>/<%= current_user.player.max_health %>❤️  Actions Restantes: <%= current_user.player.action %>⚓ LVL: <%= current_user.player.level %>💪 XP: <%= current_user.player.exp %>/<%= Player::LEVELS[current_user.player.level] %>⏫
   <br>
   <% if current_user.player.in_fight == true %>
-  en combat: ⚔️
+    <%= link_to 'Vous êtes en combat ici ⚔️', mob_path(Mob.find_by(name: @player.in_fight_enemy)) %>
   <% end %>
   <h3> <%= link_to "☠️aller à Votre position☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
   </h3>
