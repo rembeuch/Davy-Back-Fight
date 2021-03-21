@@ -13,7 +13,11 @@
             <% if player.user == current_user %>
               <h4>Vous êtes ici☠️</h4>
             <% else %>
-              <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙</li>
+              <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙
+                <% if @player.in_fight == false && @player.health > 0 && @player.action >= 1%>
+                  <%= button_to 'Combattre ⚔️', player_pvp_launch_path(player), method: :post %>
+                <% end %>
+              </li>
             <% end %>
           <% end %>
         </ul>

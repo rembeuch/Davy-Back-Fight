@@ -24,7 +24,7 @@ class MobsController < ApplicationController
     if @player.in_fight == false && @player.health > 0
       @player.update(mob_power: pick_mob_score)
       @player.update(mob_health: @mob.health)
-      @player.update(in_fight_enemy: @mob.name)
+      @player.update(in_fight_mob: @mob.name)
       @player.update(player_power: (@player.player_power += rand(1..11)))
       @player.update(in_fight: true)
     end
@@ -49,7 +49,7 @@ class MobsController < ApplicationController
     @player.update(health: (@player.health - 1))
     @player.update(player_power: 0)
     @player.update(fight: 'default')
-    @player.update(in_fight_enemy: "")
+    @player.update(in_fight_mob: "")
     @player.update(in_fight: false)
     redirect_to place_path(@mob.place_id)
     @disable_nav = false
@@ -80,7 +80,7 @@ class MobsController < ApplicationController
         redirect_to mob_path(@mob)
       else
         @player.update(in_fight: false)
-        @player.update(in_fight_enemy: "")
+        @player.update(in_fight_mob: "")
         @player.update(exp: (@player.exp + @mob.exp))
         level_up
         redirect_to mob_reward_path(@mob)

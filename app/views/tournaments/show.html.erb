@@ -150,14 +150,14 @@
                 <% @participations_validées[(@participations_validées.index(@current_participation))+1].update(engage: true) %>
                 <div>Votre prime est plus élevée. Vous remportez ce tour!</div>
                 <div>
-                  <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <p> Le prochain tour débutera dans 5 minutes</p>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
                 </div>
               <% elsif current_user.berrys == @participations_validées[(@participations_validées.index(@current_participation))+1].user.berrys%>
                 <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
                 <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
                 </div>
                 <% @current_participation.update(engage: true) %>
@@ -165,7 +165,7 @@
               <% else %>
                 <div>Votre Prime est plus basse.Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
                 <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
                 </div>
                 <% @current_participation.update(engage: true) %>
@@ -174,15 +174,15 @@
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
               <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
                 </div>
               <% @current_participation.update(engage: true) %>
             <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Katana' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
               <div>
-                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <p> Le prochain tour débutera dans moins de 5 minutes</p>
+                <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
@@ -191,15 +191,15 @@
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
               <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
               </div>
               <% @current_participation.update(engage: true) %>
             <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Fruit du Démon' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
               <div>
-                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <p> Le prochain tour débutera dans moins de 5 minutes</p>
+                <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
@@ -208,15 +208,15 @@
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
               <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
               </div>
               <% @current_participation.update(engage: true) %>
             <% elsif @current_participation.answer == 'Katana' && @participations_validées[(@participations_validées.index(@current_participation))+1].answer == 'Granit marin' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
               <div>
-                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <p> Le prochain tour débutera dans moins de 5 minutes</p>
+                <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
@@ -291,14 +291,14 @@
                 <% @participations_validées[(@participations_validées.index(@current_participation))-1].update(engage: true) %>
                 <div>Votre prime est plus élevée. Vous remportez ce tour!</div>
                 <div>
-                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <p> Le prochain tour débutera dans moins de 5 minutes</p>
+                <h3>Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
               <% elsif current_user.berrys == @participations_validées[(@participations_validées.index(@current_participation))-1].user.berrys%>
                 <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
                 <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
                 </div>
                 <% @current_participation.update(engage: true) %>
@@ -306,7 +306,7 @@
               <% else %>
                 <div>Votre Prime est plus basse.Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
                 <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
                 </div>
                 <% @current_participation.update(engage: true) %>
@@ -315,15 +315,15 @@
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
               <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
                 </div>
               <% @current_participation.update(engage: true) %>
             <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Katana' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
               <div>
-                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <p> Le prochain tour débutera dans moins de 5 minutes</p>
+                <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
@@ -332,15 +332,15 @@
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
               <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
               </div>
               <% @current_participation.update(engage: true) %>
             <% elsif @current_participation.answer == 'Granit marin' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Fruit du Démon' %>
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
               <div>
-                <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <p> Le prochain tour débutera dans moins de 5 minutes</p>
+                <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
@@ -350,7 +350,7 @@
               <% @current_participation.status == "terminée" %>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
               <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
               </div>
               <% @current_participation.update(engage: true) %>
@@ -358,7 +358,7 @@
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
               <div>
                 <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
@@ -435,14 +435,14 @@
                 <div>Le taureau est impressioné, Vous remportez ce tour!</div>
                 <div>
                 <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
             <% elsif @current_participation.answer == 'Fruit du Démon' && @participations_validées[(@participations_validées.index(@current_participation))-1].answer == 'Granit marin' %>
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
               <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
               </div>
               <% @current_participation.update(engage: true) %>
@@ -450,7 +450,7 @@
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
               <div>
                 <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
@@ -458,7 +458,7 @@
               <h2 class="text-center"> <strong> Défaite!</strong></h2>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
               <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
               </div>
               <% @current_participation.update(engage: true) %>
@@ -466,7 +466,7 @@
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
               <div>
                 <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>
@@ -475,7 +475,7 @@
               <% @current_participation.status == "terminée" %>
               <div>Vous êtes éliminé, tentez votre chance au prochain tournoi!</div>
               <div>
-                  <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                  <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                   </h3>
               </div>
               <% @current_participation.update(engage: true) %>
@@ -483,7 +483,7 @@
               <h2 class="text-center"> <strong> Victoire!</strong></h2>
               <div>
                 <p> Le prochain tour débutera à : <%= (@tournament.start.getlocal("+02:00") + (@tournament.lap * 300)).strftime("à %kh:%M") %></p>
-                <h3> En attendant vous pouvez soutenir le site gratuitement en regardant des pubs ou en faisant des dons sur <a class="btn btn-success" href="https://fr.tipeee.com/davybackfight">tipeee.com/davybackfight</a>
+                <h3> Vous pouvez soutenir le site avec la boutique du DavyBackFight ou en faisant des dons <a class="btn btn-success" href="https://davybackfight.cleverapps.io/products/57">ici!</a>
                 </h3>
               </div>
                 <% @current_participation.update(lap: (@current_participation.lap += 1)) %>

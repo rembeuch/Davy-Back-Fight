@@ -1,0 +1,33 @@
+<div class="container">
+  <%= render 'shared/dashboard' %>
+  <h1 class="font-custom text-center  ">
+  </h1>
+      <div class="m-3 d-flex">
+        <div class="card col-6 col-md-6 mx-2">
+        <h1>Votre Puissance D'Attaque🗡️: <%= @player.player_power %></h1>
+          écart de niveau: + <%= @player.level - @enemy.level %> à la résolution du combat
+          <br>
+          <% if @player.player_power == 0 %>
+           <%= button_to 'Attaquer (+1 à +11)',player_power_path(@enemy), method: :post %>
+          <% elsif @player.fight == 'lose' %>
+            Perdu!
+            <%= button_to 'Fuir',player_run_path(@enemy), method: :post %>
+          <% elsif @player.player_power == 21%>
+            Puissance Maximale!
+            <%= button_to 'Résoudre', player_resolve_path(@enemy) , method: :post %> ou <%= button_to 'Fuir?',player_run_path(@enemy), method: :post %>
+          <% elsif @player.player_power < 21 %>
+            <%= button_to 'Attaquer (+1 à +11)',player_power_path(@enemy), method: :post %>
+            ou
+            <%= button_to 'Résoudre', player_resolve_path(@enemy) , method: :post %>
+            ou <%= button_to 'Fuir?',player_run_path(@enemy), method: :post %>
+          <% end %>
+       </div>
+        <div class="card col-6 col-md-6  mx-2">
+              <h1><%= @enemy.user.pseudo %>: Puissance D'Attaque🗡️ <%= @player.mob_power %>  </h1>
+               LVL:<%= @enemy.level %>💪 Prime: <%=number_with_delimiter(@enemy.user[:berrys], :delimiter => '.')%>B🪙
+        </div>
+      </div>
+</div>
+
+
+

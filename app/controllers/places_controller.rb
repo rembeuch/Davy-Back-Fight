@@ -26,7 +26,7 @@ class PlacesController < ApplicationController
   def show
     @player = current_user.player
     @place = Place.find(params[:id])
-    @players = Player.where(position: @place.name)
+    @players = Player.where(position: @place.name).where(in_fight: false).where(health: [1..10])
   end
 
   def move_player

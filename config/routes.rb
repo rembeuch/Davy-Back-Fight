@@ -95,7 +95,14 @@ Rails.application.routes.draw do
   get 'reward' => 'mobs#reward'
   end
 
-  resources :players, only: [:new, :create, :show, :index]
+  resources :players, only: [:new, :create, :show, :index] do
+    post 'pvp_launch' => "players#pvp_launch"
+    get 'pvp' => "players#pvp"
+    post 'power' => 'players#power'
+    post 'run' => 'players#run'
+    post 'resolve' => 'players#resolve'
+    get 'reward' => 'players#reward'
+  end
 
 
   get 'politique' => 'pages#politique'
