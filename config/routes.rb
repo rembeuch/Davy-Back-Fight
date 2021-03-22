@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'fight_tokens/new'
+  get 'fight_tokens/create'
   devise_for :users
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -102,6 +104,7 @@ Rails.application.routes.draw do
     post 'run' => 'players#run'
     post 'resolve' => 'players#resolve'
     get 'reward' => 'players#reward'
+    resources :fight_tokens, only: [:create]
   end
 
 

@@ -8,10 +8,10 @@
   <div class="m-3 d-flex">
     <div class="card col-6 col-md-6 mx-2">
       <% if @player.position == @place.name %>
+              <h4>Vous êtes ici☠️</h4>
         <ul> Joueurs Présents à cet endroit:
           <% @players.each do |player| %>
             <% if player.user == current_user %>
-              <h4>Vous êtes ici☠️</h4>
             <% else %>
               <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙
                 <% if @player.in_fight == false && @player.health > 0 && @player.action >= 1%>

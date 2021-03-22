@@ -1,5 +1,6 @@
 class PlacesController < ApplicationController
   before_action :check_player
+  before_action :check_token
 
   def check_player
     if current_user.player == nil
@@ -31,9 +32,25 @@ class PlacesController < ApplicationController
 
   def move_player
     @player = current_user.player
+    if @player.in_fight == false
+    @player = current_user.player
     @place = Place.find(params[:place_id])
     @player.update(position: @place.name)
     redirect_to place_path(@place)
+    else
+      redirect_to island_path(Place.find_by(name: @player.position).island), notice: 'vous êtes engagé dans un combat'
+    end
+  end
+
+  def check_token
+    @player = current_user.player
+    @place = Place.find_by(name: @player.position)
+    if FightToken.find_by(enemy: current_user.player) != nil && FightToken.find_by(enemy: current_user.player).created_at - Time.now <= -120
+      @enemy = current_user.player
+      @enemy.update(in_fight: false)
+      @enemy.update(in_fight_enemy: "")
+      @enemy.update(fight: "default")
+    end
   end
 
   def place_params

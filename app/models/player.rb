@@ -1,4 +1,5 @@
 class Player < ApplicationRecord
+  has_one :fight_token
   belongs_to :user
   POSITIONS = []
   Place.all.each do |place|

@@ -2,10 +2,14 @@
   <%= render 'shared/dashboard' %>
   <h1 class="font-custom text-center  "> <%= @place.name %>
   </h1>
-  <% if @player.in_fight_enemy == "" && @player.in_fight_mob != @mob.name %>
+  <% if @player.health <= 0 %>
+    Votre santé est à O
+  <% elsif @player.in_fight_enemy == "" && @player.in_fight_mob != @mob.name %>
     <%= link_to 'Vous êtes déja en combat ici ⚔️', mob_path(Mob.find_by(name: @player.in_fight_mob)) %>
-  <% elsif @player.in_fight_enemy != "" && @player.in_fight_mob != @mob.name %>
+  <% elsif @player.in_fight_enemy != "" && @player.fight != "attacked" %>
     <%= link_to 'Vous êtes en combat ici ⚔️', player_pvp_path(Player.find_by(user: User.find_by(pseudo: @player.in_fight_enemy))) %>
+  <% elsif @player.in_fight_enemy != "" && @player.fight == "attacked"  %>
+    Vous êtes actuellement attaqué par <%= User.find_by(pseudo: @player.in_fight_enemy).pseudo %> (résultat dans 2min max)
   <% else %>
     <% if @player.health <= 0 %>
     Perdu!  Vous devez attendre de récupérer de la santé (santé maximum récupérée chaque jour)
