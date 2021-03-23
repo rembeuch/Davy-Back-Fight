@@ -104,7 +104,6 @@ Rails.application.routes.draw do
     post 'run' => 'players#run'
     post 'resolve' => 'players#resolve'
     get 'reward' => 'players#reward'
-    resources :fight_tokens, only: [:create]
   end
 
 

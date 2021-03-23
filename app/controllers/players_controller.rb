@@ -53,7 +53,7 @@ class PlayersController < ApplicationController
   def pvp_launch
     @player = current_user.player
     @enemy = Player.find(params[:player_id])
-    if @enemy.in_fight == false && @enemy.health > 0 && @player.action > 0
+    if @enemy.in_fight == false && @enemy.health > 0 && @player.action > 0 && @player.position == @enemy.position && @player.in_fight == false
     @player.update(action: (@player.action - 1))
     @fight_token = FightToken.new
     @fight_token.player = @player

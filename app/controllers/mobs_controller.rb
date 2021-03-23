@@ -82,6 +82,10 @@ class MobsController < ApplicationController
         @player.update(in_fight: false)
         @player.update(in_fight_mob: "")
         @player.update(exp: (@player.exp + @mob.exp))
+        if @player.defeated_mob.exclude?(@mob.name)
+          @player.defeated_mob.push(@mob.name)
+          @player.save
+        end
         level_up
         redirect_to mob_reward_path(@mob)
       end
@@ -129,6 +133,6 @@ class MobsController < ApplicationController
   private
 
   def mob_params
-    params.require(:mob).permit(:name, :image, :health, :bonus, :level, :exp)
+    params.require(:mob).permit(:name, :image, :health, :bonus, :level, :exp, :condition)
   end
 end

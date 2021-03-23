@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_22_182633) do
+ActiveRecord::Schema.define(version: 2021_03_23_161821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_182633) do
     t.string "bonus"
     t.integer "exp"
     t.integer "power"
+    t.string "condition"
     t.index ["place_id"], name: "index_mobs_on_place_id"
   end
 
@@ -145,6 +146,7 @@ ActiveRecord::Schema.define(version: 2021_03_22_182633) do
     t.integer "mob_health"
     t.string "in_fight_enemy"
     t.string "in_fight_mob", default: ""
+    t.string "defeated_mob", default: [], array: true
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 

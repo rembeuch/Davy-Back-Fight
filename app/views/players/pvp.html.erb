@@ -12,15 +12,15 @@
            <%= button_to 'Attaquer (+1 à +11)',player_power_path(@enemy), method: :post %>
           <% elsif @player.fight == 'lose' %>
             Perdu!
-            <%= button_to 'Fuir',player_run_path(@enemy), method: :post %>
+            <%= button_to 'Fuir',player_run_path(@enemy), method: :post,data: { disable_with: "Fuir" } %>
           <% elsif @player.player_power == 21%>
             Puissance Maximale!
-            <%= button_to 'Résoudre', player_resolve_path(@enemy) , method: :post %> ou <%= button_to 'Fuir?',player_run_path(@enemy), method: :post %>
+            <%= button_to 'Résoudre', player_resolve_path(@enemy) , method: :post,data: { disable_with: "Résoudre" } %> ou <%= button_to 'Fuir?',player_run_path(@enemy), method: :post ,data: { disable_with: "Fuir" }%>
           <% elsif @player.player_power < 21 %>
             <%= button_to 'Attaquer (+1 à +11)',player_power_path(@enemy), method: :post %>
             ou
-            <%= button_to 'Résoudre', player_resolve_path(@enemy) , method: :post %>
-            ou <%= button_to 'Fuir?',player_run_path(@enemy), method: :post %>
+            <%= button_to 'Résoudre', player_resolve_path(@enemy) , method: :post,data: { disable_with: "Résoudre" } %>
+            ou <%= button_to 'Fuir?',player_run_path(@enemy), method: :post,data: { disable_with: "Fuir" } %>
           <% end %>
        </div>
         <div class="card col-6 col-md-6  mx-2">

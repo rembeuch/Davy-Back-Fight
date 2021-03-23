@@ -1,3 +1,4 @@
+<div class="row">
 <div class="container">
   <% if current_user.admin == true %>
   <%= link_to 'créer un nouveau lieu', new_island_place_path(@island), class: "btn btn-warning" %>
@@ -33,4 +34,18 @@
     </div>
     <% end %>
   </div>
+</div>
+    <div class="col-0 col-md-2 text-center mt-4">
+      <div class="card mb-4">
+        <% if @article.image != nil %>
+        <%=  image_tag @article.image  %>
+        <% end %>
+        <h2 class="text-center m-2 font-custom-title"><%= @article.title %></h2>
+        <h3 class="m-3 font-custom"><%=  @article.text%>
+        </h3>
+        <% if user_signed_in? && current_user.admin == true %>
+        <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-warning" %>
+        <% end %>
+      </div>
+    </div>
 </div>

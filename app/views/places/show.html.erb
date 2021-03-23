@@ -1,46 +1,64 @@
-<div class="container">
-  <%= render 'shared/dashboard' %>
-  <h1 class="font-custom text-center  "> <%= @place.name %>
-    <%= link_to 'retourner à la carte de  l\'île', island_path(@place.island_id), class: "btn btn-primary" %> </h1>
+<div class="row">
+  <div class="container">
+    <%= render 'shared/dashboard' %>
+    <h2 class="font-custom text-center  "> <%= @place.name %>
+      <%= link_to 'retourner à la carte de  l\'île', island_path(@place.island_id), class: "btn btn-primary" %> </h1>
 
-    <%= image_tag @place.image , :class => "product-photo center mt-3" %>
-  </h1>
-  <div class="m-3 d-flex">
-    <div class="card col-6 col-md-6 mx-2">
-      <% if @player.position == @place.name %>
-              <h4>Vous êtes ici☠️</h4>
+      <%= image_tag @place.image , :class => "product-photo center mt-3" %>
+    </h2>
+    <div class="m-3 d-flex">
+      <div class="card col-6 col-md-6 mx-2">
+        <% if @player.position == @place.name %>
+        <h4>Vous êtes ici☠️</h4>
         <ul> Joueurs Présents à cet endroit:
           <% @players.each do |player| %>
-            <% if player.user == current_user %>
-            <% else %>
-              <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙
-                <% if @player.in_fight == false && @player.health > 0 && @player.action >= 1%>
-                  <%= button_to 'Combattre ⚔️', player_pvp_launch_path(player), method: :post %>
-                <% end %>
-              </li>
+          <% if player.user == current_user %>
+          <% else %>
+          <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙
+            <% if @player.in_fight == false && @player.health > 0 && @player.action >= 1%>
+            <%= button_to 'Combattre ⚔️', player_pvp_launch_path(player), method: :post %>
+            <% end %>
+          </li>
+          <% end %>
+          <% end %>
+        </ul>
+        <% else %>
+        Vous devez vous déplacer à cet endroit pour voir les joueurs qui s'y trouvent.
+        <% end %>
+      </div>
+      <div class="card col-6 col-md-6  mx-2">
+        <% if current_user.admin == true %>
+        <%= link_to 'créer un nouveau mob', new_place_mob_path(@place), class: "btn btn-warning" %>
+        <% end %>
+        <ul> Personnages Présents à cet endroit:
+          <% @place.mobs.each do |mob| %>
+          <% if mob.condition == nil || @player.defeated_mob.include?(mob.condition) %>
+            <%= image_tag mob.image , :class => "product-photo center mt-3" %>
+            <li><%= mob.name %> <% if @player.defeated_mob.include?(mob.name) %> (vaincu) <% end %>
+              LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️
+              <% if @player.health <= 0 %>
+              Vous devez attendre de récupérer de la santé pour combattre (santé maximum récupérée chaque jour)
+              <% else %>
+              <h3> <%= link_to 'Combattre ⚔️', mob_path(mob)%> </h3>
+              <% end %>
+            </li>
             <% end %>
           <% end %>
         </ul>
-      <% else %>
-        Vous devez vous déplacer à cet endroit pour voir les joueurs qui s'y trouvent.
-      <% end %>
+      </div>
     </div>
-    <div class="card col-6 col-md-6  mx-2">
-      <% if current_user.admin == true %>
-        <%= link_to 'créer un nouveau mob', new_place_mob_path(@place), class: "btn btn-warning" %>
+  </div>
+  <div class="col-0 col-md-2 text-center mt-4">
+    <div class="card mb-4">
+      <% if @article.image != nil %>
+      <%=  image_tag @article.image  %>
       <% end %>
-      <ul> Personnages Présents à cet endroit:
-        <% @place.mobs.each do |mob| %>
-          <%= image_tag mob.image , :class => "product-photo center mt-3" %>
-          <li><%= mob.name %> LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️
-            <% if @player.health <= 0 %>
-              Vous devez attendre de récupérer de la santé pour combattre (santé maximum récupérée chaque jour)
-            <% else %>
-              <h3> <%= link_to 'Combattre ⚔️', mob_path(mob)%> </h3>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
+      <h2 class="text-center m-2 font-custom-title"><%= @article.title %></h2>
+      <h3 class="m-3 font-custom"><%=  @article.text%>
+      </h3>
+      <% if user_signed_in? && current_user.admin == true %>
+      <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-warning" %>
+      <% end %>
     </div>
   </div>
 </div>

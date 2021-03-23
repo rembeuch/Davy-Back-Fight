@@ -31,6 +31,7 @@ class IslandsController < ApplicationController
   def show
     @player = current_user.player
     @island = Island.find(params[:id])
+    @article = Article.second
   end
 
   def move_player

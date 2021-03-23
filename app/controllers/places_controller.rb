@@ -25,6 +25,7 @@ class PlacesController < ApplicationController
   end
 
   def show
+    @article = Article.second
     @player = current_user.player
     @place = Place.find(params[:id])
     @players = Player.where(position: @place.name).where(in_fight: false).where(health: [1..10])
