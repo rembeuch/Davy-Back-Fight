@@ -1,4 +1,5 @@
 class Player < ApplicationRecord
+  has_many :quest_logs
   has_one :fight_token
   belongs_to :user
   POSITIONS = []

@@ -52,6 +52,13 @@ class PlacesController < ApplicationController
       @enemy.update(in_fight_enemy: "")
       @enemy.update(fight: "default")
     end
+    if @player.quest_logs != nil
+      @player.quest_logs.each do |log|
+        if log.created_at + 1.Days < Time.now
+          log.destroy
+        end
+      end
+    end
   end
 
   def place_params

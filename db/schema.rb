@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_23_161821) do
+ActiveRecord::Schema.define(version: 2021_03_24_101213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,14 @@ ActiveRecord::Schema.define(version: 2021_03_23_161821) do
     t.text "carousel", default: [], array: true
   end
 
+  create_table "quest_logs", force: :cascade do |t|
+    t.bigint "player_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_quest_logs_on_player_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.string "title"
     t.string "photo"
@@ -245,6 +253,7 @@ ActiveRecord::Schema.define(version: 2021_03_23_161821) do
   add_foreign_key "participations", "users"
   add_foreign_key "places", "islands"
   add_foreign_key "players", "users"
+  add_foreign_key "quest_logs", "players"
   add_foreign_key "quiz_answers", "quizzes"
   add_foreign_key "user_answers", "answers"
   add_foreign_key "user_answers", "users"

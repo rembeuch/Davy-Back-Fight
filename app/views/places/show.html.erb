@@ -16,7 +16,7 @@
           <% else %>
           <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙
             <% if @player.in_fight == false && @player.health > 0 && @player.action >= 1%>
-            <%= button_to 'Combattre ⚔️', player_pvp_launch_path(player), method: :post %>
+            <%= button_to 'Combattre ⚔️ (1pt d\'action)', player_pvp_launch_path(player), method: :post %>
             <% end %>
           </li>
           <% end %>
@@ -59,6 +59,13 @@
       <% if user_signed_in? && current_user.admin == true %>
       <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-warning" %>
       <% end %>
+    <ul>
+      <% @player.quest_logs.each do |log| %>
+      <li>
+        <%= log.content %> <%= log.created_at.getlocal.strftime("%d %b. %Y à %kh:%M") %>
+      </li>
+      <% end %>
+    </ul>
     </div>
   </div>
 </div>

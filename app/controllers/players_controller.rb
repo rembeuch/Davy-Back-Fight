@@ -133,10 +133,18 @@ class PlayersController < ApplicationController
       enemy_setup
       if @player.mob_health > 0
         @player.update(exp: (@player.exp + (@enemy.level*100)))
+        @log = QuestLog.new
+        @log.player = @enemy
+        @log.content = "vous avez été blessé par #{@player.user.pseudo}"
+        @log.save
         level_up
         redirect_to place_path(Place.find_by(name: @player.position)), notice: 'Victoire! mais votre adversaire à encore de la santé'
       else
         @player.update(exp: (@player.exp + (@enemy.level*100)))
+        @log = QuestLog.new
+        @log.player = @enemy
+        @log.content = "vous avez été tué par #{@player.user.pseudo}"
+        @log.save
         level_up
         redirect_to player_reward_path(@enemy)
       end
