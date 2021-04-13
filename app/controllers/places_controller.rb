@@ -54,7 +54,7 @@ class PlacesController < ApplicationController
     end
     if @player.quest_logs != nil
       @player.quest_logs.each do |log|
-        if log.created_at + 1.Days < Time.now
+        if log.created_at + 1.days < Time.now
           log.destroy
         end
       end

@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-  before_action :check_token
+  before_action :check_token, except: [:new]
 
   def new
     @player = Player.new
