@@ -120,7 +120,7 @@ class PlayersController < ApplicationController
   def resolve
     @enemy = Player.find(params[:player_id])
     @player = current_user.player
-    if @player.player_power + ( @player.level - @enemy.level ) > @player.mob_power
+    if @player.player_power + ( @player.level - @enemy.level ) > @player.mob_power || (@player.player_power + ( @player.level - @enemy.level ) == @player.mob_power && @player.user.berrys > @enemy.user.berrys)
       @player.update(mob_health: (@player.mob_health - 1))
       @player.update(player_power: 0)
       @player.update(in_fight: false)
