@@ -32,17 +32,17 @@
         <% end %>
         <ul> Personnages Présents à cet endroit:
           <% @place.mobs.each do |mob| %>
-          <% if mob.condition == nil || @player.defeated_mob.include?(mob.condition) %>
             <%= image_tag mob.image , :class => "product-photo center mt-3" %>
             <li><%= mob.name %> <% if @player.defeated_mob.include?(mob.name) %> (vaincu) <% end %>
               LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️
               <% if @player.health <= 0 %>
-              Vous devez attendre de récupérer de la santé pour combattre (santé maximum récupérée chaque jour)
+                Vous devez attendre de récupérer de la santé pour combattre (santé maximum récupérée chaque jour)
+              <% elsif mob.condition != nil && !@player.defeated_mob.join(" ").include?(mob.condition) %>
+                Vous devez battre <%= mob.condition.split(" ").join(" et ") %> d'abord.
               <% else %>
               <h3> <%= link_to 'Combattre ⚔️', mob_path(mob)%> </h3>
               <% end %>
             </li>
-            <% end %>
           <% end %>
         </ul>
       </div>

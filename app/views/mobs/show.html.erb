@@ -40,7 +40,8 @@
             <%= button_to 'Résoudre', mob_resolve_path(@mob) , method: :post, data: { disable_with: "Résoudre" } %>
             ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post,data: { disable_with: "fuir" } %>
           <% end %>
-
+          <br>
+          Vous avez 10 minutes pour finir ce combat.
        </div>
         <div class="card col-6 col-md-6  mx-2">
               <h1><%= @mob.name %>: Puissance D'Attaque🗡️ <%= @player.mob_power %>  </h1>

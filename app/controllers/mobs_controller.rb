@@ -1,5 +1,6 @@
 class MobsController < ApplicationController
     layout "application", except: [:show]
+    before_action :mob_token
   def new
     @place = Place.find(params[:place_id])
     @mob = Mob.new
@@ -27,8 +28,24 @@ class MobsController < ApplicationController
       @player.update(in_fight_mob: @mob.name)
       @player.update(player_power: (@player.player_power += rand(1..11)))
       @player.update(in_fight: true)
+      @fight_token = FightToken.new
+      @fight_token.player = @player
+      @fight_token.enemy = @player
+      @fight_token.save
     end
+  end
 
+  def mob_token
+    FightToken.all.each do |token|
+      if token.player == token.enemy && token.created_at - Time.now <= -600
+        token.player.update(health: (token.player.health - 1))
+        token.player.update(player_power: 0)
+        token.player.update(fight: 'default')
+        token.player.update(in_fight_enemy: "")
+        token.player.update(in_fight: false)
+        FightToken.find_by(player: token.player).destroy
+      end
+    end
   end
 
   def pick_mob_score
@@ -51,6 +68,9 @@ class MobsController < ApplicationController
     @player.update(fight: 'default')
     @player.update(in_fight_mob: "")
     @player.update(in_fight: false)
+    if FightToken.find_by(player: current_user.player) != nil
+      FightToken.find_by(player: current_user.player).destroy
+    end
     redirect_to place_path(@mob.place_id)
     @disable_nav = false
   end
@@ -64,6 +84,9 @@ class MobsController < ApplicationController
     @player.update(health: (@player.health - 1))
     if @player.health <= 0
       @player.update(in_fight: false)
+      if FightToken.find_by(player: current_user.player) != nil
+        FightToken.find_by(player: current_user.player).destroy
+      end
     end
     redirect_to mob_path(@mob)
   end
@@ -85,6 +108,9 @@ class MobsController < ApplicationController
         if @player.defeated_mob.exclude?(@mob.name)
           @player.defeated_mob.push(@mob.name)
           @player.save
+        end
+        if FightToken.find_by(player: current_user.player) != nil
+          FightToken.find_by(player: current_user.player).destroy
         end
         level_up
         redirect_to mob_reward_path(@mob)

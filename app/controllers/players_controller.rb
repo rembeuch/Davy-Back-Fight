@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
   before_action :check_token, except: [:new]
+  before_action :mob_token
 
   def new
     @player = Player.new
@@ -80,6 +81,19 @@ class PlayersController < ApplicationController
       @enemy.update(in_fight: true)
       @enemy.update(in_fight_enemy: @player.user.pseudo)
       @enemy.update(fight: "attacked")
+    end
+  end
+
+  def mob_token
+    FightToken.all.each do |token|
+      if token.player == token.enemy && token.created_at - Time.now <= -600
+        token.player.update(health: (token.player.health - 1))
+        token.player.update(player_power: 0)
+        token.player.update(fight: 'default')
+        token.player.update(in_fight_enemy: "")
+        token.player.update(in_fight: false)
+        FightToken.find_by(player: token.player).destroy
+      end
     end
   end
 
