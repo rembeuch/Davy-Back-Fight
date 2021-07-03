@@ -55,11 +55,13 @@ class PlayersController < ApplicationController
     @player = current_user.player
     @enemy = Player.find(params[:player_id])
     if @enemy.in_fight == false && @enemy.health > 0 && @player.action > 0 && @player.position == @enemy.position && @player.in_fight == false
-    @player.update(action: (@player.action - 1))
     @fight_token = FightToken.new
     @fight_token.player = @player
     @fight_token.enemy = @enemy
     @fight_token.save
+    @enemy.update(in_fight: true)
+    @enemy.update(in_fight_enemy: @player.user.pseudo)
+    @enemy.update(fight: "attacked")
     redirect_to player_pvp_path(params[:player_id])
     else
       redirect_to place_path(Place.find_by(name: @player.position)), notice: 'déja en combat'
@@ -71,6 +73,7 @@ class PlayersController < ApplicationController
     @player = current_user.player
     @enemy = Player.find(params[:player_id])
     @place = Place.find_by(name: @player.position)
+    @sum = compare
     if @player.in_fight == false && @player.health > 0
       @player.update(mob_power: pick_enemy_score)
       @player.update(mob_health: @enemy.health)
@@ -78,9 +81,6 @@ class PlayersController < ApplicationController
       @player.update(player_power: (@player.player_power += rand(1..11)))
       @player.update(in_fight: true)
       @enemy = Player.find(params[:player_id])
-      @enemy.update(in_fight: true)
-      @enemy.update(in_fight_enemy: @player.user.pseudo)
-      @enemy.update(fight: "attacked")
     end
   end
 
@@ -118,6 +118,7 @@ class PlayersController < ApplicationController
   def run
     @enemy = Player.find(params[:player_id])
     @player = current_user.player
+    @player.update(action: (@player.action - 1))
     @player.update(health: (@player.health - 1))
     @player.update(player_power: 0)
     @player.update(fight: 'default')
@@ -134,8 +135,9 @@ class PlayersController < ApplicationController
   def resolve
     @enemy = Player.find(params[:player_id])
     @player = current_user.player
-    if @player.player_power + ( @player.level - @enemy.level ) > @player.mob_power || (@player.player_power + ( @player.level - @enemy.level ) == @player.mob_power && @player.user.berrys > @enemy.user.berrys)
+    if @player.player_power + ( @player.level - @enemy.level ) + compare > @player.mob_power || (@player.player_power + ( @player.level - @enemy.level ) == @player.mob_power && @player.user.berrys > @enemy.user.berrys)
       @player.update(mob_health: (@player.mob_health - 1))
+      @player.update(action: (@player.action - 1))
       @player.update(player_power: 0)
       @player.update(in_fight: false)
       @player.update(fight: 'default')
@@ -171,6 +173,19 @@ class PlayersController < ApplicationController
     if @player.player_power > 21
       @player.update(fight: 'lose')
     end
+  end
+
+  def compare
+    @sum = 0
+    @rewards = current_user.player.rewards
+    @sum += @rewards.count
+    if @rewards.map { |reward| reward.category }.include?("FDD") && @enemy.rewards.map { |reward| reward.category }.include?("EAU") || @enemy.rewards.map { |reward| reward.category }.include?("GRANIT")
+      @sum -= 1
+    end
+    if @enemy.rewards != []
+      @sum -= @enemy.rewards.count
+    end
+    return @sum
   end
 
   def reward

@@ -20,6 +20,7 @@ class MobsController < ApplicationController
   def show
     @disable_nav = true
     @mob = Mob.find(params[:id])
+    @sum = compare
     @place = @mob.place
     @player = current_user.player
     if @player.in_fight == false && @player.health > 0
@@ -94,7 +95,7 @@ class MobsController < ApplicationController
   def resolve
     @mob = Mob.find(params[:mob_id])
     @player = current_user.player
-    if @player.player_power + ( @player.level - @mob.level ) > @player.mob_power
+    if @player.player_power + ( @player.level - @mob.level ) + compare > @player.mob_power
       @player.update(mob_health: (@player.mob_health - 1))
       @player.update(player_power: 0)
       @player.update(fight: 'default')
@@ -124,6 +125,19 @@ class MobsController < ApplicationController
     if @player.player_power > 21
       @player.update(fight: 'lose')
     end
+  end
+
+  def compare
+    @sum = 0
+    @rewards = current_user.player.rewards
+    @sum += @rewards.count
+    if @rewards.map { |reward| reward.category }.include?("FDD") && @mob.bonus.split(" ").include?("EAU") || @mob.bonus.split(" ").include?("GRANIT")
+      @sum -= 1
+    end
+    if @mob.bonus != "0"
+      @sum -= @mob.bonus.split(" ").count
+    end
+    return @sum
   end
 
   def reward

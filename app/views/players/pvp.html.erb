@@ -1,3 +1,4 @@
+<% if current_user.player.health > 0 && current_user.player.action > 0 && @player.position == @enemy.position && @enemy.health > 0 && @player.user != @enemy.user %>
 <div class="container">
   <%= render 'shared/dashboard' %>
   <h1 class="font-custom text-center  ">
@@ -12,6 +13,10 @@
           <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="90" aria-valuemax="100"> >21 Perdu</div>
         </div>
           écart de niveau: + <%= @player.level - @enemy.level %> à la résolution du combat
+          <br>
+          écart des bonus: + <%= @sum %> à la résolution du combat
+          <br>
+          <h2> ATTAQUE TOTALE: +<%=@player.player_power + @player.level - @enemy.level + @sum %></h2>
           <br>
           <% if @player.player_power == 0 %>
            <%= button_to 'Attaquer (+1 à +11)',player_power_path(@enemy), method: :post %>
@@ -28,11 +33,29 @@
             ou <%= button_to 'Fuir?',player_run_path(@enemy), method: :post,data: { disable_with: "Fuir" } %>
           <% end %>
           <br>
+          Bonus: <% @player.rewards.each do |reward| %>
+          <ul>
+                   <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
+ </li>
+                  <% end %>
+          </ul>
+          <br>
           Vous avez 2 minutes pour finir ce combat.
        </div>
         <div class="card col-6 col-md-6  mx-2">
               <h1><%= @enemy.user.pseudo %>: Puissance D'Attaque🗡️ <%= @player.mob_power %>  </h1>
                LVL:<%= @enemy.level %>💪 Prime: <%=number_with_delimiter(@enemy.user[:berrys], :delimiter => '.')%>B🪙
+               <br>
+               Bonus: <% @enemy.rewards.each do |reward| %>
+          <ul>
+                   <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
+ </li>
+                  <% end %>
+          </ul>
+          <br>
         </div>
       </div>
 </div>
+<% else %>
+  <% @player.update(in_fight: false) %>
+<% end %>

@@ -95,6 +95,7 @@ Rails.application.routes.draw do
   post 'retry_player' => 'mobs#retry_player'
   post 'resolve' => 'mobs#resolve'
   get 'reward' => 'mobs#reward'
+    resources :rewards, only: [:new, :create]
   end
 
   resources :players, only: [:new, :create, :show, :index] do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_101213) do
+ActiveRecord::Schema.define(version: 2021_07_03_133720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,18 @@ ActiveRecord::Schema.define(version: 2021_03_24_101213) do
     t.integer "numero"
   end
 
+  create_table "rewards", force: :cascade do |t|
+    t.bigint "mob_id"
+    t.bigint "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "category"
+    t.string "image"
+    t.index ["mob_id"], name: "index_rewards_on_mob_id"
+    t.index ["player_id"], name: "index_rewards_on_player_id"
+  end
+
   create_table "tournaments", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -255,6 +267,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_101213) do
   add_foreign_key "players", "users"
   add_foreign_key "quest_logs", "players"
   add_foreign_key "quiz_answers", "quizzes"
+  add_foreign_key "rewards", "mobs"
+  add_foreign_key "rewards", "players"
   add_foreign_key "user_answers", "answers"
   add_foreign_key "user_answers", "users"
 end
