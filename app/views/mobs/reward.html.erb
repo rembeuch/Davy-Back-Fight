@@ -3,7 +3,7 @@
     <h1>Vous avez vaincu <%= @mob.name %>
       + <%= @mob.exp %>EXP
       <br>
-      <% if @log.content.include?("Félicitations") %>
+      <% if @log != nil && @log.content.include?("Félicitations") %>
         <%= @log.content %>
         <%= image_tag @player.rewards.first.image , :class => "avatar-large" %>
         <% @log.destroy %>

@@ -1,4 +1,4 @@
-<% if current_user.player.health > 0 && current_user.player.action > 0 && @player.position == @enemy.position && @enemy.health > 0 && @player.user != @enemy.user %>
+<% if current_user.player.health > 0 && current_user.player.action > 0 && @player.position == @enemy.position && @enemy.health > 0 && @player.user != @enemy.user && @player.in_fight_enemy == @enemy.user.pseudo && @player.fight_token != nil%>
 <div class="container">
   <%= render 'shared/dashboard' %>
   <h1 class="font-custom text-center  ">
@@ -57,9 +57,24 @@
       </div>
 </div>
 <% else %>
-  <% @player.update(in_fight: false) %>
-  <% @player.update(in_fight_enemy: "") %>
-  <% @player.update(player_power: 0) %>
+  <%
+    @player.update(action: (@player.action - 1))
+    @player.update(health: (@player.health - 1))
+    @player.update(player_power: 0)
+    @player.update(fight: 'default')
+    @player.update(in_fight_enemy: "")
+    @player.update(in_fight: false)
 
+    @player.fight_token.enemy.update(in_fight: false)
+    @player.fight_token.enemy.update(in_fight_enemy: "")
 
+    FightToken.where(player: current_user.player).destroy_all
+    @player_bug = FightToken.last.player
+    FightToken.last.destroy
+    if @player_bug.fight_token == nil
+      FightToken.last.player.update(in_fight: false)
+      FightToken.last.player.update(in_fight_enemy: "")
+    end
+  %>
+    <%= link_to 'Il ne faut pas tricher', place_path(Place.find_by(name: @player.position)), class: "btn btn-success" %>
 <% end %>

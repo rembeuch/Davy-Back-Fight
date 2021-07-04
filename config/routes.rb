@@ -107,6 +107,7 @@ Rails.application.routes.draw do
     get 'reward' => 'players#reward'
   end
 
+  resources :rewards, only: [:index]
 
   get 'politique' => 'pages#politique'
 

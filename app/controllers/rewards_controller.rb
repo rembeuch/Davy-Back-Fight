@@ -16,6 +16,11 @@ class RewardsController < ApplicationController
     end
   end
 
+  def index
+    @player = current_user.player
+    @rewards = @player.rewards
+  end
+
   def reward_params
     params.require(:reward).permit(:name, :category, :image)
   end
