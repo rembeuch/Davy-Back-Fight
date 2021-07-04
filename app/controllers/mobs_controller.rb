@@ -106,6 +106,17 @@ class MobsController < ApplicationController
         @player.update(in_fight: false)
         @player.update(in_fight_mob: "")
         @player.update(exp: (@player.exp + @mob.exp))
+        @random_reward = rand(1..100)
+        if @mob.rewards != [] && @random_reward >= 95
+          @reward = @mob.rewards.sample
+          if @reward.player.user.admin == true
+            @reward.update(player_id: @player.id)
+            @log = QuestLog.new
+            @log.player = @player
+            @log.content = "Félicitations! Vous venez d'obtenir #{@reward.name}"
+            @log.save
+          end
+        end
         if @player.defeated_mob.exclude?(@mob.name)
           @player.defeated_mob.push(@mob.name)
           @player.save
@@ -143,6 +154,7 @@ class MobsController < ApplicationController
   def reward
     @mob = Mob.find(params[:mob_id])
     @player = current_user.player
+    @log = @player.quest_logs.last
   end
 
   def level_up

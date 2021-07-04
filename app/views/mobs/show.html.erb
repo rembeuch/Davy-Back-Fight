@@ -46,11 +46,11 @@
             ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post,data: { disable_with: "fuir" } %>
           <% end %>
           <br>
-          Bonus: <% @player.rewards.each do |reward| %>
           <ul>
-                   <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
+          Bonus: <% @player.rewards.each do |reward| %>
+            <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
  </li>
-                  <% end %>
+          <% end %>
           </ul>
           <br>
           Vous avez 10 minutes pour finir ce combat.

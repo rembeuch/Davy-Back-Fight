@@ -135,7 +135,7 @@ class PlayersController < ApplicationController
   def resolve
     @enemy = Player.find(params[:player_id])
     @player = current_user.player
-    if @player.player_power + ( @player.level - @enemy.level ) + compare > @player.mob_power || (@player.player_power + ( @player.level - @enemy.level ) == @player.mob_power && @player.user.berrys > @enemy.user.berrys)
+    if @player.player_power + ( @player.level - @enemy.level ) + compare > @player.mob_power || (@player.player_power + ( @player.level - @enemy.level ) + compare == @player.mob_power && @player.user.berrys > @enemy.user.berrys)
       @player.update(mob_health: (@player.mob_health - 1))
       @player.update(action: (@player.action - 1))
       @player.update(player_power: 0)
@@ -161,6 +161,18 @@ class PlayersController < ApplicationController
         @log.player = @enemy
         @log.content = "vous avez été tué par #{@player.user.pseudo}"
         @log.save
+        @enemy.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+        if @enemy.rewards.where.not(category: "FDD") != []
+          @rewards = @enemy.rewards.where.not(category: "FDD")
+          @rewards.update(player_id: @player.id)
+          @rewards.each do |reward|
+            reward.update(player_id: @player.id)
+            @log = QuestLog.new
+            @log.player = @player
+            @log.content = "Félicitations! Vous venez d'obtenir #{reward.name}"
+            @log.save
+          end
+        end
         level_up
         redirect_to player_reward_path(@enemy)
       end
@@ -191,6 +203,7 @@ class PlayersController < ApplicationController
   def reward
     @enemy = Player.find(params[:player_id])
     @player = current_user.player
+    @logs = @player.quest_logs.select{ |log| log.content.include?("Félicitations")}
   end
 
   def level_up

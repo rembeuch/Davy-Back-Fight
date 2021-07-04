@@ -1,8 +1,14 @@
   <%= render 'shared/dashboard' %>
-<div class="container card">
-<h1>Félicitations! Vous avez vaincu <%= @mob.name %>
-+ <%= @mob.exp %>EXP
-</h1>
-<h3> <%= link_to "☠️aller à Votre position☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
-</h3>
-</div>
+  <div class="container card">
+    <h1>Vous avez vaincu <%= @mob.name %>
+      + <%= @mob.exp %>EXP
+      <br>
+      <% if @log.content.include?("Félicitations") %>
+        <%= @log.content %>
+        <%= image_tag @player.rewards.first.image , :class => "avatar-large" %>
+        <% @log.destroy %>
+      <% end %>
+    </h1>
+    <h3> <%= link_to "☠️aller à Votre position☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
+    </h3>
+  </div>

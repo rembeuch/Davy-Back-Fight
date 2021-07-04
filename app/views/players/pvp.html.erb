@@ -58,4 +58,8 @@
 </div>
 <% else %>
   <% @player.update(in_fight: false) %>
+  <% @player.update(in_fight_enemy: "") %>
+  <% @player.update(player_power: 0) %>
+
+
 <% end %>
