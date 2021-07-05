@@ -125,6 +125,11 @@ class PlayersController < ApplicationController
     @player.update(in_fight_enemy: "")
     @player.update(in_fight: false)
     enemy_setup
+    if @player.health <= 0
+      @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
+      @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.where.not(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+    end
     if FightToken.find_by(player: current_user.player) != nil
       FightToken.find_by(player: current_user.player).destroy
     end
@@ -161,6 +166,7 @@ class PlayersController < ApplicationController
         @log.player = @enemy
         @log.content = "vous avez été tué par #{@player.user.pseudo}"
         @log.save
+        @enemy.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
         @enemy.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
         if @enemy.rewards.where.not(category: "FDD") != []
           @rewards = @enemy.rewards.where.not(category: "FDD")

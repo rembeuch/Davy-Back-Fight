@@ -33,8 +33,8 @@
             ou <%= button_to 'Fuir?',player_run_path(@enemy), method: :post,data: { disable_with: "Fuir" } %>
           <% end %>
           <br>
-          Bonus: <% @player.rewards.each do |reward| %>
           <ul>
+          Bonus: <% @player.rewards.each do |reward| %>
                    <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
  </li>
                   <% end %>
@@ -64,7 +64,11 @@
     @player.update(fight: 'default')
     @player.update(in_fight_enemy: "")
     @player.update(in_fight: false)
-
+    if @player.health <= 0
+      @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
+      @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.where.not(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+    end
     @player.fight_token.enemy.update(in_fight: false)
     @player.fight_token.enemy.update(in_fight_enemy: "")
 

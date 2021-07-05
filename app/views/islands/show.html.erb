@@ -5,33 +5,35 @@
   <% end %>
 <%= render 'shared/dashboard' %>
 
-  <h1 class="font-custom text-center  "> <%= @island.name %>
+  <h1 class="font-custom text-center "> <%= @island.name %>
   <br>
   <%= link_to 'retourner à la carte des îles', islands_path, class: "btn btn-primary" %> </h1>
 
   <div class="row">
     <% @island.places.each do |place| %>
-    <div class="col-12 col-md-4">
-      <div class="card m-3">
-        <%= link_to island_place_path(@island, place), class: "text-center" do %>
-          <% if place.image != nil %>
-            <%= image_tag place.image , :class => "product-photo center mt-3" %>
-          <% end %>
-        <% end %>
-        <div class="card-body">
-          <h5 class="card-title font-custom"><%= place.name %> </h5>
-          <% if place.name == @player.position %>
-            <h3 class=""> ☠️Vous êtes ici☠️</h3>
-          <% end %>
-          <%= link_to "Détails", island_place_path(@island, place), class: "btn btn-primary" %>
-          <% if place.name != @player.position && @island == Island.find_by(name: (Place.find_by(name: @player.position).island.name)) && @player.in_fight == false%>
-          <%= button_to 'Se rendre ici👣',place_move_player_path(place), method: :post %>
-          <% elsif place.name == @player.position && @player.in_fight == true %>
-            ⚔️
-          <% end %>
+      <% if place.condition == nil || @player.defeated_mob.include?(place.condition) %>
+        <div class="col-12 col-md-4">
+          <div class="card m-3">
+            <%= link_to island_place_path(@island, place), class: "text-center" do %>
+              <% if place.image != nil %>
+                <%= image_tag place.image , :class => "product-photo center mt-3" %>
+              <% end %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title font-custom"><%= place.name %> </h5>
+              <% if place.name == @player.position %>
+                <h3 class=""> ☠️Vous êtes ici☠️</h3>
+              <% end %>
+              <%= link_to "Détails", island_place_path(@island, place), class: "btn btn-primary" %>
+              <% if place.name != @player.position && @island == Island.find_by(name: (Place.find_by(name: @player.position).island.name)) && @player.in_fight == false%>
+              <%= button_to 'Se rendre ici👣',place_move_player_path(place), method: :post %>
+              <% elsif place.name == @player.position && @player.in_fight == true %>
+                ⚔️
+              <% end %>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      <% end %>
     <% end %>
   </div>
 </div>
