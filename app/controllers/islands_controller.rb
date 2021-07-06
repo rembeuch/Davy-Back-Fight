@@ -40,6 +40,7 @@ class IslandsController < ApplicationController
     if @player.in_fight == false
     @island = Island.find(params[:island_id])
     @player.update(position: @island.places[0].name)
+    @player.update(action: (@player.action - @island.difficulty))
     redirect_to island_path(@island)
     else
       redirect_to islands_path, notice: 'vous êtes engagé dans un combat'
@@ -73,6 +74,6 @@ class IslandsController < ApplicationController
   private
 
   def island_params
-    params.require(:island).permit(:name, :image, :category)
+    params.require(:island).permit(:name, :image, :category, :difficulty)
   end
 end

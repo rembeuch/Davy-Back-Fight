@@ -5,6 +5,10 @@ class PlayersController < ApplicationController
   def new
     @player = Player.new
     @player.user = current_user
+    @positions = []
+    Place.select{|place| place.island.difficulty == 1 }.each do |place|
+    @positions.push(place.name).uniq
+  end
   end
 
   def create

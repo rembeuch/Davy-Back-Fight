@@ -13,10 +13,10 @@
           <div class="row">
             <% @islands.where(category: island.category).each do |island| %>
             <div class="col-12 col-md-4">
-              <div class="card m-3">
+              <div class="card m-3" style="height: 500px">
                 <%= link_to island_path(island), class: "text-center" do %>
                 <% if island.image != nil %>
-                <%= image_tag island.image , :class => "product-photo center mt-3" %>
+                <%= image_tag island.image , :class => "product-photo center mt-3", :style => "height: 300px" %>
                 <% end %>
                 <% end %>
                 <div class="card-body">
@@ -25,8 +25,10 @@
                   <h3>☠️Vous êtes ici☠️</h3>
                   <% end %>
                   <%= link_to "Détails", island_path(island), class: "btn btn-primary" %>
-                  <% if !island.places.find_by(name: @player.position) && @player.in_fight == false %>
-                    <%= button_to 'Se déplacer sur cette île ⛵',island_move_player_path(island), method: :post %>
+                  <% if @player.action < island.difficulty && !island.places.find_by(name: @player.position) %>
+                   <br> Points d'action insuffisants pour voyager sur cette île (<%= island.difficulty %> pts)
+                  <% elsif !island.places.find_by(name: @player.position) && @player.in_fight == false && @player.action >= island.difficulty %>
+                    <%= button_to "Aller sur cette île ⛵ -#{island.difficulty}pt d'action",island_move_player_path(island), method: :post %>
                   <% elsif island.places.find_by(name: @player.position) && @player.in_fight == true %>
                     ⚔️
                   <% end %>
