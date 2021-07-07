@@ -32,8 +32,10 @@
             <%= image_tag Product.first.image, class: "product-photo mx-auto" %>
             +<%= (Product.first.price) %>€
             <%= f.input :upsell, label: "Profitez d'une réduction sur cet article si vous l'ajoutez maintenant à votre commande" %>
-            <h3>Utiliser un CODE PROMO</h3>
-            <%= f.input :coupon, label: 'Code Promo' %>
+            <% unless @product.name.include?'partenariat' %>
+              <h3>Utiliser un CODE PROMO</h3>
+              <%= f.input :coupon, label: 'Code Promo' %>
+            <% end %>
           <%= f.button :submit, "Valider", class: "btn btn-primary m-5" %>
         </div>
       </div>
