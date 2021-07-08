@@ -69,6 +69,10 @@ class MobsController < ApplicationController
     @player.update(fight: 'default')
     @player.update(in_fight_mob: "")
     @player.update(in_fight: false)
+    if @player.health <= 0
+      @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
+      @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+    end
     if FightToken.find_by(player: current_user.player) != nil
       FightToken.find_by(player: current_user.player).destroy
     end
@@ -84,6 +88,8 @@ class MobsController < ApplicationController
     @player.update(mob_power: pick_mob_score)
     @player.update(health: (@player.health - 1))
     if @player.health <= 0
+      @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
+      @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
       @player.update(in_fight: false)
       if FightToken.find_by(player: current_user.player) != nil
         FightToken.find_by(player: current_user.player).destroy
@@ -107,7 +113,7 @@ class MobsController < ApplicationController
         @player.update(in_fight_mob: "")
         @player.update(exp: (@player.exp + @mob.exp))
         @random_reward = rand(1..100)
-        if @mob.rewards != [] && @random_reward >= 95
+        if @mob.rewards != [] && @random_reward >= 90
           @reward = @mob.rewards.sample
           if @reward.player.user.admin == true
             @reward.update(player_id: @player.id)

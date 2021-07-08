@@ -6,7 +6,7 @@ class PlayersController < ApplicationController
     @player = Player.new
     @player.user = current_user
     @positions = []
-    Place.select{|place| place.island.difficulty == 1 }.each do |place|
+    Place.select{|place| place.island.category == 'East Blue' && place.condition == nil}.each do |place|
     @positions.push(place.name).uniq
   end
   end
@@ -130,9 +130,12 @@ class PlayersController < ApplicationController
     @player.update(in_fight: false)
     enemy_setup
     if @player.health <= 0
+      @log = QuestLog.new
+        @log.player = @player
+        @log.content = "vous avez été tué par #{@enemy.user.pseudo}"
+        @log.save
       @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
       @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
-      @player.rewards.where.not(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
     end
     if FightToken.find_by(player: current_user.player) != nil
       FightToken.find_by(player: current_user.player).destroy
@@ -173,15 +176,12 @@ class PlayersController < ApplicationController
         @enemy.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
         @enemy.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
         if @enemy.rewards.where.not(category: "FDD") != []
-          @rewards = @enemy.rewards.where.not(category: "FDD")
-          @rewards.update(player_id: @player.id)
-          @rewards.each do |reward|
-            reward.update(player_id: @player.id)
+          @reward = @enemy.rewards.where.not(category: "FDD").sample
+          @reward.update(player_id: @player.id)
             @log = QuestLog.new
             @log.player = @player
-            @log.content = "Félicitations! Vous venez d'obtenir #{reward.name}"
+            @log.content = "Félicitations! Vous venez d'obtenir #{@reward.name}"
             @log.save
-          end
         end
         level_up
         redirect_to player_reward_path(@enemy)

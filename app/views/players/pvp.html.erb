@@ -46,8 +46,8 @@
               <h1><%= @enemy.user.pseudo %>: Puissance D'Attaque🗡️ <%= @player.mob_power %>  </h1>
                LVL:<%= @enemy.level %>💪 Prime: <%=number_with_delimiter(@enemy.user[:berrys], :delimiter => '.')%>B🪙
                <br>
-               Bonus: <% @enemy.rewards.each do |reward| %>
           <ul>
+               Bonus: <% @enemy.rewards.each do |reward| %>
                    <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
  </li>
                   <% end %>
@@ -67,7 +67,7 @@
     if @player.health <= 0
       @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
       @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
-      @player.rewards.where.not(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.where.not(category: "FDD").sample.update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
     end
     @player.fight_token.enemy.update(in_fight: false)
     @player.fight_token.enemy.update(in_fight_enemy: "")

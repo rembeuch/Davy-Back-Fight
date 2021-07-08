@@ -8,7 +8,7 @@
       <% @islands.uniq{|island| island.category}.sort_by(&:category).each do |island| %>
       <div class="col-12 col-md-12">
         <div class="m-3">
-          <h1 class="text-center"><%= link_to "îles de #{island.category}", islands_path, class: "badge badge-pill badge-dark m-2 mt-3" %>
+          <h1 class="text-center"><%= link_to "#{island.category}", islands_path, class: "badge badge-pill badge-dark m-2 mt-3" %>
           </h1>
           <div class="row">
             <% @islands.where(category: island.category).each do |island| %>
