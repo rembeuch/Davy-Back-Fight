@@ -1,7 +1,7 @@
   <%= render 'shared/dashboard' %>
   <div class="container card">
     <h1>Vous avez vaincu <%= @enemy.user.pseudo %>
-      + <%= (@enemy.level * 100) %>XP
+      + <%= (@enemy.level * 100) %>XP et + <%= @enemy.user.berrys/2 %> Berrys
       <br>
       <% @logs.each do |log| %>
         <%= log.content %>

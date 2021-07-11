@@ -111,6 +111,7 @@ class MobsController < ApplicationController
       else
         @player.update(in_fight: false)
         @player.update(in_fight_mob: "")
+        @player.update(money: @player.money + @mob.exp)
         @player.update(exp: (@player.exp + @mob.exp))
         @random_reward = rand(1..100)
         if @mob.rewards != [] && @random_reward >= 90

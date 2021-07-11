@@ -1,4 +1,4 @@
-<% if @place.condition == nil || @player.defeated_mob.include?(@place.condition) %>
+<% if @place.condition == "" || @player.defeated_mob.include?(@place.condition) %>
   <div class="row">
     <div class="container">
       <%= render 'shared/dashboard' %>
@@ -42,8 +42,8 @@
                 LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️ Bonus:<%= mob.bonus %>🍈
                 <% if @player.health <= 0 %>
                   Vous devez attendre de récupérer de la santé pour combattre (santé maximum récupérée chaque jour)
-                <% elsif mob.condition != nil && !@player.defeated_mob.join(" ").include?(mob.condition) %>
-                  Vous devez battre <%= mob.condition.split(" ").join(" et ") %> d'abord.
+                <% elsif mob.condition != "" && !@player.defeated_mob.join(" ").include?(mob.condition) %>
+                  Vous devez battre <%= mob.condition.split(" ").join(" ") %> d'abord.
                 <% else %>
                 <h3> <%= link_to 'Combattre ⚔️', mob_path(mob)%> </h3>
                 <% end %>

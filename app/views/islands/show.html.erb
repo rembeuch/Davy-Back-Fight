@@ -11,7 +11,7 @@
 
   <div class="row">
     <% @island.places.each do |place| %>
-      <% if place.condition == nil || @player.defeated_mob.include?(place.condition) %>
+      <% if place.condition == "" || @player.defeated_mob.include?(place.condition) %>
         <div class="col-12 col-md-4">
           <div class="card m-3">
             <%= link_to island_place_path(@island, place), class: "text-center" do %>

@@ -27,6 +27,8 @@
                   <%= link_to "Détails", island_path(island), class: "btn btn-primary" %>
                   <% if @player.action < island.difficulty && !island.places.find_by(name: @player.position) %>
                    <br> Points d'action insuffisants pour voyager sur cette île (<%= island.difficulty %> pts)
+                  <% elsif island.name == 'Reverse Mountain' && !@player.defeated_mob.join(" ").include?("Smoker")  %>
+                    Vous ne pouvez pas encore vous rendre ici.
                   <% elsif !island.places.find_by(name: @player.position) && @player.in_fight == false && @player.action >= island.difficulty %>
                     <%= button_to "Aller sur cette île ⛵ -#{island.difficulty}pt d'action",island_move_player_path(island), method: :post %>
                   <% elsif island.places.find_by(name: @player.position) && @player.in_fight == true %>

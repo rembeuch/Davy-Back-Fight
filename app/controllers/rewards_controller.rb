@@ -21,6 +21,12 @@ class RewardsController < ApplicationController
     @rewards = @player.rewards
   end
 
+  def buy_health
+    @player = current_user.player
+    @player.update(health: (@player.health + 1))
+    redirect_to rewards_path
+  end
+
   def reward_params
     params.require(:reward).permit(:name, :category, :image)
   end

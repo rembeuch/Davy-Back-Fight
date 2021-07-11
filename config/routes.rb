@@ -108,6 +108,7 @@ Rails.application.routes.draw do
   end
 
   resources :rewards, only: [:index]
+  patch 'buy_health' => 'rewards#buy_health'
 
   get 'politique' => 'pages#politique'
 

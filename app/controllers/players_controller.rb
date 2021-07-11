@@ -44,6 +44,7 @@ class PlayersController < ApplicationController
       @enemy.update(in_fight: false)
       @enemy.update(in_fight_enemy: "")
       @enemy.update(fight: "default")
+      death
       FightToken.find_by(player: current_user.player).destroy
       redirect_to place_path(@place)
     end
@@ -96,6 +97,7 @@ class PlayersController < ApplicationController
         token.player.update(fight: 'default')
         token.player.update(in_fight_enemy: "")
         token.player.update(in_fight: false)
+        death
         FightToken.find_by(player: token.player).destroy
       end
     end
@@ -119,6 +121,14 @@ class PlayersController < ApplicationController
     redirect_to player_pvp_path(@enemy)
   end
 
+  def death
+    @player = current_user.player
+    if @player.health <= 0
+      @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
+      @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+    end
+  end
+
   def run
     @enemy = Player.find(params[:player_id])
     @player = current_user.player
@@ -134,8 +144,7 @@ class PlayersController < ApplicationController
         @log.player = @player
         @log.content = "vous avez été tué par #{@enemy.user.pseudo}"
         @log.save
-      @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
-      @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+        death
     end
     if FightToken.find_by(player: current_user.player) != nil
       FightToken.find_by(player: current_user.player).destroy
@@ -168,6 +177,7 @@ class PlayersController < ApplicationController
         level_up
         redirect_to place_path(Place.find_by(name: @player.position)), notice: 'Victoire! mais votre adversaire à encore de la santé'
       else
+        @player.update(money: (@player.money + (@enemy.user.berrys/2)))
         @player.update(exp: (@player.exp + (@enemy.level*100)))
         @log = QuestLog.new
         @log.player = @enemy

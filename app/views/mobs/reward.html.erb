@@ -1,7 +1,7 @@
   <%= render 'shared/dashboard' %>
-  <div class="container card">
+  <div class="container card mt-3">
     <h1>Vous avez vaincu <%= @mob.name %>
-      + <%= @mob.exp %>EXP
+      + <%= @mob.exp %>EXP et + <%= @mob.exp %> Berrys
       <br>
       <% if @log != nil && @log.content.include?("Félicitations") %>
         <%= @log.content %>
