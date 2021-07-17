@@ -1,6 +1,7 @@
   <div class="container card">
     <%= render 'shared/dashboard' %>
     <h1 class="center">Inventaire</h1>
+    <div class="d-flex justify-content-between">
     <ul>
       <% @rewards.sort_by(&:category).each do |reward| %>
       <li>
@@ -10,7 +11,15 @@
       </li>
       <% end %>
     </ul>
-    <%= link_to "Récupérer +1 Santé", buy_health_path, method: :patch, class: "btn btn-success",data: { disable_with: "" } %>
+    <div class="d-flex flex-column">
+    <% if @player.health < @player.max_health && @player.money >= 1000000%>
+      <%= link_to "Récupérer +1 Santé pour 1M de Berrys?", buy_health_path, method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" } %>
+    <% end %>
+    <% if @player.money >= 1000000%>
+      <%= link_to "Récupérer +1 Action pour 1M de Berrys?", buy_action_path, method: :patch, class: "badge-danger badge-pill m-3",data: { disable_with: "" } %>
+    <% end %>
+    </div>
+    </div>
     <h3> <%= link_to "☠️aller à Votre position☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
     </h3>
   </div>

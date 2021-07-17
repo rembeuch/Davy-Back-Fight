@@ -24,6 +24,14 @@ class RewardsController < ApplicationController
   def buy_health
     @player = current_user.player
     @player.update(health: (@player.health + 1))
+    @player.update(money: (@player.money - 1000000))
+    redirect_to rewards_path
+  end
+
+  def buy_action
+    @player = current_user.player
+    @player.update(action: (@player.action + 1))
+    @player.update(money: (@player.money - 1000000))
     redirect_to rewards_path
   end
 

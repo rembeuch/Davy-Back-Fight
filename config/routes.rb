@@ -109,6 +109,8 @@ Rails.application.routes.draw do
 
   resources :rewards, only: [:index]
   patch 'buy_health' => 'rewards#buy_health'
+  patch 'buy_action' => 'rewards#buy_action'
+
 
   get 'politique' => 'pages#politique'
 
