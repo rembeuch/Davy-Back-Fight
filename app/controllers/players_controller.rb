@@ -123,9 +123,13 @@ class PlayersController < ApplicationController
 
   def death
     @player = current_user.player
+    @place = Place.find_by(name: @player.position)
     if @player.health <= 0
       @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
       @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      if @place.island.difficulty > 1
+        @player.update(position: (Island.where.not(category: "Grand Line").sample.places.where(condition: "").sample.name))
+      end
     end
   end
 
@@ -192,6 +196,9 @@ class PlayersController < ApplicationController
             @log.player = @player
             @log.content = "Félicitations! Vous venez d'obtenir #{@reward.name}"
             @log.save
+        end
+        if Place.find_by(name: @enemy.position).island.difficulty > 1
+          @enemy.update(position: (Island.where.not(category: "Grand Line").sample.places.where(condition: "").sample.name))
         end
         level_up
         redirect_to player_reward_path(@enemy)

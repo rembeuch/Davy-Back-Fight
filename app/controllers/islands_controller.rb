@@ -25,6 +25,7 @@ class IslandsController < ApplicationController
 
   def index
     @player = current_user.player
+    @island = Place.find_by(name: @player.position).island
     @article = Article.second
     @islands = Island.all
   end
@@ -74,6 +75,6 @@ class IslandsController < ApplicationController
   private
 
   def island_params
-    params.require(:island).permit(:name, :image, :category, :difficulty)
+    params.require(:island).permit(:name, :image, :category, :difficulty, :condition, :position)
   end
 end

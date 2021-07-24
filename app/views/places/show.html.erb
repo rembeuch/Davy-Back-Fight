@@ -3,7 +3,8 @@
     <div class="container">
       <%= render 'shared/dashboard' %>
       <h2 class="font-custom text-center  "> <%= @place.name %>
-        <%= link_to 'retourner à la carte de  l\'île', island_path(@place.island_id), class: "btn btn-primary" %> </h1>
+        <br>
+        <%= link_to 'Retourner à la carte de  l\'île', island_path(@place.island_id), class: "btn btn-dark badge-pill m-3" %> </h1>
 
         <%= image_tag @place.image , :class => "product-photo center mt-3" %>
       </h2>
@@ -11,7 +12,7 @@
         <div class="card col-6 col-md-6 mx-2">
           <% if @player.position == @place.name %>
           <h4>Vous êtes ici☠️</h4>
-          <ul> Joueurs Présents à cet endroit:
+          <ul> Joueurs présents à cet endroit:
             <% @players.each do |player| %>
             <% if player.user == current_user %>
             <% else %>
@@ -35,7 +36,7 @@
             <% if @player.position != @place.name %>
               Vous devez vous déplacer à cet endroit pour voir les personnages qui s'y trouvent.
             <% else %>
-          <ul> Personnages Présents à cet endroit:
+          <ul> Personnages présents à cet endroit:
             <% @place.mobs.each do |mob| %>
               <%= image_tag mob.image , :class => "product-photo center mt-3" %>
               <li><%= mob.name %> <% if @player.defeated_mob.include?(mob.name) %> (vaincu) <% end %>

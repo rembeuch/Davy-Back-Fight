@@ -7,7 +7,7 @@
 
   <h1 class="font-custom text-center "> <%= @island.name %>
   <br>
-  <%= link_to 'retourner à la carte des îles', islands_path, class: "btn btn-primary" %> </h1>
+  <%= link_to 'Retourner à la carte des îles', islands_path, class: "btn btn-dark badge-pill m-3" %> </h1>
 
   <div class="row">
     <% @island.places.each do |place| %>
@@ -19,12 +19,13 @@
                 <%= image_tag place.image , :class => "product-photo center mt-3" %>
               <% end %>
             <% end %>
-            <div class="card-body">
+            <div class="card-body text-center">
               <h5 class="card-title font-custom"><%= place.name %> </h5>
               <% if place.name == @player.position %>
-                <h3 class=""> ☠️Vous êtes ici☠️</h3>
+                <h5 class="font-custom">☠️ <strong class="text-primary"> Vous êtes ici</strong> ☠️</h5>
               <% end %>
-              <%= link_to "Détails", island_place_path(@island, place), class: "btn btn-primary" %>
+              <%= link_to "Détails", island_place_path(@island, place), class: "btn btn-primary mb-2" %>
+
               <% if place.name != @player.position && @island == Island.find_by(name: (Place.find_by(name: @player.position).island.name)) && @player.in_fight == false%>
               <%= button_to 'Se rendre ici👣',place_move_player_path(place), method: :post %>
               <% elsif place.name == @player.position && @player.in_fight == true %>
