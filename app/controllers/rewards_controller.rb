@@ -18,7 +18,7 @@ class RewardsController < ApplicationController
 
   def index
     @player = current_user.player
-    @rewards = @player.rewards
+    @rewards = @player.rewards.sort_by(&:statut)
   end
 
   def buy_health
@@ -32,6 +32,12 @@ class RewardsController < ApplicationController
     @player = current_user.player
     @player.update(action: (@player.action + 1))
     @player.update(money: (@player.money - 1000000))
+    redirect_to rewards_path
+  end
+
+  def use
+    @reward = Reward.find(params[:reward_id])
+    @reward.update(statut: "équipé")
     redirect_to rewards_path
   end
 

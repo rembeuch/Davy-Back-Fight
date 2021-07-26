@@ -38,19 +38,20 @@
             <% else %>
           <ul> Personnages présents à cet endroit:
             <% @place.mobs.each do |mob| %>
-              <%= image_tag mob.image , :class => "product-photo center mt-3" %>
-              <li><%= mob.name %> <% if @player.defeated_mob.include?(mob.name) %> (vaincu) <% end %>
-                LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️ Bonus:<%= mob.bonus %>🍈
-                <% if @player.health <= 0 %>
-                  Vous devez attendre de récupérer de la santé pour combattre (santé maximum récupérée chaque jour)
-                <% elsif mob.condition != "" && !@player.defeated_mob.join(" ").include?(mob.condition) %>
-                  Vous devez battre <%= mob.condition.split(" ").join(" ") %> d'abord.
-                <% else %>
-                <h3> <%= link_to 'Combattre ⚔️', mob_path(mob)%> </h3>
+              <% if mob.condition != "" && !@player.defeated_mob.join(" ").include?(mob.condition) %>
+              <% else %>
+                <%= image_tag mob.image , :class => "product-photo center mt-3" %>
+                <li><%= mob.name %> <% if @player.defeated_mob.include?(mob.name) %> (vaincu) <% end %>
+                  LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️ Bonus:<%= mob.bonus %>🍈
+                  <% if @player.health <= 0 %>
+                    Vous devez attendre de récupérer de la santé pour combattre (santé maximum récupérée chaque jour)
+                  <% else %>
+                  <h3> <%= link_to 'Combattre ⚔️', mob_path(mob)%> </h3>
+                  <% end %>
+                </li>
+                <% if current_user.admin == true %>
+                  <%= link_to 'créer reward', new_mob_reward_path(mob), class: "btn btn-warning" %>
                 <% end %>
-              </li>
-              <% if current_user.admin == true %>
-                <%= link_to 'créer reward', new_mob_reward_path(mob), class: "btn btn-warning" %>
               <% end %>
             <% end %>
             <% end %>

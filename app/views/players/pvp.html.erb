@@ -47,7 +47,7 @@
                LVL:<%= @enemy.level %>💪 Prime: <%=number_with_delimiter(@enemy.user[:berrys], :delimiter => '.')%>B🪙
                <br>
           <ul>
-               Bonus: <% @enemy.rewards.each do |reward| %>
+               Bonus: <% @enemy.rewards.where(statut: "équipé").each do |reward| %>
                    <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
  </li>
                   <% end %>

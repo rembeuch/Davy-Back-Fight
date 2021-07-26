@@ -11,7 +11,7 @@
           <h1 class="text-center"><%= link_to "#{island.category}", islands_path, class: "badge badge-pill badge-dark m-2 mt-3" %>
           </h1>
           <div class="row">
-            <% @islands.where(category: island.category).each do |island| %>
+            <% @islands.where(category: island.category).sort_by(&:position).each do |island| %>
             <% if island.category != "Grand Line" %>
               <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
                 <div class="col-12 col-md-4">
@@ -40,7 +40,7 @@
                   </div>
                 </div>
               <% end %>
-            <% elsif island.position == 0 || island.position.between?((@island.position - 1),(@island.position + 1)) && @island.category == "Grand Line"%>
+            <% elsif island.position.between?((@island.position - 1),(@island.position + 1)) && @island.category == "Grand Line" || @island.position == island.position%>
             <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
                 <div class="col-12 col-md-4">
                   <div class="card m-3" style="height: 500px">

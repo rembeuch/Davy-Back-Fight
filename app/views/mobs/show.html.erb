@@ -55,7 +55,7 @@
           <% end %>
           <br>
           <ul>
-          Bonus: <% @player.rewards.each do |reward| %>
+          Bonus: <% @player.rewards.where(statut: "équipé").each do |reward| %>
             <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
  </li>
           <% end %>

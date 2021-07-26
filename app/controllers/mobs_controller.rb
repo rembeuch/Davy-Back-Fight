@@ -70,8 +70,8 @@ class MobsController < ApplicationController
     @player.update(in_fight_mob: "")
     @player.update(in_fight: false)
     if @player.health <= 0
-      @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
-      @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.where(category: "FDD", statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
+      @player.rewards.where(category: "FDD", statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
     end
     if FightToken.find_by(player: current_user.player) != nil
       FightToken.find_by(player: current_user.player).destroy
@@ -88,8 +88,8 @@ class MobsController < ApplicationController
     @player.update(mob_power: pick_mob_score)
     @player.update(health: (@player.health - 1))
     if @player.health <= 0
-      @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
-      @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.where(category: "FDD", statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
+      @player.rewards.where(category: "FDD", statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
       @player.update(in_fight: false)
       if FightToken.find_by(player: current_user.player) != nil
         FightToken.find_by(player: current_user.player).destroy
@@ -117,7 +117,7 @@ class MobsController < ApplicationController
         if @mob.rewards != [] && @random_reward >= 90
           @reward = @mob.rewards.sample
           if @reward.player.user.admin == true
-            @reward.update(player_id: @player.id)
+            @reward.update(player_id: @player.id, statut: 'Non équipé')
             @log = QuestLog.new
             @log.player = @player
             @log.content = "Félicitations! Vous venez d'obtenir #{@reward.name}"
@@ -147,7 +147,7 @@ class MobsController < ApplicationController
 
   def compare
     @sum = 0
-    @rewards = current_user.player.rewards
+    @rewards = current_user.player.rewards.where(statut: "équipé")
     @sum += @rewards.count
     if @rewards.map { |reward| reward.category }.include?("FDD") && @mob.bonus.split(" ").include?("EAU") || @mob.bonus.split(" ").include?("GRANIT")
       @sum -= 1

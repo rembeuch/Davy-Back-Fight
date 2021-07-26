@@ -42,7 +42,7 @@ class IslandsController < ApplicationController
     @island = Island.find(params[:island_id])
     @player.update(position: @island.places[0].name)
     @player.update(action: (@player.action - @island.difficulty))
-    redirect_to island_path(@island)
+    redirect_to islands_path
     else
       redirect_to islands_path, notice: 'vous êtes engagé dans un combat'
     end

@@ -125,8 +125,8 @@ class PlayersController < ApplicationController
     @player = current_user.player
     @place = Place.find_by(name: @player.position)
     if @player.health <= 0
-      @player.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
-      @player.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.where(category: "FDD", statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
+      @player.rewards.where(category: "FDD", statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
       if @place.island.difficulty > 1
         @player.update(position: (Island.where.not(category: "Grand Line").sample.places.where(condition: "").sample.name))
       end
@@ -187,10 +187,9 @@ class PlayersController < ApplicationController
         @log.player = @enemy
         @log.content = "vous avez été tué par #{@player.user.pseudo}"
         @log.save
-        @enemy.rewards.where(category: "FDD").update(mob_id: Mob.all.sample.id)
-        @enemy.rewards.where(category: "FDD").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
-        if @enemy.rewards.where.not(category: "FDD") != []
-          @reward = @enemy.rewards.where.not(category: "FDD").sample
+        @enemy.rewards.where(category: "FDD", statut: "équipé").update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+        if @enemy.rewards != []
+          @reward = @enemy.rewards.sample
           @reward.update(player_id: @player.id)
             @log = QuestLog.new
             @log.player = @player
@@ -216,13 +215,14 @@ class PlayersController < ApplicationController
 
   def compare
     @sum = 0
-    @rewards = current_user.player.rewards
+    @rewards = current_user.player.rewards.where(statut: "équipé")
+    @enemy_rewards = @enemy.rewards.where(statut: "équipé")
     @sum += @rewards.count
-    if @rewards.map { |reward| reward.category }.include?("FDD") && @enemy.rewards.map { |reward| reward.category }.include?("EAU") || @enemy.rewards.map { |reward| reward.category }.include?("GRANIT")
+    if @rewards.map { |reward| reward.category }.include?("FDD") && @enemy_rewards.map { |reward| reward.category }.include?("EAU") || @enemy_rewards.map { |reward| reward.category }.include?("GRANIT")
       @sum -= 1
     end
     if @enemy.rewards != []
-      @sum -= @enemy.rewards.count
+      @sum -= @enemy_rewards.count
     end
     return @sum
   end

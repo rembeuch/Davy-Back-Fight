@@ -8,6 +8,12 @@
         <%= reward.name %>
         <%= reward.category %>
         <%= image_tag reward.image , :class => "avatar-large" %>
+        <%= reward.statut %>
+        <% if @player.rewards.where(category: "FDD", statut: "équipé").count >= 1 && reward.category == "FDD" && reward.statut == "Non équipé" %>
+          Vous ne pouvez pas manger 2 fruits du démon
+        <% elsif reward.statut == 'Non équipé' %>
+        <%= button_to 'équiper', reward_use_path(reward), method: :patch %>
+        <% end %>
       </li>
       <% end %>
     </ul>

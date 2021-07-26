@@ -111,6 +111,10 @@ Rails.application.routes.draw do
   patch 'buy_health' => 'rewards#buy_health'
   patch 'buy_action' => 'rewards#buy_action'
 
+  resources :rewards, only: [:show] do
+   patch 'use' => 'rewards#use'
+  end
+
 
   get 'politique' => 'pages#politique'
 
