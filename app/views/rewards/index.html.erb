@@ -6,7 +6,8 @@
       <% @rewards.sort_by(&:category).each do |reward| %>
       <li>
         <%= reward.name %>
-        <%= reward.category %>
+        <br>
+        Catégorie: <%= reward.category %>
         <%= image_tag reward.image , :class => "avatar-large" %>
         <%= reward.statut %>
         <% if @player.rewards.where(category: "FDD", statut: "équipé").count >= 1 && reward.category == "FDD" && reward.statut == "Non équipé" %>

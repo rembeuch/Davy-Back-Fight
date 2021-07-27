@@ -187,7 +187,9 @@ class PlayersController < ApplicationController
         @log.player = @enemy
         @log.content = "vous avez été tué par #{@player.user.pseudo}"
         @log.save
-        @enemy.rewards.where(category: "FDD", statut: "équipé").update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+        @reward = @enemy.rewards.where(category: "FDD", statut: "équipé")
+        @reward.update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+        @enemy.rewards.delete(@reward)
         if @enemy.rewards != []
           @reward = @enemy.rewards.sample
           @reward.update(player_id: @player.id)
