@@ -45,13 +45,13 @@
     <% if @player.health < @player.max_health && @player.money >= 1000000%>
       <%= link_to "Récupérer +1 Santé pour 1M de Berrys?", buy_health_path, method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" } %>
     <% elsif @player.health < @player.max_health && @player.money < 1000000%>
-      +1 santé: Berrys insuffisants
+      +1 santé: Berrys insuffisants (1M)
       <br>
     <% end %>
     <% if @player.money >= 1000000%>
       <%= link_to "Récupérer +1 Action pour 1M de Berrys?", buy_action_path, method: :patch, class: "badge-danger badge-pill m-3",data: { disable_with: "" } %>
     <% else %>
-      +1 action: Berrys insuffisants
+      +1 action: Berrys insuffisants (1M)
     <% end %>
     </div>
     </div>

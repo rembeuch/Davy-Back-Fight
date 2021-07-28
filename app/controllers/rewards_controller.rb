@@ -71,6 +71,10 @@ class RewardsController < ApplicationController
       @reward.update(statut: 'Non équipé', player_id: current_user.player.id)
       current_user.player.update(money: (current_user.player.money - @reward.price))
       @player.update(money: (@player.money + @reward.price))
+      @log = QuestLog.new
+      @log.player = @player
+      @log.content = "Vous avez vendu #{@reward.name} pour #{@reward.price}B"
+      @log.save
     end
     redirect_to rewards_path
   end
