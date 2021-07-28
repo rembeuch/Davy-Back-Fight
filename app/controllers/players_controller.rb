@@ -192,10 +192,10 @@ class PlayersController < ApplicationController
         @enemy.rewards.delete(@reward)
         if @enemy.rewards != []
           @reward = @enemy.rewards.sample
-          @reward.update(player_id: @player.id)
+          @reward.update(player_id: @player.id, statut: 'Non équipé')
             @log = QuestLog.new
             @log.player = @player
-            @log.content = "Félicitations! Vous venez d'obtenir #{@reward.name}"
+            @log.content = "Félicitations! Vous venez d'obtenir #{@reward.name} (Pensez à l'équipé dans votre inventaire)"
             @log.save
         end
         if Place.find_by(name: @enemy.position).island.difficulty > 1

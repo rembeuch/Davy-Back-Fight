@@ -105,6 +105,7 @@ Rails.application.routes.draw do
     post 'run' => 'players#run'
     post 'resolve' => 'players#resolve'
     get 'reward' => 'players#reward'
+    get 'shop' => 'rewards#shop'
   end
 
   resources :rewards, only: [:index]
@@ -113,6 +114,9 @@ Rails.application.routes.draw do
 
   resources :rewards, only: [:show] do
    patch 'use' => 'rewards#use'
+   patch 'drop' => 'rewards#drop'
+   post 'sell' => 'rewards#sell'
+   post 'buy_reward' => 'rewards#buy_reward'
   end
 
 

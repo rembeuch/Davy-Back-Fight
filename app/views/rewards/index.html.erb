@@ -5,17 +5,40 @@
     <ul>
       <% @rewards.sort_by(&:category).each do |reward| %>
       <li>
-        <%= reward.name %>
+        <h4> <%= reward.name %> </h4>
         <br>
         Catégorie: <%= reward.category %>
         <%= image_tag reward.image , :class => "avatar-large" %>
-        <%= reward.statut %>
+        <% if reward.category == "FDD" && reward.statut == 'équipé' %>
+          Statut: Mangé
+        <% else %>
+          Statut: <%= reward.statut %>
+        <% end %>
+        <br>
+        <% if reward.statut == "A Vendre" %>
+          Prix de vente: <%=number_with_delimiter( reward.price, :delimiter => '.')%> Berrys
+        <% end %>
         <% if @player.rewards.where(category: "FDD", statut: "équipé").count >= 1 && reward.category == "FDD" && reward.statut == "Non équipé" %>
           Vous ne pouvez pas manger 2 fruits du démon
-        <% elsif reward.statut == 'Non équipé' %>
-        <%= button_to 'équiper', reward_use_path(reward), method: :patch %>
+        <% elsif reward.statut == 'Non équipé' && @player.in_fight == false %>
+          <%= button_to 'équiper', reward_use_path(reward), method: :patch, class: "btn-success", data: ( reward.category == "FDD" ? { confirm: "Manger ce fruit? (Vous ne pouvez en manger qu'un à la fois!)" } : nil )%>
+        <% elsif reward.statut == 'équipé' && @player.in_fight == false && reward.category != "FDD" %>
+          <%= button_to 'Enlever', reward_drop_path(reward), method: :patch, class: "btn-danger" %>
+        <% end %>
+        <% if reward == @player.rewards.where(category: "FDD", statut: "équipé").first%>
+        <% elsif reward.statut != 'A Vendre' && @player.in_fight == false %>
+          <%= simple_form_for reward, :url => reward_sell_path(reward), :method => :post do |f| %>
+             <%= f.input :price, label: 'Indiquez votre prix de vente',
+                  as: :integer,
+                  required: true,
+                  input_html: { id: 'price'}%>
+          <%= f.button :submit, "Mettre en vente", class: "btn btn-primary" %>
+          <% end %>
+        <% elsif @player.in_fight == false %>
+          <%= button_to 'Retirer de la vente', reward_drop_path(reward), method: :patch, class: "btn-danger" %>
         <% end %>
       </li>
+        <hr>
       <% end %>
     </ul>
     <div class="d-flex flex-column">

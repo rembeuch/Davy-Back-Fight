@@ -18,6 +18,9 @@
             <% else %>
             <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙
               <% if @player.in_fight == false && @player.health > 0 && @player.action >= 1%>
+              <% if player.rewards.where(statut: "A Vendre") != [] %>
+                <%= link_to 'Objet en vente', player_shop_path(player), class: "btn btn-warning" %>
+              <% end %>
               <%= button_to 'Combattre ⚔️ (1pt d\'action)', player_pvp_launch_path(player), method: :post %>
               <% end %>
             </li>
