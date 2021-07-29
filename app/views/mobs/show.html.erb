@@ -25,7 +25,7 @@
     <% else %>
       <div class="m-3 d-flex">
         <div class="card col-6 col-md-6 mx-2">
-        <h1>Votre Puissance D'Attaque🗡️: <%= @player.player_power %></h1>
+        <h2>Votre Puissance D'Attaque🗡️: <%= @player.player_power %></h2>
         <div class="progress">
           <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">de 0 à 20 <%= '🗡️' if @player.player_power < 21 %></div>
           <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">21 Parfait! <%= '🗡️' if @player.player_power == 21 %> </div>
