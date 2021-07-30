@@ -1,6 +1,10 @@
 <div class="d-flex bg-white font-custom text-center ">
   <div class="col-sm-7 col-sm-offset-7">
-   <h3> Nom: <%= current_user.pseudo %>🏴‍☠️ Prime: <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%>B🪙 Santé: <%= current_user.player.health %>/<%= current_user.player.max_health %>❤️  Actions Restantes: <%= current_user.player.action %>⚓ LVL: <%= current_user.player.level %>💪
+   <h3> Nom: <%= current_user.pseudo %>🏴‍☠️
+    <% if current_user.player.crew != nil %>
+      Équipage: <%= current_user.player.crew.name %>🏴‍☠️
+    <% end %>
+    Prime: <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%>B🪙 Santé: <%= current_user.player.health %>/<%= current_user.player.max_health %>❤️  Actions Restantes: <%= current_user.player.action %>⚓ LVL: <%= current_user.player.level %>💪
     <br> XP: <%= current_user.player.exp %>/<%= Player::LEVELS[current_user.player.level] %>⏫ Berrys: <%= number_with_delimiter(current_user.player.money, :delimiter => '.') %> <img src="https://ih1.redbubble.net/image.903868159.1730/st,small,507x507-pad,600x600,f8f8f8.jpg" alt="..." class="avatar">
 
 </h3>
@@ -16,10 +20,16 @@
   <% end %>
   </h3>
   <h3 class=""> <%= link_to "☠️ Aller à votre position ☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
+    <% if @player.crew == nil %>
+      <%= link_to 'Équipage', new_crew_path, class: "btn btn-primary badge-pill m-3" %>
+    <% else %>
+      <%= link_to 'Équipage', crew_path(@player.crew), class: "btn btn-primary badge-pill m-3" %>
+    <% end %>
   <%= link_to 'INVENTAIRE', rewards_path, class: "btn btn-primary badge-pill m-3" %>
   <button type="button" class="btn btn-primary badge-pill" data-toggle="modal" data-target="#Modal-rules">
       Règles du jeu
   </button>
+</h3>
 
 
     <!-- Modal -->
@@ -78,4 +88,3 @@
     </div>
   </div>
   </div>
-</h3>

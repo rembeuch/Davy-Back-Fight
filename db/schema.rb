@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_28_092859) do
+ActiveRecord::Schema.define(version: 2021_07_30_092004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(version: 2021_07_28_092859) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "crews", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name", default: ""
   end
 
   create_table "fight_tokens", force: :cascade do |t|
@@ -152,6 +158,9 @@ ActiveRecord::Schema.define(version: 2021_07_28_092859) do
     t.string "in_fight_mob", default: ""
     t.string "defeated_mob", default: [], array: true
     t.integer "money", default: 0
+    t.bigint "crew_id"
+    t.boolean "captain", default: false
+    t.index ["crew_id"], name: "index_players_on_crew_id"
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
@@ -271,6 +280,7 @@ ActiveRecord::Schema.define(version: 2021_07_28_092859) do
   add_foreign_key "participations", "tournaments"
   add_foreign_key "participations", "users"
   add_foreign_key "places", "islands"
+  add_foreign_key "players", "crews"
   add_foreign_key "players", "users"
   add_foreign_key "quest_logs", "players"
   add_foreign_key "quiz_answers", "quizzes"
