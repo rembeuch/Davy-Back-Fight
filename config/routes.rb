@@ -119,8 +119,6 @@ Rails.application.routes.draw do
    post 'buy_reward' => 'rewards#buy_reward'
   end
 
-  resources :crews, only: [:new, :create, :show]
-
   get 'politique' => 'pages#politique'
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'

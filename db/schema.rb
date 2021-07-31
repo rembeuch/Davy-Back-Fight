@@ -42,12 +42,6 @@ ActiveRecord::Schema.define(version: 2021_07_30_092004) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
-  create_table "crews", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name", default: ""
-  end
-
   create_table "fight_tokens", force: :cascade do |t|
     t.bigint "player_id"
     t.bigint "enemy_id"
@@ -158,9 +152,7 @@ ActiveRecord::Schema.define(version: 2021_07_30_092004) do
     t.string "in_fight_mob", default: ""
     t.string "defeated_mob", default: [], array: true
     t.integer "money", default: 0
-    t.bigint "crew_id"
     t.boolean "captain", default: false
-    t.index ["crew_id"], name: "index_players_on_crew_id"
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
@@ -280,7 +272,6 @@ ActiveRecord::Schema.define(version: 2021_07_30_092004) do
   add_foreign_key "participations", "tournaments"
   add_foreign_key "participations", "users"
   add_foreign_key "places", "islands"
-  add_foreign_key "players", "crews"
   add_foreign_key "players", "users"
   add_foreign_key "quest_logs", "players"
   add_foreign_key "quiz_answers", "quizzes"
