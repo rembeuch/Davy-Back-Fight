@@ -1,0 +1,27 @@
+<div class="container">
+  <%= render 'shared/dashboard' %>
+  <% if @player.crew == "" %>
+    <div class="container">
+    <div class="row ">
+      <div class="col-sm-12 col-sm-offset-12">
+        <div class="form-inputs card m-3 p-4">
+         <%= simple_form_for @player, :url => player_create_crew_path(@player), :method => :patch do |f| %>
+          <%= f.error_notification %>
+          <%= f.input :crew, label: 'Donner un nom à votre équipage' ,
+                      required: true,
+                      input_html: { maxlength: 25}%>
+          <div class="actions">
+              <%= f.button :submit, "Créer votre équipage", class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% else %>
+  Votre équipage: <%= @player.crew %>
+  <% if @player.captain == true %>
+    Capitaine
+  <% end %>
+  <% end %>
+</div>

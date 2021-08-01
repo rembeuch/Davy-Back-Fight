@@ -106,6 +106,8 @@ Rails.application.routes.draw do
     post 'resolve' => 'players#resolve'
     get 'reward' => 'players#reward'
     get 'shop' => 'rewards#shop'
+    patch 'create_crew' => "players#create_crew"
+    get 'crew' => "players#crew"
   end
 
   resources :rewards, only: [:index]

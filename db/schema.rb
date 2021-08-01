@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_30_092004) do
+ActiveRecord::Schema.define(version: 2021_08_01_120230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 2021_07_30_092004) do
     t.string "defeated_mob", default: [], array: true
     t.integer "money", default: 0
     t.boolean "captain", default: false
+    t.string "crew", default: ""
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 

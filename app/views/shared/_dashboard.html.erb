@@ -19,6 +19,8 @@
   </h3>
   <h3 class=""> <%= link_to "☠️ Aller à votre position ☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
 
+  <%= link_to 'Équipage', player_crew_path(@player), class: "btn btn-primary badge-pill m-3" %>
+
   <%= link_to 'INVENTAIRE', rewards_path, class: "btn btn-primary badge-pill m-3" %>
   <button type="button" class="btn btn-primary badge-pill" data-toggle="modal" data-target="#Modal-rules">
       Règles du jeu

@@ -259,9 +259,21 @@ class PlayersController < ApplicationController
     end
   end
 
+  def crew
+    @player = current_user.player
+  end
+
+  def create_crew
+    @player = current_user.player
+    if @player.crew == ""
+      @player.update(crew: player_params[:crew], captain: true)
+      redirect_to player_crew_path(@player)
+    end
+  end
+
   private
 
   def player_params
-    params.require(:player).permit(:position)
+    params.require(:player).permit(:position, :crew)
   end
 end
