@@ -108,6 +108,10 @@ Rails.application.routes.draw do
     get 'shop' => 'rewards#shop'
     patch 'create_crew' => "players#create_crew"
     get 'crew' => "players#crew"
+    post 'destroy_crew' => "players#destroy_crew"
+    post 'open_crew' => "players#open_crew"
+    post 'join_crew' => "players#join_crew"
+
   end
 
   resources :rewards, only: [:index]

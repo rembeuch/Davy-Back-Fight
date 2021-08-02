@@ -3,7 +3,7 @@
     <% if user_signed_in? %>
     <% if current_user.current_sign_in_at.to_date - current_user.last_sign_in_at.to_date >= 1 %>
       <% current_user.update(berrys: (current_user.berrys + 10_000)) %>
-      <% if current_user.player != nil %>
+      <% if current_user.player != nil && current_user.player.action < 3 %>
         <% current_user.player.update(action: 3) %>
         <% if current_user.player.in_fight == false %>
           <% current_user.player.update(health: current_user.player.max_health) %>

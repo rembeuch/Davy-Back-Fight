@@ -19,9 +19,28 @@
     </div>
   </div>
   <% else %>
-  Votre équipage: <%= @player.crew %>
-  <% if @player.captain == true %>
-    Capitaine
+    <div class="container card">
+    <h2> Votre équipage: <%= @player.crew %></h2>
+    <% if @player.captain == true %>
+      <h3> Recrutement:  <%= @player.open_crew ? "ouvert au recrutement" : "Fermé" %> </h3>
+    <% end %>
+    <% if @player.open_crew == false && @player.captain == true %>
+    <%= button_to "Ouvrir le recrutement",player_open_crew_path(@player), method: :post, class: "btn btn-success my-3" %>
+    <% elsif @player.captain == true %>
+      <%= button_to "Arrêter le recrutement",player_open_crew_path(@player), method: :post, class: "btn btn-warning my-3" %>
+    <% end %>
+    <p> <%= Player.where(crew: @player.crew).count %> Membre(s) </p>
+    <ul>
+      <% Player.where(crew: @player.crew).each do |player| %>
+        <li> <%= player.user.pseudo %> Prime: <%=number_with_delimiter(player.user.berrys, :delimiter => '.')%>B🪙</li>
+      <% end %>
+    </ul>
+    <% if @player.captain == true %>
+    <span>  Vous êtes le <strong> Capitaine </strong> </span>
+      <%= button_to "Dissoudre l'équipage",player_destroy_crew_path(@player), method: :post, data: { confirm: "Êtes-vous sur de vouloir dissoudre votre équipage?"}, class: "btn btn-danger my-3" %>
+    <% else %>
+      <%= Player.where(crew: @player.crew, captain: true).first.user.pseudo %> est votre capitaine.
+    <% end %>
   <% end %>
-  <% end %>
+  </div>
 </div>

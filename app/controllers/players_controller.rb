@@ -265,10 +265,43 @@ class PlayersController < ApplicationController
 
   def create_crew
     @player = current_user.player
-    if @player.crew == ""
+    if @player.crew == "" && Player.all.map{|player| player.crew}.exclude?(player_params[:crew])
       @player.update(crew: player_params[:crew], captain: true)
       redirect_to player_crew_path(@player)
+    else
+      redirect_to player_crew_path(@player), notice: 'nom déja pris'
     end
+  end
+
+  def destroy_crew
+    @player = current_user.player
+    Player.where(crew: @player.crew).each do |player|
+      player.update(crew: "", open_crew: false, captain: false)
+       @log = QuestLog.new
+            @log.player = player
+            @log.content = "dissolution de votre équipage"
+            @log.save
+    end
+  redirect_to player_crew_path(@player)
+  end
+
+  def open_crew
+    @player = current_user.player
+    if @player.open_crew == false && @player.captain == true && @player.in_fight == false
+      @player.update(open_crew: true)
+    else
+      @player.update(open_crew: false)
+    end
+      redirect_to player_crew_path(@player)
+  end
+
+  def join_crew
+    @player = current_user.player
+    @captain = Player.find(params[:player_id])
+    if @player.captain == false
+      @player.update(crew: @captain.crew)
+    end
+    redirect_to player_crew_path(@player)
   end
 
   private
