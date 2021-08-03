@@ -53,6 +53,19 @@
     <% else %>
       +1 action: Berrys insuffisants (1M)
     <% end %>
+     <p class="text-center"> Nombres de PNJ vaincus: <%= @player.defeated_mob.size %> / <%= Mob.all.count %> </p>
+     <div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Voir la liste
+  </button>
+  <div class="dropdown-menu">
+    <% @player.defeated_mob.each do |mob| %>
+    <%= mob %>
+    <br>
+    <hr>
+    <% end %>
+  </div>
+</div>
     </div>
     </div>
 

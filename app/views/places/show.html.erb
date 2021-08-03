@@ -22,10 +22,10 @@
               <% end %>
               <% if @player.in_fight == false && @player.health > 0 && @player.action >= 1  %>
                 <% if player.rewards.where(statut: "A Vendre") != [] %>
-                  <%= link_to 'Objet en vente', player_shop_path(player), class: "btn btn-warning" %>
+                  <%= link_to 'Objet en vente', player_shop_path(player), class: "btn btn-warning my-2" %>
                 <% end %>
                 <% if player.open_crew == true && @player.crew == "" && player.in_fight == false && player.level > Player.where(crew: player.crew).count %>
-                  <%= button_to "Rejoindre son équipage?",player_join_crew_path(player),data: { confirm: "Êtes-vous sur de vouloir rejoindre cet équipage?"}, method: :post, class: "btn btn-success my-3" %>
+                  <%= button_to "Rejoindre son équipage?",player_join_crew_path(player),data: { confirm: "Êtes-vous sur de vouloir rejoindre cet équipage?"}, method: :post, class: "btn btn-success my-2" %>
                 <% end %>
                 <% if !(@player.crew == player.crew) || @player.crew == "" %>
                   <%= button_to 'Combattre ⚔️ (1pt d\'action)', player_pvp_launch_path(player), method: :post %>
@@ -49,7 +49,7 @@
             <% else %>
           <ul> Personnages présents à cet endroit:
             <% @place.mobs.each do |mob| %>
-              <% if mob.condition != "" && !@player.defeated_mob.join(" ").include?(mob.condition) %>
+              <% if mob.condition != "" && !(mob.condition.split("/") - @player.defeated_mob).empty? %>
               <% else %>
                 <%= image_tag mob.image , :class => "product-photo center mt-3" %>
                 <li><%= mob.name %> <% if @player.defeated_mob.include?(mob.name) %> (vaincu) <% end %>
