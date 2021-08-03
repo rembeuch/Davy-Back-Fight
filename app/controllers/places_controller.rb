@@ -33,7 +33,10 @@ class PlacesController < ApplicationController
 
   def move_player
     @player = current_user.player
-    if @player.in_fight == false
+    @captain = Player.where(crew: @player.crew, captain: true).first
+    if @player.crew != "" && @captain.in_fight == true
+      redirect_to island_path(Place.find_by(name: @player.position).island), notice: 'votre capitaine combat ici, vous ne pouvez pas l\'abandonner'
+    elsif @player.in_fight == false
     @player = current_user.player
     @place = Place.find(params[:place_id])
     @player.update(position: @place.name)

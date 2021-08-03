@@ -226,6 +226,12 @@ class PlayersController < ApplicationController
     if @enemy.rewards != []
       @sum -= @enemy_rewards.count
     end
+    if @player.captain == true && Player.where(crew: @player.crew, position: @player.position).count > 1
+      @sum += (Player.where(crew: @player.crew, position: @player.position).count - 1)
+    end
+    if @enemy.captain == true && Player.where(crew: @enemy.crew, position: @enemy.position).count > 1
+      @sum -= (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1)
+    end
     return @sum
   end
 
@@ -298,10 +304,23 @@ class PlayersController < ApplicationController
   def join_crew
     @player = current_user.player
     @captain = Player.find(params[:player_id])
-    if @player.captain == false
+    if @player.captain == false && @player.crew == "" && @captain.open_crew == true
       @player.update(crew: @captain.crew)
+      redirect_to player_crew_path(@player)
+    else
+      redirect_to player_crew_path(@player), notice: 'Cet équipage ne recrute pas pour le moment'
     end
+  end
+
+  def leave_crew
+    @player = current_user.player
+    @captain = Player.where(crew: @player.crew, captain: true).first
+    if @captain.in_fight == false
+      @player.update(crew: "")
     redirect_to player_crew_path(@player)
+    else
+      redirect_to player_crew_path(@player), notice: 'Vous ne pouvez pas abandonner votre capitaine lorsqu\'il combat'
+    end
   end
 
   private

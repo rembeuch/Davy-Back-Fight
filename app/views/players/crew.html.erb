@@ -40,6 +40,7 @@
       <%= button_to "Dissoudre l'équipage",player_destroy_crew_path(@player), method: :post, data: { confirm: "Êtes-vous sur de vouloir dissoudre votre équipage?"}, class: "btn btn-danger my-3" %>
     <% else %>
       <%= Player.where(crew: @player.crew, captain: true).first.user.pseudo %> est votre capitaine.
+      <%= button_to "Quitter l'équipage",player_leave_crew_path(@player), method: :post, data: { confirm: "Êtes-vous sur de vouloir quitter votre équipage?"}, class: "btn btn-danger my-3" %>
     <% end %>
   <% end %>
   </div>

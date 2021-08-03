@@ -14,8 +14,11 @@
         </div>
           écart de niveau: + <%= @player.level - @enemy.level %> à la résolution du combat
           <br>
-          écart des bonus: + <%= @sum %> à la résolution du combat
+          écart des bonus: + <%= @player.rewards.where(statut: "équipé").count - @enemy.rewards.where(statut: "équipé").count %> à la résolution du combat
           <br>
+          <% if @player.captain == true && Player.where(crew: @player.crew, position: @player.position).count > 1 || @enemy.captain == true  %>
+            écart d'équipage: + <%= (Player.where(crew: @player.crew, position: @player.position).count - 1) - (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1) %>
+          <% end %>
           <h2> ATTAQUE TOTALE: +<%=@player.player_power + @player.level - @enemy.level + @sum %></h2>
           <br>
           <% if @player.player_power == 0 %>
@@ -42,18 +45,18 @@
           <br>
           Vous avez 2 minutes pour finir ce combat.
        </div>
-        <div class="card col-6 col-md-6  mx-2">
-              <h1><%= @enemy.user.pseudo %>: Puissance D'Attaque🗡️ <%= @player.mob_power %>  </h1>
-               LVL:<%= @enemy.level %>💪 Prime: <%=number_with_delimiter(@enemy.user[:berrys], :delimiter => '.')%>B🪙
-               <br>
-          <ul>
-               Bonus: <% @enemy.rewards.where(statut: "équipé").each do |reward| %>
-                   <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
- </li>
-                  <% end %>
-          </ul>
-          <br>
-        </div>
+       <div class="card col-6 col-md-6  mx-2">
+        <h1><%= @enemy.user.pseudo %>: Puissance D'Attaque🗡️ <%= @player.mob_power %>  </h1>
+        LVL:<%= @enemy.level %>💪 Prime: <%=number_with_delimiter(@enemy.user[:berrys], :delimiter => '.')%>B🪙
+        <br>
+        <ul>
+         Bonus: <% @enemy.rewards.where(statut: "équipé").each do |reward| %>
+         <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
+         </li>
+         <% end %>
+        </ul>
+       <br>
+     </div>
       </div>
 </div>
 <% else %>
