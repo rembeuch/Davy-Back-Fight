@@ -54,19 +54,45 @@
       +1 action: Berrys insuffisants (1M)
     <% end %>
      <p class="text-center"> Nombres de PNJ vaincus: <%= @player.defeated_mob.size %> / <%= Mob.all.count %> </p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Voir la liste
+      </button>
+      <div class="dropdown-menu">
+        <% @player.defeated_mob.each do |mob| %>
+          <%= mob %>
+          <br>
+          <hr>
+        <% end %>
+      </div>
+    </div>
+     <p class="text-center my-3"> Nombres d'îles visitées: <%= @player.visited_island.size %> / <%= Island.all.count %> </p>
      <div class="btn-group">
-  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Voir la liste
-  </button>
-  <div class="dropdown-menu">
-    <% @player.defeated_mob.each do |mob| %>
-    <%= mob %>
-    <br>
-    <hr>
-    <% end %>
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Voir la liste
+      </button>
+
+      <div class="dropdown-menu">
+      <% @player.visited_island.each do |island| %>
+        <%= island %>
+        <br>
+        <hr>
+      <% end %>
+      </div>
+    </div>
+    <p class="text-center my-3"> Nombres d'endroits visités: <%= @player.visited_place.size %> / <%= Place.all.count %> </p>
+     <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Voir la liste
+      </button>
+      <div class="dropdown-menu">
+      <% @player.visited_place.each do |place| %>
+        <%= place %>
+        <br>
+        <hr>
+      <% end %>
+      </div>
+    </div>
+  </div>
   </div>
 </div>
-    </div>
-    </div>
-
-  </div>

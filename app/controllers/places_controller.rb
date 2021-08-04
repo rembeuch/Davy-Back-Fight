@@ -40,6 +40,9 @@ class PlacesController < ApplicationController
     @player = current_user.player
     @place = Place.find(params[:place_id])
     @player.update(position: @place.name)
+    if @player.visited_place.exclude?(@place.name)
+      @player.update(visited_place: @player.visited_place.push(@place.name))
+    end
     redirect_to place_path(@place)
     else
       redirect_to island_path(Place.find_by(name: @player.position).island), notice: 'vous êtes engagé dans un combat'

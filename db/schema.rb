@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_02_102310) do
+ActiveRecord::Schema.define(version: 2021_08_04_110243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,13 +148,15 @@ ActiveRecord::Schema.define(version: 2021_08_02_102310) do
     t.string "fight", default: "default"
     t.integer "max_health", default: 3
     t.integer "mob_health"
-    t.string "in_fight_enemy"
+    t.string "in_fight_enemy", default: ""
     t.string "in_fight_mob", default: ""
     t.string "defeated_mob", default: [], array: true
     t.integer "money", default: 0
     t.boolean "captain", default: false
     t.string "crew", default: ""
     t.boolean "open_crew", default: false
+    t.string "visited_island", default: [], array: true
+    t.string "visited_place", default: [], array: true
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 

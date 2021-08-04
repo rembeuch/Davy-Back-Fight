@@ -1,14 +1,14 @@
 class PlayersController < ApplicationController
-  before_action :check_token, except: [:new]
+  before_action :check_token, except: [:new, :create]
   before_action :mob_token
 
   def new
     @player = Player.new
     @player.user = current_user
     @positions = []
-    Place.select{|place| place.island.category == 'East Blue' && place.condition == nil}.each do |place|
-    @positions.push(place.name).uniq
-  end
+    Place.select{|place| place.island.category == 'East Blue' && place.condition == ""}.each do |place|
+      @positions.push(place.name).uniq
+    end
   end
 
   def create
@@ -18,6 +18,8 @@ class PlayersController < ApplicationController
       @player = Player.new(player_params)
       @player.user = current_user
       if @player.save
+        @player.update(visited_place: @player.visited_place.push(@player.position))
+        @player.update(visited_island: @player.visited_island.push(Place.find_by(name: @player.position).island.name))
         redirect_to islands_path
       else
         render :new
