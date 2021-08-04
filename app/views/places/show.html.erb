@@ -14,7 +14,7 @@
           <h4>Vous êtes ici☠️</h4>
           <ul> Joueurs présents à cet endroit:
             <% @players.each do |player| %>
-            <% if player.user == current_user %>
+            <% if player.user == current_user || player.user.admin == true %>
             <% else %>
             <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙
               <% if player.crew != ""%>

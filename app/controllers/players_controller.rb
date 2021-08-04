@@ -325,6 +325,21 @@ class PlayersController < ApplicationController
     end
   end
 
+  def kick_crew
+    @player = current_user.player
+    @member = Player.find(params[:player_id])
+    if @player.captain == true && @player.in_fight == false && @member.in_fight == false
+      @member.update(crew: "")
+      @log = QuestLog.new
+            @log.player = @member
+            @log.content = "Vous avez été retiré de votre équipage"
+            @log.save
+      redirect_to player_crew_path(@player)
+    else
+      redirect_to player_crew_path(@player), notice: 'Vous ou le membre de votre équipage êtes en combat'
+    end
+  end
+
   private
 
   def player_params

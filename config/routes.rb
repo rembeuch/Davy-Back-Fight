@@ -112,6 +112,7 @@ Rails.application.routes.draw do
     post 'open_crew' => "players#open_crew"
     post 'join_crew' => "players#join_crew"
     post 'leave_crew' => "players#leave_crew"
+    post 'kick_crew' => "players#kick_crew"
 
 
   end

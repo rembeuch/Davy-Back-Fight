@@ -5,6 +5,7 @@
     <div class="row ">
       <div class="col-sm-12 col-sm-offset-12">
         <div class="form-inputs card m-3 p-4">
+      <h1>Vous pouvez créer votre propre équipage</h1>
          <%= simple_form_for @player, :url => player_create_crew_path(@player), :method => :patch do |f| %>
           <%= f.error_notification %>
           <%= f.input :crew, label: 'Donner un nom à votre équipage' ,
@@ -32,7 +33,14 @@
     <p> <%= Player.where(crew: @player.crew).count %> Membre(s) / <%= Player.where(crew: @player.crew, captain: true).first.level %> </p>
     <ul>
       <% Player.where(crew: @player.crew).each do |player| %>
-        <li> <%= player.user.pseudo %> Prime: <%=number_with_delimiter(player.user.berrys, :delimiter => '.')%>B🪙</li>
+        <li> <%= player.user.pseudo %> Prime: <%=number_with_delimiter(player.user.berrys, :delimiter => '.')%>B🪙
+          <% if player.position == @player.position && @player.captain == true && @player != player %>
+            même position: +1 bonus d'équipage
+          <% end %>
+        </li>
+        <% if @player.captain == true && player != @player %>
+          <%= button_to "Retirer de votre équipage",player_kick_crew_path(player), method: :post, data: { confirm: "Êtes-vous sur de vouloir retirer ce membre de votre équipage?"}, class: "btn btn-warning my-3" %>
+        <% end %>
       <% end %>
     </ul>
     <% if @player.captain == true %>
