@@ -16,6 +16,9 @@ class PlayersController < ApplicationController
       redirect_to islands_path
     else
       @player = Player.new(player_params)
+      if @player.position == ""
+        @player.update(position: Place.first.name)
+      end
       @player.user = current_user
       if @player.save
         @player.update(visited_place: @player.visited_place.push(@player.position))

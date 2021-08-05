@@ -9,7 +9,7 @@
           <h4> <%= reward.name %> </h4>
           <br>
           Catégorie: <%= reward.category %>
-          <%= image_tag reward.image , :class => "avatar-large" %>
+          <%= image_tag reward.image , :class => "avatar-reward" %>
           Prix: <%= number_with_delimiter( reward.price, :delimiter => '.') %>Berrys
           <br>
           <% if reward.price <= current_user.player.money && @player.in_fight == false && current_user.player.in_fight == false %>

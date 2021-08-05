@@ -8,18 +8,23 @@
       <% @islands.uniq{|island| island.category}.sort_by(&:category).each do |island| %>
       <div class="col-12 col-md-12">
         <div class="m-3">
-          <h1 class="text-center"><%= link_to "#{island.category}", islands_path, class: "badge badge-pill badge-dark m-2 mt-3" %>
+          <% if island.category == "East Blue" %>
+          <h1 class="text-center"><button class="badge badge-pill badge-dark m-2 mt-3" onclick="myFunction()"><%= island.category %><span>&#8661;</span>
+</button>
           </h1>
-          <div class="row">
+          <% else %>
+            <h1 class="text-center"><button class="badge badge-pill badge-dark m-2 mt-3"><%= island.category %></button> </h1>
+          <% end %>
+          <div class="row" id="myDIV">
             <% @islands.where(category: island.category).sort_by(&:position).each do |island| %>
             <% if island.category != "Grand Line" %>
               <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
                 <div class="col-12 col-md-4">
                   <div class="card m-3" style="height: 500px">
                     <%= link_to island_path(island), class: "text-center" do %>
-                    <% if island.image != nil %>
-                    <%= image_tag island.image , :class => "product-photo center mt-3", :style => "height: 300px" %>
-                    <% end %>
+                      <% if island.image != nil %>
+                        <%= image_tag island.image , :class => "product-photo center mt-3", :style => "height: 300px" %>
+                      <% end %>
                     <% end %>
                     <div class="card-body text-center">
                       <h5 class="card-title font-custom"><%= island.name %> </h5>
@@ -45,9 +50,9 @@
                 <div class="col-12 col-md-4">
                   <div class="card m-3" style="height: 500px">
                     <%= link_to island_path(island), class: "text-center" do %>
-                    <% if island.image != nil %>
-                    <%= image_tag island.image , :class => "product-photo center mt-3", :style => "height: 300px" %>
-                    <% end %>
+                      <% if island.image != nil %>
+                        <%= image_tag island.image , :class => "product-photo center mt-3", :style => "height: 300px" %>
+                      <% end %>
                     <% end %>
                     <div class="card-body text-center">
                       <h5 class="card-title font-custom"><%= island.name %> </h5>
@@ -91,3 +96,14 @@
     </div>
   </div>
 </div>
+
+<script>
+  function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "flex";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>

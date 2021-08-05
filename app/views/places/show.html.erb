@@ -12,7 +12,8 @@
         <div class="card col-6 col-md-6 mx-2">
           <% if @player.position == @place.name %>
           <h4>Vous êtes ici☠️</h4>
-          <ul> Joueurs présents à cet endroit:
+          <span class="m-3"> Joueurs présents à cet endroit: </span>
+          <ul>
             <% @players.each do |player| %>
             <% if player.user == current_user || player.user.admin == true %>
             <% else %>
@@ -92,5 +93,5 @@
     </div>
   </div>
 <% else %>
-  <%= link_to "☠️aller à Votre position☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
+  <%= link_to "☠️Aller à votre position☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
 <% end %>

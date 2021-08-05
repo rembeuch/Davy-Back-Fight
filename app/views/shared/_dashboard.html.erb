@@ -1,6 +1,6 @@
 <div class="d-flex bg-white font-custom text-center ">
   <div class="col-sm-7 col-sm-offset-7">
-   <h3> Nom: <%= current_user.pseudo %>🏴‍☠️
+   <h3 class="font-custom-title"> Nom: <%= current_user.pseudo %>🏴‍☠️
 
     Prime: <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%>B🪙 Santé: <%= current_user.player.health %>/<%= current_user.player.max_health %>❤️  Actions Restantes: <%= current_user.player.action %>⚓ LVL: <%= current_user.player.level %>💪
     <br> XP: <%= current_user.player.exp %>/<%= Player::LEVELS[current_user.player.level] %>⏫ Berrys: <%= number_with_delimiter(current_user.player.money, :delimiter => '.') %> <img src="https://ih1.redbubble.net/image.903868159.1730/st,small,507x507-pad,600x600,f8f8f8.jpg" alt="..." class="avatar">
@@ -17,7 +17,7 @@
       Vous êtes actuellement attaqué par <%= User.find_by(pseudo: @player.in_fight_enemy).pseudo %> (résultat dans 2min max)
   <% end %>
   </h3>
-  <h3 class=""> <%= link_to "☠️ Aller à votre position ☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
+  <h3 class=""> <%= link_to "☠️ Aller à votre position ☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill ml-3" %>
 
   <%= link_to 'Équipage', player_crew_path(@player), class: "btn btn-primary badge-pill m-3" %>
 
@@ -40,43 +40,45 @@
           </div>
           <div class="modal-body mx-auto">
             <h3> <i> "Mon trésor ? Je vous le laisse si vous voulez. Trouvez-le ! Je l'ai laissé quelque part dans ce monde!"</i></h3>
-            <p>Bienvenue dans le jeu One Piece All Blue Conqueror!
-              Le but est de conquérir Grand Line et bien sur de trouver le One Piece!
-              <br> Avancez, Explorez, Combattez!
-            <h1>Déroulement des combats:</h1>
-            <p>-Les combats sont basés sur le principe du jeu du "Black Jack". Votre puissance d'attaque commence entre 1 et 11, vous pouvez choisir de l'augmenter ou de résoudre le combat autant que vous le voulez (Victoire ou fuite).
-            Votre puissance d'attaque ne doit pas dépasser 21! avec l'écart de niveau et les bonus votre puissance d'attaque TOTALE pourra être supérieur.
+            <p>Bienvenue dans le jeu One Piece All Blue Conqueror !
+              Le but est de conquérir Grand Line et bien sûr de trouver le One Piece !
+              <br> Avancez, Explorez, Combattez !
+            <h1 class="font-custom-title">Déroulement des combats</h1>
+            <p>-Les combats sont basés sur le principe du jeu du "Black Jack". Votre puissance d'attaque commence entre 1 et 11, vous pouvez choisir de l'augmenter ou de résoudre le combat autant que vous le voulez (victoire ou fuite).
+            <br>
+            <strong class="text-danger"> Votre puissance d'attaque ne doit pas dépasser 21 ! </strong>
+            <br> Avec l'écart de niveau et les bonus votre puissance d'attaque TOTALE pourra être supérieure.
             <br>Dépasser 21 avec votre puissance d'attaque vous fait perdre la manche et vous inflige une blessure.
             Si votre santé est toujours au dessus de 0 vous pouvez choisir de continuer le combat ou fuir.
             <br>
-            Si votre puissance d'attaque TOTALE (puissance d'attaque + écart de niveau + écart de bonus + écart d'équipage (voir ci dessous)) est supérieur à la puissance d'attaque de votre adversaire, vous pouvez résoudre le combat et lui infliger une blessure.
-            <br>-Contre un monstre: si le monstre a 1 seul PV vous gagnez, si il en a +, une nouvelle manche se lance. Vous devez faire tomber ses PV à 0 pour le vaincre.
-            <br>-En PVP: chaque combat n'entraine qu'une blessure et coûte 1 point d'action. Si vous blessez un joueur adverse mais que sa santé ne tombe pas à 0, vous gagnez de l'EXP (LVL adverse*100).
-            <br>En cas d'égalité: si vous être contre un monstre vous perdez, si vous êtes en PVP, le joueur avec la plus haute prime gagne. Si les primes sont équivalentes, vous perdez (avantage à la défense)
-            <br> Si la santé de votre adversaire tombe à 0, vous gagnez de l'EXP (LVL adverse*100), vous empochez la moitié du montant de la prime de votre adversaire et vous récupérez 1 de ses objets bonus au hasard si il en possède (hors fruit du démon déja mangé qui réapparaitra aléatoirement quelque part comme récompense de monstre)
+            Si votre puissance d'attaque TOTALE (puissance d'attaque + écart de niveau + écart de bonus + écart d'équipage (voir ci-dessous)) est supérieure à la puissance d'attaque de votre adversaire, vous pouvez résoudre le combat et lui infliger une blessure.
+            <br> <strong> <u> -Contre un monstre :</u> </strong> si le monstre a 1 seul PV vous gagnez, si il en a +, une nouvelle manche se lance. Vous devez faire tomber ses PV à 0 pour le vaincre.
+            <br> <strong> <u> -En PVP :</u> </strong>chaque combat n'entraîne qu'une blessure et coûte 1 point d'action. Si vous blessez un joueur adverse mais que sa santé ne tombe pas à 0, vous gagnez de l'EXP (LVL adverse*100).
+            <br>En cas d'égalité: si vous combattez contre un monstre vous perdez, si vous êtes en PVP, le joueur avec la plus haute prime gagne. Si les primes sont équivalentes, vous perdez (avantage à la défense)
+            <br> Si la santé de votre adversaire tombe à 0, vous gagnez de l'EXP (LVL adverse*100), vous empochez la moitié du montant de la prime de votre adversaire et vous récupérez 1 de ses objets bonus au hasard si il en possède (hors fruit du démon déjà mangé qui réapparaîtra aléatoirement quelque part comme récompense de monstre)
             <br>
-            <h1>Les Bonus:</h1>
-            <p>En battant des monstres ou en tuants des joueurs vous pouvez parfois récupérer des bonus. Les bonus sont ensuite à équiper ou manger si c'est un fruit du démon (vous ne pouvez en manger qu'un seul à la fois).
+            <h1 class="font-custom-title">Les Bonus</h1>
+            <p>En battant des monstres ou en tuant des joueurs vous pouvez parfois récupérer des bonus. Les bonus sont ensuite à équiper ou manger si c'est un fruit du démon (vous ne pouvez en manger qu'un seul à la fois).
             <br> Chaque bonus vous apporte +1 à votre attaque TOTALE en combat. Attention, si vous avez mangé un fruit du démon, vous aurez un malus contre les monstres ayant un bonus EAU ou GRANIT.
-            <br>Vous pouvez vendre vos bonus aux joueurs présents au meme endroit que vous pour gagner des Berrys(vous fixez le montant) dans la section inventaire.
+            <br>Vous pouvez vendre vos bonus aux joueurs présents au même endroit que vous pour gagner des Berrys(vous fixez le montant) dans la section inventaire.
             </p>
-            <h1>La Mort:</h1>
-            <p> Suite à un combat ou si vous êtes attaqué et que votre santé tombe à 0, vous ne pouvez plus vous battre jusqu'a ce que votre santé soit rechargée (santé max toute les jours ou achat de point de santé avec vos Berrys). Si vous aviez mangé un fruit du démon, vous le perdez et il réapparaitra quelque part dans le jeu.
+            <h1 class="font-custom-title">La Mort</h1>
+            <p> Suite à un combat ou si vous êtes attaqué et que votre santé tombe à 0, vous ne pouvez plus vous battre jusqu'à ce que votre santé soit rechargée (santé max tous les jours ou achat de points de santé avec vos Berrys). Si vous aviez mangé un fruit du démon, vous le perdez et il réapparaîtra quelque part dans le jeu.
             <br> Si vous êtes tué en PvP par un adversaire, vous perdez un objet bonus si vous en possédez. Si vous êtes sur Grand Line, vous retombez à East Blue.
             </p>
-            <h1>Les Déplacements:</h1>
-            <p>Vous choisissez un endroit d'East Blue pour démarrer, vous pouvez ensuite vous déplacez librement entre les différentes zones de l'ile sur laquelle vous êtes. Certaines zones ne sont pas toujours disponibles automatiquement et nécessites des conditions pour être débloquées.
-            <br> Pour changer d'île, vous devez avoir le nombre de points d'actions nécessaires indiqué, certaines îles ne sont pas toujours disponibles automatiquement et nécessites des conditions pour être débloquées.
-            <br>Si vous n'avez plus de points d'action, vous pouvez en acheter avec vos Berrys dans l'inventaire ou attendre le lendemain pour que vos points max se rechargent.
-            <br> Attention! Sur Grand Line les iles se font dans un certain ordre. Vous pouvez passer de Grand Line à East Blue mais vous devrez à nouveau refaire Grand Line "dans l'ordre" à chaque fois.
+            <h1 class="font-custom-title">Les Déplacements</h1>
+            <p>Vous choisissez un endroit d'East Blue pour démarrer, vous pouvez ensuite vous déplacez librement entre les différentes zones de l'île sur laquelle vous êtes. Certaines zones ne sont pas toujours disponibles automatiquement et nécessitent des conditions pour être débloquées.
+            <br> Pour changer d'île, vous devez avoir le nombre de points d'action indiqué, certaines îles ne sont pas toujours disponibles automatiquement et nécessitent des conditions pour être débloquées.
+            <br>Si vous n'avez plus de points d'action, vous pouvez en acheter avec vos Berrys dans l'inventaire ou attendre le lendemain pour que vos points se rechargent au max.
+            <br> Attention! Sur Grand Line les îles se parcourent dans un certain ordre. Vous pouvez passer de Grand Line à East Blue mais vous devrez à nouveau refaire Grand Line "dans l'ordre" à chaque fois.
             </p>
-            <h1>Les équipages:</h1>
+            <h1 class="font-custom-title">Les Équipages</h1>
             <p>
               Si vous n'appartenez à aucun équipage et si vous n'êtes pas encore capitaine, vous pouvez créer votre propre équipage dans la section équipage.
               <br> Une fois votre équipage créé, vous pouvez l'ouvrir au recrutement. Cependant, votre équipage ne peut pas posséder plus de membres que votre niveau actuel.
               <br> En tant que capitaine, vous bénéficiez d'un bonus d'équipage de +1 pour chaque membre d'équipage présent au même endroit que vous pour les combats PVP.
               <br>Vous pouvez retirer un membre ou dissoudre votre équipage dans la section équipage.
-              <br>Si vous ne souhaitez pas créer un équipage, vous pouvez en rejoindre un déja créé si il est ouvert au recrutement et qu'il reste des places disponibles en fonction du capitaine.
+              <br>Si vous ne souhaitez pas créer un équipage, vous pouvez en rejoindre un déja créé si il est ouvert au recrutement et qu'il reste des places disponibles en fonction du LVL du capitaine.
               <br>Certaines actions ne peuvent pas être réalisées si vous êtes en combat.
             </p>
 

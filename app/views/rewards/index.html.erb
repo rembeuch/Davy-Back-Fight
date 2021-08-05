@@ -5,27 +5,29 @@
     <ul>
       <% @rewards.sort_by(&:category).each do |reward| %>
       <li>
-        <h4> <%= reward.name %> </h4>
+        <div class="card p-3">
+        <h4 class="font-custom"> <%= reward.name %> </h4>
         <br>
         Catégorie: <%= reward.category %>
-        <%= image_tag reward.image , :class => "avatar-large" %>
-        <% if reward.category == "FDD" && reward.statut == 'équipé' %>
+        <%= image_tag reward.image , :class => "avatar-reward" %>
+        <% if reward.category.include?("FDD") && reward.statut == 'équipé' %>
           Statut: Mangé
         <% else %>
           Statut: <%= reward.statut %>
+          <br>
         <% end %>
         <br>
         <% if reward.statut == "A Vendre" %>
           Prix de vente: <%=number_with_delimiter( reward.price, :delimiter => '.')%> Berrys
         <% end %>
-        <% if @player.rewards.where(category: "FDD", statut: "équipé").count >= 1 && reward.category == "FDD" && reward.statut == "Non équipé" %>
+        <% if @player.rewards.where(statut: "équipé", category: ['FDD', "FDD LOGIA"]).count >= 1 && reward.category.include?("FDD") && reward.statut == "Non équipé" %>
           Vous ne pouvez pas manger 2 fruits du démon
         <% elsif reward.statut == 'Non équipé' && @player.in_fight == false %>
-          <%= button_to 'équiper', reward_use_path(reward), method: :patch, class: "btn-success", data: ( reward.category == "FDD" ? { confirm: "Manger ce fruit? (Vous ne pouvez en manger qu'un à la fois!)" } : nil )%>
-        <% elsif reward.statut == 'équipé' && @player.in_fight == false && reward.category != "FDD" %>
+          <%= button_to 'équiper', reward_use_path(reward), method: :patch, class: "btn-success", data: ( reward.category.include?("FDD") ? { confirm: "Manger ce fruit? (Vous ne pouvez en manger qu'un à la fois!)" } : nil )%>
+        <% elsif reward.statut == 'équipé' && @player.in_fight == false && reward.category.exclude?("FDD") %>
           <%= button_to 'Enlever', reward_drop_path(reward), method: :patch, class: "btn-danger" %>
         <% end %>
-        <% if reward == @player.rewards.where(category: "FDD", statut: "équipé").first%>
+        <% if reward == @player.rewards.where(category: ['FDD', "FDD LOGIA"], statut: "équipé").first%>
         <% elsif reward.statut != 'A Vendre' && @player.in_fight == false %>
           <%= simple_form_for reward, :url => reward_sell_path(reward), :method => :post do |f| %>
              <%= f.input :price, label: 'Indiquez votre prix de vente',
@@ -37,6 +39,7 @@
         <% elsif @player.in_fight == false %>
           <%= button_to 'Retirer de la vente', reward_drop_path(reward), method: :patch, class: "btn-danger" %>
         <% end %>
+        </div>
       </li>
         <hr>
       <% end %>
@@ -60,9 +63,7 @@
       </button>
       <div class="dropdown-menu">
         <% @player.defeated_mob.each do |mob| %>
-          <%= mob %>
-          <br>
-          <hr>
+          <p class="p-2 text-center">  <%= mob %><hr></p>
         <% end %>
       </div>
     </div>
@@ -74,9 +75,7 @@
 
       <div class="dropdown-menu">
       <% @player.visited_island.each do |island| %>
-        <%= island %>
-        <br>
-        <hr>
+      <p class="p-2 text-center">  <%= island %><hr></p>
       <% end %>
       </div>
     </div>
@@ -87,9 +86,7 @@
       </button>
       <div class="dropdown-menu">
       <% @player.visited_place.each do |place| %>
-        <%= place %>
-        <br>
-        <hr>
+      <p class="p-2 text-center">  <%= place %> <hr> </p>
       <% end %>
       </div>
     </div>
