@@ -1,10 +1,14 @@
 <div class="container">
   <%= render 'shared/dashboard' %>
-  <h1 class="font-custom text-center  "> <%= @place.name %>
-  </h1>
   <% if @player.health <= 0 %>
     Votre santé est à O
   <% elsif Place.find_by(name: @player.position) != @place && @player.in_fight_mob == @mob.name %>
+    <% @player.update(in_fight: false) %>
+    <% @player.update(in_fight_mob: "") %>
+    <% @player.update(player_power: 0) %>
+    <% FightToken.where(player: @player).last.destroy %>
+    <%= link_to 'retour', place_path(Place.find_by(name: @player.position)), class: "btn btn-success" %>
+  <% elsif Place.find_by(name: @player.position) == @place && @mob.condition != nil && !(@mob.condition.split("/") - @player.defeated_mob).empty? %>
     <% @player.update(in_fight: false) %>
     <% @player.update(in_fight_mob: "") %>
     <% @player.update(player_power: 0) %>
@@ -19,6 +23,8 @@
   <% elsif @player.in_fight_enemy != "" && @player.fight == "attacked"  %>
     Vous êtes actuellement attaqué par <%= User.find_by(pseudo: @player.in_fight_enemy).pseudo %> (résultat dans 2min max)
   <% else %>
+  <h1 class="font-custom text-center  "> <%= @place.name %>
+  </h1>
     <% if @player.health <= 0 %>
     Perdu!  Vous devez attendre de récupérer de la santé (santé maximum récupérée chaque jour)
         <%= link_to 'retour', place_path(@mob.place_id), class: "btn btn-success" %>

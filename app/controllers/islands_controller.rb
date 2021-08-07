@@ -28,6 +28,10 @@ class IslandsController < ApplicationController
     @island = Place.find_by(name: @player.position).island
     @article = Article.second
     @islands = Island.all
+    @visited = []
+    @player.visited_island.each do |island|
+      @visited.push(Island.find_by(name: island))
+    end
   end
 
   def show
@@ -49,7 +53,13 @@ class IslandsController < ApplicationController
       @player.update(visited_island: @player.visited_island.push(@island.name))
       @player.update(visited_place: @player.visited_place.push(@island.places.first.name))
     end
-    redirect_to islands_path
+    @random_way = rand(1..100)
+    if Mob.find_by(place: @island.places.first, condition: "random") != nil && @random_way >= 75
+      @player.update(defeated_mob: @player.defeated_mob.push("random"))
+      redirect_to mob_path(Mob.find_by(place: @island.places.first, condition: "random"))
+    else
+      redirect_to islands_path
+    end
     else
       redirect_to islands_path, notice: 'vous êtes engagé dans un combat'
     end

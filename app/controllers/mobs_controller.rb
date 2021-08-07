@@ -69,6 +69,9 @@ class MobsController < ApplicationController
     @player.update(fight: 'default')
     @player.update(in_fight_mob: "")
     @player.update(in_fight: false)
+    if @mob.condition == "random"
+      @player.update(defeated_mob: Player.first.defeated_mob - ["random"])
+    end
     if @player.health <= 0
       @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
       @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
@@ -88,6 +91,9 @@ class MobsController < ApplicationController
     @player.update(mob_power: pick_mob_score)
     @player.update(health: (@player.health - 1))
     if @player.health <= 0
+      if @mob.condition == "random"
+        @player.update(defeated_mob: Player.first.defeated_mob - ["random"])
+      end
       @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
       @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
       @player.update(in_fight: false)
@@ -113,6 +119,9 @@ class MobsController < ApplicationController
         @player.update(in_fight_mob: "")
         @player.update(money: @player.money + @mob.exp)
         @player.update(exp: (@player.exp + @mob.exp))
+        if @mob.condition == "random"
+          @player.update(defeated_mob: Player.first.defeated_mob - ["random"])
+        end
         @random_reward = rand(1..100)
         if @mob.rewards != [] && @random_reward >= 90
           @reward = @mob.rewards.sample

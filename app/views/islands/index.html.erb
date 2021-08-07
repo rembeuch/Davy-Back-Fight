@@ -4,84 +4,86 @@
     <%= link_to 'Ajouter une île', new_island_path, class: "btn btn-warning" %>
     <% end %>
     <%= render 'shared/dashboard' %>
-    <div class="row">
-      <% @islands.uniq{|island| island.category}.sort_by(&:category).each do |island| %>
-      <div class="col-12 col-md-12">
-        <div class="m-3">
-          <% if island.category == "East Blue" %>
-          <h1 class="text-center"><button class="badge badge-pill badge-dark m-2 mt-3" onclick="myFunction()"><%= island.category %><span>&#8661;</span>
-</button>
-          </h1>
-          <% else %>
-            <h1 class="text-center"><button class="badge badge-pill badge-dark m-2 mt-3"><%= island.category %></button> </h1>
-          <% end %>
-          <div class="row" id="myDIV">
-            <% @islands.where(category: island.category).sort_by(&:position).each do |island| %>
-            <% if island.category != "Grand Line" %>
-              <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
-                <div class="col-12 col-md-4">
-                  <div class="card m-3" style="height: 500px">
-                    <%= link_to island_path(island), class: "text-center" do %>
-                      <% if island.image != nil %>
-                        <%= image_tag island.image , :class => "product-photo center mt-3", :style => "height: 300px" %>
+    <div class="row justify-content-center align-items-center">
+      <% @visited.uniq{|island| island.category }.sort_by(&:category).each do |island| %>
+        <h1>
+          <div class="col-12 col-md-12 ">
+            <div class="m-3">
+              <% if island.category == "East Blue" %>
+                <button class="badge badge-pill badge-dark m-2 mt-3" onclick="toggleEast()"><%= island.category %><span>&#8661;</span>
+                </button>
+              <% elsif island.category == "Grand Line" %>
+                <button class="badge badge-pill badge-dark m-2 mt-3" onclick="toggleGrand()"><%= island.category %><span>&#8661;</span>
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </h1>
+      <% end %>
+          <div class="row">
+            <% @islands.sort_by(&:category).each do |island| %>
+              <% if island.category == "East Blue" %>
+                <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
+                  <div class="col-sm-4 col-12" id="East">
+                    <div class="card m-3" style="height: 500px">
+                      <%= link_to island_path(island), class: "text-center" do %>
+                        <% if island.image != nil %>
+                          <%= image_tag island.image , :class => "product-photo center mt-3", :style => "height: 300px" %>
+                        <% end %>
                       <% end %>
-                    <% end %>
-                    <div class="card-body text-center">
-                      <h5 class="card-title font-custom"><%= island.name %> </h5>
-                      <% if island.places.find_by(name: @player.position) %>
-                      <h5 class="font-custom">☠️ <strong class="text-primary"> Vous êtes ici</strong> ☠️</h5>
-                      <% end %>
-                      <%= link_to "Détails", island_path(island), class: "btn btn-primary mb-3" %>
-                      <% if @player.action < island.difficulty && !island.places.find_by(name: @player.position) %>
-                       <br> Points d'action insuffisants pour voyager sur cette île (<%= island.difficulty %> pts)
-                      <% elsif island.name == 'Reverse Mountain' && !@player.defeated_mob.join(" ").include?("Smoker")  %>
-                        Vous ne pouvez pas encore vous rendre ici.
-                      <% elsif !island.places.find_by(name: @player.position) && @player.in_fight == false && @player.action >= island.difficulty %>
-                        <%= button_to "Aller sur cette île ⛵ -#{island.difficulty}pt d'action",island_move_player_path(island), method: :post %>
-                      <% elsif island.places.find_by(name: @player.position) && @player.in_fight == true %>
-                        ⚔️
-                      <% end %>
+                      <div class="card-body text-center">
+                        <h5 class="card-title font-custom"><%= island.name %> (<%= island.category %>)</h5>
+
+                        <% if island.places.find_by(name: @player.position) %>
+                        <h5 class="font-custom">☠️ <strong class="text-primary"> Vous êtes ici</strong> ☠️</h5>
+                        <% end %>
+                        <%= link_to "Détails", island_path(island), class: "btn btn-primary mb-3" %>
+                        <% if @player.action < island.difficulty && !island.places.find_by(name: @player.position) %>
+                         <br> Points d'action insuffisants pour voyager sur cette île (<%= island.difficulty %> pts)
+                        <% elsif island.name == 'Reverse Mountain' && !@player.defeated_mob.join(" ").include?("Smoker")  %>
+                          Vous ne pouvez pas encore vous rendre ici.
+                        <% elsif !island.places.find_by(name: @player.position) && @player.in_fight == false && @player.action >= island.difficulty %>
+                          <%= button_to "Aller sur cette île ⛵ -#{island.difficulty}pt d'action",island_move_player_path(island), method: :post, class: "col-12" %>
+                        <% elsif island.places.find_by(name: @player.position) && @player.in_fight == true %>
+                          ⚔️
+                        <% end %>
+                      </div>
                     </div>
                   </div>
-                </div>
+                <% end %>
+              <% elsif island.position.between?((@island.position - 1),(@island.position + 1)) && @island.category == "Grand Line" || @island.position == island.position%>
+          </div>
+                <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
+                    <div class="col-sm-4 col-12" id="Grand">
+                      <div class="card m-3" style="height: 500px">
+                        <%= link_to island_path(island), class: "text-center" do %>
+                          <% if island.image != nil %>
+                            <%= image_tag island.image , :class => "product-photo center mt-3", :style => "height: 300px" %>
+                          <% end %>
+                        <% end %>
+                        <div class="card-body text-center">
+                          <h5 class="card-title font-custom"><%= island.name %> (<%= island.category %>)</h5>
+                          <% if island.places.find_by(name: @player.position) %>
+                            <h5 class="font-custom">☠️ <strong class="text-primary"> Vous êtes ici</strong> ☠️</h5>
+                          <% end %>
+                          <%= link_to "Détails", island_path(island), class: "btn btn-primary mb-3" %>
+                          <% if @player.action < island.difficulty && !island.places.find_by(name: @player.position) %>
+                           <br> Points d'action insuffisants pour voyager sur cette île (<%= island.difficulty %> pts)
+                          <% elsif island.name == 'Reverse Mountain' && !@player.defeated_mob.join(" ").include?("Smoker")  %>
+                            Vous ne pouvez pas encore vous rendre ici.
+                          <% elsif !island.places.find_by(name: @player.position) && @player.in_fight == false && @player.action >= island.difficulty %>
+                            <%= button_to "Aller sur cette île ⛵ -#{island.difficulty}pt d'action",island_move_player_path(island), method: :post, class: "col-12" %>
+                          <% elsif island.places.find_by(name: @player.position) && @player.in_fight == true %>
+                            ⚔️
+                          <% end %>
+                        </div>
+                      </div>
+                <% end %>
               <% end %>
-            <% elsif island.position.between?((@island.position - 1),(@island.position + 1)) && @island.category == "Grand Line" || @island.position == island.position%>
-            <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
-                <div class="col-12 col-md-4">
-                  <div class="card m-3" style="height: 500px">
-                    <%= link_to island_path(island), class: "text-center" do %>
-                      <% if island.image != nil %>
-                        <%= image_tag island.image , :class => "product-photo center mt-3", :style => "height: 300px" %>
-                      <% end %>
-                    <% end %>
-                    <div class="card-body text-center">
-                      <h5 class="card-title font-custom"><%= island.name %> </h5>
-                      <% if island.places.find_by(name: @player.position) %>
-                      <h5 class="font-custom">☠️ <strong class="text-primary"> Vous êtes ici</strong> ☠️</h5>
-                      <% end %>
-                      <%= link_to "Détails", island_path(island), class: "btn btn-primary mb-3" %>
-                      <% if @player.action < island.difficulty && !island.places.find_by(name: @player.position) %>
-                       <br> Points d'action insuffisants pour voyager sur cette île (<%= island.difficulty %> pts)
-                      <% elsif island.name == 'Reverse Mountain' && !@player.defeated_mob.join(" ").include?("Smoker")  %>
-                        Vous ne pouvez pas encore vous rendre ici.
-                      <% elsif !island.places.find_by(name: @player.position) && @player.in_fight == false && @player.action >= island.difficulty %>
-                        <%= button_to "Aller sur cette île ⛵ -#{island.difficulty}pt d'action",island_move_player_path(island), method: :post %>
-                      <% elsif island.places.find_by(name: @player.position) && @player.in_fight == true %>
-                        ⚔️
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-            <% end %>
             <% end %>
           </div>
-        </div>
-      </div>
-      <% end %>
-    </div>
-
   </div>
+</div>
   <div class="col-2 col-md-2 text-center mt-4">
     <div class="card mb-4">
       <% if @article.image != nil %>
@@ -98,12 +100,28 @@
 </div>
 
 <script>
-  function myFunction() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "flex";
+ function toggleEast() {
+  var y = document.querySelectorAll("#East");
+  console.log(y)
+  y.forEach((island) => {
+  if (island.style.display === "none") {
+    island.style.display = "flex";
   } else {
-    x.style.display = "none";
+    island.style.display = "none";
   }
+
+  })
+}
+function toggleGrand() {
+  var y = document.querySelectorAll("#Grand");
+  console.log(y)
+  y.forEach((island) => {
+  if (island.style.display === "none") {
+    island.style.display = "flex";
+  } else {
+    island.style.display = "none";
+  }
+
+  })
 }
 </script>
