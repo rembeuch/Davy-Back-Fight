@@ -70,8 +70,8 @@ class MobsController < ApplicationController
     @player.update(in_fight_mob: "")
     @player.update(in_fight: false)
     if @player.health <= 0
-      @player.rewards.where(category: "FDD", statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
-      @player.rewards.where(category: "FDD", statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
+      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
     end
     if FightToken.find_by(player: current_user.player) != nil
       FightToken.find_by(player: current_user.player).destroy
@@ -88,8 +88,8 @@ class MobsController < ApplicationController
     @player.update(mob_power: pick_mob_score)
     @player.update(health: (@player.health - 1))
     if @player.health <= 0
-      @player.rewards.where(category: "FDD", statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
-      @player.rewards.where(category: "FDD", statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
+      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
       @player.update(in_fight: false)
       if FightToken.find_by(player: current_user.player) != nil
         FightToken.find_by(player: current_user.player).destroy
@@ -149,11 +149,17 @@ class MobsController < ApplicationController
     @sum = 0
     @rewards = current_user.player.rewards.where(statut: "équipé")
     @sum += @rewards.count
-    if @rewards.map { |reward| reward.category }.include?("FDD") && @mob.bonus.split(" ").include?("EAU") || @mob.bonus.split(" ").include?("GRANIT")
+    if ["FDD"] - @rewards.map { |reward| reward.category }.join(" ").split == [] && @mob.bonus.split(" ").include?("EAU") || @mob.bonus.split(" ").include?("GRANIT")
       @sum -= 1
+    end
+    if ["LOGIA"] - @rewards.map { |reward| reward.category }.join(" ").split == []
+      @sum += 1
     end
     if @mob.bonus != "0"
       @sum -= @mob.bonus.split(" ").count
+      if @mob.bonus.include?("FDD") && ["EAU"] - @rewards.map { |reward| reward.category }.join(" ").split == [] || ["GRANIT"] - @rewards.map { |reward| reward.category }.join(" ").split == []
+        @sum += 1
+      end
     end
     return @sum
   end

@@ -14,7 +14,7 @@
         </div>
           écart de niveau: + <%= @player.level - @enemy.level %> à la résolution du combat
           <br>
-          écart des bonus: + <%= @player.rewards.where(statut: "équipé").count - @enemy.rewards.where(statut: "équipé").count %> à la résolution du combat
+          écart des bonus: + <%= @sum - ((Player.where(crew: @player.crew, position: @player.position).count - 1) - (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1)) %> à la résolution du combat
           <br>
           <% if @player.captain == true && Player.where(crew: @player.crew, position: @player.position).count > 1 || @enemy.captain == true  %>
             écart d'équipage: + <%= (Player.where(crew: @player.crew, position: @player.position).count - 1) - (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1) %>
@@ -37,10 +37,10 @@
           <% end %>
           <br>
           <ul>
-          Bonus: <% @player.rewards.each do |reward| %>
-                   <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
- </li>
-                  <% end %>
+          Bonus: <% @player.rewards.where(statut: "équipé").each do |reward| %>
+          <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
+          </li>
+          <% end %>
           </ul>
           <br>
           Vous avez 2 minutes pour finir ce combat.

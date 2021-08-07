@@ -130,8 +130,8 @@ class PlayersController < ApplicationController
     @player = current_user.player
     @place = Place.find_by(name: @player.position)
     if @player.health <= 0
-      @player.rewards.where(category: "FDD", statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
-      @player.rewards.where(category: "FDD", statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
+      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
       if @place.island.difficulty > 1
         @player.update(position: (Island.where.not(category: "Grand Line").sample.places.where(condition: "").sample.name))
       end
@@ -192,7 +192,7 @@ class PlayersController < ApplicationController
         @log.player = @enemy
         @log.content = "vous avez été tué par #{@player.user.pseudo}"
         @log.save
-        @reward = @enemy.rewards.where(category: "FDD", statut: "équipé")
+        @reward = @enemy.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé")
         @reward.update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
         @enemy.rewards.delete(@reward)
         if @enemy.rewards != []
@@ -225,11 +225,20 @@ class PlayersController < ApplicationController
     @rewards = current_user.player.rewards.where(statut: "équipé")
     @enemy_rewards = @enemy.rewards.where(statut: "équipé")
     @sum += @rewards.count
-    if @rewards.map { |reward| reward.category }.include?("FDD") && @enemy_rewards.map { |reward| reward.category }.include?("EAU") || @enemy_rewards.map { |reward| reward.category }.include?("GRANIT")
-      @sum -= 1
+    if ["LOGIA"] - @rewards.map { |reward| reward.category }.join(" ").split == []
+      @sum += 1
     end
     if @enemy.rewards != []
-      @sum -= @enemy_rewards.count
+      if ["FDD"] - @rewards.map { |reward| reward.category }.join(" ").split == [] && ["EAU"] - @enemy.rewards.map { |reward| reward.category }.join(" ").split == [] ||["GRANIT"] - @enemy.rewards.map { |reward| reward.category }.join(" ").split == []
+        @sum -= 1
+      end
+      @sum -= @enemy.rewards.where(statut: "équipé").count
+      if ["LOGIA"] - @enemy.rewards.map { |reward| reward.category }.join(" ").split == []
+        @sum -= 1
+      end
+      if ["FDD"] - @enemy.rewards.map { |reward| reward.category }.join(" ").split == []  && ["EAU"] - @rewards.map { |reward| reward.category }.join(" ").split == [] || ["GRANIT"] - @rewards.map { |reward| reward.category }.join(" ").split == []
+        @sum += 1
+      end
     end
     if @player.captain == true && Player.where(crew: @player.crew, position: @player.position).count > 1
       @sum += (Player.where(crew: @player.crew, position: @player.position).count - 1)
