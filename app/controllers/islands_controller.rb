@@ -42,6 +42,7 @@ class IslandsController < ApplicationController
 
   def move_player
     @player = current_user.player
+    @current_island = Place.find_by(name: @player.position).island
     @captain = Player.where(crew: @player.crew, captain: true).first
     if @player.crew != "" && @captain.in_fight == true
       redirect_to island_path(Place.find_by(name: @player.position).island), notice: 'votre capitaine combat ici, vous ne pouvez pas l\'abandonner'
@@ -57,6 +58,9 @@ class IslandsController < ApplicationController
     if Mob.find_by(place: @island.places.first, condition: "random") != nil && @random_way >= 75
       @player.update(defeated_mob: @player.defeated_mob.push("random"))
       redirect_to mob_path(Mob.find_by(place: @island.places.first, condition: "random"))
+    elsif @current_island.category == "Grand Line" && @island.category == "East Blue" && @random_way >= 50
+      @player.update(defeated_mob: @player.defeated_mob.push("random"))
+      redirect_to mob_path(Mob.find_by(place: Island.all.where(category: "Calm Belt").first.places.first, condition: "random"))
     else
       redirect_to islands_path
     end

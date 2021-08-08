@@ -2,7 +2,7 @@
   <%= render 'shared/dashboard' %>
   <% if @player.health <= 0 %>
     Votre santé est à O
-  <% elsif Place.find_by(name: @player.position) != @place && @player.in_fight_mob == @mob.name %>
+  <% elsif Place.find_by(name: @player.position) != @place && @player.in_fight_mob == @mob.name && @mob.name != 'Rois des Mers' %>
     <% @player.update(in_fight: false) %>
     <% @player.update(in_fight_mob: "") %>
     <% @player.update(player_power: 0) %>

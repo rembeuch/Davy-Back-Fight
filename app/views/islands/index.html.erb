@@ -4,10 +4,10 @@
     <%= link_to 'Ajouter une île', new_island_path, class: "btn btn-warning" %>
     <% end %>
     <%= render 'shared/dashboard' %>
-    <div class="row justify-content-center align-items-center">
+    <div class="row">
       <% @visited.uniq{|island| island.category }.sort_by(&:category).each do |island| %>
         <h1>
-          <div class="col-12 col-md-12 ">
+          <div class="col-12 col-md-12 justify-content-center align-items-center ">
             <div class="m-3">
               <% if island.category == "East Blue" %>
                 <button class="badge badge-pill badge-dark m-2 mt-3" onclick="toggleEast()"><%= island.category %><span>&#8661;</span>
@@ -20,6 +20,7 @@
           </div>
         </h1>
       <% end %>
+    </div>
           <div class="row">
             <% @islands.sort_by(&:category).each do |island| %>
               <% if island.category == "East Blue" %>
@@ -33,9 +34,8 @@
                       <% end %>
                       <div class="card-body text-center">
                         <h5 class="card-title font-custom"><%= island.name %> (<%= island.category %>)</h5>
-
                         <% if island.places.find_by(name: @player.position) %>
-                        <h5 class="font-custom">☠️ <strong class="text-primary"> Vous êtes ici</strong> ☠️</h5>
+                          <h5 class="font-custom">☠️ <strong class="text-primary"> Vous êtes ici</strong> ☠️</h5>
                         <% end %>
                         <%= link_to "Détails", island_path(island), class: "btn btn-primary mb-3" %>
                         <% if @player.action < island.difficulty && !island.places.find_by(name: @player.position) %>
@@ -52,7 +52,6 @@
                   </div>
                 <% end %>
               <% elsif island.position.between?((@island.position - 1),(@island.position + 1)) && @island.category == "Grand Line" || @island.position == island.position%>
-          </div>
                 <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
                     <div class="col-sm-4 col-12" id="Grand">
                       <div class="card m-3" style="height: 500px">
@@ -78,12 +77,12 @@
                           <% end %>
                         </div>
                       </div>
+                    </div>
                 <% end %>
               <% end %>
             <% end %>
           </div>
   </div>
-</div>
   <div class="col-2 col-md-2 text-center mt-4">
     <div class="card mb-4">
       <% if @article.image != nil %>
@@ -99,6 +98,7 @@
   </div>
 </div>
 
+</div>
 <script>
  function toggleEast() {
   var y = document.querySelectorAll("#East");

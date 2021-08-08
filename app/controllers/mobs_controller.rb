@@ -79,7 +79,7 @@ class MobsController < ApplicationController
     if FightToken.find_by(player: current_user.player) != nil
       FightToken.find_by(player: current_user.player).destroy
     end
-    redirect_to place_path(@mob.place_id)
+    redirect_to place_path(Place.find_by(name: @player.position))
     @disable_nav = false
   end
 
