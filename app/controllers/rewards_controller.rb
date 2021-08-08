@@ -39,6 +39,14 @@ class RewardsController < ApplicationController
   def use
     @reward = Reward.find(params[:reward_id])
     @reward.update(statut: "équipé")
+    if @reward.category.include?("FDD")
+      Player.all.each do |player|
+        @log = QuestLog.new
+        @log.player = player
+        @log.content = "le #{@reward.name} à été mangé!"
+        @log.save
+      end
+    end
     redirect_to rewards_path
   end
 
