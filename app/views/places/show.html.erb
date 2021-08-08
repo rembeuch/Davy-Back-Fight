@@ -2,6 +2,7 @@
   <div class="row">
     <div class="container">
       <%= render 'shared/dashboard' %>
+      <% if @player.position == @place.name %>
       <h2 class="font-custom text-center  "> <%= @place.name %>
         <br>
         <%= link_to 'Retourner à la carte de  l\'île', island_path(@place.island_id), class: "btn btn-dark badge-pill m-3" %> </h1>
@@ -92,6 +93,7 @@
       </div>
     </div>
   </div>
+  <% end %>
 <% else %>
   <%= link_to "☠️Aller à votre position☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
 <% end %>

@@ -18,7 +18,8 @@ class RewardsController < ApplicationController
 
   def index
     @player = current_user.player
-    @rewards = @player.rewards.sort_by(&:statut)
+    @rewards = @player.rewards.where.not(category: "EternalPose").sort_by(&:statut)
+    @eternalpose = @player.rewards.where(category: "EternalPose")
   end
 
   def buy_health

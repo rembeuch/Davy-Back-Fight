@@ -45,6 +45,11 @@ class MobsController < ApplicationController
         token.player.update(in_fight_enemy: "")
         token.player.update(in_fight: false)
         FightToken.find_by(player: token.player).destroy
+        if current_user.player.health <= 0
+          @reward = current_user.player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé")
+          @reward.update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+          current_user.player.rewards.delete(@reward)
+        end
       end
     end
   end
@@ -73,8 +78,9 @@ class MobsController < ApplicationController
       @player.update(defeated_mob: Player.first.defeated_mob - ["random"])
     end
     if @player.health <= 0
-      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
-      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @reward = @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé")
+      @reward.update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.delete(@reward)
     end
     if FightToken.find_by(player: current_user.player) != nil
       FightToken.find_by(player: current_user.player).destroy
@@ -94,8 +100,9 @@ class MobsController < ApplicationController
       if @mob.condition == "random"
         @player.update(defeated_mob: Player.first.defeated_mob - ["random"])
       end
-      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
-      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @reward = @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé")
+      @reward.update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.delete(@reward)
       @player.update(in_fight: false)
       if FightToken.find_by(player: current_user.player) != nil
         FightToken.find_by(player: current_user.player).destroy

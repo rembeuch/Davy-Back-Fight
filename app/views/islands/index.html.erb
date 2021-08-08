@@ -22,7 +22,7 @@
       <% end %>
     </div>
           <div class="row">
-            <% @islands.sort_by(&:category).each do |island| %>
+            <% @islands.sort_by(&:position).each do |island| %>
               <% if island.category == "East Blue" %>
                 <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
                   <div class="col-sm-4 col-12" id="East">
@@ -51,7 +51,7 @@
                     </div>
                   </div>
                 <% end %>
-              <% elsif island.position.between?((@island.position - 1),(@island.position + 1)) && @island.category == "Grand Line" || @island.position == island.position%>
+              <% elsif island.position.between?((@island.position - 1),(@island.position + 1)) && @island.category == "Grand Line" || @island.position == island.position || @player.rewards.where(category: "EternalPose").map{ |island| island.name}.include?(island.name) && @island.category == 'Grand Line' %>
                 <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
                     <div class="col-sm-4 col-12" id="Grand">
                       <div class="card m-3" style="height: 500px">

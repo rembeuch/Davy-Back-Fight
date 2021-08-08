@@ -5,10 +5,10 @@
   <% end %>
 <%= render 'shared/dashboard' %>
 
+  <% if Place.find_by(name: @player.position).island == @island %>
   <h1 class="font-custom text-center "> <%= @island.name %>
   <br>
   <%= link_to 'Retourner à la carte des îles', islands_path, class: "btn btn-dark badge-pill m-3" %> </h1>
-
   <div class="row">
     <% @island.places.each do |place| %>
       <% if place.condition == "" || @player.defeated_mob.include?(place.condition) %>
@@ -37,6 +37,7 @@
       <% end %>
     <% end %>
   </div>
+<% end %>
 </div>
     <div class="col-0 col-md-2 text-center mt-4">
       <div class="card mb-4">

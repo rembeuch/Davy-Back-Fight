@@ -130,8 +130,9 @@ class PlayersController < ApplicationController
     @player = current_user.player
     @place = Place.find_by(name: @player.position)
     if @player.health <= 0
-      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(mob_id: Mob.all.sample.id, statut: "Non équipé")
-      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @reward = @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé")
+      @reward.update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.delete(@reward)
       if @place.island.difficulty > 1
         @player.update(position: (Island.where.not(category: "Grand Line").sample.places.where(condition: "").sample.name))
       end
