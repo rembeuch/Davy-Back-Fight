@@ -46,9 +46,15 @@ class MobsController < ApplicationController
         token.player.update(in_fight: false)
         FightToken.find_by(player: token.player).destroy
         if current_user.player.health <= 0
+          current_user.player.update(wanted: 0)
           @reward = current_user.player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé")
           @reward.update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
           current_user.player.rewards.delete(@reward)
+          if token.player.defeated_mob.include?('random')
+            token.player.update(defeated_mob: token.player.defeated_mob - ["random"])
+          elsif token.player.defeated_mob.include?('Marine')
+            token.player.update(defeated_mob: token.player.defeated_mob - ["Marine"])
+          end
         end
       end
     end
@@ -66,6 +72,15 @@ class MobsController < ApplicationController
     redirect_to mob_path(@mob)
   end
 
+  def death
+    if @player.health <= 0
+      @player.update(wanted: 0)
+      @reward = @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé")
+      @reward.update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.rewards.delete(@reward)
+    end
+  end
+
   def run
     @mob = Mob.find(params[:mob_id])
     @player = current_user.player
@@ -75,13 +90,11 @@ class MobsController < ApplicationController
     @player.update(in_fight_mob: "")
     @player.update(in_fight: false)
     if @mob.condition == "random"
-      @player.update(defeated_mob: Player.first.defeated_mob - ["random"])
+      @player.update(defeated_mob: @player.defeated_mob - ["random"])
+    elsif @mob.condition == 'Marine'
+          @player.update(defeated_mob: @player.defeated_mob - ["Marine"])
     end
-    if @player.health <= 0
-      @reward = @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé")
-      @reward.update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
-      @player.rewards.delete(@reward)
-    end
+    death
     if FightToken.find_by(player: current_user.player) != nil
       FightToken.find_by(player: current_user.player).destroy
     end
@@ -98,12 +111,14 @@ class MobsController < ApplicationController
     @player.update(health: (@player.health - 1))
     if @player.health <= 0
       if @mob.condition == "random"
-        @player.update(defeated_mob: Player.first.defeated_mob - ["random"])
+        @player.update(defeated_mob: @player.defeated_mob - ["random"])
+      elsif @mob.condition == 'Marine'
+          @player.update(defeated_mob: @player.defeated_mob - ["Marine"])
       end
       @reward = @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé")
       @reward.update(mob_id: Mob.all.sample.id, player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+      @player.update(in_fight: false, wanted: 0)
       @player.rewards.delete(@reward)
-      @player.update(in_fight: false)
       if FightToken.find_by(player: current_user.player) != nil
         FightToken.find_by(player: current_user.player).destroy
       end
@@ -127,7 +142,16 @@ class MobsController < ApplicationController
         @player.update(money: @player.money + @mob.exp)
         @player.update(exp: (@player.exp + @mob.exp))
         if @mob.condition == "random"
-          @player.update(defeated_mob: Player.first.defeated_mob - ["random"])
+          @player.update(defeated_mob: @player.defeated_mob - ["random"])
+        elsif @mob.condition == 'Marine'
+          @player.update(defeated_mob: @player.defeated_mob - ["Marine"])
+        end
+        if ['civil','marine','tenryubito','gouvernement'].include?(@mob.category) && @player.wanted <= 100
+          if @mob.condition == 'tenryubito'
+            @player.update(wanted: 100)
+          else
+            @player.update(wanted: (@player.wanted += 1))
+          end
         end
         @random_reward = rand(1..100)
         if @mob.rewards != [] && @random_reward >= 90

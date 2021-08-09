@@ -25,6 +25,10 @@
   <button type="button" class="btn btn-primary badge-pill" data-toggle="modal" data-target="#Modal-rules">
       Règles du jeu
   </button>
+  <br> Wanted: <%= @player.wanted %> / 100⭐
+    <% if @player.wanted > 19 %>
+      Recherché!
+    <% end %>
 </h3>
 
 
@@ -62,8 +66,14 @@
             <br> Chaque bonus vous apporte +1 à votre attaque TOTALE en combat (+2 pour les FDD LOGIA). Attention, si vous avez mangé un fruit du démon, vous aurez un malus contre les monstres ayant un bonus EAU ou GRANIT.
             <br>Vous pouvez vendre vos bonus aux joueurs présents au même endroit que vous pour gagner des Berrys (vous fixez le montant) dans la section inventaire.
             </p>
+            <h1 class="font-custom-title">La jauge Wanted ⭐</h1>
+            <p> Vous commencez avec 0 ⭐. Si vous battez un monstre "civil", "marine", "gouvernement" ou "tenryubito" votre nombre d'⭐ augmentera.
+            <br> à partir de 20 ⭐, la marine se lancera à votre poursuite. Vous aurez alors une chance de vous retrouver en combat lors de vos déplacements.
+            <br> Plus votre jauge wanted ⭐ sera pleine, plus les marines à vos trousses seront puissants!
+            </p>
             <h1 class="font-custom-title">La Mort</h1>
-            <p> Suite à un combat ou si vous êtes attaqué et que votre santé tombe à 0, vous ne pouvez plus vous battre jusqu'à ce que votre santé soit rechargée (santé max tous les jours ou achat de points de santé avec vos Berrys). Si vous aviez mangé un fruit du démon, vous le perdez et il réapparaîtra quelque part dans le jeu.
+            <p> Suite à un combat ou si vous êtes attaqué et que votre santé tombe à 0, vous ne pouvez plus vous battre jusqu'à ce que votre santé soit rechargée (santé max tous les jours ou achat de points de santé avec vos Berrys). Si vous aviez mangé un fruit du démon, vous le perdez et il réapparaîtra quelque part dans le jeu. Votre jauge wanted ⭐ est remise à 0 si vous êtes tué par un monstre.
+            <br>Vous ne pouvez plus changer d'île tant que votre santé est à 0.
             <br> Si vous êtes tué en PvP par un adversaire, vous perdez un objet bonus si vous en possédez. Si vous êtes sur Grand Line, vous retombez à East Blue.
             </p>
             <h1 class="font-custom-title">Les Déplacements</h1>

@@ -5,13 +5,13 @@
   <% end %>
 <%= render 'shared/dashboard' %>
 
-  <% if Place.find_by(name: @player.position).island == @island %>
+  <% if Place.find_by(name: @player.position).island == @island || current_user.admin == true %>
   <h1 class="font-custom text-center "> <%= @island.name %>
   <br>
   <%= link_to 'Retourner à la carte des îles', islands_path, class: "btn btn-dark badge-pill m-3" %> </h1>
   <div class="row">
     <% @island.places.each do |place| %>
-      <% if place.condition == "" || @player.defeated_mob.include?(place.condition) %>
+      <% if place.condition == "" || @player.defeated_mob.include?(place.condition) || current_user.admin == true%>
         <div class="col-12 col-md-4">
           <div class="card m-3">
             <%= link_to island_place_path(@island, place), class: "text-center" do %>

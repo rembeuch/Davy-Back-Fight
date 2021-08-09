@@ -1,8 +1,8 @@
-<% if @place.condition == "" || @player.defeated_mob.include?(@place.condition) %>
+<% if @place.condition == "" || @player.defeated_mob.include?(@place.condition) || current_user.admin == true %>
   <div class="row">
     <div class="container">
       <%= render 'shared/dashboard' %>
-      <% if @player.position == @place.name %>
+      <% if @player.position == @place.name || current_user.admin == true %>
       <h2 class="font-custom text-center  "> <%= @place.name %>
         <br>
         <%= link_to 'Retourner à la carte de  l\'île', island_path(@place.island_id), class: "btn btn-dark badge-pill m-3" %> </h1>
@@ -54,7 +54,13 @@
               <% if mob.condition != "" && !(mob.condition.split("/") - @player.defeated_mob).empty? %>
               <% else %>
                 <%= image_tag mob.image , :class => "product-photo center mt-3" %>
-                <li><%= mob.name %> <% if @player.defeated_mob.include?(mob.name) %> (vaincu) <% end %>
+                <li><%= mob.name %>
+                  <% if mob.category != "" %>
+                    : <%= mob.category %>
+                   <% end %>
+                  <% if @player.defeated_mob.include?(mob.name) %>
+                    (vaincu)
+                  <% end %>
                   LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️ Bonus:<%= mob.bonus %>🍈
                   <% if @player.health <= 0 %>
                     Vous devez attendre de récupérer de la santé pour combattre (santé maximum récupérée chaque jour)
