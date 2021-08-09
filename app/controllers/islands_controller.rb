@@ -61,7 +61,7 @@ class IslandsController < ApplicationController
     elsif @current_island.category == "Grand Line" && @island.category == "East Blue" && @random_way >= 50
       @player.update(defeated_mob: @player.defeated_mob.push("random"), visited_island: @player.visited_island.push("Calm Belt"), visited_place: @player.visited_place.push("Calm Belt"))
       redirect_to mob_path(Mob.find_by(place: Island.all.where(category: "Calm Belt").first.places.first, condition: "random"))
-    elsif @player.wanted >= 20 && @random_way >= 1
+    elsif @player.wanted >= 20 && @random_way >= 75
       @player.update(defeated_mob: @player.defeated_mob.push("Marine"))
       redirect_to mob_path(Mob.where(category: "marine", level: @player.wanted/10).sample)
     else
