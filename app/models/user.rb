@@ -7,10 +7,11 @@ class User < ApplicationRecord
   has_many :user_answers
   has_many :orders
   has_one :cart
+  has_one :player
   has_many :participations
 
   mount_uploader :avatar, PhotoUploader
 
-  validates :email, uniqueness: true
-  validates :pseudo, uniqueness: true
+  validates :email, uniqueness: true, presence: true
+  validates :pseudo, uniqueness: true, presence: true
 end

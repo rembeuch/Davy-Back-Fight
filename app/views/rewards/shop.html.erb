@@ -1,0 +1,24 @@
+<% if current_user.player.position == @player.position && @player != current_user.player %>
+  <div class="container card">
+    <%= render 'shared/dashboard' %>
+    <h1 class="center">En Vente</h1>
+    <div class="d-flex justify-content-between">
+      <ul>
+        <% @rewards.sort_by(&:category).each do |reward| %>
+        <li>
+          <h4> <%= reward.name %> </h4>
+          <br>
+          Catégorie: <%= reward.category %>
+          <%= image_tag reward.image , :class => "avatar-reward" %>
+          Prix: <%= number_with_delimiter( reward.price, :delimiter => '.') %>Berrys
+          <br>
+          <% if reward.price <= current_user.player.money && @player.in_fight == false && current_user.player.in_fight == false %>
+            <%= button_to 'Acheter?', reward_buy_reward_path(reward), method: :post, class: "btn-success", data: { confirm: "Etes vous sur?" }%>
+          <% end %>
+        </li>
+        <hr>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

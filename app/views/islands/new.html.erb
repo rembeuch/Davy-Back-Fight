@@ -1,0 +1,22 @@
+<% if current_user.admin == true %>
+<h1>new island</h1>
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-4">
+    <div class="form-inputs">
+  <%= simple_form_for [@island] do |f| %>
+  <%= f.input :name, label: 'Name' %>
+  <%= f.input :image, label: "image" %>
+  <%= f.input :category, label: "category" %>
+  <%= f.input :difficulty, label: "difficulty" %>
+  <%= f.input :condition, label: "condition" %>
+  <%= f.input :position, label: "position" %>
+
+
+
+
+  <%= f.button :submit, "Valider", class: "btn btn-primary" %>
+   </div>
+  </div>
+</div>
+  <% end %>
+<% end %>

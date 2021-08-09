@@ -1,0 +1,86 @@
+<% if current_user.player.health > 0 && current_user.player.action > 0 && @player.position == @enemy.position && @enemy.health > 0 && @player.user != @enemy.user && @player.in_fight_enemy == @enemy.user.pseudo && @player.fight_token != nil%>
+<div class="container">
+  <%= render 'shared/dashboard' %>
+  <h1 class="font-custom text-center  ">
+  </h1>
+      <div id="timeup"></div>
+      <div class="m-3 d-flex" id="fight">
+        <div class="card col-6 col-md-6 mx-2">
+        <h2>Votre Puissance D'Attaque🗡️: <%= @player.player_power %></h2>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">de 0 à 20 <%= '🗡️' if @player.player_power < 21 %></div>
+          <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">21 Parfait! <%= '🗡️' if @player.player_power == 21 %> </div>
+          <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="90" aria-valuemax="100"> >21 Perdu</div>
+        </div>
+          écart de niveau: + <%= @player.level - @enemy.level %> à la résolution du combat
+          <br>
+          écart des bonus: + <%= @sum - ((Player.where(crew: @player.crew, position: @player.position).count - 1) - (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1)) %> à la résolution du combat
+          <br>
+          <% if @player.captain == true && Player.where(crew: @player.crew, position: @player.position).count > 1 || @enemy.captain == true  %>
+            écart d'équipage: + <%= (Player.where(crew: @player.crew, position: @player.position).count - 1) - (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1) %>
+          <% end %>
+          <h2> ATTAQUE TOTALE: +<%=@player.player_power + @player.level - @enemy.level + @sum %></h2>
+          <br>
+          <% if @player.player_power == 0 %>
+           <%= button_to 'Attaquer (+1 à +11)',player_power_path(@enemy), method: :post %>
+          <% elsif @player.fight == 'lose' %>
+            Perdu!
+            <%= button_to 'Fuir',player_run_path(@enemy), method: :post,data: { disable_with: "Fuir" } %>
+          <% elsif @player.player_power == 21%>
+            Puissance Maximale!
+            <%= button_to 'Résoudre', player_resolve_path(@enemy) , method: :post,data: { disable_with: "Résoudre" } %> ou <%= button_to 'Fuir?',player_run_path(@enemy), method: :post ,data: { disable_with: "Fuir" }%>
+          <% elsif @player.player_power < 21 %>
+            <%= button_to 'Attaquer (+1 à +11)',player_power_path(@enemy), method: :post %>
+            ou
+            <%= button_to 'Résoudre', player_resolve_path(@enemy) , method: :post,data: { disable_with: "Résoudre" } %>
+            ou <%= button_to 'Fuir?',player_run_path(@enemy), method: :post,data: { disable_with: "Fuir" } %>
+          <% end %>
+          <br>
+          <ul>
+          Bonus: <% @player.rewards.where(statut: "équipé").each do |reward| %>
+          <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
+          </li>
+          <% end %>
+          </ul>
+          <br>
+          Vous avez 2 minutes pour finir ce combat.
+       </div>
+       <div class="card col-6 col-md-6  mx-2">
+        <h1><%= @enemy.user.pseudo %>: Puissance D'Attaque🗡️ <%= @player.mob_power %>  </h1>
+        LVL:<%= @enemy.level %>💪 Prime: <%=number_with_delimiter(@enemy.user[:berrys], :delimiter => '.')%>B🪙
+        <br>
+        <ul>
+         Bonus: <% @enemy.rewards.where(statut: "équipé").each do |reward| %>
+         <li> <%= reward.category %>: <%= reward.name %> <%= image_tag reward.image , :class => "avatar-large" %>
+         </li>
+         <% end %>
+        </ul>
+       <br>
+     </div>
+      </div>
+</div>
+<% else %>
+  <%
+    @player.update(action: (@player.action - 1))
+    @player.update(health: (@player.health - 1))
+    @player.update(player_power: 0)
+    @player.update(fight: 'default')
+    @player.update(in_fight_enemy: "")
+    @player.update(in_fight: false)
+    if @player.health <= 0
+      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(mob_id: Mob.all.sample.id)
+      @player.rewards.where(category: ["FDD", "FDD LOGIA"], statut: "équipé").update(player_id: Player.all.select{ |player| player.user.admin == true}.first.id)
+    end
+    @player.fight_token.enemy.update(in_fight: false)
+    @player.fight_token.enemy.update(in_fight_enemy: "")
+
+    FightToken.where(player: current_user.player).destroy_all
+    @player_bug = FightToken.last.player
+    FightToken.last.destroy
+    if @player_bug.fight_token == nil
+      FightToken.last.player.update(in_fight: false)
+      FightToken.last.player.update(in_fight_enemy: "")
+    end
+  %>
+    <%= link_to 'Il ne faut pas tricher', place_path(Place.find_by(name: @player.position)), class: "btn btn-success" %>
+<% end %>

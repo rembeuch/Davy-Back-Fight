@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'fight_tokens/new'
+  get 'fight_tokens/create'
   devise_for :users
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -75,6 +77,55 @@ Rails.application.routes.draw do
     patch 'katana_answer' => 'participations#katana_answer'
     patch 'draw' => 'participations#draw'
     resources :participations, only: [:create]
+  end
+
+  resources :islands, only: [:index, :show, :new, :create] do
+    post 'move_player' => "islands#move_player"
+    resources :places, only: [:new, :create, :show]
+  end
+
+  resources :places, only: [:show] do
+    post 'move_player' => "places#move_player"
+    resources :mobs, only: [:new, :create]
+  end
+
+  resources :mobs, only: [:show] do
+  post 'power' => 'mobs#power'
+  post 'run' => 'mobs#run'
+  post 'retry_player' => 'mobs#retry_player'
+  post 'resolve' => 'mobs#resolve'
+  get 'reward' => 'mobs#reward'
+    resources :rewards, only: [:new, :create]
+  end
+
+  resources :players, only: [:new, :create, :show, :index] do
+    post 'pvp_launch' => "players#pvp_launch"
+    get 'pvp' => "players#pvp"
+    post 'power' => 'players#power'
+    post 'run' => 'players#run'
+    post 'resolve' => 'players#resolve'
+    get 'reward' => 'players#reward'
+    get 'shop' => 'rewards#shop'
+    patch 'create_crew' => "players#create_crew"
+    get 'crew' => "players#crew"
+    post 'destroy_crew' => "players#destroy_crew"
+    post 'open_crew' => "players#open_crew"
+    post 'join_crew' => "players#join_crew"
+    post 'leave_crew' => "players#leave_crew"
+    post 'kick_crew' => "players#kick_crew"
+
+
+  end
+
+  resources :rewards, only: [:index]
+  patch 'buy_health' => 'rewards#buy_health'
+  patch 'buy_action' => 'rewards#buy_action'
+
+  resources :rewards, only: [:show] do
+   patch 'use' => 'rewards#use'
+   patch 'drop' => 'rewards#drop'
+   post 'sell' => 'rewards#sell'
+   post 'buy_reward' => 'rewards#buy_reward'
   end
 
   get 'politique' => 'pages#politique'

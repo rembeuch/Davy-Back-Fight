@@ -1,0 +1,108 @@
+  <div class="container card">
+    <%= render 'shared/dashboard' %>
+    <h1 class="center">Inventaire</h1>
+    <div class="d-flex justify-content-between">
+    <ul>
+      <% @rewards.sort_by(&:category).each do |reward| %>
+      <li>
+        <div class="card p-3">
+        <h4 class="font-custom"> <%= reward.name %> </h4>
+        <br>
+        Catégorie: <%= reward.category %>
+        <%= image_tag reward.image , :class => "avatar-reward" %>
+        <% if reward.category.include?("FDD") && reward.statut == 'équipé' %>
+          Statut: Mangé
+        <% else %>
+          Statut: <%= reward.statut %>
+          <br>
+        <% end %>
+        <br>
+        <% if reward.statut == "A Vendre" %>
+          Prix de vente: <%=number_with_delimiter( reward.price, :delimiter => '.')%> Berrys
+        <% end %>
+        <% if @player.rewards.where(statut: "équipé", category: ['FDD', "FDD LOGIA"]).count >= 1 && reward.category.include?("FDD") && reward.statut == "Non équipé" %>
+          Vous ne pouvez pas manger 2 fruits du démon
+        <% elsif reward.statut == 'Non équipé' && @player.in_fight == false %>
+          <%= button_to 'équiper', reward_use_path(reward), method: :patch, class: "btn-success", data: ( reward.category.include?("FDD") ? { confirm: "Manger ce fruit? (Vous ne pouvez en manger qu'un à la fois!)" } : nil )%>
+        <% elsif reward.statut == 'équipé' && @player.in_fight == false && reward.category.exclude?("FDD") %>
+          <%= button_to 'Enlever', reward_drop_path(reward), method: :patch, class: "btn-danger" %>
+        <% end %>
+        <% if reward == @player.rewards.where(category: ['FDD', "FDD LOGIA"], statut: "équipé").first%>
+        <% elsif reward.statut != 'A Vendre' && @player.in_fight == false %>
+          <%= simple_form_for reward, :url => reward_sell_path(reward), :method => :post do |f| %>
+             <%= f.input :price, label: 'Indiquez votre prix de vente',
+                  as: :integer,
+                  required: true,
+                  input_html: { id: 'price'}%>
+          <%= f.button :submit, "Mettre en vente", class: "btn btn-primary" %>
+          <% end %>
+        <% elsif @player.in_fight == false %>
+          <%= button_to 'Retirer de la vente', reward_drop_path(reward), method: :patch, class: "btn-danger" %>
+        <% end %>
+        </div>
+      </li>
+        <hr>
+      <% end %>
+    </ul>
+    <div class="d-flex flex-column">
+    <% if @player.health < @player.max_health && @player.money >= 1000000%>
+      <%= link_to "Récupérer +1 Santé pour 1M de Berrys?", buy_health_path, method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" } %>
+    <% elsif @player.health < @player.max_health && @player.money < 1000000%>
+      +1 santé: Berrys insuffisants (1M)
+      <br>
+    <% end %>
+    <% if @player.money >= 1000000%>
+      <%= link_to "Récupérer +1 Action pour 1M de Berrys?", buy_action_path, method: :patch, class: "badge-danger badge-pill m-3",data: { disable_with: "" } %>
+    <% else %>
+      +1 action: Berrys insuffisants (1M)
+    <% end %>
+     <p class="text-center"> Nombres de PNJ vaincus: <%= @player.defeated_mob.size - (@player.defeated_mob.include?("random") ? 1 : 0) %> / <%= Mob.all.count %> </p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Voir la liste
+      </button>
+      <div class="dropdown-menu">
+        <% @player.defeated_mob.each do |mob| %>
+        <% if mob != "random" %>
+          <p class="p-2 text-center">  <%= mob %><hr></p>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+     <p class="text-center my-3"> Nombres d'îles visitées: <%= @player.visited_island.size %> / <%= Island.all.count %> </p>
+     <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Voir la liste
+      </button>
+
+      <div class="dropdown-menu">
+      <% @player.visited_island.each do |island| %>
+      <p class="p-2 text-center">  <%= island %><hr></p>
+      <% end %>
+      </div>
+    </div>
+    <p class="text-center my-3"> Nombres d'endroits visités: <%= @player.visited_place.size %> / <%= Place.all.count %> </p>
+     <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle mb-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Voir la liste
+      </button>
+      <div class="dropdown-menu">
+      <% @player.visited_place.each do |place| %>
+      <p class="p-2 text-center">  <%= place %> <hr> </p>
+      <% end %>
+      </div>
+    </div>
+      <% if @eternalpose != [] %>
+      <h3 class="text-center">Eternal Pose</h3>
+      <div class="row">
+        <% @eternalpose.each do |pose| %>
+          <div class="col-sm-4 col-4">
+            <%= image_tag pose.image , :class => "avatar-reward" %>
+            <%= pose.name %>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+  </div>
+  </div>
+</div>

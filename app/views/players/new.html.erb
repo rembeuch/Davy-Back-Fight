@@ -1,0 +1,15 @@
+<div class="container bg-white">
+  <h1 class="text-center font-custom-title">Bienvenue dans One Piece All Blue Conqueror!</h1>
+  <h4 class="text-center">  Choisissez votre point de départ: </h4>
+  <div class="row d-flex justify-content-center">
+    <div class="col-sm-4 col-sm-offset-4">
+      <div class="form-inputs">
+        <%= simple_form_for [@player] do |f| %>
+        <%= f.input :position,:collection => @positions, include_blank: false, label: 'Points de départ' %>
+
+        <%= f.button :submit, "Valider", class: "btn btn-primary mb-4" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

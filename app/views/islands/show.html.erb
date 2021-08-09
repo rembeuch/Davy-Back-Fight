@@ -1,0 +1,55 @@
+<div class="row">
+<div class="container">
+  <% if current_user.admin == true %>
+  <%= link_to 'créer un nouveau lieu', new_island_place_path(@island), class: "btn btn-warning" %>
+  <% end %>
+<%= render 'shared/dashboard' %>
+
+  <% if Place.find_by(name: @player.position).island == @island || current_user.admin == true %>
+  <h1 class="font-custom text-center "> <%= @island.name %>
+  <br>
+  <%= link_to 'Retourner à la carte des îles', islands_path, class: "btn btn-dark badge-pill m-3" %> </h1>
+  <div class="row">
+    <% @island.places.each do |place| %>
+      <% if place.condition == "" || @player.defeated_mob.include?(place.condition) || current_user.admin == true%>
+        <div class="col-12 col-md-4">
+          <div class="card m-3">
+            <%= link_to island_place_path(@island, place), class: "text-center" do %>
+              <% if place.image != nil %>
+                <%= image_tag place.image , :class => "product-photo center mt-3" %>
+              <% end %>
+            <% end %>
+            <div class="card-body text-center">
+              <h5 class="card-title font-custom"><%= place.name %> </h5>
+              <% if place.name == @player.position %>
+                <h5 class="font-custom">☠️ <strong class="text-primary"> Vous êtes ici</strong> ☠️</h5>
+              <% end %>
+              <%= link_to "Détails", island_place_path(@island, place), class: "btn btn-primary mb-2" %>
+
+              <% if place.name != @player.position && @island == Island.find_by(name: (Place.find_by(name: @player.position).island.name)) && @player.in_fight == false%>
+              <%= button_to 'Se rendre ici👣',place_move_player_path(place), method: :post %>
+              <% elsif place.name == @player.position && @player.in_fight == true %>
+                ⚔️
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+</div>
+    <div class="col-0 col-md-2 text-center mt-4">
+      <div class="card mb-4">
+        <% if @article.image != nil %>
+        <%=  image_tag @article.image  %>
+        <% end %>
+        <h2 class="text-center m-2 font-custom-title"><%= @article.title %></h2>
+        <h3 class="m-3 font-custom"><%=  @article.text%>
+        </h3>
+        <% if user_signed_in? && current_user.admin == true %>
+        <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-warning" %>
+        <% end %>
+      </div>
+    </div>
+</div>

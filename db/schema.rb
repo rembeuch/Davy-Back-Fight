@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_12_081654) do
+ActiveRecord::Schema.define(version: 2021_08_09_103651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,26 @@ ActiveRecord::Schema.define(version: 2021_01_12_081654) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
+  create_table "fight_tokens", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "enemy_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enemy_id"], name: "index_fight_tokens_on_enemy_id"
+    t.index ["player_id"], name: "index_fight_tokens_on_player_id"
+  end
+
+  create_table "islands", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
+    t.string "category"
+    t.integer "difficulty", default: 1
+    t.string "condition", default: ""
+    t.integer "position", default: 0
+  end
+
   create_table "items", force: :cascade do |t|
     t.bigint "cart_id"
     t.bigint "product_id"
@@ -50,6 +70,22 @@ ActiveRecord::Schema.define(version: 2021_01_12_081654) do
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_items_on_cart_id"
     t.index ["product_id"], name: "index_items_on_product_id"
+  end
+
+  create_table "mobs", force: :cascade do |t|
+    t.string "name"
+    t.integer "level"
+    t.bigint "place_id"
+    t.integer "health"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
+    t.string "bonus"
+    t.integer "exp"
+    t.integer "power"
+    t.string "condition"
+    t.string "category", default: ""
+    t.index ["place_id"], name: "index_mobs_on_place_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -88,6 +124,44 @@ ActiveRecord::Schema.define(version: 2021_01_12_081654) do
     t.index ["user_id"], name: "index_participations_on_user_id"
   end
 
+  create_table "places", force: :cascade do |t|
+    t.string "name"
+    t.string "image"
+    t.bigint "island_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "condition"
+    t.index ["island_id"], name: "index_places_on_island_id"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "position"
+    t.integer "health", default: 3
+    t.integer "level", default: 1
+    t.integer "exp", default: 0
+    t.integer "action", default: 3
+    t.boolean "in_fight", default: false
+    t.integer "mob_power"
+    t.integer "player_power", default: 0
+    t.string "fight", default: "default"
+    t.integer "max_health", default: 3
+    t.integer "mob_health"
+    t.string "in_fight_enemy", default: ""
+    t.string "in_fight_mob", default: ""
+    t.string "defeated_mob", default: [], array: true
+    t.integer "money", default: 0
+    t.boolean "captain", default: false
+    t.string "crew", default: ""
+    t.boolean "open_crew", default: false
+    t.string "visited_island", default: [], array: true
+    t.string "visited_place", default: [], array: true
+    t.integer "wanted", default: 0
+    t.index ["user_id"], name: "index_players_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "photo"
@@ -98,6 +172,14 @@ ActiveRecord::Schema.define(version: 2021_01_12_081654) do
     t.string "tags", default: ""
     t.string "image"
     t.text "carousel", default: [], array: true
+  end
+
+  create_table "quest_logs", force: :cascade do |t|
+    t.bigint "player_id"
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_quest_logs_on_player_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -126,6 +208,20 @@ ActiveRecord::Schema.define(version: 2021_01_12_081654) do
     t.datetime "updated_at", null: false
     t.string "question"
     t.integer "numero"
+  end
+
+  create_table "rewards", force: :cascade do |t|
+    t.bigint "mob_id"
+    t.bigint "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "category"
+    t.string "image"
+    t.string "statut", default: "Non équipé"
+    t.integer "price", default: 0
+    t.index ["mob_id"], name: "index_rewards_on_mob_id"
+    t.index ["player_id"], name: "index_rewards_on_player_id"
   end
 
   create_table "tournaments", force: :cascade do |t|
@@ -172,13 +268,21 @@ ActiveRecord::Schema.define(version: 2021_01_12_081654) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "carts", "users"
+  add_foreign_key "fight_tokens", "players"
+  add_foreign_key "fight_tokens", "players", column: "enemy_id"
   add_foreign_key "items", "carts"
   add_foreign_key "items", "products"
+  add_foreign_key "mobs", "places"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "participations", "tournaments"
   add_foreign_key "participations", "users"
+  add_foreign_key "places", "islands"
+  add_foreign_key "players", "users"
+  add_foreign_key "quest_logs", "players"
   add_foreign_key "quiz_answers", "quizzes"
+  add_foreign_key "rewards", "mobs"
+  add_foreign_key "rewards", "players"
   add_foreign_key "user_answers", "answers"
   add_foreign_key "user_answers", "users"
 end
