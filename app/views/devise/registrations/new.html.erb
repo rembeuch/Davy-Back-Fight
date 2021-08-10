@@ -31,19 +31,12 @@
           </div>
           <label class="btn btn-primary mt-4 mr-3 mb-5">
               Ajouter une photo
-              <span style="display:none;">
                 <%= f.input :avatar,
-                            required: true,
                             input_html: { id: 'avatar-preview'},
-                            label: 'Avatar'
+                            label: 'Copier l\'url de votre image'
                             %>
-              </span>
             </label>
         </div>
-          <div class=""  id="imagePreview">
-            <img src="" alt="" class="image-preview__image wanted-avatar mt-1">
-          </div>
-
 
         <div class="form-actions" id="submit">
           <%= f.button :submit, "Créer votre compte", class: 'btn btn-primary' %>
@@ -56,28 +49,6 @@
 </div>
 
 <script>
-  const Ifile = document.getElementById("avatar-preview")
-  const previewContainer = document.getElementById("imagePreview")
-  const previewImage = previewContainer.querySelector(".image-preview__image")
-
-  const checkbox = document.getElementById("checkbox")
-  Ifile.addEventListener("change", function() {
-    const file = this.files[0];
-
-    if (file) {
-        const reader = new FileReader();
-
-        previewImage.style.display = "block";
-
-        reader.addEventListener("load", function() {
-          previewImage.setAttribute("src", this.result);
-        });
-        reader.readAsDataURL(file);
-    } else {
-      previewImage.style.display = null;
-    }
-
-  });
 
   const check = document.getElementById("checkbox")
   check.addEventListener("change", function() {

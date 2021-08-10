@@ -1,9 +1,12 @@
 
 <div class="container">
   <h5 class="font-custom">Changer votre avatar
-  <%= form_for current_user, :url => {:action => 'update'} do |form| %>
-  <%= form.file_field :avatar %>
-  <%= form.submit "upload" %>
+
+  <%= simple_form_for current_user, :url => avatar_path, :method => :patch do |f| %>
+             <%= f.input :avatar, label: 'copier l\'url de votre image',
+                  as: :string,
+                  input_html: { id: 'avatar'}%>
+          <%= f.button :submit, "Modifier", class: "btn btn-primary" %>
   <% end %>
   </h5>
 

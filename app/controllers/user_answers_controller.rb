@@ -37,9 +37,9 @@ class UserAnswersController < ApplicationController
     params.require(:user_answer).permit(:amount)
   end
 
-  def update
+  def avatar
     @user = current_user
-    @user.update_attribute(:avatar, params[:user][:avatar])
+    @user.update(avatar: params[:user][:avatar])
     redirect_to user_answers_path
   end
 
