@@ -238,6 +238,6 @@ class MobsController < ApplicationController
   private
 
   def mob_params
-    params.require(:mob).permit(:name, :image, :health, :bonus, :level, :exp, :condition)
+    params.require(:mob).permit(:name, :image, :health, :bonus, :level, :exp, :condition, :category)
   end
 end

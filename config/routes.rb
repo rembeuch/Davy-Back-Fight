@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     patch :win
   end
 
+  patch 'avatar' => 'user_answers#avatar'
   get'finish_user_answer' => 'user_answers#finish_user_answer'
   get'sort_user_answer' => 'user_answers#sort_user_answer'
   get'best' => 'user_answers#best'

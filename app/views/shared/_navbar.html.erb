@@ -13,7 +13,7 @@
       <% end %>
       <%  current_user.update(last_sign_in_at: (current_user.current_sign_in_at)) %>
     <% end %>
-     <center> <%=cl_image_tag current_user.avatar, :class => "wanted-avatar" %></center>
+     <center> <%= image_tag current_user.avatar, :class => "wanted-avatar" %></center>
     <div class="wanted-pseudo pl-1 ml-2"> <%=current_user.pseudo%></div>
     <div class="wanted-berrys pl-4 ml-5 pb-3 "> <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%></div>
     <% else %>

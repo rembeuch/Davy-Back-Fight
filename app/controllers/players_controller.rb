@@ -39,6 +39,7 @@ class PlayersController < ApplicationController
   def check_token
     @player = current_user.player
     @place = Place.find_by(name: @player.position)
+    @deads = Player.where(health: 0)
     if FightToken.find_by(player: current_user.player) != nil && current_user.player.fight_token.created_at - Time.now <= -120
       @enemy = FightToken.find_by(player: current_user.player).enemy
       @player.update(health: (@player.health - 1))
@@ -58,6 +59,14 @@ class PlayersController < ApplicationController
       @enemy.update(in_fight: false)
       @enemy.update(in_fight_enemy: "")
       @enemy.update(fight: "default")
+    end
+    if @deads.count > 0
+      @deads.each do |dead|
+        if Time.now.to_date - dead.user.last_sign_in_at.to_date >= 2 && dead.rewards.count > 0
+          dead.update(health: 3, action: 3)
+          dead.user.update(last_sign_in_at: Time.now)
+        end
+      end
     end
   end
 
