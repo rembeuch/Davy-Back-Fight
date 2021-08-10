@@ -9,46 +9,17 @@
 
 
 
-
-puts "creating questions"
-
-traitre_wano = Question.create!(
-    closed: false,
-    title: 'Qui à trahi les fourreaux rouges en renseignant Orochi de leurs actions?',
-    tag: 'wano',
-  )
-  traitre_wano.photo = "https://res.cloudinary.com/dsiamykrd/image/upload/v1577443578/wano_gtoynb.jpg"
-
-puts "creating answers"
-
-answer_1_traitre_wano = Answer.create!(
-  question: traitre_wano,
-  text: 'Kanjuro',
-  multiplier: 2,
-  status: 'En cours',
-  position: 1,
+Island.create([
+   {name: "Ile de Dawn"},
+ {image: "https://i.pinimg.com/736x/ca/a6/c1/caa6c130f4eb108d4f0774574c1acfbf.jpg"},
+ {category: "East Blue"},
+ {difficulty: 1},
+ {condition: ""},
+ {position: 0}]
   )
 
-answer_2_traitre_wano = Answer.create!(
-  question: traitre_wano,
-  text: 'Shinobu',
-  multiplier: 2,
-  status: 'En cours',
-  position: 2,
-  )
-
-answer_3_traitre_wano = Answer.create!(
-  question: traitre_wano,
-  text: 'Carrot',
-  multiplier: 3,
-  status: 'En cours',
-  position: 3,
-  )
-
-answer_4_traitre_wano = Answer.create!(
-  question: traitre_wano,
-  text: 'Autre',
-  multiplier: 2,
-  status: 'En cours',
-  position: 4,
-  )
+Place.create([
+ {name: "Village de Fuchsia"},
+ {image: "http://ekladata.com/NENTzGt4Cg3N9N71OfCPyLCaF3I.jpg"},
+ {island_id: 1},
+ {condition: ""}])
