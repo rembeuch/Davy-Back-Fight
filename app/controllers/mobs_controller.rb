@@ -89,7 +89,7 @@ class MobsController < ApplicationController
     @player.update(fight: 'default')
     @player.update(in_fight_mob: "")
     @player.update(in_fight: false)
-    if @mob.condition == "random"
+    if @player.defeated_mob.include?("random")
       @player.update(defeated_mob: @player.defeated_mob - ["random"])
     elsif @mob.condition == 'Marine'
           @player.update(defeated_mob: @player.defeated_mob - ["Marine"])
@@ -110,7 +110,7 @@ class MobsController < ApplicationController
     @player.update(mob_power: pick_mob_score)
     @player.update(health: (@player.health - 1))
     if @player.health <= 0
-      if @mob.condition == "random"
+      if @player.defeated_mob.include?("random")
         @player.update(defeated_mob: @player.defeated_mob - ["random"])
       elsif @mob.condition == 'Marine'
           @player.update(defeated_mob: @player.defeated_mob - ["Marine"])
@@ -141,7 +141,7 @@ class MobsController < ApplicationController
         @player.update(in_fight_mob: "")
         @player.update(money: @player.money + @mob.exp)
         @player.update(exp: (@player.exp + @mob.exp))
-        if @mob.condition == "random"
+        if @player.defeated_mob.include?("random")
           @player.update(defeated_mob: @player.defeated_mob - ["random"])
         elsif @mob.condition == 'Marine'
           @player.update(defeated_mob: @player.defeated_mob - ["Marine"])

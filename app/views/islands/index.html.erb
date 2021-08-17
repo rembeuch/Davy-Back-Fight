@@ -43,7 +43,7 @@
                         <% elsif island.name == 'Reverse Mountain' && !@player.defeated_mob.join(" ").include?("Smoker")  %>
                           Vous ne pouvez pas encore vous rendre ici.
                         <% elsif !island.places.find_by(name: @player.position) && @player.in_fight == false && @player.action >= island.difficulty && @player.health > 0 %>
-                          <%= button_to "Aller sur cette île ⛵ -#{island.difficulty}pt d'action",island_move_player_path(island), method: :post, class: "col-12" %>
+                          <%= button_to "Aller sur cette île ⛵ -#{island.difficulty}pt d'action",island_move_player_path(island), method: :post, class: "col-12",data: { disable_with: "" } %>
                         <% elsif island.places.find_by(name: @player.position) && @player.in_fight == true %>
                           ⚔️
                         <% end %>
