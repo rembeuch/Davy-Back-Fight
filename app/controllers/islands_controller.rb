@@ -55,13 +55,13 @@ class IslandsController < ApplicationController
       @player.update(visited_place: @player.visited_place.push(@island.places.first.name))
     end
     @random_way = rand(1..100)
-    if @random_way >= 1 && Mob.all.select{ |mob| mob.place == @island.places.first && mob.condition.include?("random") && mob.condition.split('/') - @player.defeated_mob == ['random']} != []
+    if @random_way >= 75 && Mob.all.select{ |mob| mob.place == @island.places.first && mob.condition.include?("random") && mob.condition.split('/') - @player.defeated_mob == ['random']} != []
       @player.update(defeated_mob: @player.defeated_mob.push("random"))
       redirect_to mob_path(Mob.all.select{ |mob| mob.place == @island.places.first && mob.condition.include?("random") }.sample)
     elsif @current_island.category == "Grand Line" && @island.category == "East Blue" && @random_way >= 50
       @player.update(defeated_mob: @player.defeated_mob.push("random"), visited_island: @player.visited_island.push("Calm Belt"), visited_place: @player.visited_place.push("Calm Belt"))
       redirect_to mob_path(Mob.find_by(place: Island.all.where(category: "Calm Belt").first.places.first, condition: "random"))
-    elsif @player.wanted >= 20 && @random_way >= 70
+    elsif @player.wanted >= 20 && @random_way >= 66
       @player.update(defeated_mob: @player.defeated_mob.push("Marine"))
       redirect_to mob_path(Mob.where(condition: "Marine", level: @player.wanted/10).sample)
     else
