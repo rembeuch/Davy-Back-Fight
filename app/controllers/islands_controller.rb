@@ -65,7 +65,7 @@ class IslandsController < ApplicationController
       @player.update(defeated_mob: @player.defeated_mob.push("Marine"))
       redirect_to mob_path(Mob.where(condition: "Marine", level: @player.wanted/10).sample)
     else
-      redirect_to islands_path
+      redirect_to island_path(@island)
     end
     else
       redirect_to islands_path, notice: 'vous êtes engagé dans un combat'

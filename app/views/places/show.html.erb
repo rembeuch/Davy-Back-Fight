@@ -54,14 +54,15 @@
               <% if mob.condition != "" && !(mob.condition.split("/") - @player.defeated_mob).empty? %>
               <% else %>
                 <%= image_tag mob.image , :class => "product-photo center mt-3" %>
-                <li><%= mob.name %>
+                <li><%= mob.name %>:
+                  <br>
                   <% if mob.category != "" %>
-                    : <%= mob.category %>
+                    <strong> <%= mob.category %></strong>
                    <% end %>
                   <% if @player.defeated_mob.include?(mob.name) %>
                     (vaincu)
                   <% end %>
-                  LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️ Bonus:<%= mob.bonus %>🍈
+                  LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️ Bonus: <%= mob.bonus %>🍈
                   <% if @player.health <= 0 %>
                     Vous devez attendre de récupérer de la santé pour combattre (santé maximum récupérée chaque jour)
                   <% else %>
