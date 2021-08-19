@@ -27,7 +27,7 @@ class IslandsController < ApplicationController
     @player = current_user.player
     @island = Place.find_by(name: @player.position).island
     @article = Article.second
-    @islands = Island.all
+    @islands = Island.all.sort_by(&:created_at)
     @visited = []
     @player.visited_island.each do |island|
       @visited.push(Island.find_by(name: island))

@@ -50,7 +50,7 @@
               Vous devez vous déplacer à cet endroit pour voir les personnages qui s'y trouvent.
             <% else %>
           <ul> Personnages présents à cet endroit:
-            <% @place.mobs.each do |mob| %>
+            <% @place.mobs.sort_by(&:created_at).each do |mob| %>
               <% if mob.condition != "" && !(mob.condition.split("/") - @player.defeated_mob).empty? %>
               <% else %>
                 <%= image_tag mob.image , :class => "product-photo center mt-3" %>
