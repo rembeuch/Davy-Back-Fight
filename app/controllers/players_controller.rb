@@ -20,6 +20,7 @@ class PlayersController < ApplicationController
         @player.update(position: Place.first.name)
       end
       @player.user = current_user
+      @player.money = 2000000
       if @player.save
         @player.update(visited_place: @player.visited_place.push(@player.position))
         @player.update(visited_island: @player.visited_island.push(Place.find_by(name: @player.position).island.name))

@@ -8,7 +8,7 @@
           <% current_user.player.update(action: 3) %>
         <% end %>
         <% if current_user.player.in_fight == false %>
-          <% current_user.player.update(health: current_user.player.max_health) %>
+          <% current_user.player.update(health: current_user.player.max_health, money: (current_user.player.money + 10000)) %>
         <% end %>
       <% end %>
       <%  current_user.update(last_sign_in_at: (current_user.current_sign_in_at)) %>
@@ -42,11 +42,9 @@
         <li class="m-2 font-custom-navbar">
          <%= link_to 'Colisée', tournaments_path, class: current_class?(tournaments_path)%>
         </li>
-        <% if user_signed_in? && current_user.admin == true %>
         <li class="m-2 font-custom-navbar">
           <%= link_to 'Quest', islands_path, class: current_class?(islands_path) %>
         </li>
-        <% end %>
       </div>
   </div>
 
