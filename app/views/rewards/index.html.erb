@@ -45,6 +45,9 @@
       <% end %>
     </ul>
     <div class="d-flex flex-column">
+    <% if @player.health < @player.max_health && @player.abilities.include?('Carnacié')%>
+        <%= link_to "Utiliser la compétence Carnacié: +1 Santé contre des points d'action?", carnacie_path, method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" } %>
+    <% end %>
     <% if @player.health < @player.max_health && @player.money >= 1000000%>
       <%= link_to "Récupérer +1 Santé pour 1M de Berrys?", buy_health_path, method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" } %>
     <% elsif @player.health < @player.max_health && @player.money < 1000000%>

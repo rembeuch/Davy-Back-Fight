@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'fight_tokens/new'
-  get 'fight_tokens/create'
   devise_for :users
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -117,6 +115,9 @@ Rails.application.routes.draw do
 
 
   end
+  get 'abilities/index'
+  get 'fight_tokens/new'
+  get 'fight_tokens/create'
 
   resources :rewards, only: [:index]
   patch 'buy_health' => 'rewards#buy_health'
@@ -128,6 +129,9 @@ Rails.application.routes.draw do
    post 'sell' => 'rewards#sell'
    post 'buy_reward' => 'rewards#buy_reward'
   end
+
+  patch 'ability_push' => 'abilities#ability_push'
+  patch 'carnacie' => 'abilities#carnacie'
 
   get 'politique' => 'pages#politique'
 

@@ -1,11 +1,12 @@
-<div class="d-flex bg-white font-custom text-center ">
+<div class="d-flex bg-white text-center ">
   <div class="col-sm-7 col-sm-offset-7">
    <h3 class="font-custom-title"> Nom: <%= current_user.pseudo %>🏴‍☠️
 
     Prime: <%=number_with_delimiter(current_user.berrys, :delimiter => '.')%>B🪙 Santé: <%= current_user.player.health %>/<%= current_user.player.max_health %>❤️  Actions Restantes: <%= current_user.player.action %>⚓ LVL: <%= current_user.player.level %>💪
     <br> XP: <%= current_user.player.exp %>/<%= Player::LEVELS[current_user.player.level] %>⏫ Berrys: <%= number_with_delimiter(current_user.player.money, :delimiter => '.') %> <img src="https://ih1.redbubble.net/image.903868159.1730/st,small,507x507-pad,600x600,f8f8f8.jpg" alt="..." class="avatar">
-
+    <br>
 </h3>
+  <span>  <%= link_to 'Compétences', abilities_index_path, class: "btn btn-primary badge-pill mb-2" %> <span class="font-custom-title"> Points de compétences: </span> <%= current_user.player.abilities_points %> </span>
   </div>
 <div>
   <h3>
@@ -25,7 +26,7 @@
   <button type="button" class="btn btn-primary badge-pill" data-toggle="modal" data-target="#Modal-rules">
       Règles du jeu
   </button>
-  <br> Wanted: <%= @player.wanted %> / 100⭐
+  <br>  Wanted: <%= @player.wanted %> / 100⭐
     <% if @player.wanted > 19 %>
       Recherché!
     <% end %>
@@ -92,7 +93,9 @@
               <br>Si vous ne souhaitez pas créer un équipage, vous pouvez en rejoindre un déja créé si il est ouvert au recrutement et qu'il reste des places disponibles en fonction du LVL du capitaine.
               <br>Certaines actions ne peuvent pas être réalisées si vous ou votre capitaine êtes en combat.
             </p>
-
+            <h1 class="font-custom-title">Les Compétences</h1>
+              Vous pouvez débloquer des nouvelles compétences en utilisant vos points de compétences et si les conditions requises sont réunies.
+              <br> Pour gagner +1 point de compétences, vous devez remporter une manche en PvP contre un adversaire de niveau égal ou supérieur au votre.
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
