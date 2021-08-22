@@ -183,6 +183,9 @@ class PlayersController < ApplicationController
       @player.update(in_fight: false)
       @player.update(fight: 'default')
       @player.update(in_fight_enemy: "")
+      if @player.level <= @enemy.level
+        @player.update(abilities_points: (@player.abilities_points =+ 1))
+      end
       @enemy.update(health: (@enemy.health - 1))
       if FightToken.find_by(player: current_user.player) != nil
         FightToken.find_by(player: current_user.player).destroy

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_10_140910) do
+ActiveRecord::Schema.define(version: 2021_08_22_124123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,8 @@ ActiveRecord::Schema.define(version: 2021_08_10_140910) do
     t.string "visited_island", default: [], array: true
     t.string "visited_place", default: [], array: true
     t.integer "wanted", default: 0
+    t.string "abilities", default: [], array: true
+    t.integer "abilities_points", default: 0
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
