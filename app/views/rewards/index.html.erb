@@ -22,6 +22,10 @@
         <% end %>
         <% if @player.rewards.where(statut: "équipé", category: ['FDD', "FDD LOGIA"]).count >= 1 && reward.category.include?("FDD") && reward.statut == "Non équipé" %>
           Vous ne pouvez pas manger 2 fruits du démon
+        <% elsif reward.category == 'KATANA' && reward.statut != 'équipé' && @player.abilities.select { |ability| ability.include?("MrBushido") } == [] %>
+          Compétence insuffisante pour être équipé
+        <% elsif reward.category == 'KATANA' && reward.statut != 'équipé' && @player.rewards.where(category: 'KATANA', statut: 'équipé').count >= @player.abilities.select { |ability| ability.include?("MrBushido") }.last[-1].to_i %>
+          Compétence insuffisante pour être équipé
         <% elsif reward.statut == 'Non équipé' && @player.in_fight == false %>
           <%= button_to 'équiper', reward_use_path(reward), method: :patch, class: "btn-success", data: ( reward.category.include?("FDD") ? { confirm: "Manger ce fruit? (Vous ne pouvez en manger qu'un à la fois!)" } : nil )%>
         <% elsif reward.statut == 'équipé' && @player.in_fight == false && reward.category.exclude?("FDD") %>

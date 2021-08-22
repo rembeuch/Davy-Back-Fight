@@ -9,13 +9,13 @@ class AbilitiesController < ApplicationController
     redirect_to abilities_index_path
   end
 
-  def carnacie
+  def carnassier
     @player = current_user.player
-    if @player.abilities.include?("Carnacié3") && @player.action > 0
+    if @player.abilities.include?("Carnassier3") && @player.action > 0
       @player.update(health: (@player.health += 1), action: (@player.action -= 1))
-    elsif @player.abilities.include?("Carnacié2") && @player.action >= 2
+    elsif @player.abilities.include?("Carnassier2") && @player.action >= 2
       @player.update(health: (@player.health += 1), action: (@player.action -= 2))
-    elsif @player.abilities.include?("Carnacié") && @player.action >= 3
+    elsif @player.abilities.include?("Carnassier") && @player.action >= 3
       @player.update(health: (@player.health += 1), action: (@player.action -= 3))
     else
       flash[:alert] = "Pas assez de points d'action"

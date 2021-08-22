@@ -7,16 +7,16 @@
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://lh3.googleusercontent.com/proxy/HebwUlXj_OwZndyU5uFU-AxtncrPtDf8NQZth-KMB0OsVAqt5S1KsNV7MMXtOMmTncgk11bkRTfM9Dx8ravaARCrZFyWyOHUuU87Wv292Mqn6_0avlwWb9N96TyLKWKT3VcPWg", :class => "avatar mx-auto mt-3"  %>
           <div class="card-body">
-            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
-              Carnacié LVL 1
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Carnassier">
+              Carnassier LVL 1
             </button>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal fade" id="Carnassier" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Carnacié lvl 1</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Carnassier lvl 1</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -24,7 +24,7 @@
         <div class="modal-body">
           Compétence: échangez 3 points d'action contre 1 point de santé dans votre inventaire
           <br>
-          Condition: 1 point de compétence
+          Condition: 1 point de compétences
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -32,9 +32,9 @@
       </div>
     </div>
   </div>
-            <% if @player.abilities_points >= 1 && @player.abilities.include?('Carnacié') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Carnacié", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
-            <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Carnacié') == false %>
+            <% if @player.abilities_points >= 1 && @player.abilities.include?('Carnassier') == false%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Carnassier') == false %>
             <% else %>
               ☑ acquise
             <% end %>
@@ -43,40 +43,228 @@
       </div>
 
 
-     <!--  <div class="col-2 col-md-2">
+       <div class="col-2 col-md-2">
         <div class="card m-3 align-items-center">
-          <%=  image_tag "https://lh3.googleusercontent.com/proxy/HebwUlXj_OwZndyU5uFU-AxtncrPtDf8NQZth-KMB0OsVAqt5S1KsNV7MMXtOMmTncgk11bkRTfM9Dx8ravaARCrZFyWyOHUuU87Wv292Mqn6_0avlwWb9N96TyLKWKT3VcPWg", :class => "avatar mx-auto mt-3"  %>
+          <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar mx-auto mt-3"  %>
           <div class="card-body">
-            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
-              Carnacié LVL 1
-            </button> -->
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Bushido">
+              MrBushido LVL 1
+            </button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Carnacié lvl 1</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Compétence: échangez 3 points d'action contre 1 point de santé dans votre inventaire
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+  <!-- Modal -->
+  <div class="modal fade" id="Bushido" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">MrBushido lvl 1</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Vous maîtrisez 'Ittoryu' technique à 1 sabre. Vous pouvez équiper 1 Katana dans votre inventaire si vous en possédez.
+          <br>
+          Condition: 1 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-            <!--  <button>Obtenir</button>
+            <% if @player.abilities_points >= 1 && @player.abilities.include?('MrBushido1') == false%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 1 && @player.abilities.include?('MrBushido1') == false %>
+            <% else %>
+              ☑ acquise
+            <% end %>
           </div>
         </div>
-      </div> -->
+      </div>
+
     </div>
   </div>
+    <% if @player.level >= 2 %>
+    <div> <h2>Level 2 :</h2>
+        <div class="row">
+          <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://lh3.googleusercontent.com/proxy/HebwUlXj_OwZndyU5uFU-AxtncrPtDf8NQZth-KMB0OsVAqt5S1KsNV7MMXtOMmTncgk11bkRTfM9Dx8ravaARCrZFyWyOHUuU87Wv292Mqn6_0avlwWb9N96TyLKWKT3VcPWg", :class => "avatar mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Carnassier2">
+                  Carnassier LVL 2
+                </button>
 
+      <!-- Modal -->
+      <div class="modal fade" id="Carnassier2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Carnassier lvl 2</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: échangez 2 points d'action contre 1 point de santé dans votre inventaire
+              <br>
+              Condition: 2 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 2 && @player.abilities.include?('Carnassier2') == false && @player.abilities.include?('Carnassier') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Carnassier2') == false || @player.abilities.include?('Carnassier') == false%>
+                <% else %>
+                  ☑ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Bushido2">
+              MrBushido LVL 2
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Bushido2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">MrBushido lvl 2</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Vous maîtrisez 'Nitoryu' technique à 2 sabres. Vous pouvez équiper 2 Katana dans votre inventaire si vous en possédez.
+          <br>
+          Condition: 2 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 2 && @player.abilities.include?('MrBushido2') == false && @player.abilities.include?('MrBushido1') == true %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 2 && @player.abilities.include?('MrBushido2') == false || @player.abilities.include?('MrBushido1') == false %>
+            <% else %>
+              ☑ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+         <!--  <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://lh3.googleusercontent.com/proxy/HebwUlXj_OwZndyU5uFU-AxtncrPtDf8NQZth-KMB0OsVAqt5S1KsNV7MMXtOMmTncgk11bkRTfM9Dx8ravaARCrZFyWyOHUuU87Wv292Mqn6_0avlwWb9N96TyLKWKT3VcPWg", :class => "avatar mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
+                  Carnassier LVL 1
+                </button> -->
+
+                <!--  <button>Obtenir</button>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    <% end %>
+
+    <% if @player.level >= 3 %>
+    <div> <h2>Level 3 :</h2>
+        <div class="row">
+          <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://lh3.googleusercontent.com/proxy/HebwUlXj_OwZndyU5uFU-AxtncrPtDf8NQZth-KMB0OsVAqt5S1KsNV7MMXtOMmTncgk11bkRTfM9Dx8ravaARCrZFyWyOHUuU87Wv292Mqn6_0avlwWb9N96TyLKWKT3VcPWg", :class => "avatar mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Carnassier3">
+                  Carnassier LVL 3
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Carnassier3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Carnassier lvl 3</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: échangez 1 point d'action contre 1 point de santé dans votre inventaire
+              <br>
+              Condition: 3 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 3 && @player.abilities.include?('Carnassier3') == false && @player.abilities.include?('Carnassier2') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Carnassier3') == false || @player.abilities.include?('Carnassier2') == false%>
+                <% else %>
+                  ☑ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Bushido3">
+              MrBushido LVL 3
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Bushido3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">MrBushido lvl 3</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Vous maîtrisez 'Santoryu' technique à 3 sabres. Vous pouvez équiper 3 Katana dans votre inventaire si vous en possédez.
+          <br>
+          Condition: 3 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 3 && @player.abilities.include?('MrBushido3') == false && @player.abilities.include?('MrBushido2') == true %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 3 && @player.abilities.include?('MrBushido3') == false || @player.abilities.include?('MrBushido2') == false %>
+            <% else %>
+              ☑ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+        </div>
+      </div>
+    <% end %>
 
   </div>
 </div>

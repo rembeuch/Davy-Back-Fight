@@ -131,7 +131,7 @@ Rails.application.routes.draw do
   end
 
   patch 'ability_push' => 'abilities#ability_push'
-  patch 'carnacie' => 'abilities#carnacie'
+  patch 'carnassier' => 'abilities#carnassier'
 
   get 'politique' => 'pages#politique'
 
