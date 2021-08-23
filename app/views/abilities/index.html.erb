@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-2 col-md-2">
         <div class="card m-3 align-items-center">
-          <%=  image_tag "https://lh3.googleusercontent.com/proxy/HebwUlXj_OwZndyU5uFU-AxtncrPtDf8NQZth-KMB0OsVAqt5S1KsNV7MMXtOMmTncgk11bkRTfM9Dx8ravaARCrZFyWyOHUuU87Wv292Mqn6_0avlwWb9N96TyLKWKT3VcPWg", :class => "avatar mx-auto mt-3"  %>
+          <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
             <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Carnassier">
               Carnassier LVL 1
@@ -36,7 +36,46 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Carnassier') == false %>
             <% else %>
-              ☑ acquise
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Incognito">
+              Incognito LVL 1
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Incognito" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 1</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Diminuez votre score Wanted -1 ⭐ contre 1 point d'action lorsque vous êtes recherché.
+          <br>
+          Condition: 1 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 1 && @player.abilities.include?('Incognito1') == false%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Incognito1') == false %>
+            <% else %>
+              ✅ acquise
             <% end %>
           </div>
         </div>
@@ -45,7 +84,7 @@
 
        <div class="col-2 col-md-2">
         <div class="card m-3 align-items-center">
-          <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar mx-auto mt-3"  %>
+          <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
             <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Bushido">
               MrBushido LVL 1
@@ -76,7 +115,85 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('MrBushido1') == false %>
             <% else %>
-              ☑ acquise
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+<div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Chasseur1">
+              Chasseur de Prime LVL 1
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Chasseur1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 1</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Vous remportez +10% de Berrys sur la prime de vos adversaires vaincus en PvP.
+          <br>
+          Condition: 1 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 1 && @player.abilities.include?('Chasseur1') == false%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Chasseur1') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+   <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Pickpocket1">
+              Pickpocket LVL 1
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Pickpocket1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 1</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 5%.
+          <br>
+          Condition: 1 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 1 && @player.abilities.include?('Pickpocket05') == false%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket05", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Pickpocket05') == false %>
+            <% else %>
+              ✅ acquise
             <% end %>
           </div>
         </div>
@@ -84,12 +201,13 @@
 
     </div>
   </div>
+
     <% if @player.level >= 2 %>
     <div> <h2>Level 2 :</h2>
         <div class="row">
           <div class="col-2 col-md-2">
             <div class="card m-3 align-items-center">
-              <%=  image_tag "https://lh3.googleusercontent.com/proxy/HebwUlXj_OwZndyU5uFU-AxtncrPtDf8NQZth-KMB0OsVAqt5S1KsNV7MMXtOMmTncgk11bkRTfM9Dx8ravaARCrZFyWyOHUuU87Wv292Mqn6_0avlwWb9N96TyLKWKT3VcPWg", :class => "avatar mx-auto mt-3"  %>
+              <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Carnassier2">
                   Carnassier LVL 2
@@ -120,7 +238,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
                 <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Carnassier2') == false || @player.abilities.include?('Carnassier') == false%>
                 <% else %>
-                  ☑ acquise
+                  ✅ acquise
                 <% end %>
               </div>
             </div>
@@ -128,7 +246,46 @@
 
           <div class="col-2 col-md-2">
         <div class="card m-3 align-items-center">
-          <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar mx-auto mt-3"  %>
+          <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Incognito2">
+              Incognito LVL 2
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Incognito2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 2</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Diminuez votre score Wanted -2⭐ contre 1 point d'action lorsque vous êtes recherché.
+          <br>
+          Condition: 2 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 2 && @player.abilities.include?('Incognito2') == false && @player.abilities.include?('Incognito1') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Incognito2') == false || @player.abilities.include?('Incognito1') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
             <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Bushido2">
               MrBushido LVL 2
@@ -159,7 +316,85 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
             <% elsif @player.abilities_points <= 2 && @player.abilities.include?('MrBushido2') == false || @player.abilities.include?('MrBushido1') == false %>
             <% else %>
-              ☑ acquise
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Chasseur2">
+                  Chasseur de Prime LVL 2
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Chasseur2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 2</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Vous remportez +20% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              <br>
+              Condition: 2 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 2 && @player.abilities.include?('Chasseur2') == false && @player.abilities.include?('Chasseur1') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Chasseur2') == false || @player.abilities.include?('Chasseur1') == false%>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Pickpocket2">
+              Pickpocket LVL 2
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Pickpocket2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 2</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 10%.
+          <br>
+          Condition: 2 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 2 && @player.abilities.include?('Pickpocket10') == false && @player.abilities.include?('Pickpocket05') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket10", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Pickpocket10') == false || @player.abilities.include?('Pickpocket05') == false%>
+            <% else %>
+              ✅ acquise
             <% end %>
           </div>
         </div>
@@ -167,7 +402,7 @@
 
          <!--  <div class="col-2 col-md-2">
             <div class="card m-3 align-items-center">
-              <%=  image_tag "https://lh3.googleusercontent.com/proxy/HebwUlXj_OwZndyU5uFU-AxtncrPtDf8NQZth-KMB0OsVAqt5S1KsNV7MMXtOMmTncgk11bkRTfM9Dx8ravaARCrZFyWyOHUuU87Wv292Mqn6_0avlwWb9N96TyLKWKT3VcPWg", :class => "avatar mx-auto mt-3"  %>
+              <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
                   Carnassier LVL 1
@@ -186,7 +421,7 @@
         <div class="row">
           <div class="col-2 col-md-2">
             <div class="card m-3 align-items-center">
-              <%=  image_tag "https://lh3.googleusercontent.com/proxy/HebwUlXj_OwZndyU5uFU-AxtncrPtDf8NQZth-KMB0OsVAqt5S1KsNV7MMXtOMmTncgk11bkRTfM9Dx8ravaARCrZFyWyOHUuU87Wv292Mqn6_0avlwWb9N96TyLKWKT3VcPWg", :class => "avatar mx-auto mt-3"  %>
+              <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
                 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Carnassier3">
                   Carnassier LVL 3
@@ -217,7 +452,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
                 <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Carnassier3') == false || @player.abilities.include?('Carnassier2') == false%>
                 <% else %>
-                  ☑ acquise
+                  ✅ acquise
                 <% end %>
               </div>
             </div>
@@ -225,7 +460,46 @@
 
           <div class="col-2 col-md-2">
         <div class="card m-3 align-items-center">
-          <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar mx-auto mt-3"  %>
+          <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Incognito3">
+              Incognito LVL 3
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Incognito3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 3</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Diminuez votre score Wanted -3⭐ contre 1 point d'action lorsque vous êtes recherché.
+          <br>
+          Condition: 3 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 3 && @player.abilities.include?('Incognito3') == false && @player.abilities.include?('Incognito2') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Incognito3') == false || @player.abilities.include?('Incognito2') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
             <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Bushido3">
               MrBushido LVL 3
@@ -256,15 +530,1189 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
             <% elsif @player.abilities_points <= 3 && @player.abilities.include?('MrBushido3') == false || @player.abilities.include?('MrBushido2') == false %>
             <% else %>
-              ☑ acquise
+              ✅ acquise
             <% end %>
           </div>
         </div>
       </div>
 
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Chasseur3">
+                  Chasseur de Prime LVL 3
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Chasseur3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 3</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Vous remportez +30% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              <br>
+              Condition: 3 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 3 && @player.abilities.include?('Chasseur3') == false && @player.abilities.include?('Chasseur2') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Chasseur3') == false || @player.abilities.include?('Chasseur2') == false%>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+
+       <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Pickpocket3">
+              Pickpocket LVL 3
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Pickpocket3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 3</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 15%.
+          <br>
+          Condition: 3 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 3 && @player.abilities.include?('Pickpocket15') == false && @player.abilities.include?('Pickpocket10') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket15", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Pickpocket15') == false || @player.abilities.include?('Pickpocket10') == false%>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://storage.googleapis.com/zmooz-estoryc-images/asset/preview-89334d0a-092f-4bb8-895a-516697277230/1619801956908.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Criminel3">
+                  Criminel LVL 3
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Criminel3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Criminel lvl 3</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Augmenter votre score Wanted de +3 ⭐ contre 1 point d'action
+              <br>
+              Condition: 3 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 3 && @player.abilities.include?('Criminel3') == false %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Criminel3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Criminel3') == false %>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     <% end %>
+
+    <% if @player.level >= 4 %>
+    <div> <h2>Level 4 :</h2>
+        <div class="row">
+
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Incognito4">
+              Incognito LVL 4
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Incognito4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 4</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Diminuez votre score Wanted -4⭐ contre 1 point d'action lorsque vous êtes recherché.
+          <br>
+          Condition: 4 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 4 && @player.abilities.include?('Incognito4') == false && @player.abilities.include?('Incognito3') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 4 && @player.abilities.include?('Incognito4') == false || @player.abilities.include?('Incognito3') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Chasseur4">
+                  Chasseur de Prime LVL 4
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Chasseur4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 4</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Vous remportez +40% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              <br>
+              Condition: 4 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 4 && @player.abilities.include?('Chasseur4') == false && @player.abilities.include?('Chasseur3') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 4 && @player.abilities.include?('Chasseur4') == false || @player.abilities.include?('Chasseur3') == false%>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+         <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Pickpocket4">
+              Pickpocket LVL 4
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Pickpocket4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 4</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 20%.
+          <br>
+          Condition: 4 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 4 && @player.abilities.include?('Pickpocket20') == false && @player.abilities.include?('Pickpocket15') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket20", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 4 && @player.abilities.include?('Pickpocket20') == false || @player.abilities.include?('Pickpocket15') == false%>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+         <!--  <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
+                  Carnassier LVL 1
+                </button> -->
+
+                <!--  <button>Obtenir</button>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    <% end %>
+
+    <% if @player.level >= 5 %>
+    <div> <h2>Level 5 :</h2>
+        <div class="row">
+
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Incognito5">
+              Incognito LVL 5
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Incognito5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 5</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Diminuez votre score Wanted -5⭐ contre 1 point d'action lorsque vous êtes recherché.
+          <br>
+          Condition: 5 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 5 && @player.abilities.include?('Incognito5') == false && @player.abilities.include?('Incognito4') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Incognito5') == false || @player.abilities.include?('Incognito4') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Chasseur5">
+                  Chasseur de Prime LVL 5
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Chasseur5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 5</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Vous remportez +50% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              <br>
+              Condition: 5 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 5 && @player.abilities.include?('Chasseur5') == false && @player.abilities.include?('Chasseur4') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Chasseur5') == false || @player.abilities.include?('Chasseur4') == false%>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+
+       <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Pickpocket5">
+              Pickpocket LVL 5
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Pickpocket5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 5</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 25%.
+          <br>
+          Condition: 5 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 5 && @player.abilities.include?('Pickpocket25') == false && @player.abilities.include?('Pickpocket20') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket25", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Pickpocket25') == false || @player.abilities.include?('Pickpocket20') == false%>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://storage.googleapis.com/zmooz-estoryc-images/asset/preview-89334d0a-092f-4bb8-895a-516697277230/1619801956908.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Criminel5">
+                  Criminel LVL 5
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Criminel5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Criminel lvl 5</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Augmenter votre score Wanted de +5 ⭐ contre 1 point d'action
+              <br>
+              Condition: 5 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 5 && @player.abilities.include?('Criminel5') == false && @player.abilities.include?('Criminel3') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Criminel5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Criminel5') == false || @player.abilities.include?('Criminel3') == false  %>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+         <!--  <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
+                  Carnassier LVL 1
+                </button> -->
+
+                <!--  <button>Obtenir</button>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    <% end %>
+
+    <% if @player.level >= 6 %>
+    <div> <h2>Level 6 :</h2>
+        <div class="row">
+
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Incognito6">
+              Incognito LVL 6
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Incognito6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 6</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Diminuez votre score Wanted -6⭐ contre 1 point d'action lorsque vous êtes recherché.
+          <br>
+          Condition: 6 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 6 && @player.abilities.include?('Incognito6') == false && @player.abilities.include?('Incognito5') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito6", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 6 && @player.abilities.include?('Incognito6') == false || @player.abilities.include?('Incognito5') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Chasseur6">
+                  Chasseur de Prime LVL 6
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Chasseur6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 6</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Vous remportez +60% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              <br>
+              Condition: 6 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 6 && @player.abilities.include?('Chasseur6') == false && @player.abilities.include?('Chasseur5') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur6", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 6 && @player.abilities.include?('Chasseur6') == false || @player.abilities.include?('Chasseur5') == false%>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+
+       <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Pickpocket6">
+              Pickpocket LVL 6
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Pickpocket6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 6</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 30%.
+          <br>
+          Condition: 6 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 6 && @player.abilities.include?('Pickpocket30') == false && @player.abilities.include?('Pickpocket25') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket30", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 6 && @player.abilities.include?('Pickpocket30') == false || @player.abilities.include?('Pickpocket25') == false%>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+         <!--  <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
+                  Carnassier LVL 1
+                </button> -->
+
+                <!--  <button>Obtenir</button>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    <% end %>
+
+    <% if @player.level >= 7 %>
+    <div> <h2>Level 7 :</h2>
+        <div class="row">
+
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Incognito7">
+              Incognito LVL 7
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Incognito7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 7</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Diminuez votre score Wanted -7⭐ contre 1 point d'action lorsque vous êtes recherché.
+          <br>
+          Condition: 7 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 7 && @player.abilities.include?('Incognito7') == false && @player.abilities.include?('Incognito6') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito7", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 7 && @player.abilities.include?('Incognito7') == false || @player.abilities.include?('Incognito6') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Chasseur7">
+                  Chasseur de Prime LVL 7
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Chasseur7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 7</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Vous remportez +70% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              <br>
+              Condition: 7 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 7 && @player.abilities.include?('Chasseur7') == false && @player.abilities.include?('Chasseur6') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur7", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 7 && @player.abilities.include?('Chasseur7') == false || @player.abilities.include?('Chasseur6') == false%>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Pickpocket7">
+              Pickpocket LVL 7
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Pickpocket7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 7</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 35%.
+          <br>
+          Condition: 7 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 7 && @player.abilities.include?('Pickpocket35') == false && @player.abilities.include?('Pickpocket30') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket35", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 7 && @player.abilities.include?('Pickpocket35') == false || @player.abilities.include?('Pickpocket30') == false%>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+         <!--  <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
+                  Carnassier LVL 1
+                </button> -->
+
+                <!--  <button>Obtenir</button>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    <% end %>
+
+    <% if @player.level >= 8 %>
+    <div> <h2>Level 8 :</h2>
+        <div class="row">
+
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Incognito8">
+              Incognito LVL 8
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Incognito8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 8</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Diminuez votre score Wanted -8⭐ contre 1 point d'action lorsque vous êtes recherché.
+          <br>
+          Condition: 8 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 8 && @player.abilities.include?('Incognito8') == false && @player.abilities.include?('Incognito7') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito8", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 8 && @player.abilities.include?('Incognito8') == false || @player.abilities.include?('Incognito7') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Chasseur8">
+                  Chasseur de Prime LVL 8
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Chasseur8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 8</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Vous remportez +80% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              <br>
+              Condition: 8 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 8 && @player.abilities.include?('Chasseur8') == false && @player.abilities.include?('Chasseur7') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur8", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 8 && @player.abilities.include?('Chasseur8') == false || @player.abilities.include?('Chasseur7') == false%>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+      <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Pickpocket8">
+              Pickpocket LVL 8
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Pickpocket8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 8</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 40%.
+          <br>
+          Condition: 8 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 8 && @player.abilities.include?('Pickpocket40') == false && @player.abilities.include?('Pickpocket35') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket40", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 8 && @player.abilities.include?('Pickpocket40') == false || @player.abilities.include?('Pickpocket35') == false%>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+         <!--  <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
+                  Carnassier LVL 1
+                </button> -->
+
+                <!--  <button>Obtenir</button>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    <% end %>
+
+    <% if @player.level >= 9 %>
+    <div> <h2>Level 9 :</h2>
+        <div class="row">
+
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Incognito9">
+              Incognito LVL 9
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Incognito9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 9</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Diminuez votre score Wanted -9⭐ contre 1 point d'action lorsque vous êtes recherché.
+          <br>
+          Condition: 9 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 9 && @player.abilities.include?('Incognito9') == false && @player.abilities.include?('Incognito8') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito9", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 9 && @player.abilities.include?('Incognito9') == false || @player.abilities.include?('Incognito8') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Chasseur9">
+                  Chasseur de Prime LVL 9
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Chasseur9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 9</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Vous remportez +90% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              <br>
+              Condition: 9 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 9 && @player.abilities.include?('Chasseur9') == false && @player.abilities.include?('Chasseur8') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur9", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 9 && @player.abilities.include?('Chasseur9') == false || @player.abilities.include?('Chasseur8') == false%>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+      <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Pickpocket9">
+              Pickpocket LVL 9
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Pickpocket9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 9</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 45%.
+          <br>
+          Condition: 9 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 9 && @player.abilities.include?('Pickpocket45') == false && @player.abilities.include?('Pickpocket40') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket45", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 9 && @player.abilities.include?('Pickpocket45') == false || @player.abilities.include?('Pickpocket40') == false%>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+         <!--  <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
+                  Carnassier LVL 1
+                </button> -->
+
+                <!--  <button>Obtenir</button>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    <% end %>
+
+    <% if @player.level >= 10 %>
+    <div> <h2>Level 10 :</h2>
+        <div class="row">
+
+
+          <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Incognito10">
+              Incognito LVL 10
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Incognito10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 10</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Diminuez votre score Wanted -10⭐ contre 1 point d'action lorsque vous êtes recherché.
+          <br>
+          Condition: 10 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 10 && @player.abilities.include?('Incognito10') == false && @player.abilities.include?('Incognito9') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Incognito10') == false || @player.abilities.include?('Incognito9') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Chasseur10">
+                  Chasseur de Prime LVL 10
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Chasseur10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 10</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Vous remportez +100% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              <br>
+              Condition: 10 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 10 && @player.abilities.include?('Chasseur10') == false && @player.abilities.include?('Chasseur9') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Chasseur10') == false || @player.abilities.include?('Chasseur9') == false%>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+      <div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Pickpocket10">
+              Pickpocket LVL 10
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Pickpocket10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 10</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 50%.
+          <br>
+          Condition: 10 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 10 && @player.abilities.include?('Pickpocket50') == false && @player.abilities.include?('Pickpocket45') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket50", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+            <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Pickpocket50') == false || @player.abilities.include?('Pickpocket45') == false%>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+
+       <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://storage.googleapis.com/zmooz-estoryc-images/asset/preview-89334d0a-092f-4bb8-895a-516697277230/1619801956908.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Criminel10">
+                  Criminel LVL 10
+                </button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="Criminel10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Criminel lvl 10</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Compétence: Augmenter votre score Wanted de +10 ⭐ contre 1 point d'action
+              <br>
+              Condition: 10 point de compétences
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                <% if @player.abilities_points >= 10 && @player.abilities.include?('Criminel10') == false && @player.abilities.include?('Criminel5') == true%>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Criminel10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+                <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Criminel10') == false || @player.abilities.include?('Criminel5') == false  %>
+                <% else %>
+                  ✅ acquise
+                <% end %>
+              </div>
+            </div>
+          </div>
+         <!--  <div class="col-2 col-md-2">
+            <div class="card m-3 align-items-center">
+              <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+              <div class="card-body">
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModalLong">
+                  Carnassier LVL 1
+                </button> -->
+
+                <!--  <button>Obtenir</button>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    <% end %>
+
 
   </div>
 </div>

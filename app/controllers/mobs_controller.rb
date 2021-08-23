@@ -146,7 +146,7 @@ class MobsController < ApplicationController
         elsif @mob.condition == 'Marine'
           @player.update(defeated_mob: @player.defeated_mob - ["Marine"])
         end
-        if ['civil','marine','tenryubito','gouvernement'].include?(@mob.category) && @player.wanted <= 100
+        if ['civil','marine','tenryubito','gouvernement'].include?(@mob.category) && @player.wanted < 100
           if @mob.condition == 'tenryubito'
             @player.update(wanted: 100)
           else
@@ -154,6 +154,9 @@ class MobsController < ApplicationController
           end
         end
         @random_reward = rand(1..100)
+        if @player.abilities.include?('Pickpocket05')
+          @random_reward = (@random_reward + @player.abilities.select{|ability| ability.include?('Pickpocket')}.last[-2..-1].to_i)
+        end
         if @mob.rewards != [] && @random_reward >= 90
           @reward = @mob.rewards.sample
           if @reward.player.user.admin == true
@@ -161,6 +164,7 @@ class MobsController < ApplicationController
             @log = QuestLog.new
             @log.player = @player
             @log.content = "Félicitations! Vous venez d'obtenir #{@reward.name}"
+            @log.image = @reward.image
             @log.save
           end
         end

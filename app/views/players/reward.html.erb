@@ -2,6 +2,11 @@
   <%= render 'shared/dashboard' %>
     <h1>Vous avez vaincu <%= @enemy.user.pseudo %>
       + <%= (@enemy.level * 100) %>XP et + <%= @enemy.user.berrys/2 %> Berrys
+        <% if @player.abilities.include?('Chasseur10') %>
+          + <%= @enemy.user.berrys %> Berrys
+        <% elsif @player.abilities.include?('Chasseur1') %>
+          + <%= @enemy.user.berrys*(@player.abilities.select{|ability| ability.include?('Chasseur')}.last[-1].to_i*0.1) %> Berrys
+        <% end %>
       <br>
       <% @logs.each do |log| %>
         <%= log.content %>
