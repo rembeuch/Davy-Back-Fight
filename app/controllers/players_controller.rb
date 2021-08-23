@@ -201,6 +201,11 @@ class PlayersController < ApplicationController
         redirect_to place_path(Place.find_by(name: @player.position)), notice: 'Victoire! mais votre adversaire à encore de la santé'
       else
         @player.update(money: (@player.money + (@enemy.user.berrys/2)))
+        if @player.abilities.include?('Chasseur10')
+          @player.update(money: (@player.money + @enemy.user.berrys))
+        elsif @player.abilities.include?('Chasseur1')
+          @player.update(money: (@player.money + (@enemy.user.berrys*(@player.abilities.select{|ability| ability.include?('Chasseur')}.last[-1].to_i*0.1))))
+        end
         @player.update(exp: (@player.exp + (@enemy.level*100)))
         @log = QuestLog.new
         @log.player = @enemy

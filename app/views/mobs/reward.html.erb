@@ -6,7 +6,7 @@
       <% if @log != nil && @log.content.include?("Félicitations") %>
         <%= @log.content %>
         <%= link_to rewards_path do %>
-        <%= image_tag @player.rewards.first.image , :class => "avatar-reward" %>
+        <%= image_tag @log.image , :class => "avatar-reward" %>
         <% end %>
         <% @log.destroy %>
       <% end %>

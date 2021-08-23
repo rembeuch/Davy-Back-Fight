@@ -132,6 +132,9 @@ Rails.application.routes.draw do
 
   patch 'ability_push' => 'abilities#ability_push'
   patch 'carnassier' => 'abilities#carnassier'
+  patch 'incognito' => 'abilities#incognito'
+  patch 'criminal' => 'abilities#criminal'
+
 
   get 'politique' => 'pages#politique'
 
