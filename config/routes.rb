@@ -132,6 +132,8 @@ Rails.application.routes.draw do
 
   get 'ship' => 'ships#ship'
   patch 'upgrade_ship' => 'ships#upgrade_ship'
+  patch 'options_push' => 'ships#options_push'
+  patch 'options_toggle' => 'ships#options_toggle'
 
   patch 'ability_push' => 'abilities#ability_push'
   patch 'carnassier' => 'abilities#carnassier'

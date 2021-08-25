@@ -12,4 +12,27 @@ class ShipsController < ApplicationController
     end
   redirect_to ship_path
   end
+
+  def options_push
+    @player = current_user.player
+    @player.update(ship_options: (@player.ship_options.push(params[:option])), abilities_points: (@player.abilities_points -= params[:cost].to_i))
+    redirect_to ship_path
+  end
+
+  def options_toggle
+    @player = current_user.player
+    if @player.ship_options.include?('Marin_on') == false && @player.ship_options.include?('Provocation_on') == true
+      @player.update(ship_options: (@player.ship_options.push('Marin_on')))
+      @player.update(ship_options: (@player.ship_options - ['Provocation_on']))
+    elsif @player.ship_options.include?('Marin_on') == false && @player.ship_options.include?('Provocation_on') == false
+      @player.update(ship_options: (@player.ship_options.push('Marin_on')))
+    elsif @player.ship_options.include?('Provocation_on') == false && @player.ship_options.include?('Marin_on') == true
+      @player.update(ship_options: (@player.ship_options.push('Provocation_on')))
+      @player.update(ship_options: (@player.ship_options - ['Marin_on']))
+    elsif @player.ship_options.include?('Provocation_on') == false && @player.ship_options.include?('Provocation_on') == false
+      @player.update(ship_options: (@player.ship_options.push('Provocation_on')))
+    end
+    redirect_to ship_path
+  end
+
 end

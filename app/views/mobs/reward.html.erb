@@ -1,7 +1,14 @@
   <div class="container card mt-3">
   <%= render 'shared/dashboard' %>
     <h1>Vous avez vaincu <%= @mob.name %>
-      + <%= @mob.exp %>EXP et + <%= @mob.exp %> Berrys
+      + <%= @mob.exp %>EXP et +
+      <% if @player.ship_options.include?("Plongeur") %>
+        <%= @mob.exp * 100 %> Berrys
+      <% elsif @player.ship_options.include?("Scaphandrier") %>
+       <%= @mob.exp * 10 %> Berrys
+      <% else %>
+        <%= @mob.exp %> Berrys
+      <% end %>
       <br>
       <% if @log != nil && @log.content.include?("Félicitations") %>
         <%= @log.content %>

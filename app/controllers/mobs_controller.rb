@@ -140,6 +140,11 @@ class MobsController < ApplicationController
         @player.update(in_fight: false)
         @player.update(in_fight_mob: "")
         @player.update(money: @player.money + @mob.exp)
+        if @player.ship_options.include?("Plongeur")
+          @player.update(money: @player.money + (99*@mob.exp))
+        elsif @player.ship_options.include?("Scaphandrier")
+          @player.update(money: @player.money + (9*@mob.exp))
+        end
         @player.update(exp: (@player.exp + @mob.exp))
         if @player.defeated_mob.include?("random")
           @player.update(defeated_mob: @player.defeated_mob - ["random"])
