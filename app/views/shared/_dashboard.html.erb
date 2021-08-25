@@ -6,7 +6,7 @@
     <br> XP: <%= current_user.player.exp %>/<%= Player::LEVELS[current_user.player.level] %>⏫ Berrys: <%= number_with_delimiter(current_user.player.money, :delimiter => '.') %> <img src="https://ih1.redbubble.net/image.903868159.1730/st,small,507x507-pad,600x600,f8f8f8.jpg" alt="..." class="avatar">
     <br>
 </h3>
-  <span> <%= link_to 'Compétences', abilities_index_path, class: "btn btn-primary badge-pill mb-2" %> <span class="font-custom-title"> Points de compétences: </span> <%= current_user.player.abilities_points %> </span>
+  <span><%= link_to 'Votre Navire', ship_path, class: "btn btn-primary badge-pill mb-2" %> <%= link_to 'Compétences', abilities_index_path, class: "btn btn-primary badge-pill mb-2" %> <span class="font-custom-title"> Points de compétences: </span> <%= current_user.player.abilities_points %> </span>
   </div>
 <div>
   <h3>

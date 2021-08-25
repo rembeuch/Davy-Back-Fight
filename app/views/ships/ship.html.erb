@@ -1,0 +1,121 @@
+<div class="container card">
+  <%= render 'shared/dashboard' %>
+  <h1 class="font-custom-title">Navire LVL: <%= @player.ship_level %></h1>
+  <div class="row">
+    <div class="col-6">
+      <div class="card m-3">
+  <% if @player.ship_level == 0 %>
+    Vous ne possédez pas de Navire
+          <%=  image_tag "https://pbs.twimg.com/media/E4WNYNhXMAI48GA.jpg", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              Barque (Nécessaire pour vous rendre sur Grand Line)
+            <br> <%= link_to "Acheter: 100.000 Berrys?", upgrade_ship_path(:cost => 100000),method: :patch,   class: "btn btn-success m-2 rounded-pill border border-success" %>
+            </h5>
+          </div>
+        </div>
+  <% elsif @player.ship_level == 1%>
+    <%=  image_tag "http://cdn.shopify.com/s/files/1/0273/9529/3272/products/DrapeauxOnePieceBarbeNoire_1200x1200.png?v=1627667229", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              Améliorer votre Barque >>> Radeau
+            <br> <%= link_to "Acheter: 500.000 Berrys?", upgrade_ship_path(:cost => 500000),method: :patch, class: "btn btn-success m-2 rounded-pill border border-success" %>
+            </h5>
+          </div>
+        </div>
+<% elsif @player.ship_level == 2%>
+    <%=  image_tag "http://pm1.narvii.com/6636/df509d8cf1140fc55c36295f0b6801df6c0e60e1_00.jpg", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              Améliorer votre Radeau >>> Caravelle
+              <% if @player.defeated_mob.include?('Capitaine Kuro')%>
+                <br> <%= link_to "Acheter: 5 Millions de Berrys?", upgrade_ship_path(:cost => 5000000),method: :patch, class: "btn btn-success m-2 rounded-pill border border-success" %>
+              <% else %>
+              <br>  Vous devez vaincre Capitaine Kuro pour pouvoir débloquer la Caravelle.
+              <% end %>
+            </h5>
+          </div>
+        </div>
+<% elsif @player.ship_level == 3%>
+    <%=  image_tag "http://ekladata.com/ZN05NL7tmHXg0kwicjnHrq1HfmI.jpg", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              Améliorer votre Caravelle >>> Brigantin
+                <br> <%= link_to "Acheter: 15 Millions de Berrys?", upgrade_ship_path(:cost => 15000000),method: :patch, class: "btn btn-success m-2 rounded-pill border border-success" %>
+            </h5>
+          </div>
+        </div>
+<% elsif @player.ship_level == 4%>
+    <%=  image_tag "https://external-preview.redd.it/qHVtbdVNmPXsPvoLmABzJMaf-7jjcYIFYZsbMCPp22U.jpg?auto=webp&s=49e333c1794a7c3e3252f094950cae4209388e00", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              Améliorer votre Brigantin >>> Drakkar
+              <% if @player.defeated_mob.include?('Dorry') && @player.defeated_mob.include?('Broggy')%>
+                <br> <%= link_to "Acheter: 30 Millions de Berrys?", upgrade_ship_path(:cost => 30000000),method: :patch, class: "btn btn-success m-2 rounded-pill border border-success" %>
+              <% else %>
+              <br>  Vous devez vaincre Dorry et Broggy pour pouvoir débloquer le Drakkar.
+              <% end %>
+            </h5>
+          </div>
+        </div>
+<% elsif @player.ship_level == 5%>
+    <%=  image_tag "https://pbs.twimg.com/media/EyDHcl5XEAE8-QF.jpg", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              Améliorer votre Drakkar >>> Brise Glace
+                <br> <%= link_to "Acheter: 50 Millions de Berrys?", upgrade_ship_path(:cost => 50000000),method: :patch, class: "btn btn-success m-2 rounded-pill border border-success" %>
+            </h5>
+          </div>
+        </div>
+<% elsif @player.ship_level == 6%>
+    <%=  image_tag "http://pm1.narvii.com/6827/3bba93e46efe7c66bca662bca33590be56b1372cv2_00.jpg", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              Améliorer votre Brise Glace >>> Galion
+              <% if @player.defeated_mob.include?('Pauly')%>
+                <br> <%= link_to "Acheter: 100 Millions de Berrys?", upgrade_ship_path(:cost => 100000000),method: :patch, class: "btn btn-success m-2 rounded-pill border border-success" %>
+              <% else %>
+              <br>  Vous devez vaincre Pauly pour pouvoir débloquer le Galion.
+              <% end %>
+            </h5>
+          </div>
+        </div>
+<% elsif @player.ship_level == 7%>
+    <%=  image_tag "https://img.wattpad.com/ae9461b2b60d7c8f3b3d5b2fe68f152593dd1d92/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f776174747061642d6d656469612d736572766963652f53746f7279496d6167652f4b626334684763783348397744773d3d2d3433353531313537332e313463653134343162666362666536613235353730303433373630342e706e67?s=fit&w=720&h=720", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              Améliorer votre Galion >>> Cuirassé
+                <br> <%= link_to "Acheter: 200 Millions de Berrys?", upgrade_ship_path(:cost => 200000000),method: :patch, class: "btn btn-success m-2 rounded-pill border border-success" %>
+            </h5>
+          </div>
+        </div>
+<% elsif @player.ship_level == 8%>
+    <%=  image_tag "data:image/jpeg;base64,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", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              Améliorer votre Cuirassé >>> Navire de Guerre
+                <br> <%= link_to "Acheter: 500 Millions de Berrys?", upgrade_ship_path(:cost => 500000000),method: :patch, class: "btn btn-success m-2 rounded-pill border border-success" %>
+            </h5>
+          </div>
+        </div>
+<% elsif @player.ship_level == 9%>
+    <%=  image_tag "https://img.sharetv.com/shows/episodes/standard/694354.jpg", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              Améliorer votre Navire de Guerre >>> Arche
+                <br> <%= link_to "Acheter: 1 Milliard de Berrys?", upgrade_ship_path(:cost => 1000000000),method: :patch, class: "btn btn-success m-2 rounded-pill border border-success" %>
+            </h5>
+          </div>
+        </div>
+<% elsif @player.ship_level == 10%>
+    <%=  image_tag "https://img.sharetv.com/shows/episodes/standard/694354.jpg", :class => "product-photo mx-auto mt-3"  %>
+          <div class="card-body text-center">
+            <h5 class="card-title font-custom">
+              LvL Max
+            </h5>
+          </div>
+        </div>
+  <% end %>
+    </div>
+  </div>
+</div>

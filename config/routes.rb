@@ -130,6 +130,9 @@ Rails.application.routes.draw do
    post 'buy_reward' => 'rewards#buy_reward'
   end
 
+  get 'ship' => 'ships#ship'
+  patch 'upgrade_ship' => 'ships#upgrade_ship'
+
   patch 'ability_push' => 'abilities#ability_push'
   patch 'carnassier' => 'abilities#carnassier'
   patch 'incognito' => 'abilities#incognito'
