@@ -182,9 +182,9 @@
       </div>
     </div>
   </div>
-            <% if @player.abilities_points >= 1 && @player.ship_options.include?('Scaphandrier') == false%>
-              <%= link_to "Obtenir", options_push_path(:option => "Scaphandrier", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
-            <% elsif @player.abilities_points <= 1 && @player.ship_options.include?('Scaphandrier') == false %>
+            <% if @player.abilities_points >= 2 && @player.ship_options.include?('Scaphandrier') == false%>
+              <%= link_to "Obtenir", options_push_path(:option => "Scaphandrier", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
+            <% elsif @player.abilities_points <= 2 && @player.ship_options.include?('Scaphandrier') == false %>
             <% else %>
               ✅ acquise
             <% end %>
@@ -260,7 +260,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 4 && @player.ship_options.include?('Plongeur') == false && @player.ship_options.include?('Scaphandrier') == true %>
-              <%= link_to "Obtenir", options_push_path(:option => "Plongeur", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+              <%= link_to "Obtenir", options_push_path(:option => "Plongeur", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-4 points de compétences)"} %>
             <% elsif @player.abilities_points <= 4 && @player.ship_options.include?('Plongeur') == false %>
             <% elsif @player.ship_options.include?('Scaphandrier') == false %>
               Vous devez débloquer 'Scaphandrier' d'abord.
@@ -305,10 +305,10 @@
     </div>
   </div>
             <% if @player.abilities_points >= 5 && @player.ship_options.include?('Marin') == false %>
-              <%= link_to "Obtenir", options_push_path(:option => "Marin", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+              <%= link_to "Obtenir", options_push_path(:option => "Marin", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-5 points de compétences)"} %>
             <% elsif @player.abilities_points <= 5 && @player.ship_options.include?('Marin') == false %>
             <% elsif @player.ship_options.include?('Marin_on') == false %>
-              <%= link_to "Activer (Retire Provocation)", options_toggle_path, method: :patch, class: "badge-warning badge-pill btn m-3",data: { disable_with: "Activer (Retire Provocation)"} %>
+              <%= link_to "Activer (Retire Provocation)", marine_toggle_path, method: :patch, class: "badge-warning badge-pill btn m-3",data: { disable_with: "Activer (Retire Provocation)"} %>
             <% else %>
               ✅ Active
             <% end %>
@@ -348,10 +348,10 @@
     </div>
   </div>
             <% if @player.abilities_points >= 5 && @player.ship_options.include?('Provocation') == false %>
-              <%= link_to "Obtenir", options_push_path(:option => "Provocation", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur?"} %>
+              <%= link_to "Obtenir", options_push_path(:option => "Provocation", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-5 points de compétences)"} %>
             <% elsif @player.abilities_points <= 5 && @player.ship_options.include?('Provocation') == false %>
             <% elsif @player.ship_options.include?('Provocation_on') == false %>
-              <%= link_to "Activer (Retire Sous-Marin)", options_toggle_path, method: :patch, class: "badge-warning badge-pill btn m-3",data: { disable_with: "Activer (Retire Sous-Marin)"} %>
+              <%= link_to "Activer (Retire Sous-Marin)", marine_toggle_path, method: :patch, class: "badge-warning badge-pill btn m-3",data: { disable_with: "Activer (Retire Sous-Marin)"} %>
             <% else %>
               ✅ Active
             <% end %>
@@ -360,6 +360,129 @@
       </div>
       <% end %>
 
+      <% if @player.ship_level >= 6  %>
+    <div class="col-3 col-md-3">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://static.wikia.nocookie.net/onepiece/images/2/22/Navire_de_Pudding_Pudding_Infobox.png/revision/latest/scale-to-width-down/613?cb=20180615165609&path-prefix=fr", :class => "ship-options mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#Granit">
+              Revêtement en Granit Marin
+            </button>
+            <br>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Granit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Revêtement en Granit Marin</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <br>
+        </div>
+        <div class="modal-body">
+          Compétence: Vous êtes moins repérable par les monstres marins lorsque vous vous déplacez.
+          <br>
+          Condition: 6 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 6 && @player.ship_options.include?('Granit') == false %>
+              <%= link_to "Obtenir", options_push_path(:option => "Granit", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
+            <% elsif @player.abilities_points <= 6 && @player.ship_options.include?('Granit') == false %>
+            <% elsif @player.ship_options.include?('Granit_on') == false %>
+              <%= link_to "Activer (Retire Appat)", monsters_toggle_path, method: :patch, class: "badge-warning badge-pill btn m-3",data: { disable_with: "Activer (Retire Appat)"} %>
+            <% else %>
+              ✅ Active
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-3 col-md-3">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "http://pm1.narvii.com/6228/4ce96e92bb5c40e896b003b385d3ae5449af0019_00.jpg", :class => "ship-options mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#Appat">
+              Appât
+            </button>
+            <br>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Appat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Appât</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <br>
+        </div>
+        <div class="modal-body">
+          Compétence: Augmente vos chances de tomber sur des monstres marins quand vous vous déplacez.
+          <br>
+          Condition: 6 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 6 && @player.ship_options.include?('Appat') == false %>
+              <%= link_to "Obtenir", options_push_path(:option => "Appat", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
+            <% elsif @player.abilities_points <= 6 && @player.ship_options.include?('Appat') == false %>
+            <% elsif @player.ship_options.include?('Appat_on') == false %>
+              <%= link_to "Activer (Retire Granit-Marin)", monsters_toggle_path, method: :patch, class: "badge-warning badge-pill btn m-3",data: { disable_with: "Activer (Retire Granit-Marin)"} %>
+            <% else %>
+              ✅ Active
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+<% if @player.ship_level >= 7  %>
+    <div class="col-3 col-md-3">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://static.wikia.nocookie.net/onepiece/images/2/2e/Thousand-Sunny-Laser.gif/revision/latest/scale-to-width-down/316?cb=20131007171044&path-prefix=fr", :class => "ship-options mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#Artillerie">
+              Artillerie Lourde
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Artillerie" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Artillerie Lourde</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <br>
+        </div>
+        <div class="modal-body">
+          Compétence passive: Vous bénéficiez d'un bonus de Navire de +1 en PvP
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+              ✅ acquise
+          </div>
+        </div>
+      </div>
+      <% end %>
 
   </div>
 </div>

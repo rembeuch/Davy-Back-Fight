@@ -63,7 +63,13 @@ class IslandsController < ApplicationController
     elsif @player.ship_options.include?('Provocation_on')
       @random_marine = 35
     end
-    if @random_way >= 75 && Mob.all.select{ |mob| mob.place == @island.places.first && mob.condition.include?("random") && mob.condition.split('/') - @player.defeated_mob == ['random']} != []
+    @random_monster = 75
+    if @player.ship_options.include?('Granit_on')
+      @random_marine = 85
+    elsif @player.ship_options.include?('Appat_on')
+      @random_marine = 50
+    end
+    if @random_way >= @random_monster && Mob.all.select{ |mob| mob.place == @island.places.first && mob.condition.include?("random") && mob.condition.split('/') - @player.defeated_mob == ['random']} != []
       @player.update(defeated_mob: @player.defeated_mob.push("random"))
       redirect_to mob_path(Mob.all.select{ |mob| mob.place == @island.places.first && mob.condition.include?("random") }.sample)
     elsif @current_island.category == "Grand Line" && @island.category == "East Blue" && @random_way >= 50

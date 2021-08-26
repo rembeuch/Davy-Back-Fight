@@ -26,6 +26,8 @@
           Compétence insuffisante pour être équipé
         <% elsif reward.category == 'KATANA' && reward.statut != 'équipé' && @player.rewards.where(category: 'KATANA', statut: 'équipé').count >= @player.abilities.select { |ability| ability.include?("MrBushido") }.last[-1].to_i %>
           Compétence insuffisante pour être équipé
+        <% elsif reward.category == 'ARSENAL' && reward.statut != 'équipé' && @player.rewards.where(statut: "équipé", category: 'ARSENAL').count >= 1 %>
+          Vous ne pouvez pas équiper plus d'une pièce d'Arsenal
         <% elsif reward.statut == 'Non équipé' && @player.in_fight == false %>
           <%= button_to 'équiper', reward_use_path(reward), method: :patch, class: "btn-success", data: ( reward.category.include?("FDD") ? { confirm: "Manger ce fruit? (Vous ne pouvez en manger qu'un à la fois!)" } : nil )%>
         <% elsif reward.statut == 'équipé' && @player.in_fight == false && reward.category.exclude?("FDD") %>

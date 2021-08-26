@@ -19,7 +19,7 @@ class ShipsController < ApplicationController
     redirect_to ship_path
   end
 
-  def options_toggle
+  def marine_toggle
     @player = current_user.player
     if @player.ship_options.include?('Marin_on') == false && @player.ship_options.include?('Provocation_on') == true
       @player.update(ship_options: (@player.ship_options.push('Marin_on')))
@@ -31,6 +31,22 @@ class ShipsController < ApplicationController
       @player.update(ship_options: (@player.ship_options - ['Marin_on']))
     elsif @player.ship_options.include?('Provocation_on') == false && @player.ship_options.include?('Provocation_on') == false
       @player.update(ship_options: (@player.ship_options.push('Provocation_on')))
+    end
+    redirect_to ship_path
+  end
+
+  def monsters_toggle
+    @player = current_user.player
+    if @player.ship_options.include?('Granit_on') == false && @player.ship_options.include?('Appat_on') == true
+      @player.update(ship_options: (@player.ship_options.push('Granit_on')))
+      @player.update(ship_options: (@player.ship_options - ['Appat_on']))
+    elsif @player.ship_options.include?('Granit_on') == false && @player.ship_options.include?('Appat_on') == false
+      @player.update(ship_options: (@player.ship_options.push('Granit_on')))
+    elsif @player.ship_options.include?('Appat_on') == false && @player.ship_options.include?('Granit_on') == true
+      @player.update(ship_options: (@player.ship_options.push('Appat_on')))
+      @player.update(ship_options: (@player.ship_options - ['Granit_on']))
+    elsif @player.ship_options.include?('Appat_on') == false && @player.ship_options.include?('Appat_on') == false
+      @player.update(ship_options: (@player.ship_options.push('Appat_on')))
     end
     redirect_to ship_path
   end

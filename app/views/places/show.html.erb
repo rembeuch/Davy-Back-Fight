@@ -21,7 +21,7 @@
             <% else %>
             <li> <%= player.user[:pseudo] %> LVL:<%= player.level %> Prime: <%=number_with_delimiter(player.user[:berrys], :delimiter => '.')%>B🪙
               <% if player.crew != ""%>
-                Équipage: <%= player.crew %> <%= player.crew == @player.crew ? '(Allié)' : nil %>
+                Équipage: <%= player.crew %> <%= player.captain == true ? '(Capitaine)' : nil %> <%= player.crew == @player.crew ? '(Allié)' : nil %>
               <% end %>
               <% if @player.in_fight == false && @player.health > 0 && @player.action >= 1  %>
                 <% if player.rewards.where(statut: "A Vendre") != [] %>

@@ -241,6 +241,7 @@ class PlayersController < ApplicationController
 
   def compare
     @sum = 0
+    @ship = 12
     @rewards = current_user.player.rewards.where(statut: "équipé")
     @enemy_rewards = @enemy.rewards.where(statut: "équipé")
     @sum += @rewards.count
@@ -259,13 +260,18 @@ class PlayersController < ApplicationController
         @sum += 1
       end
     end
-    if @player.captain == true && Player.where(crew: @player.crew, position: @player.position).count > 1
+    if @player.captain == true && Player.where(crew: @player.crew, position: @player.position).count > 1 || @player.ship_level >= 3 && Player.where(crew: @player.crew, position: @player.position).count > 1
       @sum += (Player.where(crew: @player.crew, position: @player.position).count - 1)
     end
-    if @enemy.captain == true && Player.where(crew: @enemy.crew, position: @enemy.position).count > 1
+    if @enemy.captain == true && Player.where(crew: @enemy.crew, position: @enemy.position).count > 1 || @enemy.ship_level >= 3 && Player.where(crew: @enemy.crew, position: @enemy.position).count > 1
       @sum -= (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1)
     end
-    return @sum
+    if @player.ship_level >= 7
+      @sum += 1
+    end
+    if @enemy.ship_level >= 7
+      @sum -= 1
+    end
   end
 
   def reward
