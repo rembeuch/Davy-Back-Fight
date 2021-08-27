@@ -15,24 +15,14 @@
           écart de niveau: + <%= @player.level - @enemy.level %> à la résolution du combat
           <br>
           écart des bonus: +
-          <% if @player.ship_level >= 7 && @player.crew != "" && @enemy.crew != '' %>
-           <%= @sum - ((Player.where(crew: @player.crew, position: @player.position).count - 1) - (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1)) - 1 %> à la résolution du combat
-          <br>
-          <% else %>
-          <% raise %>
-            <%= @sum - ((Player.where(crew: @player.crew, position: @player.position).count - 1) - (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1)) %> à la résolution du combat
-          <br>
-          <% end %>
-          <% if @player.captain == true && Player.where(crew: @player.crew, position: @player.position).count > 1 || @player.ship_level >= 3 && Player.where(crew: @player.crew, position: @player.position).count > 1 || @enemy.captain == true || @enemy.ship_level >= 3  %>
-            écart d'équipage: + <%= (Player.where(crew: @player.crew, position: @player.position).count - 1) - (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1) %>
+            <%= @sum %>
+          <% if @player.captain == true && @player.crew != "" && Player.where(crew: @player.crew, position: @player.position).count > 1 || @player.ship_level >= 3 && @player.crew != '' && Player.where(crew: @player.crew, position: @player.position).count > 1 || @enemy.captain == true || @enemy.ship_level >= 3 && @enemy.crew != ""  %>
+          <br>  écart d'équipage: + <%= @crew_points %>
           <% end %>
           <% if @player.ship_level >= 7 %>
-            Bonus de votre Navire: + 1
+          <br>  écart de Navire: + <%= @ship_points %>
           <% end %>
-          <% if @enemy.ship_level >= 7 %>
-            Bonus du Navire adverse: - 1
-          <% end %>
-          <h2> ATTAQUE TOTALE: +<%=@player.player_power + @player.level - @enemy.level + @sum%></h2>
+          <h2> ATTAQUE TOTALE: +<%=@player.player_power + @player.level - @enemy.level + @total%></h2>
           <br>
           <% if @player.player_power == 0 %>
            <%= button_to 'Attaquer (+1 à +11)',player_power_path(@enemy), method: :post %>
