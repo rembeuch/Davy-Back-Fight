@@ -42,6 +42,8 @@
                          <br> Points d'action insuffisants pour voyager sur cette île (<%= island.difficulty %> pts)
                         <% elsif island.name == 'Reverse Mountain' && !@player.defeated_mob.join(" ").include?("Smoker")  %>
                           Vous ne pouvez pas encore vous rendre ici.
+                        <% elsif @player.health <= 0  %>
+                          <br> Vous ne pouvez pas vous déplacer quand votre santé est à 0
                         <% elsif !island.places.find_by(name: @player.position) && @player.in_fight == false && @player.action >= island.difficulty && @player.health > 0 %>
                           <%= button_to "Aller sur cette île ⛵ -#{island.difficulty}pt d'action",island_move_player_path(island), method: :post, class: "col-12",data: { disable_with: "" } %>
                         <% elsif island.places.find_by(name: @player.position) && @player.in_fight == true %>
@@ -52,7 +54,7 @@
                   </div>
                 <% end %>
               <% elsif island.position.between?((@island.position - 1),(@island.position + 1)) && @island.category == "Grand Line" || @island.position == island.position || @player.rewards.where(category: "EternalPose").map{ |island| island.name}.include?(island.name) && @island.category == 'Grand Line' %>
-                <% if island.condition == "" || @player.defeated_mob.include?(island.condition) %>
+                <% if island.condition == "" || @player.defeated_mob.include?(island.condition) || island.name == 'Reverse Mountain'%>
                     <div class="col-sm-4 col-12" id="Grand">
                       <div class="card m-3" style="height: 500px">
                         <%= link_to island_path(island), class: "text-center" do %>
@@ -70,7 +72,9 @@
                            <br> Points d'action insuffisants pour voyager sur cette île (<%= island.difficulty %> pts)
                           <% elsif island.name == 'Reverse Mountain' && !@player.defeated_mob.join(" ").include?("Smoker")  %>
                             Vous ne pouvez pas encore vous rendre ici.
-                          <% elsif !island.places.find_by(name: @player.position) && @player.in_fight == false && @player.action >= island.difficulty && @player.health > 0 %>
+                          <% elsif @player.ship_level < 1  %>
+                           <br> Vous devez posséder un Navire pour naviguer sur Grand Line.
+                          <% elsif !island.places.find_by(name: @player.position) && @player.in_fight == false && @player.action >= island.difficulty && @player.health > 0 && @player.ship_level >= 1 %>
                             <%= button_to "Aller sur cette île ⛵ -#{island.difficulty}pt d'action",island_move_player_path(island), method: :post, class: "col-12" %>
                           <% elsif island.places.find_by(name: @player.position) && @player.in_fight == true %>
                             ⚔️

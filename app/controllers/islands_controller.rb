@@ -52,18 +52,33 @@ class IslandsController < ApplicationController
     @island = Island.find(params[:island_id])
     @player.update(position: @island.places[0].name)
     @player.update(action: (@player.action - @island.difficulty))
+    if @island.difficulty > 1 && @player.ship_options.include?('Roues')
+      @player.update(action: (@player.action += 1))
+    end
     if @player.visited_island.exclude?(@island.name)
       @player.update(visited_island: @player.visited_island.push(@island.name))
       @player.update(visited_place: @player.visited_place.push(@island.places.first.name))
     end
     @random_way = rand(1..100)
-    if @random_way >= 75 && Mob.all.select{ |mob| mob.place == @island.places.first && mob.condition.include?("random") && mob.condition.split('/') - @player.defeated_mob == ['random']} != []
+    @random_marine = 66
+    if @player.ship_options.include?('Marin_on')
+      @random_marine = 74
+    elsif @player.ship_options.include?('Provocation_on')
+      @random_marine = 35
+    end
+    @random_monster = 75
+    if @player.ship_options.include?('Yuda_on')
+      @random_marine = 85
+    elsif @player.ship_options.include?('Appat_on')
+      @random_marine = 50
+    end
+    if @random_way >= @random_monster && Mob.all.select{ |mob| mob.place == @island.places.first && mob.condition.include?("random") && mob.condition.split('/') - @player.defeated_mob == ['random']} != []
       @player.update(defeated_mob: @player.defeated_mob.push("random"))
       redirect_to mob_path(Mob.all.select{ |mob| mob.place == @island.places.first && mob.condition.include?("random") }.sample)
     elsif @current_island.category == "Grand Line" && @island.category == "East Blue" && @random_way >= 50
       @player.update(defeated_mob: @player.defeated_mob.push("random"), visited_island: @player.visited_island.push("Calm Belt"), visited_place: @player.visited_place.push("Calm Belt"))
       redirect_to mob_path(Mob.find_by(place: Island.all.where(category: "Calm Belt").first.places.first, condition: "random"))
-    elsif @player.wanted >= 20 && @random_way >= 66
+    elsif @player.wanted >= 20 && @random_way >= @random_marine
       @player.update(defeated_mob: @player.defeated_mob.push("Marine"))
       if @island.category == "East Blue"
         redirect_to mob_path(@east_marines.select{|marine| marine.level == @player.wanted/10}.sample)

@@ -93,15 +93,16 @@ class PlayersController < ApplicationController
     @player = current_user.player
     @enemy = Player.find(params[:player_id])
     @place = Place.find_by(name: @player.position)
-    @sum = compare
+    @total = compare
     if @player.in_fight == false && @player.health > 0
+      @player.update(in_fight: true)
       @player.update(mob_power: pick_enemy_score)
       @player.update(mob_health: @enemy.health)
       @player.update(in_fight_enemy: @enemy.user.pseudo)
       @player.update(player_power: (@player.player_power += rand(1..11)))
-      @player.update(in_fight: true)
       @enemy = Player.find(params[:player_id])
-    end
+      compare
+      end
   end
 
   def mob_token
@@ -112,6 +113,7 @@ class PlayersController < ApplicationController
         token.player.update(fight: 'default')
         token.player.update(in_fight_enemy: "")
         token.player.update(in_fight: false)
+        raise
         death
         FightToken.find_by(player: token.player).destroy
       end
@@ -241,6 +243,8 @@ class PlayersController < ApplicationController
 
   def compare
     @sum = 0
+    @ship_points = 0
+    @crew_points = 0
     @rewards = current_user.player.rewards.where(statut: "équipé")
     @enemy_rewards = @enemy.rewards.where(statut: "équipé")
     @sum += @rewards.count
@@ -259,13 +263,28 @@ class PlayersController < ApplicationController
         @sum += 1
       end
     end
-    if @player.captain == true && Player.where(crew: @player.crew, position: @player.position).count > 1
-      @sum += (Player.where(crew: @player.crew, position: @player.position).count - 1)
+    if @player.crew == ''
+
+    elsif @player.captain == true && Player.where(crew: @player.crew, position: @player.position).count > 1 || @player.ship_level >= 3 && Player.where(crew: @player.crew, position: @player.position).count > 1
+      @crew_points += (Player.where(crew: @player.crew, position: @player.position).count - 1)
     end
-    if @enemy.captain == true && Player.where(crew: @enemy.crew, position: @enemy.position).count > 1
-      @sum -= (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1)
+    if @enemy.crew == ''
+
+    elsif @enemy.captain == true && Player.where(crew: @enemy.crew, position: @enemy.position).count > 1 || @enemy.ship_level >= 3 && Player.where(crew: @enemy.crew, position: @enemy.position).count > 1
+      @crew_points -= (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1)
     end
-    return @sum
+    if @player.ship_level >= 10
+      @ship_points += 2
+    elsif @player.ship_level >= 7
+      @ship_points += 1
+    end
+    if @enemy.ship_level >= 10
+      @ship_points -= 2
+    elsif @enemy.ship_level >= 7
+      @ship_points -= 1
+    end
+    @total = (@sum + @ship_points + @crew_points)
+    return @total
   end
 
   def reward

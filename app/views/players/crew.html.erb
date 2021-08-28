@@ -30,7 +30,11 @@
     <% elsif @player.captain == true %>
       <%= button_to "Arrêter le recrutement",player_open_crew_path(@player), method: :post, class: "btn btn-warning my-3" %>
     <% end %>
-    <p> <%= Player.where(crew: @player.crew).count %> Membre(s) / <%= Player.where(crew: @player.crew, captain: true).first.level %> </p>
+    <% if @player.ship_options.include?('Flotte1') %>
+    <p> <%= Player.where(crew: @player.crew).count %> Membre(s) / <%= Player.where(crew: @player.crew, captain: true).first.level + 1%> </p>
+    <% else %>
+      <p> <%= Player.where(crew: @player.crew).count %> Membre(s) / <%= Player.where(crew: @player.crew, captain: true).first.level %> </p>
+    <% end %>
     <ul>
       <% Player.where(crew: @player.crew).each do |player| %>
         <li> <%= player.user.pseudo %> Prime: <%=number_with_delimiter(player.user.berrys, :delimiter => '.')%>B🪙

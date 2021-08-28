@@ -5,7 +5,7 @@ class Player < ApplicationRecord
   belongs_to :user
 
 
-  LEVELS = [0, 999, 2999, 5999, 9999, 14999, 20999, 27999, 35999, 44999]
+  LEVELS = [0, 999, 5999, 9999, 20999, 35999, 50999, 99999, 199999, 499999]
 
 
 end
