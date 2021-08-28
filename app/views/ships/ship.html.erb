@@ -363,19 +363,19 @@
       <% if @player.ship_level >= 6  %>
     <div class="col-3 col-md-3">
         <div class="card m-3 align-items-center">
-          <%=  image_tag "https://static.wikia.nocookie.net/onepiece/images/2/22/Navire_de_Pudding_Pudding_Infobox.png/revision/latest/scale-to-width-down/613?cb=20180615165609&path-prefix=fr", :class => "ship-options mx-auto mt-3"  %>
+          <%=  image_tag "http://ekladata.com/I-mwSULO6JztWIwLcr1DyNy3DM8.png", :class => "ship-options mx-auto mt-3"  %>
           <div class="card-body">
-            <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#Granit">
-              Revêtement en Granit Marin
+            <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#Yuda">
+              Yuda Venimeux
             </button>
             <br>
 
   <!-- Modal -->
-  <div class="modal fade" id="Granit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal fade" id="Yuda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Revêtement en Granit Marin</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Yuda Venimeux</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -392,10 +392,10 @@
       </div>
     </div>
   </div>
-            <% if @player.abilities_points >= 6 && @player.ship_options.include?('Granit') == false %>
-              <%= link_to "Obtenir", options_push_path(:option => "Granit", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
-            <% elsif @player.abilities_points <= 6 && @player.ship_options.include?('Granit') == false %>
-            <% elsif @player.ship_options.include?('Granit_on') == false %>
+            <% if @player.abilities_points >= 6 && @player.ship_options.include?('Yuda') == false %>
+              <%= link_to "Obtenir", options_push_path(:option => "Yuda", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
+            <% elsif @player.abilities_points <= 6 && @player.ship_options.include?('Yuda') == false %>
+            <% elsif @player.ship_options.include?('Yuda_on') == false %>
               <%= link_to "Activer (Retire Appat)", monsters_toggle_path, method: :patch, class: "badge-warning badge-pill btn m-3",data: { disable_with: "Activer (Retire Appat)"} %>
             <% else %>
               ✅ Active
@@ -439,7 +439,7 @@
               <%= link_to "Obtenir", options_push_path(:option => "Appat", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
             <% elsif @player.abilities_points <= 6 && @player.ship_options.include?('Appat') == false %>
             <% elsif @player.ship_options.include?('Appat_on') == false %>
-              <%= link_to "Activer (Retire Granit-Marin)", monsters_toggle_path, method: :patch, class: "badge-warning badge-pill btn m-3",data: { disable_with: "Activer (Retire Granit-Marin)"} %>
+              <%= link_to "Activer (Retire Yuda Venimeux)", monsters_toggle_path, method: :patch, class: "badge-warning badge-pill btn m-3",data: { disable_with: "Activer (Retire Yuda Venimeux)"} %>
             <% else %>
               ✅ Active
             <% end %>
@@ -451,7 +451,7 @@
 <% if @player.ship_level >= 7  %>
     <div class="col-3 col-md-3">
         <div class="card m-3 align-items-center">
-          <%=  image_tag "https://static.wikia.nocookie.net/onepiece/images/2/2e/Thousand-Sunny-Laser.gif/revision/latest/scale-to-width-down/316?cb=20131007171044&path-prefix=fr", :class => "ship-options mx-auto mt-3"  %>
+          <%=  image_tag "https://i.pinimg.com/originals/72/07/e3/7207e35dd6bb26e2403c66ede755eadb.jpg", :class => "ship-options mx-auto mt-3"  %>
           <div class="card-body">
             <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#Artillerie">
               Artillerie Lourde
@@ -470,6 +470,160 @@
         </div>
         <div class="modal-body">
           Compétence passive: Vous bénéficiez d'un bonus de Navire de +1 en PvP
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+              ✅ acquise
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+<% if @player.ship_level >= 8  %>
+    <div class="col-3 col-md-3">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://pbs.twimg.com/media/DZUgzM3XUAAClCK.jpg", :class => "ship-options mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#Bois">
+              Bois d'Adam
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Bois" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Bois d'Adam</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <br>
+        </div>
+        <div class="modal-body">
+          Compétence passive: Votre Navire ne peut plus être détruit
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+              ✅ acquise
+          </div>
+        </div>
+      </div>
+
+          <div class="col-3 col-md-3">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://pm1.narvii.com/7060/724160d42c3ec15e64061b589383e32bff861e48r1-500-388v2_hq.jpg", :class => "ship-options mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#GrandeFlotte">
+              Grande Flotte
+            </button>
+            <br>
+
+  <!-- Modal -->
+  <div class="modal fade" id="GrandeFlotte" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Grande Flotte</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Vous pouvez recruter 1 membre d'équipage supplémentaire par rapport à votre Level actuel.
+          <br>
+          Condition: 8 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 8 && @player.ship_options.include?('Flotte1') == false%>
+              <%= link_to "Obtenir", options_push_path(:option => "Flotte1", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-8 points de compétences)"} %>
+            <% elsif @player.abilities_points <= 8 && @player.ship_options.include?('Flotte1') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+
+<% if @player.ship_level >= 9  %>
+    <div class="col-3 col-md-3">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "http://op-nouveau-monde.e-monsite.com/medias/images/thousand-sunny-2.png", :class => "ship-options mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#Roues">
+              Roues à aubes
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Roues" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Roues à aubes</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <br>
+        </div>
+        <div class="modal-body">
+          Compétence: -1 point d'action pour vos déplacements (ne peut descendre en dessous d'1 pt par déplacement)
+          <br>
+          Condition: 9 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+            <% if @player.abilities_points >= 9 && @player.ship_options.include?('Roues') == false%>
+              <%= link_to "Obtenir", options_push_path(:option => "Roues", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-9 points de compétences)"} %>
+            <% elsif @player.abilities_points <= 9 && @player.ship_options.include?('Roues') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>          </div>
+        </div>
+      </div>
+      <% end %>
+
+      <% if @player.ship_level >= 10  %>
+    <div class="col-3 col-md-3">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://i.ytimg.com/vi/p7UmT6QQmes/mqdefault.jpg", :class => "ship-options mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#Antique">
+              Arme Antique
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Antique" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Arme Antique</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <br>
+        </div>
+        <div class="modal-body">
+          Compétence passive: Vous bénéficiez d'un bonus de Navire de +2 en PvP
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

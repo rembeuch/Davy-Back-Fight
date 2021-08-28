@@ -273,10 +273,14 @@ class PlayersController < ApplicationController
     elsif @enemy.captain == true && Player.where(crew: @enemy.crew, position: @enemy.position).count > 1 || @enemy.ship_level >= 3 && Player.where(crew: @enemy.crew, position: @enemy.position).count > 1
       @crew_points -= (Player.where(crew: @enemy.crew, position: @enemy.position).count - 1)
     end
-    if @player.ship_level >= 7
+    if @player.ship_level >= 10
+      @ship_points += 2
+    elsif @player.ship_level >= 7
       @ship_points += 1
     end
-    if @enemy.ship_level >= 7
+    if @enemy.ship_level >= 10
+      @ship_points -= 2
+    elsif @enemy.ship_level >= 7
       @ship_points -= 1
     end
     @total = (@sum + @ship_points + @crew_points)

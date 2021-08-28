@@ -52,6 +52,9 @@ class IslandsController < ApplicationController
     @island = Island.find(params[:island_id])
     @player.update(position: @island.places[0].name)
     @player.update(action: (@player.action - @island.difficulty))
+    if @island.difficulty > 1 && @player.ship_options.include?('Roues')
+      @player.update(action: (@player.action += 1))
+    end
     if @player.visited_island.exclude?(@island.name)
       @player.update(visited_island: @player.visited_island.push(@island.name))
       @player.update(visited_place: @player.visited_place.push(@island.places.first.name))
@@ -64,7 +67,7 @@ class IslandsController < ApplicationController
       @random_marine = 35
     end
     @random_monster = 75
-    if @player.ship_options.include?('Granit_on')
+    if @player.ship_options.include?('Yuda_on')
       @random_marine = 85
     elsif @player.ship_options.include?('Appat_on')
       @random_marine = 50

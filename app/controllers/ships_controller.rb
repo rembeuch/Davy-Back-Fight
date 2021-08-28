@@ -37,14 +37,14 @@ class ShipsController < ApplicationController
 
   def monsters_toggle
     @player = current_user.player
-    if @player.ship_options.include?('Granit_on') == false && @player.ship_options.include?('Appat_on') == true
-      @player.update(ship_options: (@player.ship_options.push('Granit_on')))
+    if @player.ship_options.include?('Yuda_on') == false && @player.ship_options.include?('Appat_on') == true
+      @player.update(ship_options: (@player.ship_options.push('Yuda_on')))
       @player.update(ship_options: (@player.ship_options - ['Appat_on']))
-    elsif @player.ship_options.include?('Granit_on') == false && @player.ship_options.include?('Appat_on') == false
-      @player.update(ship_options: (@player.ship_options.push('Granit_on')))
-    elsif @player.ship_options.include?('Appat_on') == false && @player.ship_options.include?('Granit_on') == true
+    elsif @player.ship_options.include?('Yuda_on') == false && @player.ship_options.include?('Appat_on') == false
+      @player.update(ship_options: (@player.ship_options.push('Yuda_on')))
+    elsif @player.ship_options.include?('Appat_on') == false && @player.ship_options.include?('Yuda_on') == true
       @player.update(ship_options: (@player.ship_options.push('Appat_on')))
-      @player.update(ship_options: (@player.ship_options - ['Granit_on']))
+      @player.update(ship_options: (@player.ship_options - ['Yuda_on']))
     elsif @player.ship_options.include?('Appat_on') == false && @player.ship_options.include?('Appat_on') == false
       @player.update(ship_options: (@player.ship_options.push('Appat_on')))
     end
