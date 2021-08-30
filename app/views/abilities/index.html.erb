@@ -16,15 +16,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Carnassier lvl 1</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Carnassier LVL 1</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: échangez 3 points d'action contre 1 point de santé dans votre inventaire
+          Compétence : échangez 3 points d'action contre 1 point de santé dans votre inventaire
           <br>
-          Condition: 1 point de compétences
+          Condition : 1 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -33,10 +33,10 @@
     </div>
   </div>
             <% if @player.abilities_points >= 1 && @player.abilities.include?('Carnassier') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 points de compétences) (-1 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 point de compétences)"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Carnassier') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -55,15 +55,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 1</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito LVL 1</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Diminuez votre score Wanted -1 ⭐ contre 1 point d'action lorsque vous êtes recherché.
+          Compétence : Diminuez votre score Wanted -1 ⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition: 1 point de compétences
+          Condition : 1 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -72,10 +72,10 @@
     </div>
   </div>
             <% if @player.abilities_points >= 1 && @player.abilities.include?('Incognito1') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 point de compétences)"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Incognito1') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -95,15 +95,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">MrBushido lvl 1</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">MrBushido LVL 1</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Vous maîtrisez 'Ittoryu' technique à 1 sabre. Vous pouvez équiper 1 Katana dans votre inventaire si vous en possédez.
+          Compétence : Vous maîtrisez 'Ittoryu' technique à 1 sabre. Vous pouvez équiper 1 Katana dans votre inventaire si vous en possédez.
           <br>
-          Condition: 1 point de compétences
+          Condition : 1 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -112,10 +112,10 @@
     </div>
   </div>
             <% if @player.abilities_points >= 1 && @player.abilities.include?('MrBushido1') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 point de compétences)"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('MrBushido1') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -134,15 +134,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 1</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime LVL 1</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Vous remportez +10% de Berrys sur la prime de vos adversaires vaincus en PvP.
+          Compétence : Vous remportez +10% de Berrys sur la prime de vos adversaires vaincus en PvP.
           <br>
-          Condition: 1 point de compétences
+          Condition : 1 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -151,10 +151,10 @@
     </div>
   </div>
             <% if @player.abilities_points >= 1 && @player.abilities.include?('Chasseur1') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 point de compétences)"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Chasseur1') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -173,15 +173,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 1</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket LVL 1</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 5%.
+          Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 5%.
           <br>
-          Condition: 1 point de compétences
+          Condition : 1 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -190,10 +190,10 @@
     </div>
   </div>
             <% if @player.abilities_points >= 1 && @player.abilities.include?('Pickpocket05') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket05", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket05", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 point de compétences)"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Pickpocket05') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -218,15 +218,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Carnassier lvl 2</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Carnassier LVL 2</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: échangez 2 points d'action contre 1 point de santé dans votre inventaire
+              Compétence : échangez 2 points d'action contre 1 point de santé dans votre inventaire
               <br>
-              Condition: 2 point de compétences
+              Condition : 2 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -238,7 +238,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Carnassier2') == false || @player.abilities.include?('Carnassier') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -257,15 +257,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 2</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito LVL 2</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Diminuez votre score Wanted -2⭐ contre 1 point d'action lorsque vous êtes recherché.
+          Compétence : Diminuez votre score Wanted -2⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition: 2 points de compétences
+          Condition : 2 points de compétences
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -277,7 +277,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Incognito2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
             <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Incognito2') == false || @player.abilities.include?('Incognito1') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -296,15 +296,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">MrBushido lvl 2</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">MrBushido LVL 2</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Vous maîtrisez 'Nitoryu' technique à 2 sabres. Vous pouvez équiper 2 Katana dans votre inventaire si vous en possédez.
+          Compétence : Vous maîtrisez 'Nitoryu' technique à 2 sabres. Vous pouvez équiper 2 Katana dans votre inventaire si vous en possédez.
           <br>
-          Condition: 2 point de compétences
+          Condition : 2 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -316,7 +316,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
             <% elsif @player.abilities_points <= 2 && @player.abilities.include?('MrBushido2') == false || @player.abilities.include?('MrBushido1') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -335,15 +335,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 2</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime LVL 2</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Vous remportez +20% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              Compétence : Vous remportez +20% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition: 2 point de compétences
+              Condition : 2 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -355,7 +355,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Chasseur2') == false || @player.abilities.include?('Chasseur1') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -374,15 +374,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 2</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket LVL 2</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 10%.
+          Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 10%.
           <br>
-          Condition: 2 point de compétences
+          Condition : 2 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -394,7 +394,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket10", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
             <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Pickpocket10') == false || @player.abilities.include?('Pickpocket05') == false%>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -432,15 +432,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Carnassier lvl 3</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Carnassier LVL 3</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: échangez 1 point d'action contre 1 point de santé dans votre inventaire
+              Compétence : échangez 1 point d'action contre 1 point de santé dans votre inventaire
               <br>
-              Condition: 3 point de compétences
+              Condition : 3 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -452,7 +452,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Carnassier3') == false || @player.abilities.include?('Carnassier2') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -471,15 +471,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 3</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito LVL 3</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Diminuez votre score Wanted -3⭐ contre 1 point d'action lorsque vous êtes recherché.
+          Compétence : Diminuez votre score Wanted -3⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition: 3 points de compétences
+          Condition : 3 points de compétences
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -491,7 +491,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Incognito3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
             <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Incognito3') == false || @player.abilities.include?('Incognito2') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -510,15 +510,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">MrBushido lvl 3</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">MrBushido LVL 3</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Vous maîtrisez 'Santoryu' technique à 3 sabres. Vous pouvez équiper 3 Katana dans votre inventaire si vous en possédez.
+          Compétence : Vous maîtrisez 'Santoryu' technique à 3 sabres. Vous pouvez équiper 3 Katana dans votre inventaire si vous en possédez.
           <br>
-          Condition: 3 point de compétences
+          Condition : 3 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -530,7 +530,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
             <% elsif @player.abilities_points <= 3 && @player.abilities.include?('MrBushido3') == false || @player.abilities.include?('MrBushido2') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -549,15 +549,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 3</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime LVL 3</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Vous remportez +30% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              Compétence : Vous remportez +30% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition: 3 point de compétences
+              Condition : 3 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -569,7 +569,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Chasseur3') == false || @player.abilities.include?('Chasseur2') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -589,15 +589,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 3</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket LVL 3</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 15%.
+          Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 15%.
           <br>
-          Condition: 3 point de compétences
+          Condition : 3 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -609,7 +609,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket15", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
             <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Pickpocket15') == false || @player.abilities.include?('Pickpocket10') == false%>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -630,15 +630,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Criminel lvl 3</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Criminel LVL 3</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Augmenter votre score Wanted de +3 ⭐ contre 1 point d'action
+              Compétence : Augmenter votre score Wanted de +3 ⭐ contre 1 point d'action
               <br>
-              Condition: 3 point de compétences
+              Condition : 3 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -650,7 +650,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Criminel3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Criminel3') == false %>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -678,15 +678,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 4</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito LVL 4</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Diminuez votre score Wanted -4⭐ contre 1 point d'action lorsque vous êtes recherché.
+          Compétence : Diminuez votre score Wanted -4⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition: 4 points de compétences
+          Condition : 4 points de compétences
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -698,7 +698,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Incognito4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-4 points de compétences)"} %>
             <% elsif @player.abilities_points <= 4 && @player.abilities.include?('Incognito4') == false || @player.abilities.include?('Incognito3') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -717,15 +717,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 4</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime LVL 4</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Vous remportez +40% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              Compétence : Vous remportez +40% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition: 4 point de compétences
+              Condition : 4 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -737,7 +737,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-4 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 4 && @player.abilities.include?('Chasseur4') == false || @player.abilities.include?('Chasseur3') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -756,15 +756,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 4</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket LVL 4</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 20%.
+          Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 20%.
           <br>
-          Condition: 4 point de compétences
+          Condition : 4 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -776,7 +776,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket20", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-4 points de compétences)"} %>
             <% elsif @player.abilities_points <= 4 && @player.abilities.include?('Pickpocket20') == false || @player.abilities.include?('Pickpocket15') == false%>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -817,15 +817,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 5</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito LVL 5</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Diminuez votre score Wanted -5⭐ contre 1 point d'action lorsque vous êtes recherché.
+          Compétence : Diminuez votre score Wanted -5⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition: 5 points de compétences
+          Condition : 5 points de compétences
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -837,7 +837,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Incognito5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-5 points de compétences)"} %>
             <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Incognito5') == false || @player.abilities.include?('Incognito4') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -856,15 +856,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 5</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime LVL 5</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Vous remportez +50% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              Compétence : Vous remportez +50% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition: 5 point de compétences
+              Condition : 5 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -876,7 +876,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-5 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Chasseur5') == false || @player.abilities.include?('Chasseur4') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -896,15 +896,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 5</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket LVL 5</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 25%.
+          Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 25%.
           <br>
-          Condition: 5 point de compétences
+          Condition : 5 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -916,7 +916,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket25", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-5 points de compétences)"} %>
             <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Pickpocket25') == false || @player.abilities.include?('Pickpocket20') == false%>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -937,15 +937,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Criminel lvl 5</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Criminel LVL 5</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Augmenter votre score Wanted de +5 ⭐ contre 1 point d'action
+              Compétence : Augmenter votre score Wanted de +5 ⭐ contre 1 point d'action
               <br>
-              Condition: 5 point de compétences
+              Condition : 5 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -957,7 +957,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Criminel5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-5 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Criminel5') == false || @player.abilities.include?('Criminel3') == false  %>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -997,15 +997,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 6</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito LVL 6</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Diminuez votre score Wanted -6⭐ contre 1 point d'action lorsque vous êtes recherché.
+          Compétence : Diminuez votre score Wanted -6⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition: 6 points de compétences
+          Condition : 6 points de compétences
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1017,7 +1017,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Incognito6", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
             <% elsif @player.abilities_points <= 6 && @player.abilities.include?('Incognito6') == false || @player.abilities.include?('Incognito5') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -1036,15 +1036,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 6</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime LVL 6</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Vous remportez +60% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              Compétence : Vous remportez +60% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition: 6 point de compétences
+              Condition : 6 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1056,7 +1056,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur6", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 6 && @player.abilities.include?('Chasseur6') == false || @player.abilities.include?('Chasseur5') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -1076,15 +1076,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 6</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket LVL 6</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 30%.
+          Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 30%.
           <br>
-          Condition: 6 point de compétences
+          Condition : 6 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1096,7 +1096,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket30", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
             <% elsif @player.abilities_points <= 6 && @player.abilities.include?('Pickpocket30') == false || @player.abilities.include?('Pickpocket25') == false%>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -1137,15 +1137,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 7</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito LVL 7</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Diminuez votre score Wanted -7⭐ contre 1 point d'action lorsque vous êtes recherché.
+          Compétence : Diminuez votre score Wanted -7⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition: 7 points de compétences
+          Condition : 7 points de compétences
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1157,7 +1157,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Incognito7", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-7 points de compétences)"} %>
             <% elsif @player.abilities_points <= 7 && @player.abilities.include?('Incognito7') == false || @player.abilities.include?('Incognito6') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -1176,15 +1176,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 7</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime LVL 7</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Vous remportez +70% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              Compétence : Vous remportez +70% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition: 7 point de compétences
+              Condition : 7 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1196,7 +1196,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur7", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-7 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 7 && @player.abilities.include?('Chasseur7') == false || @player.abilities.include?('Chasseur6') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -1215,15 +1215,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 7</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket LVL 7</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 35%.
+          Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 35%.
           <br>
-          Condition: 7 point de compétences
+          Condition : 7 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1235,7 +1235,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket35", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-7 points de compétences)"} %>
             <% elsif @player.abilities_points <= 7 && @player.abilities.include?('Pickpocket35') == false || @player.abilities.include?('Pickpocket30') == false%>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -1276,15 +1276,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 8</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito LVL 8</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Diminuez votre score Wanted -8⭐ contre 1 point d'action lorsque vous êtes recherché.
+          Compétence : Diminuez votre score Wanted -8⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition: 8 points de compétences
+          Condition : 8 points de compétences
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1296,7 +1296,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Incognito8", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-8 points de compétences)"} %>
             <% elsif @player.abilities_points <= 8 && @player.abilities.include?('Incognito8') == false || @player.abilities.include?('Incognito7') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -1315,15 +1315,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 8</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime LVL 8</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Vous remportez +80% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              Compétence : Vous remportez +80% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition: 8 point de compétences
+              Condition : 8 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1335,7 +1335,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur8", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-8 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 8 && @player.abilities.include?('Chasseur8') == false || @player.abilities.include?('Chasseur7') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -1354,15 +1354,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 8</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket LVL 8</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 40%.
+          Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 40%.
           <br>
-          Condition: 8 point de compétences
+          Condition : 8 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1374,7 +1374,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket40", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-8 points de compétences)"} %>
             <% elsif @player.abilities_points <= 8 && @player.abilities.include?('Pickpocket40') == false || @player.abilities.include?('Pickpocket35') == false%>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -1415,15 +1415,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 9</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito LVL 9</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Diminuez votre score Wanted -9⭐ contre 1 point d'action lorsque vous êtes recherché.
+          Compétence : Diminuez votre score Wanted -9⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition: 9 points de compétences
+          Condition : 9 points de compétences
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1435,7 +1435,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Incognito9", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-9 points de compétences)"} %>
             <% elsif @player.abilities_points <= 9 && @player.abilities.include?('Incognito9') == false || @player.abilities.include?('Incognito8') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -1454,15 +1454,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 9</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime LVL 9</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Vous remportez +90% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              Compétence : Vous remportez +90% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition: 9 point de compétences
+              Condition : 9 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1474,7 +1474,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur9", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-9 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 9 && @player.abilities.include?('Chasseur9') == false || @player.abilities.include?('Chasseur8') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -1493,15 +1493,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 9</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket LVL 9</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 45%.
+          Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 45%.
           <br>
-          Condition: 9 point de compétences
+          Condition : 9 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1513,7 +1513,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket45", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-9 points de compétences)"} %>
             <% elsif @player.abilities_points <= 9 && @player.abilities.include?('Pickpocket45') == false || @player.abilities.include?('Pickpocket40') == false%>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -1554,15 +1554,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Incognito lvl 10</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Incognito LVL 10</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Diminuez votre score Wanted -10⭐ contre 1 point d'action lorsque vous êtes recherché.
+          Compétence : Diminuez votre score Wanted -10⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition: 10 points de compétences
+          Condition : 10 points de compétences
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1574,7 +1574,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Incognito10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-10 points de compétences)"} %>
             <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Incognito10') == false || @player.abilities.include?('Incognito9') == false %>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -1593,15 +1593,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime lvl 10</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Chasseur de Prime LVL 10</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Vous remportez +100% de Berrys sur la prime de vos adversaires vaincus en PvP.
+              Compétence : Vous remportez +100% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition: 10 point de compétences
+              Condition : 10 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1613,7 +1613,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-10 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Chasseur10') == false || @player.abilities.include?('Chasseur9') == false%>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>
@@ -1632,15 +1632,15 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket lvl 10</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Pickpocket LVL 10</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Compétence: Augmente les chances de trouver un objet bonus sur un monstre de 50%.
+          Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 50%.
           <br>
-          Condition: 10 point de compétences
+          Condition : 10 point de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1652,7 +1652,7 @@
               <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket50", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-10 points de compétences)"} %>
             <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Pickpocket50') == false || @player.abilities.include?('Pickpocket45') == false%>
             <% else %>
-              ✅ acquise
+              ✅ Acquise
             <% end %>
           </div>
         </div>
@@ -1672,15 +1672,15 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Criminel lvl 10</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Criminel LVL 10</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Compétence: Augmenter votre score Wanted de +10 ⭐ contre 1 point d'action
+              Compétence : Augmenter votre score Wanted de +10 ⭐ contre 1 point d'action
               <br>
-              Condition: 10 point de compétences
+              Condition : 10 point de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1692,7 +1692,7 @@
                   <%= link_to "Obtenir", ability_push_path(:ability => "Criminel10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-10 points de compétences)"} %>
                 <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Criminel10') == false || @player.abilities.include?('Criminel5') == false  %>
                 <% else %>
-                  ✅ acquise
+                  ✅ Acquise
                 <% end %>
               </div>
             </div>

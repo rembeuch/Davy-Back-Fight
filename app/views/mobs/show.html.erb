@@ -52,11 +52,11 @@
     1 blessure
           <% elsif @player.player_power == 21%>
             Puissance Maximale!
-            <%= button_to 'Résoudre', mob_resolve_path(@mob) , method: :post, data: { disable_with: "Résoudre" } %> ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post %>
+            <%= button_to 'Résoudre le combat', mob_resolve_path(@mob) , method: :post, data: { disable_with: "Résoudre" } %> ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post %>
           <% elsif @player.player_power < 21 %>
             <%= button_to 'Attaquer (+1 à +11)',mob_power_path(@mob), method: :post %>
             ou
-            <%= button_to 'Résoudre', mob_resolve_path(@mob) , method: :post, data: { disable_with: "Résoudre" } %>
+            <%= button_to 'Résoudre le combat', mob_resolve_path(@mob) , method: :post, data: { disable_with: "Résoudre" } %>
             ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post,data: { disable_with: "fuir" } %>
           <% end %>
           <br>

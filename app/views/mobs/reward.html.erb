@@ -1,6 +1,6 @@
   <div class="container card mt-3">
   <%= render 'shared/dashboard' %>
-    <h1>Vous avez vaincu <%= @mob.name %>
+    <h1 class="font-custom-title"><span class="text-success"> Vous avez vaincu <%= @mob.name %>
       + <%= @mob.exp %>EXP et +
       <% if @player.ship_options.include?("Plongeur") %>
         <%= @mob.exp * 100 %> Berrys
@@ -9,6 +9,7 @@
       <% else %>
         <%= @mob.exp %> Berrys
       <% end %>
+      </span>
       <br>
       <% if @log != nil && @log.content.include?("Félicitations") %>
         <%= @log.content %>
@@ -18,6 +19,4 @@
         <% @log.destroy %>
       <% end %>
     </h1>
-    <h3> <%= link_to "☠️aller à Votre position☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
-    </h3>
   </div>

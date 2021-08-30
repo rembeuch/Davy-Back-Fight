@@ -186,7 +186,7 @@ class PlayersController < ApplicationController
       @player.update(fight: 'default')
       @player.update(in_fight_enemy: "")
       if @player.level <= @enemy.level
-        @player.update(abilities_points: (@player.abilities_points =+ 1))
+        @player.update(abilities_points: (@player.abilities_points += 1))
       end
       @enemy.update(health: (@enemy.health - 1))
       if FightToken.find_by(player: current_user.player) != nil
@@ -200,7 +200,7 @@ class PlayersController < ApplicationController
         @log.content = "vous avez été blessé par #{@player.user.pseudo}"
         @log.save
         level_up
-        redirect_to place_path(Place.find_by(name: @player.position)), notice: 'Victoire! mais votre adversaire à encore de la santé'
+        redirect_to place_path(Place.find_by(name: @player.position)), notice: 'Victoire! Mais votre adversaire a encore de la santé'
       else
         @player.update(money: (@player.money + (@enemy.user.berrys/2)))
         if @player.abilities.include?('Chasseur10')

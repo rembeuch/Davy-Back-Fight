@@ -14,6 +14,4 @@
         <% log.destroy %>
       <% end %>
     </h1>
-    <h3> <%= link_to "☠️aller à Votre position☠️", island_place_path(Place.find_by(name: @player.position).island, Place.find_by(name: @player.position).id), class: "badge-dark badge-pill m-3" %>
-    </h3>
   </div>

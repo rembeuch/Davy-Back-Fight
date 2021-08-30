@@ -5,16 +5,16 @@
       <% if @player.position == @place.name || current_user.admin == true %>
       <h2 class="font-custom text-center  "> <%= @place.name %>
         <br>
-        <%= link_to 'Retourner à la carte des îles', islands_path, class: "btn btn-dark badge-pill m-3" %>
-        <%= link_to 'Retourner à la carte de  l\'île', island_path(@place.island_id), class: "btn btn-dark badge-pill m-3" %> </h1>
+        <%= link_to 'Retourner à la carte de  l\'île', island_path(@place.island_id), class: "btn btn-dark badge-pill m-3" %>
+        <%= link_to 'Carte des îles', islands_path, class: "btn btn-dark badge-pill m-3" %> </h1>
 
         <%= image_tag @place.image , :class => "product-photo center mt-3" %>
       </h2>
       <div class="m-3 d-flex">
         <div class="card col-6 col-md-6 mx-2">
           <% if @player.position == @place.name %>
-          <h4>Vous êtes ici☠️</h4>
-          <span class="m-3"> Joueurs présents à cet endroit: </span>
+          <h4 class="font-custom-title">Vous êtes ici☠️</h4>
+          <span class="m-3 text-center"> <strong> Joueurs présents à cet endroit :</strong> </span>
           <ul>
             <% @players.each do |player| %>
             <% if player.user == current_user || player.user.admin == true %>
@@ -45,14 +45,14 @@
           Vous devez vous déplacer à cet endroit pour voir les joueurs qui s'y trouvent.
           <% end %>
         </div>
-        <div class="card col-6 col-md-6  mx-2">
+        <div class="card col-6 col-md-6 mx-2">
           <% if current_user.admin == true %>
           <%= link_to 'créer un nouveau mob', new_place_mob_path(@place), class: "btn btn-warning" %>
           <% end %>
             <% if @player.position != @place.name %>
               Vous devez vous déplacer à cet endroit pour voir les personnages qui s'y trouvent.
             <% else %>
-          <ul> Personnages présents à cet endroit:
+          <ul> <p class="text-center"> <strong> Personnages présents à cet endroit:</strong> </p>
             <% @place.mobs.sort_by(&:created_at).each do |mob| %>
               <% if mob.condition != "" && !(mob.condition.split("/") - @player.defeated_mob).empty? %>
               <% else %>
