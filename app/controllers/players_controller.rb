@@ -208,6 +208,18 @@ class PlayersController < ApplicationController
         elsif @player.abilities.include?('Chasseur1')
           @player.update(money: (@player.money + (@enemy.user.berrys*(@player.abilities.select{|ability| ability.include?('Chasseur')}.last[-1].to_i*0.1))))
         end
+        @random_ship = rand(1..100)
+        if @player.abilities.include?('MrBushido4') && @enemy.ship_level > 0 && @enemy.ship_level <= 3 && @random_ship >= 75
+          @enemy.update(ship_level: 0)
+          @log = QuestLog.new
+          @log.player = @enemy
+          @log.content = "Votre Navire à été détruit"
+          @log.save
+          @log = QuestLog.new
+          @log.player = @player
+          @log.content = "Vous avez détruit le Navire de #{@enemy.user.pseudo}"
+          @log.save
+        end
         @player.update(exp: (@player.exp + (@enemy.level*100)))
         @log = QuestLog.new
         @log.player = @enemy

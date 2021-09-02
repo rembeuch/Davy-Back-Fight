@@ -5,7 +5,8 @@
   <%= simple_form_for current_user, :url => avatar_path, :method => :patch do |f| %>
              <%= f.input :avatar, label: 'copier l\'url de votre image',
                   as: :string,
-                  input_html: { id: 'avatar'}%>
+                  input_html: { id: 'avatar'},
+                  input_html: { maxlength: 200}%>
           <%= f.button :submit, "Modifier", class: "btn btn-primary" %>
   <% end %>
   </h5>

@@ -63,7 +63,7 @@
                     <strong> <%= mob.category %></strong>
                    <% end %>
                   <% if @player.defeated_mob.include?(mob.name) %>
-                    (vaincu)
+                    (<span class="text-success"> Vaincu </span>)
                   <% end %>
                   LVL:<%= mob.level %>💪 Santé:<%= mob.health %>❤️ Bonus: <%= mob.bonus %>🍈
                   <% if @player.health <= 0 %>

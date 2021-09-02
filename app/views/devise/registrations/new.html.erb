@@ -33,7 +33,8 @@
               Ajouter une photo
                 <%= f.input :avatar,
                             input_html: { id: 'avatar-preview'},
-                            label: 'Copier l\'url de votre image'
+                            label: 'Copier l\'url de votre image',
+                            input_html: { maxlength: 200}
                             %>
             </label>
         </div>

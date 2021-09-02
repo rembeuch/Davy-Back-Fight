@@ -32,6 +32,7 @@ class IslandsController < ApplicationController
     @player.visited_island.each do |island|
       @visited.push(Island.find_by(name: island))
     end
+    current_user.update(current_sign_in_at: Time.now)
   end
 
   def show

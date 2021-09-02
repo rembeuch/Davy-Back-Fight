@@ -704,6 +704,45 @@
         </div>
       </div>
 
+<div class="col-2 col-md-2">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#Bushido4">
+              Mr Bushido LVL 4
+            </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Bushido4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Mr Bushido LVL 4</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence : 1 chance sur 4 de détruire le Navire (LVL 3 et moins) de votre adversaire lorsque vous le tuez en PvP.
+          <br>
+          Condition : 4 points de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 4 && @player.abilities.include?('MrBushido4') == false && @player.abilities.include?('MrBushido3') == true%>
+              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-4 points de compétences)"} %>
+            <% elsif @player.abilities_points <= 4 && @player.abilities.include?('MrBushido4') == false || @player.abilities.include?('MrBushido3') == false %>
+            <% else %>
+              ✅ Acquise
+            <% end %>
+          </div>
+        </div>
+      </div>
+
       <div class="col-2 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
