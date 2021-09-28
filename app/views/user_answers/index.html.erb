@@ -44,7 +44,7 @@
             <span class="text-danger"> <%= user_answer.answer.status%></span>
           <% end %>
           <% if user_answer.closed == false && user_answer.answer.status == 'Validé!'  %>
-            <%= link_to "Récupérez vos gains!", user_answer_win_path(user_answer), method: :patch, class: "btn btn-success", id: "gain",data: { disable_with: false } %>
+            <%= link_to "Récupérez vos gains!", user_answer_win_path(user_answer), method: :patch, class: "btn btn-success", id: "gain",data: { disable_with: "Récupérez vos gains!" } %>
           <% end %>
           </div>
         </div>

@@ -13,7 +13,7 @@
   <% if current_user.numero_quiz == 0 %>
     <div class="card m-3">
       <%= link_to 'Démarrer les quiz?',
-      plus_path , method: :patch, class: "btn btn-success", data: { disable_with: false } %>
+      plus_path , method: :patch, class: "btn btn-success", data: { disable_with: "Démarrer les quiz?" } %>
     </div>
   <% elsif current_user.numero_quiz > 0 && current_user.numero_quiz <= @quizs.count  %>
     <div class="col-12 col-md-12">
@@ -25,7 +25,7 @@
             <div class="row" id="validation">
               <% @current_quiz.quiz_answers.each do |answer| %>
                 <div class="col-6 col-md-6 my-2" >
-                  <div class="quiz_btn"> <%= link_to "#{answer.description}", quiz_quiz_answer_validation_path(@current_quiz, answer), method: :patch, class: "btn btn-success" %>
+                  <div class="quiz_btn"> <%= link_to "#{answer.description}", quiz_quiz_answer_validation_path(@current_quiz, answer), method: :patch, class: "btn btn-success", data: { disable_with: "" } %>
                   </div>
                 </div>
               <% end %>

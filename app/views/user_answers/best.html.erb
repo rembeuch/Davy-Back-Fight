@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <% @user_answers.sort_by(&:amount).reverse.each do |user_answer| %>
+    <% @user_answers.sort_by(&:amount).reverse.first(10).each do |user_answer| %>
       <% if user_answer.answer.status == 'Validé!' %>
         <div class="col-12 col-md-12">
           <div class="card m-3">

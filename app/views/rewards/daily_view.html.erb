@@ -1,0 +1,10 @@
+  <div class="container card mt-3">
+  <%= render 'shared/dashboard' %>
+    <h1 class="font-custom-title"><span class="text-success">
+      <% if @log != nil && @log.content.include?("du jour") %>
+        <%= @log.content %>
+        <%= image_tag @log.image , :class => "answer-photo mx-auto mt-3" %>
+        <% @log.destroy %>
+      <% end %>
+    </h1>
+  </div>

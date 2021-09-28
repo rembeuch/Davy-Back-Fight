@@ -3,7 +3,7 @@
   <h1 class="text-center">Compétences</h1>
   <div> <h2>Level 1 :</h2>
     <div class="row">
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -33,7 +33,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 1 && @player.abilities.include?('Carnassier') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 point de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-1 point de compétence)"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Carnassier') == false %>
             <% else %>
               ✅ Acquise
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -72,7 +72,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 1 && @player.abilities.include?('Incognito1') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 point de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-1 point de compétence)"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Incognito1') == false %>
             <% else %>
               ✅ Acquise
@@ -82,7 +82,7 @@
       </div>
 
 
-       <div class="col-2 col-md-2">
+       <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -112,7 +112,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 1 && @player.abilities.include?('MrBushido1') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 point de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-1 point de compétence)"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('MrBushido1') == false %>
             <% else %>
               ✅ Acquise
@@ -121,7 +121,7 @@
         </div>
       </div>
 
-<div class="col-2 col-md-2">
+<div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -151,7 +151,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 1 && @player.abilities.include?('Chasseur1') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 point de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur1", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-1 point de compétence)"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Chasseur1') == false %>
             <% else %>
               ✅ Acquise
@@ -160,7 +160,7 @@
         </div>
       </div>
 
-   <div class="col-2 col-md-2">
+   <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -190,7 +190,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 1 && @player.abilities.include?('Pickpocket05') == false%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket05", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-1 point de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket05", :cost => 1), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-1 point de compétence)"} %>
             <% elsif @player.abilities_points <= 1 && @player.abilities.include?('Pickpocket05') == false %>
             <% else %>
               ✅ Acquise
@@ -205,7 +205,7 @@
     <% if @player.level >= 2 %>
     <div> <h2>Level 2 :</h2>
         <div class="row">
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -226,7 +226,7 @@
             <div class="modal-body">
               Compétence : échangez 2 points d'action contre 1 point de santé dans votre inventaire
               <br>
-              Condition : 2 point de compétence
+              Condition : 2 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -235,7 +235,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 2 && @player.abilities.include?('Carnassier2') == false && @player.abilities.include?('Carnassier') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-2 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Carnassier2') == false || @player.abilities.include?('Carnassier') == false%>
                 <% else %>
                   ✅ Acquise
@@ -244,7 +244,7 @@
             </div>
           </div>
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -265,7 +265,7 @@
         <div class="modal-body">
           Compétence : Diminuez votre score Wanted -2⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition : 2 points de compétences
+          Condition : 2 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -274,7 +274,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 2 && @player.abilities.include?('Incognito2') == false && @player.abilities.include?('Incognito1') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-2 points de compétence)"} %>
             <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Incognito2') == false || @player.abilities.include?('Incognito1') == false %>
             <% else %>
               ✅ Acquise
@@ -283,7 +283,7 @@
         </div>
       </div>
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -304,7 +304,7 @@
         <div class="modal-body">
           Compétence : Vous maîtrisez 'Nitoryu' technique à 2 sabres. Vous pouvez équiper 2 Katana dans votre inventaire si vous en possédez.
           <br>
-          Condition : 2 point de compétence
+          Condition : 2 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -313,7 +313,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 2 && @player.abilities.include?('MrBushido2') == false && @player.abilities.include?('MrBushido1') == true %>
-              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-2 points de compétence)"} %>
             <% elsif @player.abilities_points <= 2 && @player.abilities.include?('MrBushido2') == false || @player.abilities.include?('MrBushido1') == false %>
             <% else %>
               ✅ Acquise
@@ -322,7 +322,7 @@
         </div>
       </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -343,7 +343,7 @@
             <div class="modal-body">
               Compétence : Vous remportez +20% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition : 2 point de compétence
+              Condition : 2 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -352,7 +352,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 2 && @player.abilities.include?('Chasseur2') == false && @player.abilities.include?('Chasseur1') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur2", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-2 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Chasseur2') == false || @player.abilities.include?('Chasseur1') == false%>
                 <% else %>
                   ✅ Acquise
@@ -361,7 +361,7 @@
             </div>
           </div>
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -382,7 +382,7 @@
         <div class="modal-body">
           Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 10%.
           <br>
-          Condition : 2 point de compétence
+          Condition : 2 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -391,7 +391,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 2 && @player.abilities.include?('Pickpocket10') == false && @player.abilities.include?('Pickpocket05') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket10", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-2 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket10", :cost => 2), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-2 points de compétence)"} %>
             <% elsif @player.abilities_points <= 2 && @player.abilities.include?('Pickpocket10') == false || @player.abilities.include?('Pickpocket05') == false%>
             <% else %>
               ✅ Acquise
@@ -400,7 +400,7 @@
         </div>
       </div>
 
-         <!--  <div class="col-2 col-md-2">
+         <!--  <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -419,7 +419,7 @@
     <% if @player.level >= 3 %>
     <div> <h2>Level 3 :</h2>
         <div class="row">
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -440,7 +440,7 @@
             <div class="modal-body">
               Compétence : échangez 1 point d'action contre 1 point de santé dans votre inventaire
               <br>
-              Condition : 3 point de compétence
+              Condition : 3 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -449,7 +449,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 3 && @player.abilities.include?('Carnassier3') == false && @player.abilities.include?('Carnassier2') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Carnassier3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-3 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Carnassier3') == false || @player.abilities.include?('Carnassier2') == false%>
                 <% else %>
                   ✅ Acquise
@@ -458,7 +458,7 @@
             </div>
           </div>
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -479,7 +479,7 @@
         <div class="modal-body">
           Compétence : Diminuez votre score Wanted -3⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition : 3 points de compétences
+          Condition : 3 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -488,7 +488,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 3 && @player.abilities.include?('Incognito3') == false && @player.abilities.include?('Incognito2') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-3 points de compétence)"} %>
             <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Incognito3') == false || @player.abilities.include?('Incognito2') == false %>
             <% else %>
               ✅ Acquise
@@ -497,7 +497,7 @@
         </div>
       </div>
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -518,7 +518,7 @@
         <div class="modal-body">
           Compétence : Vous maîtrisez 'Santoryu' technique à 3 sabres. Vous pouvez équiper 3 Katana dans votre inventaire si vous en possédez.
           <br>
-          Condition : 3 point de compétence
+          Condition : 3 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -527,7 +527,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 3 && @player.abilities.include?('MrBushido3') == false && @player.abilities.include?('MrBushido2') == true %>
-              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-3 points de compétence)"} %>
             <% elsif @player.abilities_points <= 3 && @player.abilities.include?('MrBushido3') == false || @player.abilities.include?('MrBushido2') == false %>
             <% else %>
               ✅ Acquise
@@ -536,7 +536,7 @@
         </div>
       </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -557,7 +557,7 @@
             <div class="modal-body">
               Compétence : Vous remportez +30% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition : 3 point de compétence
+              Condition : 3 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -566,7 +566,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 3 && @player.abilities.include?('Chasseur3') == false && @player.abilities.include?('Chasseur2') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-3 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Chasseur3') == false || @player.abilities.include?('Chasseur2') == false%>
                 <% else %>
                   ✅ Acquise
@@ -576,7 +576,7 @@
           </div>
 
 
-       <div class="col-2 col-md-2">
+       <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -597,7 +597,7 @@
         <div class="modal-body">
           Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 15%.
           <br>
-          Condition : 3 point de compétence
+          Condition : 3 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -606,7 +606,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 3 && @player.abilities.include?('Pickpocket15') == false && @player.abilities.include?('Pickpocket10') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket15", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket15", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-3 points de compétence)"} %>
             <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Pickpocket15') == false || @player.abilities.include?('Pickpocket10') == false%>
             <% else %>
               ✅ Acquise
@@ -617,7 +617,7 @@
 
 
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://storage.googleapis.com/zmooz-estoryc-images/asset/preview-89334d0a-092f-4bb8-895a-516697277230/1619801956908.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -638,7 +638,7 @@
             <div class="modal-body">
               Compétence : Augmenter votre score Wanted de +3 ⭐ contre 1 point d'action
               <br>
-              Condition : 3 point de compétence
+              Condition : 3 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -647,7 +647,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 3 && @player.abilities.include?('Criminel3') == false %>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Criminel3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Criminel3", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-3 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 3 && @player.abilities.include?('Criminel3') == false %>
                 <% else %>
                   ✅ Acquise
@@ -665,7 +665,7 @@
         <div class="row">
 
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -686,7 +686,7 @@
         <div class="modal-body">
           Compétence : Diminuez votre score Wanted -4⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition : 4 points de compétences
+          Condition : 4 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -695,7 +695,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 4 && @player.abilities.include?('Incognito4') == false && @player.abilities.include?('Incognito3') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-4 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-4 points de compétence)"} %>
             <% elsif @player.abilities_points <= 4 && @player.abilities.include?('Incognito4') == false || @player.abilities.include?('Incognito3') == false %>
             <% else %>
               ✅ Acquise
@@ -704,7 +704,7 @@
         </div>
       </div>
 
-<div class="col-2 col-md-2">
+<div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://img.pixers.pics/pho_wat(s3:700/FO/38/84/25/62/700_FO38842562_ac5a3c8991048f4b57c64749bfb19306.jpg,700,603,cms:2018/10/5bd1b6b8d04b8_220x50-watermark.png,over,480,553,jpg)/stickers-katana-sabre-japonais-samurai-sword.jpg.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -725,7 +725,7 @@
         <div class="modal-body">
           Compétence : 1 chance sur 4 de détruire le Navire (LVL 3 et moins) de votre adversaire lorsque vous le tuez en PvP.
           <br>
-          Condition : 4 points de compétences
+          Condition : 4 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -734,7 +734,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 4 && @player.abilities.include?('MrBushido4') == false && @player.abilities.include?('MrBushido3') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-4 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "MrBushido4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-4 points de compétence)"} %>
             <% elsif @player.abilities_points <= 4 && @player.abilities.include?('MrBushido4') == false || @player.abilities.include?('MrBushido3') == false %>
             <% else %>
               ✅ Acquise
@@ -743,7 +743,7 @@
         </div>
       </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -764,7 +764,7 @@
             <div class="modal-body">
               Compétence : Vous remportez +40% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition : 4 point de compétence
+              Condition : 4 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -773,7 +773,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 4 && @player.abilities.include?('Chasseur4') == false && @player.abilities.include?('Chasseur3') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-4 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur4", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-4 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 4 && @player.abilities.include?('Chasseur4') == false || @player.abilities.include?('Chasseur3') == false%>
                 <% else %>
                   ✅ Acquise
@@ -782,7 +782,7 @@
             </div>
           </div>
 
-         <div class="col-2 col-md-2">
+         <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -803,7 +803,7 @@
         <div class="modal-body">
           Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 20%.
           <br>
-          Condition : 4 point de compétence
+          Condition : 4 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -812,7 +812,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 4 && @player.abilities.include?('Pickpocket20') == false && @player.abilities.include?('Pickpocket15') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket20", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-4 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket20", :cost => 4), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-4 points de compétence)"} %>
             <% elsif @player.abilities_points <= 4 && @player.abilities.include?('Pickpocket20') == false || @player.abilities.include?('Pickpocket15') == false%>
             <% else %>
               ✅ Acquise
@@ -822,7 +822,7 @@
       </div>
 
 
-         <!--  <div class="col-2 col-md-2">
+         <!--  <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -843,7 +843,7 @@
         <div class="row">
 
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -864,7 +864,7 @@
         <div class="modal-body">
           Compétence : Diminuez votre score Wanted -5⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition : 5 points de compétences
+          Condition : 5 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -873,7 +873,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 5 && @player.abilities.include?('Incognito5') == false && @player.abilities.include?('Incognito4') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-5 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-5 points de compétence)"} %>
             <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Incognito5') == false || @player.abilities.include?('Incognito4') == false %>
             <% else %>
               ✅ Acquise
@@ -882,7 +882,7 @@
         </div>
       </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -903,7 +903,7 @@
             <div class="modal-body">
               Compétence : Vous remportez +50% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition : 5 point de compétence
+              Condition : 5 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -912,7 +912,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 5 && @player.abilities.include?('Chasseur5') == false && @player.abilities.include?('Chasseur4') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-5 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-5 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Chasseur5') == false || @player.abilities.include?('Chasseur4') == false%>
                 <% else %>
                   ✅ Acquise
@@ -922,7 +922,7 @@
           </div>
 
 
-       <div class="col-2 col-md-2">
+       <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -943,7 +943,7 @@
         <div class="modal-body">
           Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 25%.
           <br>
-          Condition : 5 point de compétence
+          Condition : 5 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -952,7 +952,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 5 && @player.abilities.include?('Pickpocket25') == false && @player.abilities.include?('Pickpocket20') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket25", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-5 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket25", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-5 points de compétence)"} %>
             <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Pickpocket25') == false || @player.abilities.include?('Pickpocket20') == false%>
             <% else %>
               ✅ Acquise
@@ -963,7 +963,7 @@
 
 
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://storage.googleapis.com/zmooz-estoryc-images/asset/preview-89334d0a-092f-4bb8-895a-516697277230/1619801956908.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -984,7 +984,7 @@
             <div class="modal-body">
               Compétence : Augmenter votre score Wanted de +5 ⭐ contre 1 point d'action
               <br>
-              Condition : 5 point de compétence
+              Condition : 5 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -993,7 +993,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 5 && @player.abilities.include?('Criminel5') == false && @player.abilities.include?('Criminel3') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Criminel5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-5 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Criminel5", :cost => 5), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-5 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 5 && @player.abilities.include?('Criminel5') == false || @player.abilities.include?('Criminel3') == false  %>
                 <% else %>
                   ✅ Acquise
@@ -1002,7 +1002,7 @@
             </div>
           </div>
 
-         <!--  <div class="col-2 col-md-2">
+         <!--  <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1023,7 +1023,7 @@
         <div class="row">
 
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -1044,7 +1044,7 @@
         <div class="modal-body">
           Compétence : Diminuez votre score Wanted -6⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition : 6 points de compétences
+          Condition : 6 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1053,7 +1053,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 6 && @player.abilities.include?('Incognito6') == false && @player.abilities.include?('Incognito5') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito6", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito6", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-6 points de compétence)"} %>
             <% elsif @player.abilities_points <= 6 && @player.abilities.include?('Incognito6') == false || @player.abilities.include?('Incognito5') == false %>
             <% else %>
               ✅ Acquise
@@ -1062,7 +1062,7 @@
         </div>
       </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1083,7 +1083,7 @@
             <div class="modal-body">
               Compétence : Vous remportez +60% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition : 6 point de compétence
+              Condition : 6 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1092,7 +1092,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 6 && @player.abilities.include?('Chasseur6') == false && @player.abilities.include?('Chasseur5') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur6", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur6", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-6 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 6 && @player.abilities.include?('Chasseur6') == false || @player.abilities.include?('Chasseur5') == false%>
                 <% else %>
                   ✅ Acquise
@@ -1102,7 +1102,7 @@
           </div>
 
 
-       <div class="col-2 col-md-2">
+       <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -1123,7 +1123,7 @@
         <div class="modal-body">
           Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 30%.
           <br>
-          Condition : 6 point de compétence
+          Condition : 6 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1132,7 +1132,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 6 && @player.abilities.include?('Pickpocket30') == false && @player.abilities.include?('Pickpocket25') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket30", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-6 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket30", :cost => 6), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-6 points de compétence)"} %>
             <% elsif @player.abilities_points <= 6 && @player.abilities.include?('Pickpocket30') == false || @player.abilities.include?('Pickpocket25') == false%>
             <% else %>
               ✅ Acquise
@@ -1142,7 +1142,7 @@
       </div>
 
 
-         <!--  <div class="col-2 col-md-2">
+         <!--  <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1163,7 +1163,7 @@
         <div class="row">
 
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -1184,7 +1184,7 @@
         <div class="modal-body">
           Compétence : Diminuez votre score Wanted -7⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition : 7 points de compétences
+          Condition : 7 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1193,7 +1193,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 7 && @player.abilities.include?('Incognito7') == false && @player.abilities.include?('Incognito6') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito7", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-7 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito7", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-7 points de compétence)"} %>
             <% elsif @player.abilities_points <= 7 && @player.abilities.include?('Incognito7') == false || @player.abilities.include?('Incognito6') == false %>
             <% else %>
               ✅ Acquise
@@ -1202,7 +1202,7 @@
         </div>
       </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1223,7 +1223,7 @@
             <div class="modal-body">
               Compétence : Vous remportez +70% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition : 7 point de compétence
+              Condition : 7 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1232,7 +1232,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 7 && @player.abilities.include?('Chasseur7') == false && @player.abilities.include?('Chasseur6') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur7", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-7 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur7", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-7 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 7 && @player.abilities.include?('Chasseur7') == false || @player.abilities.include?('Chasseur6') == false%>
                 <% else %>
                   ✅ Acquise
@@ -1241,7 +1241,7 @@
             </div>
           </div>
 
-        <div class="col-2 col-md-2">
+        <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -1262,7 +1262,7 @@
         <div class="modal-body">
           Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 35%.
           <br>
-          Condition : 7 point de compétence
+          Condition : 7 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1271,7 +1271,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 7 && @player.abilities.include?('Pickpocket35') == false && @player.abilities.include?('Pickpocket30') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket35", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-7 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket35", :cost => 7), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-7 points de compétence)"} %>
             <% elsif @player.abilities_points <= 7 && @player.abilities.include?('Pickpocket35') == false || @player.abilities.include?('Pickpocket30') == false%>
             <% else %>
               ✅ Acquise
@@ -1281,7 +1281,7 @@
       </div>
 
 
-         <!--  <div class="col-2 col-md-2">
+         <!--  <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1302,7 +1302,7 @@
         <div class="row">
 
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -1323,7 +1323,7 @@
         <div class="modal-body">
           Compétence : Diminuez votre score Wanted -8⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition : 8 points de compétences
+          Condition : 8 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1332,7 +1332,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 8 && @player.abilities.include?('Incognito8') == false && @player.abilities.include?('Incognito7') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito8", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-8 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito8", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-8 points de compétence)"} %>
             <% elsif @player.abilities_points <= 8 && @player.abilities.include?('Incognito8') == false || @player.abilities.include?('Incognito7') == false %>
             <% else %>
               ✅ Acquise
@@ -1341,7 +1341,7 @@
         </div>
       </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1362,7 +1362,7 @@
             <div class="modal-body">
               Compétence : Vous remportez +80% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition : 8 point de compétence
+              Condition : 8 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1371,7 +1371,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 8 && @player.abilities.include?('Chasseur8') == false && @player.abilities.include?('Chasseur7') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur8", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-8 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur8", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-8 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 8 && @player.abilities.include?('Chasseur8') == false || @player.abilities.include?('Chasseur7') == false%>
                 <% else %>
                   ✅ Acquise
@@ -1380,7 +1380,7 @@
             </div>
           </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -1401,7 +1401,7 @@
         <div class="modal-body">
           Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 40%.
           <br>
-          Condition : 8 point de compétence
+          Condition : 8 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1410,7 +1410,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 8 && @player.abilities.include?('Pickpocket40') == false && @player.abilities.include?('Pickpocket35') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket40", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-8 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket40", :cost => 8), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-8 points de compétence)"} %>
             <% elsif @player.abilities_points <= 8 && @player.abilities.include?('Pickpocket40') == false || @player.abilities.include?('Pickpocket35') == false%>
             <% else %>
               ✅ Acquise
@@ -1420,7 +1420,7 @@
       </div>
 
 
-         <!--  <div class="col-2 col-md-2">
+         <!--  <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1441,7 +1441,7 @@
         <div class="row">
 
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -1462,7 +1462,7 @@
         <div class="modal-body">
           Compétence : Diminuez votre score Wanted -9⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition : 9 points de compétences
+          Condition : 9 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1471,7 +1471,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 9 && @player.abilities.include?('Incognito9') == false && @player.abilities.include?('Incognito8') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito9", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-9 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito9", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-9 points de compétence)"} %>
             <% elsif @player.abilities_points <= 9 && @player.abilities.include?('Incognito9') == false || @player.abilities.include?('Incognito8') == false %>
             <% else %>
               ✅ Acquise
@@ -1480,7 +1480,7 @@
         </div>
       </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1501,7 +1501,7 @@
             <div class="modal-body">
               Compétence : Vous remportez +90% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition : 9 point de compétence
+              Condition : 9 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1510,7 +1510,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 9 && @player.abilities.include?('Chasseur9') == false && @player.abilities.include?('Chasseur8') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur9", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-9 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur9", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-9 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 9 && @player.abilities.include?('Chasseur9') == false || @player.abilities.include?('Chasseur8') == false%>
                 <% else %>
                   ✅ Acquise
@@ -1519,7 +1519,7 @@
             </div>
           </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -1540,7 +1540,7 @@
         <div class="modal-body">
           Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 45%.
           <br>
-          Condition : 9 point de compétence
+          Condition : 9 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1549,7 +1549,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 9 && @player.abilities.include?('Pickpocket45') == false && @player.abilities.include?('Pickpocket40') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket45", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-9 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket45", :cost => 9), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-9 points de compétence)"} %>
             <% elsif @player.abilities_points <= 9 && @player.abilities.include?('Pickpocket45') == false || @player.abilities.include?('Pickpocket40') == false%>
             <% else %>
               ✅ Acquise
@@ -1559,7 +1559,7 @@
       </div>
 
 
-         <!--  <div class="col-2 col-md-2">
+         <!--  <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1580,7 +1580,7 @@
         <div class="row">
 
 
-          <div class="col-2 col-md-2">
+          <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://www.ledeguisement.com/images/articles/4247-0.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -1601,7 +1601,7 @@
         <div class="modal-body">
           Compétence : Diminuez votre score Wanted -10⭐ contre 1 point d'action lorsque vous êtes recherché.
           <br>
-          Condition : 10 points de compétences
+          Condition : 10 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1610,7 +1610,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 10 && @player.abilities.include?('Incognito10') == false && @player.abilities.include?('Incognito9') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-10 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Incognito10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-10 points de compétence)"} %>
             <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Incognito10') == false || @player.abilities.include?('Incognito9') == false %>
             <% else %>
               ✅ Acquise
@@ -1619,7 +1619,7 @@
         </div>
       </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://res.cloudinary.com/dsiamykrd/image/upload/v1577030856/wanted_vmyodi.png", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1640,7 +1640,7 @@
             <div class="modal-body">
               Compétence : Vous remportez +100% de Berrys sur la prime de vos adversaires vaincus en PvP.
               <br>
-              Condition : 10 point de compétence
+              Condition : 10 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1649,7 +1649,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 10 && @player.abilities.include?('Chasseur10') == false && @player.abilities.include?('Chasseur9') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-10 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Chasseur10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-10 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Chasseur10') == false || @player.abilities.include?('Chasseur9') == false%>
                 <% else %>
                   ✅ Acquise
@@ -1658,7 +1658,7 @@
             </div>
           </div>
 
-      <div class="col-2 col-md-2">
+      <div class="col-sm-4 col-md-2">
         <div class="card m-3 align-items-center">
           <%=  image_tag "https://ih1.redbubble.net/image.955807418.9171/flat,750x1000,075,f.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
           <div class="card-body">
@@ -1679,7 +1679,7 @@
         <div class="modal-body">
           Compétence : Augmente les chances de trouver un objet bonus sur un monstre de 50%.
           <br>
-          Condition : 10 point de compétence
+          Condition : 10 points de compétence
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1688,7 +1688,7 @@
     </div>
   </div>
             <% if @player.abilities_points >= 10 && @player.abilities.include?('Pickpocket50') == false && @player.abilities.include?('Pickpocket45') == true%>
-              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket50", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-10 points de compétences)"} %>
+              <%= link_to "Obtenir", ability_push_path(:ability => "Pickpocket50", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-10 points de compétence)"} %>
             <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Pickpocket50') == false || @player.abilities.include?('Pickpocket45') == false%>
             <% else %>
               ✅ Acquise
@@ -1698,7 +1698,7 @@
       </div>
 
 
-       <div class="col-2 col-md-2">
+       <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://storage.googleapis.com/zmooz-estoryc-images/asset/preview-89334d0a-092f-4bb8-895a-516697277230/1619801956908.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">
@@ -1719,7 +1719,7 @@
             <div class="modal-body">
               Compétence : Augmenter votre score Wanted de +10 ⭐ contre 1 point d'action
               <br>
-              Condition : 10 point de compétence
+              Condition : 10 points de compétence
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -1728,7 +1728,7 @@
         </div>
       </div>
                 <% if @player.abilities_points >= 10 && @player.abilities.include?('Criminel10') == false && @player.abilities.include?('Criminel5') == true%>
-                  <%= link_to "Obtenir", ability_push_path(:ability => "Criminel10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-10 points de compétences)"} %>
+                  <%= link_to "Obtenir", ability_push_path(:ability => "Criminel10", :cost => 10), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sûr? (-10 points de compétence)"} %>
                 <% elsif @player.abilities_points <= 10 && @player.abilities.include?('Criminel10') == false || @player.abilities.include?('Criminel5') == false  %>
                 <% else %>
                   ✅ Acquise
@@ -1736,7 +1736,7 @@
               </div>
             </div>
           </div>
-         <!--  <div class="col-2 col-md-2">
+         <!--  <div class="col-sm-4 col-md-2">
             <div class="card m-3 align-items-center">
               <%=  image_tag "https://m.media-amazon.com/images/I/41lLYGBnhDL._AC_.jpg", :class => "avatar-abilities mx-auto mt-3"  %>
               <div class="card-body">

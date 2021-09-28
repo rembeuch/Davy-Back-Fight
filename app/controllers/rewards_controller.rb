@@ -22,6 +22,65 @@ class RewardsController < ApplicationController
     @eternalpose = @player.rewards.where(category: "EternalPose")
   end
 
+  def daily_view
+    @player = current_user.player
+    @log = @player.quest_logs.last
+  end
+
+  def daily
+    @player = current_user.player
+    if @player.daily == true
+      @random_daily = rand(1..100)
+      if @random_daily >= 90
+        @player.update(abilities_points: (@player.abilities_points + 1))
+        @log = QuestLog.new
+        @log.player = @player
+        @log.content = "Votre Récompense du jour: 1 point de compétence!"
+        @log.image = "https://i.skyrock.net/4220/84734220/pics/3219135745_1_4_Yj66ygi1.jpg"
+        @log.save
+      elsif @random_daily >= 70
+        @player.update(exp: (@player.exp + 200))
+        @log = QuestLog.new
+        @log.player = @player
+        @log.content = "Votre Récompense du jour: 200 points d'expérience!"
+        @log.image = "https://i.skyrock.net/4220/84734220/pics/3219135745_1_4_Yj66ygi1.jpg"
+        @log.save
+      elsif @random_daily >= 50
+        @player.update(action: (@player.action + 1))
+        @log = QuestLog.new
+        @log.player = @player
+        @log.content = "Votre Récompense du jour: 1 point d'action!"
+        @log.image = "https://i.skyrock.net/4220/84734220/pics/3219135745_1_4_Yj66ygi1.jpg"
+        @log.save
+      elsif @random_daily >= 20
+        @player.update(money: (@player.money + 10000))
+        @log = QuestLog.new
+        @log.player = @player
+        @log.content = "Votre Récompense du jour: 10 000 Berrys!"
+        @log.image = "https://i.skyrock.net/4220/84734220/pics/3219135745_1_4_Yj66ygi1.jpg"
+        @log.save
+      else
+        if @player.wanted < 100
+          @player.update(wanted: (@player.wanted + 10))
+          @log = QuestLog.new
+        @log.player = @player
+        @log.content = "Votre Récompense du jour: 10 points ⭐ Wanted!"
+        @log.image = "https://i.skyrock.net/4220/84734220/pics/3219135745_1_4_Yj66ygi1.jpg"
+        @log.save
+        else
+          @player.update(money: (@player.money + 10000))
+          @log = QuestLog.new
+        @log.player = @player
+        @log.content = "Votre Récompense du jour: 10 000 Berrys!"
+        @log.image = "https://i.skyrock.net/4220/84734220/pics/3219135745_1_4_Yj66ygi1.jpg"
+        @log.save
+        end
+      end
+      @player.update(daily: false)
+      redirect_to daily_view_path
+    end
+  end
+
   def buy_health
     @player = current_user.player
     @player.update(health: (@player.health + 1))

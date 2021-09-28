@@ -130,6 +130,9 @@ Rails.application.routes.draw do
    post 'buy_reward' => 'rewards#buy_reward'
   end
 
+  patch 'daily' => 'rewards#daily'
+  get 'daily_view' => 'rewards#daily_view'
+
   get 'ship' => 'ships#ship'
   patch 'upgrade_ship' => 'ships#upgrade_ship'
   patch 'options_push' => 'ships#options_push'

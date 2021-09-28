@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_24_123508) do
+ActiveRecord::Schema.define(version: 2021_09_28_090737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 2021_08_24_123508) do
     t.integer "abilities_points", default: 0
     t.string "ship_options", default: [], array: true
     t.integer "ship_level", default: 0
+    t.boolean "daily", default: false
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 

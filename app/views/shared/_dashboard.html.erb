@@ -7,6 +7,10 @@
     <br>
 </h3>
   <span><%= link_to 'Votre Navire', ship_path, class: "btn btn-primary badge-pill mb-2" %> <%= link_to 'Compétences', abilities_index_path, class: "btn btn-primary badge-pill mb-2" %> <span class="font-custom-title"> Points de compétence : </span> <%= current_user.player.abilities_points %> </span>
+  <br>
+  <% if @player.daily == true && @player.in_fight == false %>
+      <%= link_to "Récompense quotidienne!", daily_path, method: :patch, class: "btn btn-primary btn-sm m-3",data: { disable_with: "Récompense quotidienne!" } %>
+  <% end %>
   </div>
 <div>
   <h3>
