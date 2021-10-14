@@ -30,23 +30,19 @@
       <%= link_to 'Accueil', root_path, class: current_class?(root_path) %>
     </li>
 
+    <li class="m-2 font-custom-navbar">
+          <%= link_to 'All Blue Conqueror', islands_path, class: current_class?(islands_path) %>
+    </li>
 
-  <div class="dropdown m-2">
-    <span class="font-custom-navbar">Jeux <i class="fas fa-chevron-down"></i></span>
-      <div class="dropdown-content">
-        <li class="m-2 font-custom-navbar">
-          <%= link_to 'Paris', questions_path, class: current_class?(questions_path) %>
-        </li>
-        <li class="m-2 font-custom-navbar">
-         <%= link_to 'Quiz', quiz_path, class: current_class?(quiz_path) %>
-        </li>
-        <li class="m-2 font-custom-navbar">
-         <%= link_to 'Colisée', tournaments_path, class: current_class?(tournaments_path)%>
-        </li>
-        <li class="m-2 font-custom-navbar">
-          <%= link_to 'Quest', islands_path, class: current_class?(islands_path) %>
-        </li>
-      </div>
+
+    <li class="m-2 font-custom-navbar">
+      <%= link_to 'Paris', questions_path, class: current_class?(questions_path) %>
+    </li>
+
+    <li class="m-2 font-custom-navbar">
+      <%= link_to 'Quiz', quiz_path, class: current_class?(quiz_path) %>
+    </li>
+
   </div>
 
   <div class="dropdown m-2">
