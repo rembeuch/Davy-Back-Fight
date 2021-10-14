@@ -49,7 +49,7 @@
           <% if current_user.admin == true %>
           <%= link_to 'créer un nouveau mob', new_place_mob_path(@place), class: "btn btn-warning" %>
           <% end %>
-            <% if @player.position != @place.name %>
+            <% if @player.position != @place.name && current_user.admin == false %>
               Vous devez vous déplacer à cet endroit pour voir les personnages qui s'y trouvent.
             <% else %>
           <ul> <p class="text-center"> <strong> Personnages présents à cet endroit:</strong> </p>
