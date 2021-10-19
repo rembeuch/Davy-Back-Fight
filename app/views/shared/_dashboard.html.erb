@@ -1,4 +1,7 @@
 <div class="d-flex bg-white text-center ">
+  <% if current_user.admin == true %>
+  Players: <%= Player.count - 1 %>
+  <% end %>
   <div class="col-sm-7 col-sm-offset-7">
    <h3 class="font-custom-title"> Nom: <%= current_user.pseudo %>🏴‍☠️
 
