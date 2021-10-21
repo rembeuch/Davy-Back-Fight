@@ -52,18 +52,35 @@
     </ul>
     <div class="d-flex flex-column">
     <% if @player.health < @player.max_health && @player.abilities.include?('Carnassier')%>
-        <%= link_to "Utiliser la compétence Carnassier: +1 Santé contre des points d'action?", carnassier_path, method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" } %>
+      <p class="text-center">Utiliser la compétence Carnassier: +1 Santé contre des points d'action?
+        <%= link_to "+1", carnassier_path, method: :patch, class: "button-circle",data: { disable_with: "" } %>
+      </p>
     <% end %>
     <% if @player.health < @player.max_health && @player.money >= 1000000%>
-      <%= link_to "Récupérer +1 Santé pour 1M de Berrys?", buy_health_path, method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" } %>
+      <p class="text-center">Récupérer +1 Santé pour 1M de Berrys
+        <br>
+        <%= link_to "+1", buy_health_path, method: :patch, class: "button-circle",data: { disable_with: "" } %>
+      </p>
     <% elsif @player.health < @player.max_health && @player.money < 1000000%>
       +1 santé: Berrys insuffisants (1M)
       <br>
     <% end %>
     <% if @player.money >= 1000000%>
-      <%= link_to "Récupérer +1 Action pour 1M de Berrys?", buy_action_path, method: :patch, class: "badge-danger badge-pill m-3",data: { disable_with: "" } %>
+     <p class="text-center"> Récupérer +1 Action pour 1M de Berrys?
+      <br>
+      <%= link_to "+1", buy_action_path, method: :patch, class: "button-circle",data: { disable_with: "" } %>
+    </p>
     <% else %>
       +1 action: Berrys insuffisants (1M)
+    <br>
+    <% end %>
+    <% if @player.money >= 1000000%>
+      <p class="text-center">Gagner +1 pt de Compétence pour 1M de Berrys?
+      <br>
+      <%= link_to "+1", buy_skill_path, method: :patch, class: "button-circle",data: { disable_with: "" } %>
+      </p>
+    <% else %>
+      +1 pt de Compétence: Berrys insuffisants (1M)
     <% end %>
      <p class="text-center"> Nombres de PNJ vaincus: <%= @player.defeated_mob.size - (@player.defeated_mob.include?("random") ? 1 : 0) %> / <%= Mob.all.count %> </p>
     <div class="btn-group">

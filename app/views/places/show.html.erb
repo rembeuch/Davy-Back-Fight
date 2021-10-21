@@ -28,9 +28,9 @@
                   <%= link_to 'Objet en vente', player_shop_path(player), class: "btn btn-warning my-2" %>
                 <% end %>
                 <% if player.open_crew == true && @player.crew == "" && player.in_fight == false && player.ship_options.include?('Flotte1') && (player.level + 1) > Player.where(crew: player.crew).count%>
-                  <%= button_to "Rejoindre son équipage?",player_join_crew_path(player),data: { confirm: "Êtes-vous sur de vouloir rejoindre cet équipage?"}, method: :post, class: "btn btn-success my-2" %>
+                  <%= link_to "Rejoindre son équipage?",player_join_crew_path(player),data: { confirm: "Êtes-vous sur de vouloir rejoindre cet équipage?"}, method: :post, class: "button-fight" %>
                 <% elsif player.open_crew == true && @player.crew == "" && player.in_fight == false && player.level > Player.where(crew: player.crew).count %>
-                  <%= button_to "Rejoindre son équipage?",player_join_crew_path(player),data: { confirm: "Êtes-vous sur de vouloir rejoindre cet équipage?"}, method: :post, class: "btn btn-success my-2" %>
+                  <%= link_to "Rejoindre son équipage?",player_join_crew_path(player),data: { confirm: "Êtes-vous sur de vouloir rejoindre cet équipage?"}, method: :post, class: "button-fight" %>
                 <% end %>
                 <% if !(@player.crew == player.crew) || @player.crew == "" %>
                   <%= button_to 'Combattre ⚔️ (1pt d\'action)', player_pvp_launch_path(player), method: :post %>

@@ -45,19 +45,19 @@
           <h2> ATTAQUE TOTALE: +<%=@player.player_power + @player.level - @mob.level + @sum %></h2>
           <br>
           <% if @player.player_power == 0 %>
-           <%= button_to 'Attaquer (+1 à +11)',mob_power_path(@mob), method: :post %>
+           <%= link_to 'Attaquer (+1 à +11)',mob_power_path(@mob), method: :post, class: "button-fight" %>
           <% elsif @player.fight == 'lose' %>
             Perdu!
-            <%= button_to 'Continuer?', mob_retry_player_path(@mob), method: :post,data: { disable_with: "Continuer?" } %> ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post,data: { disable_with: "Fuir" } %>
+            <%= link_to 'Continuer?', mob_retry_player_path(@mob), method: :post,data: { disable_with: "Continuer?" }, class: "button-fight" %> ou <%= link_to 'Fuir?',mob_run_path(@mob), method: :post,data: { disable_with: "Fuir" }, class: "button-run" %>
     1 blessure
           <% elsif @player.player_power == 21%>
             Puissance Maximale!
-            <%= button_to 'Résoudre le combat', mob_resolve_path(@mob) , method: :post, data: { disable_with: "Résoudre" } %> ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post %>
+            <%= link_to 'Résoudre le combat', mob_resolve_path(@mob) , method: :post, data: { disable_with: "Résoudre le combat" }, class: "button-fight" %> ou <%= link_to 'Fuir?',mob_run_path(@mob), method: :post, class: "button-run" %>
           <% elsif @player.player_power < 21 %>
-            <%= button_to 'Attaquer (+1 à +11)',mob_power_path(@mob), method: :post %>
+           <%= link_to 'Attaquer (+1 à +11)',mob_power_path(@mob), method: :post, class: "button-fight" %>
             ou
-            <%= button_to 'Résoudre le combat', mob_resolve_path(@mob) , method: :post, data: { disable_with: "Résoudre" } %>
-            ou <%= button_to 'Fuir?',mob_run_path(@mob), method: :post,data: { disable_with: "fuir" } %>
+            <%= link_to 'Résoudre le combat', mob_resolve_path(@mob) , method: :post, data: { disable_with: "Résoudre" }, class: "button-fight" %>
+            ou <%= link_to 'Fuir?',mob_run_path(@mob), method: :post,data: { disable_with: "fuir" }, class: "button-run" %>
           <% end %>
           <br>
           <ul>

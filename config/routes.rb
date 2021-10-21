@@ -122,6 +122,7 @@ Rails.application.routes.draw do
   resources :rewards, only: [:index]
   patch 'buy_health' => 'rewards#buy_health'
   patch 'buy_action' => 'rewards#buy_action'
+  patch 'buy_skill' => 'rewards#buy_skill'
 
   resources :rewards, only: [:show] do
    patch 'use' => 'rewards#use'
