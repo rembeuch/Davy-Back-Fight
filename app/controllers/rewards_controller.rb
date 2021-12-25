@@ -60,7 +60,7 @@ class RewardsController < ApplicationController
         @log.image = "https://i.skyrock.net/4220/84734220/pics/3219135745_1_4_Yj66ygi1.jpg"
         @log.save
       else
-        if @player.wanted < 100
+        if @player.wanted < 91
           @player.update(wanted: (@player.wanted + 10))
           @log = QuestLog.new
         @log.player = @player
