@@ -67,6 +67,37 @@ class PlacesController < ApplicationController
     end
   end
 
+  def skypiea
+    @player = current_user.player
+    @random_skypiea = rand(1..100)
+    @captain = Player.where(crew: @player.crew, captain: true).first
+    if @random_skypiea > 85
+      @player.update(ship_level: 0)
+          @log = QuestLog.new
+          @log.player = @player
+          @log.content = "Votre Navire à été détruit par le Knock Up Stream"
+          @log.save
+          @log = QuestLog.new
+          redirect_to island_path(Place.find_by(name: @player.position).island)
+    else
+      if @player.crew != "" && @captain.in_fight == true
+        redirect_to island_path(Place.find_by(name: @player.position).island), notice: 'votre capitaine combat ici, vous ne pouvez pas l\'abandonner'
+      elsif @player.in_fight == false
+      @player = current_user.player
+      @player.update(position: 'Mer de nuages')
+        if @player.visited_place.exclude?('Mer de nuages')
+          @player.update(visited_place: @player.visited_place.push('Mer de nuages'))
+        end
+        if @player.visited_island.exclude?('Mer de nuages')
+          @player.update(visited_island: @player.visited_island.push('Mer de nuages'))
+        end
+      redirect_to place_path(Place.find_by(name: 'Mer de nuages'))
+      else
+        redirect_to island_path(Place.find_by(name: @player.position).island), notice: 'vous êtes engagé dans un combat'
+      end
+    end
+  end
+
   def place_params
     params.require(:place).permit(:name, :image, :condition)
   end
