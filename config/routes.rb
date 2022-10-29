@@ -88,6 +88,8 @@ Rails.application.routes.draw do
     resources :mobs, only: [:new, :create]
   end
 
+  patch 'skypiea' => 'places#skypiea'
+
   resources :mobs, only: [:show] do
   post 'power' => 'mobs#power'
   post 'run' => 'mobs#run'
