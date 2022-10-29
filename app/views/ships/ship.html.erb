@@ -1,6 +1,6 @@
 <div class="container card">
   <%= render 'shared/dashboard' %>
-  <h1 class="font-custom-title text-center">Navire LVL: <%= @player.ship_level %></h1>
+  <h1 class="font-custom-title text-center">Votre Navire est LVL: <%= @player.ship_level %></h1>
   <div class="row">
     <div class="col-12">
       <div class="card m-3">
@@ -214,7 +214,6 @@
         </div>
         <div class="modal-body">
           Compétence passive: Vous bénéficiez du bonus d'équipage en PvP si vous n'êtes pas Capitaine (+1 de bonus d'attaque par membre d'équipage au même endroit que vous)
-          <br> Certaines améliorations pour accéder à de nouveaux endroits sont désormais possible (à venir...)
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -223,6 +222,45 @@
     </div>
   </div>
               ✅ acquise
+          </div>
+        </div>
+      </div>
+      <div class="col-3 col-md-3">
+        <div class="card m-3 align-items-center">
+          <%=  image_tag "https://img.filmsactu.net/datas/dvd/o/n/one-piece-skypiea-coffret-1/xl/4c860a243ac7d.jpg", :class => "ship-options mx-auto mt-3"  %>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary mb-2 p-2" data-toggle="modal" data-target="#Ailes">
+              Ailes
+            </button>
+            <br>
+
+  <!-- Modal -->
+  <div class="modal fade" id="Ailes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Ailes</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Compétence: Vous pouvez tentez d'accéder à Skypiea en prenant le Knock Up Stream!
+          <br>
+          Condition: 3 point de compétences
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+            <% if @player.abilities_points >= 3 && @player.ship_options.include?('Ailes') == false%>
+              <%= link_to "Obtenir", options_push_path(:option => "Ailes", :cost => 3), method: :patch, class: "badge-success badge-pill m-3",data: { disable_with: "" , confirm: "Êtes-vous sur? (-3 points de compétences)"} %>
+            <% elsif @player.abilities_points <= 3 && @player.ship_options.include?('Ailes') == false %>
+            <% else %>
+              ✅ acquise
+            <% end %>
           </div>
         </div>
       </div>

@@ -13,6 +13,9 @@
       <div class="m-3 d-flex">
         <div class="card col-6 col-md-6 mx-2">
           <% if @player.position == @place.name %>
+        <% if @place.name == 'Knock Up Stream' && @player.ship_level >= 3 && @player.ship_options.include?('Ailes') %>
+          <%= link_to "Aller à Skypiea?", skypiea_path, method: :patch, class: "btn btn-success m-2 rounded-pill border border-success",data: { disable_with: "Skypiea!" , confirm: "Êtes-vous sûr? Si votre navire est de niveau inférieur à 8, il peut être détruit par le Knock Up Stream."} %>
+        <% end %>
           <h4 class="font-custom-title">Vous êtes ici☠️</h4>
           <span class="m-3 text-center"> <strong> Joueurs présents à cet endroit :</strong> </span>
           <ul>

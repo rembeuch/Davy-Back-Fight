@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
-ruby '2.6.3'
+ruby '2.7.4'
 
 gem 'cloudinary', '~> 1.9.1'
 gem 'carrierwave', '~> 1.2'
 gem 'money-rails'
 gem 'stripe'
 gem 'stripe_event'
+gem 'minitest', '~> 5.8', '>= 5.8.4'
 
 gem 'bootsnap', require: false
 gem 'devise'
