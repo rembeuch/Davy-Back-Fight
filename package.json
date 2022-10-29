@@ -2,14 +2,15 @@
   "name": "_Davy-Back-Fight",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^5.4.3",
+    "@rails/webpacker": "5.4.3",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0",
-    "tar": "^6.1.11"
+    "tar": "^6.1.11",
+    "webpack": "^4.46.0"
   },
   "devDependencies": {
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.11.1"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3"
   }
 }
