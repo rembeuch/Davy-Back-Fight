@@ -71,7 +71,7 @@ class PlacesController < ApplicationController
     @player = current_user.player
     @random_skypiea = rand(1..100)
     @captain = Player.where(crew: @player.crew, captain: true).first
-    if @random_skypiea > 85
+    if @random_skypiea > 85 && @player.ship_level < 8
       @player.update(ship_level: 0)
           @log = QuestLog.new
           @log.player = @player
