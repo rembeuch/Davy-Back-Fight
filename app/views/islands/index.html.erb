@@ -16,7 +16,7 @@
                 <button class="badge badge-pill badge-dark m-2 mt-3" onclick="toggleGrand()"><%= island.category %><span>&#8661;</span>
                 </button>
               <% elsif island.category == "Skypiea" %>
-                <button class="badge badge-pill badge-dark m-2 mt-3" onclick="toggleGrand()"><%= island.category %><span>&#8661;</span>
+                <button class="badge badge-pill badge-dark m-2 mt-3" onclick="toggleSkypiea()"><%= island.category %><span>&#8661;</span>
                 </button>
               <% end %>
             </div>
@@ -58,7 +58,8 @@
                 <% end %>
               <% elsif island.category != 'Skypiea' && island.position.between?((@island.position - 1),(@island.position + 1)) && @island.category == "Grand Line" || @island.position == island.position || @player.rewards.where(category: "EternalPose").map{ |island| island.name}.include?(island.name) && @island.category == 'Grand Line' %>
                 <% if island.category != 'Skypiea' && island.condition == "" || @player.defeated_mob.include?(island.condition) || island.name == 'Reverse Mountain' %>
-                    <div class="col-sm-12 col-md-4" id="Grand">
+                    <div class="col-sm-12 col-md-4" id="<%= island.category == "Skypiea" ? "Skypiea" : "Grand"%>"
+>
                       <div class="card m-3" style="height: 500px">
                         <%= link_to island_path(island), class: "text-center" do %>
                           <% if island.image != nil %>
@@ -121,6 +122,19 @@
 }
 function toggleGrand() {
   var y = document.querySelectorAll("#Grand");
+  console.log(y)
+  y.forEach((island) => {
+  if (island.style.display === "none") {
+    island.style.display = "flex";
+  } else {
+    island.style.display = "none";
+  }
+
+  })
+}
+
+function toggleSkypiea() {
+  var y = document.querySelectorAll("#Skypiea");
   console.log(y)
   y.forEach((island) => {
   if (island.style.display === "none") {

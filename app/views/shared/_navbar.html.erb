@@ -59,20 +59,20 @@
 
 
 
-    <li class="m-2 font-custom-navbar">
+    <%# <li class="m-2 font-custom-navbar">
      <%= link_to 'Boutique', products_path, class: current_class?(products_path) %>
+    <%# </li> %>
+    <%# <% if user_signed_in? && current_user.cart != nil %>
+    <%# <li class="m-2 font-custom-navbar"> %>
+     <%# <%= link_to 'Mon Panier', cart_path(current_user.cart), class: current_class?(cart_path(current_user.cart)) %>
+     <%# <%if current_user.cart.items.size > 0 %>
+        <%# <%= link_to cart_path(current_user.cart) do %>
+          <%# <%= current_user.cart.items.size %>
+          <%# <i class="fas fa-shopping-basket"></i> %>
+        <%# <% end %>
+     <%# <% end %>
     </li>
-    <% if user_signed_in? && current_user.cart != nil %>
-    <li class="m-2 font-custom-navbar">
-     <%= link_to 'Mon Panier', cart_path(current_user.cart), class: current_class?(cart_path(current_user.cart)) %>
-     <%if current_user.cart.items.size > 0 %>
-        <%= link_to cart_path(current_user.cart) do %>
-          <%= current_user.cart.items.size %>
-          <i class="fas fa-shopping-basket"></i>
-        <% end %>
-     <% end %>
-    </li>
-    <% end %>
+    <%# <% end %>
     <li class="m-2 font-custom-navbar">
      <%= link_to 'Classement', users_controller_index_path, class: current_class?(users_controller_index_path) %>
     </li>
