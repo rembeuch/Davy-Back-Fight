@@ -1,0 +1,79 @@
+
+<div class="container">
+<div class="bg-white">
+    <h3 class="">
+        Camp: <%= @solo.side %>
+        <% if @solo.side == "marine" %>
+            <img src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="card-zone-img avatar-square" />
+        <% else %>
+            <img src="https://www.comprarbanderas.es/images/banderas/400/373-pirata-de-edward-england_400px.jpg" class="card-zone-img avatar-square" />
+        <% end %>
+        Berrys: <%= @solo.berrys %>
+        <img src="https://ih1.redbubble.net/image.903868159.1730/st,small,507x507-pad,600x600,f8f8f8.jpg" class="avatar">
+        Bois: <%= @solo.wood %> 🪵
+    </h3>
+    <h3 class="text-right mx-3"> Jour: <%= @solo.jour %>🕒</h3>
+</div>
+<div class="row container">
+    <% @zones.each do |zone| %>
+    <div class="m-3 py-3 col-lg-3 card-zone">
+        <img src="http://ekladata.com/3sRat8HlQpYfZNUxryAgfxD7HH4.png" />
+        <div class="card-zone-infos">
+            <div>
+            <% if !Building.where(zone: zone.name, solo: @solo, version: "chantier").empty? %>
+                🏗️
+            <% end %>
+            <% if !Building.where(zone: zone.name, solo: @solo, version: "port").empty? %>
+                ⚓
+            <% end %>
+            <% if !Building.where(zone: zone.name, solo: @solo, version: "caserne").empty? %>
+                ⛩️
+            <% end %>
+            <% if !Building.where(zone: zone.name, solo: @solo, version: "canon").empty? %>
+                🛡️
+            <% end %>
+            <br>
+            <h2><%= zone.name %></h2>
+            <p></p>
+            <h3>
+                <%= progress_bar 1 - zone.affinity_number / 100.to_f,class: "bg-danger", style: 'min-width: 200px' %>
+                <div class="d-flex">
+                    <% Building.where(zone: zone.name, solo: @solo).count.times do |i| %>
+                        <%= progress_bar 0, class: "bg-success", style: 'width: 20px' %>
+                    <% end %>
+                    <% (zone.slot - Building.where(zone: zone.name, solo: @solo).count).times do |i| %>
+                        <%= progress_bar 0, class: "bg-dark", style: 'width: 20px' %>
+                    <% end %>
+                </div>
+            </h3>
+                <div class="d-flex">
+                    <% if !Perso.where(zone: zone.name, solo: @solo, side: "marine").empty? %>
+                        <img src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="avatar-square" />
+                    <% end %>
+                    <% if !Perso.where(zone: zone.name, solo: @solo, side: "pirate").empty? %>
+                        <img src="https://www.comprarbanderas.es/images/banderas/400/373-pirata-de-edward-england_400px.jpg" class="avatar-square" />
+                    <% end %>
+                    <% if !Boat.where(zone: zone.name, solo: @solo).empty? %>
+                        <div class="mx-2">🚢</div>
+                    <% end %>
+                    <% if !Soldier.where(zone: zone.name, solo: @solo).empty? %>
+                        <div class="mx-2">🪖</div>
+                    <% end %>
+                </div>
+            </div>
+            <% if zone.affinity == "marine" %>
+                <h2 class="card-zone-affinity">Marine</h2>
+                <img src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="card-zone-img avatar-square" />
+            <% elsif zone.affinity == "pirate"%>
+                <h2 class="card-zone-affinity">Pirate</h2>
+                <img src="https://www.comprarbanderas.es/images/banderas/400/373-pirata-de-edward-england_400px.jpg" class="card-zone-img avatar-square" />
+            <% elsif zone.affinity == "neutre"%>
+                <h2 class="card-zone-affinity">Neutre</h2>
+                <img src="https://us.123rf.com/450wm/muuraa/muuraa1503/muuraa150300208/37740509-agitant-un-drapeau-gris-sur-gris-fond-d%C3%A9grad%C3%A9.jpg" class="card-zone-img avatar-bordered" />
+            <% end %>
+            <br>
+        </div>
+    </div>
+    <% end %>
+</div>
+</div>

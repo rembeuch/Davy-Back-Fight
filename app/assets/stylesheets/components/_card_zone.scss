@@ -1,0 +1,59 @@
+.card-zone {
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+  
+  .card-zone > img {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .card-zone h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .card-zone p {
+    font-size: 12px;
+    opacity: .7;
+    margin: 0;
+  }
+  
+  
+  .card-zone .card-zone-infos {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    position: relative;
+  }
+  
+  .card-zone-infos .card-zone-img {
+    position: absolute;
+    right: 10px;
+    top: -145px;
+    width: 40px;
+  }
+
+  .card-zone-infos .card-zone-affinity {
+    position: absolute;
+    right: 16px;
+    top: -100px;
+    width: 40px;
+  }
+  .avatar-bordered {
+    width: 40px;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    border: white 1px solid;
+  }
+  
+  .avatar-square {
+    width: 40px;
+    border-radius: 0px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    border: white 1px solid;
+  }

@@ -1,0 +1,13 @@
+<div class="container bg-white">
+  <h1 class="text-center font-custom-title">Bienvenue dans One Piece Winner Takes All!</h1>
+  <% if current_user.solo %>
+  <div>
+    <%= link_to 'Continuer la partie en cours', solo_path(current_user.solo) %>
+  </div>
+  <% end %>
+  <h4 class="text-center">  Choisissez votre camp! </h4>
+  <div class="row d-flex justify-content-center">
+        <%= button_to 'Marine 🚢',solos_path,params: { side: "marine" }, method: :post, class: "m-3" %>
+        <%= button_to 'Pirate 🏴‍☠️',solos_path,params: { side: "pirate" }, method: :post, class: "m-3"%>
+  </div>
+</div>

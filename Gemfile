@@ -22,6 +22,10 @@ gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'bootstrap_progressbar'
+gem 'bootstrap-sass' 
+
+
 
 gem 'letter_opener', group: :development
 

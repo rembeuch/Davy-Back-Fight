@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :orders
   has_one :cart
   has_one :player
+  has_one :solo
   has_many :participations
 
 

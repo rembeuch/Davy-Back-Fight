@@ -10,10 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_28_090737) do
+ActiveRecord::Schema.define(version: 2022_11_11_185727) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "adminpack"
+  enable_extension "autoinc"
+  enable_extension "btree_gin"
+  enable_extension "btree_gist"
+  enable_extension "citext"
+  enable_extension "cube"
+  enable_extension "dblink"
+  enable_extension "dict_int"
+  enable_extension "dict_xsyn"
+  enable_extension "earthdistance"
+  enable_extension "file_fdw"
+  enable_extension "fuzzystrmatch"
+  enable_extension "hstore"
+  enable_extension "insert_username"
+  enable_extension "intagg"
+  enable_extension "intarray"
+  enable_extension "isn"
+  enable_extension "lo"
+  enable_extension "ltree"
+  enable_extension "moddatetime"
+  enable_extension "pageinspect"
+  enable_extension "pg_buffercache"
+  enable_extension "pg_freespacemap"
+  enable_extension "pg_stat_statements"
+  enable_extension "pg_trgm"
+  enable_extension "pgcrypto"
+  enable_extension "pgrowlocks"
+  enable_extension "pgstattuple"
   enable_extension "plpgsql"
+  enable_extension "refint"
+  enable_extension "seg"
+  enable_extension "sslinfo"
+  enable_extension "tablefunc"
+  enable_extension "tcn"
+  enable_extension "unaccent"
+  enable_extension "uuid-ossp"
+  enable_extension "xml2"
 
   create_table "answers", force: :cascade do |t|
     t.bigint "question_id"
@@ -35,11 +71,52 @@ ActiveRecord::Schema.define(version: 2021_09_28_090737) do
     t.string "link"
   end
 
+  create_table "boats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "version"
+    t.integer "level"
+    t.string "zone"
+    t.boolean "moving", default: false
+    t.integer "cost"
+    t.integer "wood"
+    t.bigint "solo_id"
+    t.string "side"
+    t.string "statut"
+    t.index ["solo_id"], name: "index_boats_on_solo_id"
+  end
+
+  create_table "buildings", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "version"
+    t.string "zone"
+    t.integer "level"
+    t.integer "cost"
+    t.integer "wood"
+    t.bigint "solo_id"
+    t.string "side"
+    t.string "statut"
+    t.index ["solo_id"], name: "index_buildings_on_solo_id"
+  end
+
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
+  create_table "computers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "jour", default: 0
+    t.string "goals", default: [], array: true
+    t.integer "berrys", default: 500
+    t.integer "wood", default: 500
+    t.string "side"
+    t.bigint "solo_id"
+    t.index ["solo_id"], name: "index_computers_on_solo_id"
   end
 
   create_table "fight_tokens", force: :cascade do |t|
@@ -122,6 +199,28 @@ ActiveRecord::Schema.define(version: 2021_09_28_090737) do
     t.boolean "engage", default: false
     t.index ["tournament_id"], name: "index_participations_on_tournament_id"
     t.index ["user_id"], name: "index_participations_on_user_id"
+  end
+
+  create_table "persos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "side"
+    t.string "health"
+    t.boolean "captured"
+    t.integer "diplomatie"
+    t.integer "charisme"
+    t.integer "discretion"
+    t.integer "fight"
+    t.boolean "recrutement"
+    t.boolean "trainer"
+    t.boolean "innovation"
+    t.boolean "moving"
+    t.boolean "mission"
+    t.string "zone"
+    t.bigint "solo_id"
+    t.boolean "special", default: false
+    t.index ["solo_id"], name: "index_persos_on_solo_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -230,6 +329,32 @@ ActiveRecord::Schema.define(version: 2021_09_28_090737) do
     t.index ["player_id"], name: "index_rewards_on_player_id"
   end
 
+  create_table "soldiers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "version"
+    t.integer "level"
+    t.string "zone"
+    t.boolean "moving", default: false
+    t.integer "cost"
+    t.bigint "solo_id"
+    t.string "side"
+    t.string "statut"
+    t.index ["solo_id"], name: "index_soldiers_on_solo_id"
+  end
+
+  create_table "solos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "jour", default: 0
+    t.string "goals", default: [], array: true
+    t.integer "berrys", default: 500
+    t.integer "wood", default: 500
+    t.string "side"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_solos_on_user_id"
+  end
+
   create_table "tournaments", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -272,8 +397,23 @@ ActiveRecord::Schema.define(version: 2021_09_28_090737) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "zones", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.integer "affinity_number", default: 50
+    t.string "affinity"
+    t.integer "position"
+    t.integer "slot"
+    t.bigint "solo_id"
+    t.index ["solo_id"], name: "index_zones_on_solo_id"
+  end
+
   add_foreign_key "answers", "questions"
+  add_foreign_key "boats", "solos"
+  add_foreign_key "buildings", "solos"
   add_foreign_key "carts", "users"
+  add_foreign_key "computers", "solos"
   add_foreign_key "fight_tokens", "players"
   add_foreign_key "fight_tokens", "players", column: "enemy_id"
   add_foreign_key "items", "carts"
@@ -283,12 +423,16 @@ ActiveRecord::Schema.define(version: 2021_09_28_090737) do
   add_foreign_key "orders", "users"
   add_foreign_key "participations", "tournaments"
   add_foreign_key "participations", "users"
+  add_foreign_key "persos", "solos"
   add_foreign_key "places", "islands"
   add_foreign_key "players", "users"
   add_foreign_key "quest_logs", "players"
   add_foreign_key "quiz_answers", "quizzes"
   add_foreign_key "rewards", "mobs"
   add_foreign_key "rewards", "players"
+  add_foreign_key "soldiers", "solos"
+  add_foreign_key "solos", "users"
   add_foreign_key "user_answers", "answers"
   add_foreign_key "user_answers", "users"
+  add_foreign_key "zones", "solos"
 end

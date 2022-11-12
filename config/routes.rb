@@ -150,5 +150,10 @@ Rails.application.routes.draw do
 
   get 'politique' => 'pages#politique'
 
+  resources :solos
+  get 'menu' => 'solos#menu'
+
+  post 'try' => 'computers#try'
+
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
