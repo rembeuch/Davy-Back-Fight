@@ -12,7 +12,9 @@ class BuildingsController < ApplicationController
                 level: 1,
                 solo: solo,
                 zone: Zone.where(affinity: "marine").shuffle.first.name,
-                side: "marine"
+                side: "marine",
+                cost: 200,
+                wood: 200
             )
             if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                 @building.save
@@ -22,7 +24,9 @@ class BuildingsController < ApplicationController
                 level: 1,
                 solo: solo,
                 zone: Zone.where(affinity: "marine").shuffle.first.name,
-                side: "marine"
+                side: "marine",
+                cost: 200,
+                wood: 200
             )
             if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                 @building.save
@@ -32,7 +36,9 @@ class BuildingsController < ApplicationController
                 level: 1,
                 solo: solo,
                 zone: Zone.where(affinity: "marine").shuffle.first.name,
-                side: "marine"
+                side: "marine",
+                cost: 200,
+                wood: 200
             )
             if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                 @building.save
@@ -42,7 +48,9 @@ class BuildingsController < ApplicationController
                 level: 1,
                 solo: solo,
                 zone: Zone.where(affinity: "marine").shuffle.first.name,
-                side: "marine"
+                side: "marine",
+                cost: 150,
+                wood: 150
             )
             if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                 @building.save
@@ -54,7 +62,9 @@ class BuildingsController < ApplicationController
                     level: 1,
                     solo: solo,
                     zone: Zone.where(affinity: "marine").shuffle.first.name,
-                    side: "marine"
+                    side: "marine",
+                    cost: 200,
+                    wood: 200
                 )
                 if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                     @building.save
@@ -67,7 +77,9 @@ class BuildingsController < ApplicationController
                     level: 1,
                     solo: solo,
                     zone: Zone.where(affinity: "marine").shuffle.first.name,
-                    side: "marine"
+                    side: "marine",
+                    cost: 200,
+                    wood: 200
                 )
                 if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                     @building.save
@@ -80,7 +92,9 @@ class BuildingsController < ApplicationController
                     level: 1,
                     solo: solo,
                     zone: Zone.where(affinity: "marine").shuffle.first.name,
-                    side: "marine"
+                    side: "marine",
+                    cost: 200,
+                    wood: 200
                 )
                 if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                     @building.save
@@ -93,7 +107,9 @@ class BuildingsController < ApplicationController
                     level: 1,
                     solo: solo,
                     zone: Zone.where(affinity: "marine").shuffle.first.name,
-                    side: "marine"
+                    side: "marine",
+                    cost: 200,
+                    wood: 200
                 )
                 if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                     @building.save
@@ -106,7 +122,9 @@ class BuildingsController < ApplicationController
                     level: 1,
                     solo: solo,
                     zone: Zone.where(affinity: "marine").shuffle.first.name,
-                    side: "marine"
+                    side: "marine",
+                    cost: 150,
+                    wood: 150
                 )
                 if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                     @building.save
@@ -120,7 +138,9 @@ class BuildingsController < ApplicationController
                 level: 1,
                 solo: solo,
                 zone: Zone.where(affinity: "pirate").shuffle.first.name,
-                side: "pirate"
+                side: "pirate",
+                cost: 200,
+                wood: 200
           )
             if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                 @building.save
@@ -130,7 +150,9 @@ class BuildingsController < ApplicationController
                 level: 1,
                 solo: solo,
                 zone: Zone.where(affinity: "pirate").shuffle.first.name,
-                side: "pirate"
+                side: "pirate",
+                cost: 200,
+                wood: 200
           )
             if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                 @building.save
@@ -140,7 +162,9 @@ class BuildingsController < ApplicationController
                 level: 1,
                 solo: solo,
                 zone: Zone.where(affinity: "pirate").shuffle.first.name,
-                side: "pirate"
+                side: "pirate",
+                cost: 200,
+                wood: 200
           )
             if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                 @building.save
@@ -150,7 +174,9 @@ class BuildingsController < ApplicationController
                 level: 1,
                 solo: solo,
                 zone: Zone.where(affinity: "pirate").shuffle.first.name,
-                side: "pirate"
+                side: "pirate",
+                cost: 150,
+                wood: 150
           )
             if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                 @building.save
@@ -162,7 +188,9 @@ class BuildingsController < ApplicationController
                     level: 1,
                     solo: solo,
                     zone: Zone.where(affinity: "pirate").shuffle.first.name,
-                    side: "pirate"
+                    side: "pirate",
+                    cost: 200,
+                    wood: 200
                 )
                 if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                     @building.save
@@ -175,7 +203,9 @@ class BuildingsController < ApplicationController
                     level: 1,
                     solo: solo,
                     zone: Zone.where(affinity: "pirate").shuffle.first.name,
-                    side: "pirate"
+                    side: "pirate",
+                    cost: 200,
+                    wood: 200
                 )
                 if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                     @building.save
@@ -188,7 +218,9 @@ class BuildingsController < ApplicationController
                     level: 1,
                     solo: solo,
                     zone: Zone.where(affinity: "pirate").shuffle.first.name,
-                    side: "pirate"
+                    side: "pirate",
+                    cost: 200,
+                    wood: 200   
                 )
                 if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                     @building.save
@@ -201,7 +233,9 @@ class BuildingsController < ApplicationController
                     level: 1,
                     solo: solo,
                     zone: Zone.where(affinity: "pirate").shuffle.first.name,
-                    side: "pirate"
+                    side: "pirate",
+                    cost: 200,
+                    wood: 200
                 )
                 if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                     @building.save
@@ -214,7 +248,9 @@ class BuildingsController < ApplicationController
                     level: 1,
                     solo: solo,
                     zone: Zone.where(affinity: "pirate").shuffle.first.name,
-                    side: "pirate"
+                    side: "pirate",
+                    cost: 150,
+                    wood: 150
                 )
                 if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                     @building.save
@@ -231,7 +267,9 @@ class BuildingsController < ApplicationController
                         level: 1,
                         solo: solo,
                         zone: Zone.where(affinity: "neutre").shuffle.first.name,
-                        side: "neutre"
+                        side: "neutre",
+                        cost: 200,
+                        wood: 200
                     )
                     if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                         @building.save
@@ -244,7 +282,9 @@ class BuildingsController < ApplicationController
                         level: 1,
                         solo: solo,
                         zone: Zone.where(affinity: "neutre").shuffle.first.name,
-                        side: "neutre"
+                        side: "neutre",
+                        cost: 200,
+                        wood: 200
                     )
                     if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                         @building.save
@@ -257,7 +297,9 @@ class BuildingsController < ApplicationController
                         level: 1,
                         solo: solo,
                         zone: Zone.where(affinity: "neutre").shuffle.first.name,
-                        side: "neutre"
+                        side: "neutre",
+                        cost: 200,
+                        wood: 200
                     )
                     if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                         @building.save
@@ -270,7 +312,9 @@ class BuildingsController < ApplicationController
                         level: 1,
                         solo: solo,
                         zone: Zone.where(affinity: "neutre").shuffle.first.name,
-                        side: "neutre"
+                        side: "neutre",
+                        cost: 200,
+                        wood: 200   
                     )
                     if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                         @building.save
@@ -283,7 +327,9 @@ class BuildingsController < ApplicationController
                         level: 1,
                         solo: solo,
                         zone: Zone.where(affinity: "neutre").shuffle.first.name,
-                        side: "neutre"
+                        side: "neutre",
+                        cost: 150,
+                        wood: 150   
                     )
                     if Zone.find_by(name: @building.zone).slot > Building.where(zone: @building.zone).count
                         @building.save

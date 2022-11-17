@@ -153,7 +153,8 @@ Rails.application.routes.draw do
   resources :solos
   get 'menu' => 'solos#menu'
 
-  post 'try' => 'computers#try'
+  patch 'move_perso' => 'persos#move_perso'
+  patch 'chantier' => 'zones#chantier'
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

@@ -159,4 +159,14 @@ class PersosController < ApplicationController
         end
 
     end
+
+    def move_perso
+        @solo = current_user.solo
+        @perso = Perso.find(params[:id])
+        @new_zone = Zone.find_by(name: params[:perso][:zone])
+        @actual_zone = Zone.find_by(name: @perso.zone)
+        @travel_days = (@new_zone.position - @actual_zone.position).abs
+        
+        @perso.update(zone: params[:perso][:zone], moving: true, moving_days: @travel_days)
+    end
 end

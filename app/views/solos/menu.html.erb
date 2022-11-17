@@ -2,7 +2,7 @@
   <h1 class="text-center font-custom-title">Bienvenue dans One Piece Winner Takes All!</h1>
   <% if current_user.solo %>
   <div>
-    <%= link_to 'Continuer la partie en cours', solo_path(current_user.solo) %>
+    <%= link_to 'Continuer la partie en cours', solo_path(current_user.solo),  data: { confirm_swal: 'Are you sure?' } %>
   </div>
   <% end %>
   <h4 class="text-center">  Choisissez votre camp! </h4>

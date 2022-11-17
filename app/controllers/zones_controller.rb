@@ -68,9 +68,38 @@ class ZonesController < ApplicationController
         end
     end
 
+    def chantier
+        @solo = current_user.solo
+        @zone = Zone.find(params[:zone_id])
+        @destination = Zone.find(params[:zone][:name])
+        @version = params[:zone][:affinity]
+        @cost = cost_construction(@version)
+        if @zone != @destination
+            @moving_days = (@zone.position - @destination.position).abs
+        else
+            @moving_days = 0
+        end
+        @constructions_days = @cost - (Building.where(solo: @solo, version: "chantier", zone: @zone.name).count * 15)
+        if @solo.berrys >= @cost && @solo.wood >= @cost
+            @building = Building.create!(solo: @solo, version: @version, zone: @zone.name, destination: @destination, moving_days: @moving_days, constructions_days: @constructions_days, statut: "creation")
+            @solo.berrys -= @cost
+            @solo.wood -= @cost
+            @solo.save
+        end
+        redirect_to solo_path(@solo)
+    end
+
     private
 
     def zones_params
         params.require(:zone).permit(:name, :affinity, :affinity_number, :position, :slot)
+    end
+
+    def cost_construction(version)
+        if version == 'canon'
+            return 150
+        elsif version == 'chantier' || version == 'port' || version == 'caserne'
+            return 200
+        end
     end
 end

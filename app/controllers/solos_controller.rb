@@ -40,11 +40,17 @@ class SolosController < ApplicationController
     def show
       @solo = current_user.solo
       @zones = Zone.where(solo: @solo).sort_by(&:position)
+      @side_zones = Zone.where(affinity: @solo.side).sort_by(&:position)
+      @zones_with_slots = Zone.select{|zone| zone.affinity == @solo.side && zone.slot - Building.where(zone: zone.name, solo: @solo).count > 0}.sort_by(&:position)
     end
 
     def check_solo
-        if current_user.solo == nil
-          redirect_to menu_path
-        end
+      if current_user.solo == nil
+        redirect_to menu_path
       end
+    end
+
+    def check_moving_perso
+
+    end
 end

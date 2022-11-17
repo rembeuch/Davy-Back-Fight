@@ -13,7 +13,7 @@ gem 'devise'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
 gem 'puma'
-gem 'rails', '5.2.4.1'
+gem 'rails', '6.0.0'
 gem 'redis'
 
 gem 'autoprefixer-rails'
@@ -21,9 +21,11 @@ gem 'font-awesome-sass', '~> 5.6.1'
 gem 'sassc-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'webpacker'
+gem 'webpacker', '~> 4.x'
 gem 'bootstrap_progressbar'
 gem 'bootstrap-sass' 
+gem 'stimulus-rails'
+gem 'actionpack', '~> 6.0'
 
 
 

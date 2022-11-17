@@ -20,17 +20,117 @@
         <img src="http://ekladata.com/3sRat8HlQpYfZNUxryAgfxD7HH4.png" />
         <div class="card-zone-infos">
             <div>
-            <% if !Building.where(zone: zone.name, solo: @solo, version: "chantier").empty? %>
-                🏗️
+            <% if !Building.where(zone: zone.name, solo: @solo, version: "chantier").empty? %>       
+              <button type="button" class="btn-square" data-toggle="modal" data-target="#Modal-chantier-<%= zone.id %>">
+                <span class="mx-2"><%= Building.where(zone: zone.name, solo: @solo, version: "chantier").count %>🏗️</span>
+              </button>
+              <div class="modal fade" id="Modal-chantier-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-chantier_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-chantier_label"> <%= Building.where(zone: zone.name, solo: @solo, version: "chantier").count %> Chantiers</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto">
+                  <br>
+                  <% if zone.affinity == @solo.side %>
+                    <%= simple_form_for zone, :url => chantier_path(zone_id: zone.id) do |f| %>
+                      <%= f.input :affinity, collection: @solo.constructions, as: :select, include_blank: false, label: "Constructions" %>
+                      <%= f.input :name, collection: @zones_with_slots, as: :select, include_blank: false, label: "ile de destination" %>
+
+                      <%= f.button :submit, "Valider", :onclick => "return confirm('Confirmer cette construction?')", class: "btn btn-primary" %>
+                    <% end %>
+                  <% end %>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>           
             <% end %>
-            <% if !Building.where(zone: zone.name, solo: @solo, version: "port").empty? %>
-                ⚓
+            <% if !Building.where(zone: zone.name, solo: @solo, version: "port").empty? %>              
+                <button type="button" class="btn-square" data-toggle="modal" data-target="#Modal-port-<%= zone.id %>">
+                <span class="mx-2"><%= Building.where(zone: zone.name, solo: @solo, version: "port").count %>⚓</span>
+              </button>
+              <div class="modal fade" id="Modal-port-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-port_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-port_label"> <%= Building.where(zone: zone.name, solo: @solo, version: "port").count %> Ports</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto">
+                      Niveau: 
+                    <% Building.where(zone: zone.name, solo: @solo, version: "port").sort_by(&:level).each do |port| %>
+                      <%= port.level %>/
+                    <% end %>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>         
             <% end %>
             <% if !Building.where(zone: zone.name, solo: @solo, version: "caserne").empty? %>
-                ⛩️
+            <button type="button" class="btn-square" data-toggle="modal" data-target="#Modal-caserne-<%= zone.id %>">
+              <span class="mx-2"><%= Building.where(zone: zone.name, solo: @solo, version: "caserne").count %>⛩️</span>
+            </button>
+            <div class="modal fade" id="Modal-caserne-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-caserne_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-caserne_label"> <%= Building.where(zone: zone.name, solo: @solo, version: "caserne").count %> casernes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto">
+                      Niveau: 
+                    <% Building.where(zone: zone.name, solo: @solo, version: "caserne").sort_by(&:level).each do |caserne| %>
+                      <%= caserne.level %>/
+                    <% end %>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>        
             <% end %>
-            <% if !Building.where(zone: zone.name, solo: @solo, version: "canon").empty? %>
-                🛡️
+            <% if !Building.where(zone: zone.name, solo: @solo, version: "canon").empty? %>  
+            <button type="button" class="btn-square" data-toggle="modal" data-target="#Modal-canon-<%= zone.id %>">
+              <span class="mx-2"><%= Building.where(zone: zone.name, solo: @solo, version: "canon").count %>🛡️</span>
+            </button>
+            <div class="modal fade" id="Modal-canon-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-canon_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-canon_label"> <%= Building.where(zone: zone.name, solo: @solo, version: "canon").count %> canons</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto">
+                      Niveau: 
+                    <% Building.where(zone: zone.name, solo: @solo, version: "canon").sort_by(&:level).each do |canon| %>
+                      <%= canon.level %>/
+                    <% end %>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>        
             <% end %>
             <br>
             <h2><%= zone.name %></h2>
@@ -48,22 +148,26 @@
             </h3>
                 <div class="d-flex">
                     <% if !Perso.where(zone: zone.name, solo: @solo, side: "marine").empty? %>
-                        <img src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="avatar-square" />
+                        <img type="button" src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="avatar-square" data-toggle="modal" data-target="#Modal-persos-<%= zone.id %>">
                     <% end %>
                     <% if !Perso.where(zone: zone.name, solo: @solo, side: "pirate").empty? %>
                         <img src="https://www.comprarbanderas.es/images/banderas/400/373-pirata-de-edward-england_400px.jpg" class="avatar-square" />
                     <% end %>
                     <% if !Boat.where(zone: zone.name, solo: @solo).empty? %>
+                    <button type="button" class="avatar-square" data-toggle="modal" data-target="#Modal-boats-<%= zone.id %>">
                         <div class="mx-2">🚢</div>
+                    </button>
                     <% end %>
                     <% if !Soldier.where(zone: zone.name, solo: @solo).empty? %>
-                        <div class="mx-2">🪖</div>
+                        <button type="button" class="avatar-square" data-toggle="modal" data-target="#Modal-soldiers-<%= zone.id %>">
+                          <div class="mx-2">🪖</div>
+                        </button>
                     <% end %>
                 </div>
             </div>
             <% if zone.affinity == "marine" %>
                 <h2 class="card-zone-affinity">Marine</h2>
-                <img src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="card-zone-img avatar-square" />
+                <img src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="card-zone-img avatar-square">
             <% elsif zone.affinity == "pirate"%>
                 <h2 class="card-zone-affinity">Pirate</h2>
                 <img src="https://www.comprarbanderas.es/images/banderas/400/373-pirata-de-edward-england_400px.jpg" class="card-zone-img avatar-square" />
@@ -74,6 +178,179 @@
             <br>
         </div>
     </div>
+<!-- Modal -->
+    <div class="modal fade" id="Modal-persos-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-persos_label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Modal-persos_label">Personages:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-auto">
+          <% Perso.where(zone: zone.name, solo: @solo, side: @solo.side).each do |perso| %>
+            <%= perso.name %>
+            Détails: <img type="button" src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="avatar-square" data-toggle="modal" data-target="#Modal-perso-<%= perso.id %>">
+            <% if perso.moving == false %>
+            <div class="d-flex  flex-column" data-controller="perso">
+              <div id="toggleZone<%= perso.id %>"  data-action="click->perso#openZone">
+                <button id="zone" data-action="click->perso#days" data-id="<%= perso.id %>" class="btn-primary">Déplacer</button>
+              </div>
+              <div data-perso-target="zone">
+              <div  data-action="click->perso#closeZone" >
+                <button data-id="<%= perso.id %>">Fermer X</button>
+              </div>
+                  <%= simple_form_for perso, :url => move_perso_path(id: perso.id) do |f| %>
+                   <div data-action="click->perso#days" data-id="<%= perso.id %>" data-days="<%= Zone.find_by(name: perso.zone).position %>">
+                    <%= f.input :zone,:input_html => { :id => "selectedzone#{perso.id}"}, collection: (@side_zones - [Zone.find_by(name: perso.zone)]), as: :select, label_method: :name, value_method: :name, include_blank: false, label: "Iles sous votre controle" %> </div>
+                    <div id="days<%= perso.id %>" data-id="<%= perso.id %>" data-days="<%= Zone.find_by(name: perso.zone).position %>"></div> 
+                    <%= f.button :submit, "Valider", :onclick => "return confirm('Confirmer ce trajet?')", class: "btn btn-primary" %>
+                  <% end %>
+              </div>
+            </div>
+            <% else %>
+              <br>
+              En déplacement. Reste <%= perso.moving_days %> Jours 🌊
+            <% end %>
+               
+              
+            
+            <hr>
+            <div class="modal fade" id="Modal-perso-<%= perso.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-perso_label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="Modal-perso_label"><%= perso.name %></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body mx-auto">
+                  camp: <%= perso.side %>
+                  <br>santé: <%= perso.health %>
+                  <br><%= perso.captured ? "capturé" : "" %>
+                  <br>diplomatie: <%= perso.diplomatie %>
+                  <br>charisme: <%= perso.charisme %>
+                  <br>discretion: <%= perso.discretion %>
+                  <br>fight: <%= perso.fight %>
+                  <br><%= perso.recrutement ? "recrutement" : "" %>
+                  <br><%= perso.trainer ? "trainer" : "" %>
+                  <br><%= perso.innovation ? "innovation" : "" %>
+                  <br><% if perso.moving %>
+                          En déplacement Reste <%= perso.moving_days %> Jours 🌊
+                      <% end %>
+                  <br><%= perso.mission ? "en mission" : "" %>
+
+                </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="Modal-boats-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-boats_label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Modal-boats_label">Bateaux:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-auto">
+          <% Boat.where(zone: zone.name, solo: @solo, side: @solo.side).each do |boat| %>
+            <%= boat.version %>
+            <img type="button" src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="avatar-square" data-toggle="modal" data-target="#Modal-boat-<%= boat.id %>">
+            <hr>
+            <div class="modal fade" id="Modal-boat-<%= boat.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-boat_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-boat_label"><%= boat.version %></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto">
+                    camp: <%= boat.side %>
+                    <br>version: <%= boat.version %>
+                    <br>level: <%= boat.level %>
+                    <br>coût: <%= boat.cost %>
+                    <br>Bois: <%= boat.wood %>
+                    
+                    <br><%= boat.moving ? "en déplacement" : "" %>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="Modal-soldiers-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-soldiers_label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Modal-soldiers_label">Soldats:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-auto">
+          <% Soldier.where(zone: zone.name, solo: @solo, side: @solo.side).each do |soldier| %>
+            <%= soldier.version %>
+            <img type="button" src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="avatar-square" data-toggle="modal" data-target="#Modal-soldier-<%= soldier.id %>">
+            <hr>
+            <div class="modal fade" id="Modal-soldier-<%= soldier.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-boat_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-soldier_label"><%= soldier.version %></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto">
+                    camp: <%= soldier.side %>
+                    <br>version: <%= soldier.version %>
+                    <br>level: <%= soldier.level %>
+                    <br>coût: <%= soldier.cost %>
+                    
+                    <br><%= soldier.moving ? "en déplacement" : "" %>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <% end %>
 </div>
-</div>
+</div> 
+
