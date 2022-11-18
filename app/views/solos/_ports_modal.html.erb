@@ -1,0 +1,22 @@
+<div class="modal fade" id="Modal-port-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-port_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-port_label"> <%= Building.where(zone: zone.name, solo: @solo, version: "port").count %> Ports</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto">
+                      Niveau: 
+                    <% Building.where(zone: zone.name, solo: @solo, version: "port").sort_by(&:level).each do |port| %>
+                      <%= port.level %>/
+                    <% end %>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>      

@@ -337,4 +337,15 @@ class BuildingsController < ApplicationController
                 end
         end
     end
+
+    def destroy
+        @building = Building.find(params[:building])
+        @zone = Zone.find_by(name: @building.zone)
+        @building.destroy
+        # respond_to do |format|
+        #     format.html
+        #     format.text { render partial: 'solos/chantiers_modal.html', locals: { zone: @zone } }
+        # end
+        redirect_to solo_path(current_user.solo)
+    end
 end

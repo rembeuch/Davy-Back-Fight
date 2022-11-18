@@ -1,0 +1,46 @@
+<div class="modal fade" id="Modal-soldiers-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-soldiers_label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Modal-soldiers_label">Soldats:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-auto">
+          <% Soldier.where(zone: zone.name, solo: @solo, side: @solo.side).each do |soldier| %>
+            <%= soldier.version %>
+            <img type="button" src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="avatar-square" data-toggle="modal" data-target="#Modal-soldier-<%= soldier.id %>">
+            <hr>
+            <div class="modal fade" id="Modal-soldier-<%= soldier.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-boat_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-soldier_label"><%= soldier.version %></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto">
+                    camp: <%= soldier.side %>
+                    <br>version: <%= soldier.version %>
+                    <br>level: <%= soldier.level %>
+                    <br>coût: <%= soldier.cost %>
+                    
+                    <br><%= soldier.moving ? "en déplacement" : "" %>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>

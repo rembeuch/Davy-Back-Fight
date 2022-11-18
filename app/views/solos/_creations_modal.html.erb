@@ -1,0 +1,57 @@
+  <div class="modal fade" id="Modal-creation-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-creation_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-creation_label"> <%= Building.where(destination: zone.name, solo: @solo, statut: "creation", side: @solo.side).count %> Batiments en cours de production</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto"> 
+                    <% Building.where(destination: zone.name, solo: @solo, statut: "creation", side: @solo.side).sort_by(&:version).each do |b| %>
+                      <%= b.version %> en création: <%= b.constructions_days %>Jours🕒 Produit ici:
+                      <button type="button" data-dismiss="modal" class="btn-primary" data-toggle="modal" data-target="#Modal-chantier-<%= Zone.find_by(name: b.zone).id %>">
+                        <span class="mx-2"><%= b.zone %></span>
+                      </button>
+                    <div class="modal fade" id="Modal-chantier-<%= Zone.find_by(name: b.zone).id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-chantier_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-chantier_label"> <%= Building.where(zone: zone.name, solo: @solo, version: "chantier", statut: nil).count %> Chantiers</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto">
+                  <% if !Building.select{|b| b.zone == zone.name && b.solo == @solo && b.statut == 'creation' && b.side == @solo.side}.empty? %>
+                    <% Building.select{|b| b.zone == zone.name && b.solo == @solo && b.statut == 'creation' && b.side == @solo.side}.each do |b| %>
+                      <%= b.version %> en création: <%= b.constructions_days %>Jours🕒 destination: <%= b.destination %>
+                    <hr>
+                    <% end %>
+                    <br>
+                  <% else %>
+                    <% if zone.affinity == @solo.side %>
+                      <%= simple_form_for zone, :url => chantier_path(zone_id: zone.id) do |f| %>
+                        <%= f.input :affinity, collection: @solo.constructions, as: :select, include_blank: false, label: "Constructions" %>
+                        <%= f.input :name, collection: @zones_with_slots, as: :select, include_blank: false, label: "ile de destination" %>
+
+                        <%= f.button :submit, "Valider", :onclick => "return confirm('Confirmer cette construction?')", class: "btn btn-primary" %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div> 
+                    <% end %>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>  

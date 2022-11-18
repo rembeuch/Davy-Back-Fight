@@ -1,0 +1,79 @@
+<!-- Modal -->
+    <div class="modal fade" id="Modal-persos-<%= zone.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-persos_label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Modal-persos_label">Personages:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-auto">
+          <% Perso.where(zone: zone.name, solo: @solo, side: @solo.side).each do |perso| %>
+            <%= perso.name %>
+            Détails: <img type="button" src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="avatar-square" data-toggle="modal" data-target="#Modal-perso-<%= perso.id %>">
+            <% if perso.moving == false %>
+            <div class="d-flex  flex-column" data-controller="perso">
+              <div id="toggleZone<%= perso.id %>"  data-action="click->perso#openZone">
+                <button id="zone" data-action="click->perso#days" data-id="<%= perso.id %>" class="btn-primary">Déplacer</button>
+              </div>
+              <div data-perso-target="zone">
+              <div  data-action="click->perso#closeZone" >
+                <button data-id="<%= perso.id %>">Fermer X</button>
+              </div>
+                  <%= simple_form_for perso, :url => move_perso_path(id: perso.id) do |f| %>
+                   <div data-action="click->perso#days" data-id="<%= perso.id %>" data-days="<%= Zone.find_by(name: perso.zone).position %>">
+                    <%= f.input :zone,:input_html => { :id => "selectedzone#{perso.id}"}, collection: (@side_zones - [Zone.find_by(name: perso.zone)]), as: :select, label_method: :name, value_method: :name, include_blank: false, label: "Iles sous votre controle" %> </div>
+                    <div id="days<%= perso.id %>" data-id="<%= perso.id %>" data-days="<%= Zone.find_by(name: perso.zone).position %>"></div> 
+                    <%= f.button :submit, "Valider", :onclick => "return confirm('Confirmer ce trajet?')", class: "btn btn-primary" %>
+                  <% end %>
+              </div>
+            </div>
+            <% else %>
+              <br>
+              En déplacement. Reste <%= perso.moving_days %> Jours 🌊
+            <% end %>
+               
+              
+            
+            <hr>
+            <div class="modal fade" id="Modal-perso-<%= perso.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-perso_label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="Modal-perso_label"><%= perso.name %></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body mx-auto">
+                  camp: <%= perso.side %>
+                  <br>santé: <%= perso.health %>
+                  <br><%= perso.captured ? "capturé" : "" %>
+                  <br>diplomatie: <%= perso.diplomatie %>
+                  <br>charisme: <%= perso.charisme %>
+                  <br>discretion: <%= perso.discretion %>
+                  <br>fight: <%= perso.fight %>
+                  <br><%= perso.recrutement ? "recrutement✅" : "" %>
+                  <br><%= perso.trainer ? "trainer✅" : "" %>
+                  <br><%= perso.innovation ? "innovation✅" : "" %>
+                  <br><% if perso.moving %>
+                          En déplacement Reste <%= perso.moving_days %> Jours 🌊
+                      <% end %>
+                  <br><%= perso.mission ? "en mission" : "" %>
+
+                </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>

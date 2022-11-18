@@ -71,7 +71,7 @@ class ZonesController < ApplicationController
     def chantier
         @solo = current_user.solo
         @zone = Zone.find(params[:zone_id])
-        @destination = Zone.find(params[:zone][:name])
+        @destination = Zone.find_by(name: params[:zone][:name])
         @version = params[:zone][:affinity]
         @cost = cost_construction(@version)
         if @zone != @destination
@@ -79,14 +79,16 @@ class ZonesController < ApplicationController
         else
             @moving_days = 0
         end
-        @constructions_days = @cost - (Building.where(solo: @solo, version: "chantier", zone: @zone.name).count * 15)
+        @constructions_days = @cost - (Building.where(solo: @solo, version: "chantier",statut: nil, zone: @zone.name).count * 15)
         if @solo.berrys >= @cost && @solo.wood >= @cost
-            @building = Building.create!(solo: @solo, version: @version, zone: @zone.name, destination: @destination, moving_days: @moving_days, constructions_days: @constructions_days, statut: "creation")
+            @building = Building.create!(solo: @solo,side: @solo.side, version: @version, zone: @zone.name, destination: @destination.name, moving_days: @moving_days, constructions_days: @constructions_days, statut: "creation")
             @solo.berrys -= @cost
             @solo.wood -= @cost
             @solo.save
+            redirect_to solo_path(@solo)
+        else
+            redirect_to solo_path(@solo), alert: "Berrys ou Bois insuffisant"
         end
-        redirect_to solo_path(@solo)
     end
 
     private
