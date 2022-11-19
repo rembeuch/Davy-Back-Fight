@@ -52,4 +52,15 @@ class BoatsController < ApplicationController
             @boat.save
         end
     end
+
+    def destroy_boat
+        @boat = Boat.find(params[:boat])
+        @zone = Zone.find_by(name: @boat.zone)
+        @boat.destroy
+        # respond_to do |format|
+        #     format.html
+        #     format.text { render partial: 'solos/chantiers_modal.html', locals: { zone: @zone } }
+        # end
+        redirect_to solo_path(current_user.solo)
+    end
 end

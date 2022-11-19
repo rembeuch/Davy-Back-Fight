@@ -8,9 +8,11 @@
             </button>
           </div>
           <div class="modal-body mx-auto">
-          <% Boat.where(zone: zone.name, solo: @solo, side: @solo.side).each do |boat| %>
+          <% Boat.where(zone: zone.name, solo: @solo, side: @solo.side, destination: nil).each do |boat| %>
             <%= boat.version %>
             <img type="button" src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="avatar-square" data-toggle="modal" data-target="#Modal-boat-<%= boat.id %>">
+            <%= boat.moving ? "en déplacement" : "" %>
+            <%= boat.statut == 'creation' ? "🕒" : "" %>
             <hr>
             <div class="modal fade" id="Modal-boat-<%= boat.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-boat_label" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -29,6 +31,48 @@
                     <br>Bois: <%= boat.wood %>
                     
                     <br><%= boat.moving ? "en déplacement" : "" %>
+                    <br><%= boat.statut == 'creation' ? "En cours de production" : "" %>
+                    <%= boat.constructions_days %>Jours🕒 Produit ici:
+                      <button type="button" data-dismiss="modal" class="btn-primary" data-toggle="modal" data-target="#Modal-port-<%= Zone.find_by(name: boat.zone).id %>">
+                        <span class="mx-2"><%= boat.zone %></span>
+                      </button>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% Boat.where(destination: zone.name, solo: @solo, side: @solo.side, statut: 'creation').each do |boat| %>
+            <%= boat.version %>
+            <img type="button" src="https://media.cdnws.com//_i/136023/p%7B1000%7D-61423/1845/27/top-10-marines-puissants-one-piece-blog-3.jpeg" class="avatar-square" data-toggle="modal" data-target="#Modal-boat-<%= boat.id %>">
+            <%= boat.moving ? "en déplacement" : "" %>
+            <%= boat.statut == 'creation' ? "🕒" : "" %>
+            <hr>
+            <div class="modal fade" id="Modal-boat-<%= boat.id %>" tabindex="-1" role="dialog" aria-labelledby="Modal-boat_label" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modal-boat_label"><%= boat.version %></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body mx-auto">
+                    camp: <%= boat.side %>
+                    <br>version: <%= boat.version %>
+                    <br>level: <%= boat.level %>
+                    <br>coût: <%= boat.cost %>
+                    <br>Bois: <%= boat.wood %>
+                    
+                    <br><%= boat.moving ? "en déplacement" : "" %>
+                    <br><%= boat.statut == 'creation' ? "En cours de production" : "" %>
+                    <%= boat.constructions_days %>Jours🕒 Produit ici:
+                      <button type="button" data-dismiss="modal" class="btn-primary" data-toggle="modal" data-target="#Modal-port-<%= Zone.find_by(name: boat.zone).id %>">
+                        <span class="mx-2"><%= boat.zone %></span>
+                      </button>
 
                   </div>
                   <div class="modal-footer">

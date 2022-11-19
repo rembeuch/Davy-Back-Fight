@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_17_155106) do
+ActiveRecord::Schema.define(version: 2022_11_19_135257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "adminpack"
@@ -364,6 +364,8 @@ ActiveRecord::Schema.define(version: 2022_11_17_155106) do
     t.string "side"
     t.bigint "user_id"
     t.string "constructions", default: ["chantier", "port", "caserne", "canon"], array: true
+    t.string "constructions_boats", default: ["barque", "caravelle"], array: true
+    t.string "constructions_soldiers", default: ["soldats", "lieutenants"], array: true
     t.index ["user_id"], name: "index_solos_on_user_id"
   end
 

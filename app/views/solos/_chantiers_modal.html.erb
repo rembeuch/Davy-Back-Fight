@@ -2,7 +2,11 @@
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="Modal-chantier_label"> <%= Building.where(zone: zone.name, solo: @solo, version: "chantier", statut: nil).count %> Chantiers</h5>
+                    <h5 class="modal-title" id="Modal-chantier_label"> <%= Building.where(zone: zone.name, solo: @solo, version: "chantier", statut: nil).count %> Chantiers / 
+                      Berrys: <%= @solo.berrys %> 
+                      <img src="https://ih1.redbubble.net/image.903868159.1730/st,small,507x507-pad,600x600,f8f8f8.jpg" class="avatar"> /
+                      Bois: <%= @solo.wood %> 🪵
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -12,7 +16,18 @@
                     <% Building.select{|b| b.zone == zone.name && b.solo == @solo && b.statut == 'creation' && b.side == @solo.side}.each do |b| %>
                       <%= b.version %> en création: <%= b.constructions_days %>Jours🕒 destination: <%= b.destination %>
                     <hr>
-                    <%= link_to "Annuler cette production", destroy_path(building: b), method: :delete, data: { confirm_swal: 'Êtes vous sur de vouloir arrêter cette production?' } %>
+                    <%= link_to "Annuler cette production", destroy_building_path(building: b), method: :delete, data: { confirm_swal: 'Êtes vous sur de vouloir arrêter cette production?' } %>
+                    <%= simple_form_for b, :url => change_destination_path(zone_id: zone.id) do |f| %>                
+                        <% if @zones_with_slots.empty? %>
+                            Plus aucune des îles sous votre contrôle ne peut accueillir de production.
+                        <% else %>
+                        <div data-action="click->chantier#change" data-id="<%= zone.id %>" data-days="<%= Zone.find_by(name: zone.name).position %>">
+                            <%= f.input :destination, :input_html => { :id => "chantierchange#{zone.id}"}, collection: @zones_with_slots, as: :select, value_method: :name, include_blank: false, label: "Changer de destination" %>
+                        </div>
+                        <div id="chantierchangedays<%= zone.id %>" data-id="<%= zone.id %>" data-days="<%= Zone.find_by(name: zone.name).position %>"></div> 
+                            <%= f.button :submit, "Valider", :onclick => "return confirm('Confirmer le changement de destination?')", class: "btn btn-primary" %>
+                        <% end %>
+                      <% end %>
                     <% end %>
                     <br>
                   <% else %>
@@ -23,13 +38,13 @@
                         </div>
                         <div id="chantiercost<%= zone.id %>"></div> 
                         <div id="chantierwood<%= zone.id %>"></div> 
+                        <% if @zones_with_slots.empty? %>
+                            Plus aucune des îles sous votre contrôle ne peut accueillir de production.
+                        <% else %>
                         <div data-action="click->chantier#days" data-id="<%= zone.id %>" data-days="<%= Zone.find_by(name: zone.name).position %>">
                             <%= f.input :name, :input_html => { :id => "chantierzone#{zone.id}"}, collection: @zones_with_slots, as: :select, value_method: :name, include_blank: false, label: "ile de destination" %>
                         </div>
                         <div id="chantierdays<%= zone.id %>" data-id="<%= zone.id %>" data-days="<%= Zone.find_by(name: zone.name).position %>"></div> 
-                        <% if @zones_with_slots.empty? %>
-                            Plus aucune des îles sous votre contrôle ne peut accueillir de production.
-                        <% else %>
                             <%= f.button :submit, "Valider", :onclick => "return confirm('Confirmer cette construction?')", class: "btn btn-primary" %>
                         <% end %>
                       <% end %>

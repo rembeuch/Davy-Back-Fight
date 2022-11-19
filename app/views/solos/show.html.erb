@@ -22,14 +22,15 @@
             <div>
             <% if !Building.where(zone: zone.name, solo: @solo, version: "chantier").empty? %>       
               <button type="button" class="btn-square" data-toggle="modal" data-target="#Modal-chantier-<%= zone.id %>">
-                <span class="mx-2" data-controller="chantier" data-action="click->chantier#days"data-id="<%= zone.id %>" data-days="<%= Zone.find_by(name: zone.name).position %>">
+                <span class="mx-2" data-controller="chantier" data-action="click->chantier#days" data-id="<%= zone.id %>" data-days="<%= Zone.find_by(name: zone.name).position %>">
                 <%= Building.where(zone: zone.name, solo: @solo, version: "chantier", statut: nil).count %>🏗️</span>
               </button>
               <%= render "chantiers_modal", zone: zone %>      
             <% end %>
             <% if !Building.where(zone: zone.name, solo: @solo, version: "port").empty? %>              
                 <button type="button" class="btn-square" data-toggle="modal" data-target="#Modal-port-<%= zone.id %>">
-                <span class="mx-2"><%= Building.where(zone: zone.name, solo: @solo, version: "port").count %>⚓</span>
+                <span class="mx-2" data-controller="port" data-action="click->port#days" data-id="<%= zone.id %>" data-days="<%= Zone.find_by(name: zone.name).position %>">
+                <%= Building.where(zone: zone.name, solo: @solo, version: "port").count %>⚓</span>
               </button>
               <%= render "ports_modal", zone: zone %>   
             <% end %>

@@ -155,7 +155,15 @@ Rails.application.routes.draw do
 
   patch 'move_perso' => 'persos#move_perso'
   patch 'chantier' => 'zones#chantier'
+  patch 'port' => 'zones#port'
+  patch 'caserne' => 'zones#caserne'
 
-  delete 'destroy' => 'buildings#destroy'
+
+
+  delete 'destroy_building' => 'buildings#destroy_building'
+  patch 'change_destination' => 'buildings#change_destination'
+
+  delete 'destroy_boat' => 'boats#destroy_boat'
+
   mount StripeEvent::Engine, at: '/stripe-webhooks'
 end

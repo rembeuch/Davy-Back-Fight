@@ -91,6 +91,30 @@ class ZonesController < ApplicationController
         end
     end
 
+    def port
+        @solo = current_user.solo
+        @zone = Zone.find(params[:zone_id]).name
+        @destination = params[:zone][:name]
+        @version = params[:zone][:affinity]
+        @cost = cost_boat(@version)
+        if @zone != @destination
+            @moving_days = (Zone.find(@zone).position - Zone.find_by(name: @destination).position).abs
+        else
+            @moving_days = 0
+            @destination = nil
+        end
+        @constructions_days = @cost - (Building.where(solo: @solo, version: "port", statut: nil, zone: @zone).count * 15)
+        if @solo.berrys >= @cost && @solo.wood >= @cost
+            @building = Boat.create!(solo: @solo, side: @solo.side, version: @version, zone: @zone, destination: @destination, moving_days: @moving_days, constructions_days: @constructions_days, statut: "creation")
+            @solo.berrys -= @cost
+            @solo.wood -= @cost
+            @solo.save
+            redirect_to solo_path(@solo)
+        else
+            redirect_to solo_path(@solo), alert: "Berrys ou Bois insuffisant"
+        end
+    end
+
     private
 
     def zones_params
@@ -101,6 +125,14 @@ class ZonesController < ApplicationController
         if version == 'canon'
             return 150
         elsif version == 'chantier' || version == 'port' || version == 'caserne'
+            return 200
+        end
+    end
+
+    def cost_boat(version)
+        if version == 'barque'
+            return 100
+        elsif version == 'caravelle'
             return 200
         end
     end
