@@ -9,7 +9,7 @@
                   </div>
                   <div class="modal-body mx-auto">
                       Niveau: 
-                    <% Building.where(zone: zone.name, solo: @solo, version: "caserne").sort_by(&:level).each do |caserne| %>
+                    <% Building.where(zone: zone.name, solo: @solo, version: "caserne").each do |caserne| %>
                       <%= caserne.level %>/
                     <% end %>
 

@@ -31,12 +31,13 @@
                     <br>Bois: <%= boat.wood %>
                     
                     <br><%= boat.moving ? "en déplacement" : "" %>
-                    <br><%= boat.statut == 'creation' ? "En cours de production" : "" %>
+                    <% if boat.statut == 'creation' %>
+                    En cours de production
                     <%= boat.constructions_days %>Jours🕒 Produit ici:
                       <button type="button" data-dismiss="modal" class="btn-primary" data-toggle="modal" data-target="#Modal-port-<%= Zone.find_by(name: boat.zone).id %>">
                         <span class="mx-2"><%= boat.zone %></span>
                       </button>
-
+                    <% end %>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

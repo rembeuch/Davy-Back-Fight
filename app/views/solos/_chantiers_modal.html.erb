@@ -15,7 +15,7 @@
                   <% if !Building.select{|b| b.zone == zone.name && b.solo == @solo && b.statut == 'creation' && b.side == @solo.side}.empty? %>
                     <% Building.select{|b| b.zone == zone.name && b.solo == @solo && b.statut == 'creation' && b.side == @solo.side}.each do |b| %>
                       <%= b.version %> en création: <%= b.constructions_days %>Jours🕒 destination: <%= b.destination %>
-                    <hr>
+                      <hr>
                     <%= link_to "Annuler cette production", destroy_building_path(building: b), method: :delete, data: { confirm_swal: 'Êtes vous sur de vouloir arrêter cette production?' } %>
                     <%= simple_form_for b, :url => change_destination_path(zone_id: zone.id) do |f| %>                
                         <% if @zones_with_slots.empty? %>

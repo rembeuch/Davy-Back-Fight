@@ -56,13 +56,13 @@
             <h2><%= zone.name %></h2>
             <p></p>
             <h3>
-                <%= progress_bar 1 - zone.affinity_number / 100.to_f,class: "bg-danger", style: 'min-width: 200px' %>
+                <%= progress_bar 1 - zone.affinity_number / 100.to_f,class: "bg-danger", style: 'width: 200px' %>
                 <div class="d-flex">
-                    <% (Building.where(zone: zone.name, solo: @solo).count + Building.where( destination: zone.name, statut: "creation", solo: @solo).count ).times do |i| %>
-                        <%= progress_bar 0, class: "bg-success", style: 'width: 20px' %>
+                    <% (Building.where(zone: zone.name, solo: @solo, statut: nil).count + Building.where( destination: zone.name, statut: "creation", solo: @solo).count ).times do |i| %>
+                        <%= progress_bar 0, class: "bg-success  border border-dark", style: 'width: 20px' %>
                     <% end %>
-                    <% (zone.slot - Building.where(zone: zone.name, solo: @solo).count).times do |i| %>
-                        <%= progress_bar 0, class: "bg-dark", style: 'width: 20px' %>
+                    <% (zone.slot - Building.where(zone: zone.name, solo: @solo, statut: nil).count - Building.where( destination: zone.name, statut: "creation", solo: @solo).count).times do |i| %>
+                        <%= progress_bar 0, class: "bg-dark border border-white", style: 'width: 20px' %>
                     <% end %>
                 </div>
             </h3>

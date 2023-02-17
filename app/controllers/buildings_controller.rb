@@ -350,6 +350,8 @@ class BuildingsController < ApplicationController
     end
 
     def change_destination
-        raise
+        @building = Building.find(params[:building][:building])
+        @building.update(destination: params[:building][:destination])
+        redirect_to solo_path(current_user.solo)
     end
 end
